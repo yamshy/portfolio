@@ -1,0 +1,58 @@
+---
+export interface Props {
+    title: string;
+    image: string;
+    link: string;
+    description?: string;
+    technologies?: string[];
+}
+
+const { title, image, link, description, technologies } = Astro.props;
+---
+
+<a href={link} target="_blank" rel="noopener noreferrer" class="group block">
+    <div class="aspect-[4/3] bg-slate-100 mb-4 overflow-hidden relative">
+        <div
+            class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-slate-500"
+        >
+            <div class="text-center">
+                <div class="text-lg font-medium mb-2">{title}</div>
+                <div class="text-sm">Project Image</div>
+            </div>
+        </div>
+
+        <!-- Hover Overlay -->
+        <div
+            class="absolute inset-0 bg-slate-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+        >
+            <div class="text-center text-white px-6">
+                <h3 class="text-xl font-semibold mb-3">{title}</h3>
+                {
+                    description && (
+                        <p class="text-slate-200 text-sm mb-4 leading-relaxed">
+                            {description}
+                        </p>
+                    )
+                }
+                {
+                    technologies && technologies.length > 0 && (
+                        <div class="flex flex-wrap justify-center gap-2">
+                            {technologies.map((tech) => (
+                                <span class="px-2 py-1 bg-white/20 text-white text-xs rounded-full">
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    )
+                }
+                <div class="mt-4 text-purple-300 text-sm font-medium">
+                    View Project →
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3
+        class="text-lg font-medium text-slate-900 group-hover:text-slate-600 transition-colors"
+    >
+    </h3>
+</a>
