@@ -28,8 +28,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/dist /usr/share/caddy
 # Switch to non-root user
 USER nextjs
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080 for non-root user compatibility
+EXPOSE 8080
 
-# Caddy will serve the static files by default
+# Caddy will serve the static files by default on port 8080
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

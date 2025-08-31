@@ -84,6 +84,7 @@ Images are automatically published to `ghcr.io/<owner>/portfolio:<version>` with
 - Semantic version tags (e.g., `1.2.3`, `2.0.0`)
 - `latest` tag for the most recent release
 - OCI labels for source, revision, creation time, and version
+- Container exposes port 8080 for non-root user compatibility
 
 ### Deployment
 

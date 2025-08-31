@@ -19,12 +19,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
       
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: 9
       
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -32,9 +30,15 @@ jobs:
       - name: Build Astro site
         run: pnpm build
 
-      - id: semantic-release
-        name: Run semantic-release
-        run: pnpm release
+      - name: Semantic Release
+        id: sr
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+            @semantic-release/github
+            @semantic-release/npm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -48,19 +52,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build & push image
+        if: steps.sr.outputs.new_release_published == 'true'
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/portfolio:${{ steps.semantic-release.outputs.new_release_version }}
+            ghcr.io/${{ github.repository_owner }}/portfolio:${{ steps.sr.outputs.new_release_version }}
             ghcr.io/${{ github.repository_owner }}/portfolio:latest
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
-            org.opencontainers.image.version=${{ steps.semantic-release.outputs.new_release_version }}
+            org.opencontainers.image.version=${{ steps.sr.outputs.new_release_version }}
             org.opencontainers.image.description=Astro portfolio site
           cache-from: type=gha
           cache-to: type=gha,mode=max
