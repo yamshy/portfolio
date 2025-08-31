@@ -3,11 +3,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Use corepack for pnpm (smaller layer + reproducible)
+RUN corepack enable
+
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Install pnpm and dependencies
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
@@ -19,17 +22,16 @@ RUN pnpm build
 FROM caddy:2-alpine
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nextjs -u 1001
+RUN addgroup -g 1001 -S app && adduser -S app -u 1001 -G app
 
 # Copy built site from builder stage
-COPY --from=builder --chown=nextjs:nodejs /app/dist /usr/share/caddy
+COPY --from=builder --chown=app:app /app/dist /srv
 
 # Switch to non-root user
-USER nextjs
+USER app
 
 # Expose port 8080 for non-root user compatibility
 EXPOSE 8080
 
-# Caddy will serve the static files by default on port 8080
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+# Serve static files on 8080 explicitly
+CMD ["caddy", "file-server", "--root", "/srv", "--listen", ":8080"]

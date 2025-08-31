@@ -20,28 +20,32 @@
 
 ### 3. Docker Configuration
 - ✅ Created multi-stage `Dockerfile`:
-  - Node 20 Alpine builder stage
+  - Node 20 Alpine builder stage with corepack for pnpm
   - Caddy minimal static server final stage
-  - Non-root user execution
+  - Non-root user execution (app:app)
   - Port 8080 exposed (for non-root compatibility)
+  - **Fixed serving**: Uses `caddy file-server --root /srv --listen :8080`
 - ✅ Created `.dockerignore` to exclude unnecessary files
 
 ### 4. GitHub Actions Workflow
 - ✅ Created `.github/workflows/release.yml`:
   - Triggers on push to main
+  - **Concurrency guard** to prevent parallel runs
   - Uses `cycjimmy/semantic-release-action@v4` for reliable outputs
   - Installs dependencies with pnpm
   - Runs semantic-release with proper plugin configuration
   - **Gates Docker image build on actual releases only**
+  - **Skips latest tag on pre-releases** (channel check)
+  - **Additional semver tags**: major and minor version tags
   - Builds and pushes Docker image to GHCR
-  - Tags images with semantic versions
+  - Tags images with semantic versions + convenience tags
   - Adds OCI labels for provenance
 
 ### 5. Documentation
 - ✅ Updated `README.md` with:
   - Conventional commits format explanation
   - Release process documentation
-  - Container image information (including port 8080)
+  - Container image information (including port 8080 and serving details)
   - Deployment notes
 - ✅ Created initial `CHANGELOG.md`
 
@@ -78,6 +82,7 @@ To trigger your first release:
    - Generate CHANGELOG.md
    - Create a GitHub release
    - **Only if a release is published**: Build and push Docker image to GHCR
+   - **Create multiple tags**: 1.0.0, 1.0, 1, and latest
 
 ## 🚀 How It Works
 
@@ -86,7 +91,11 @@ To trigger your first release:
 3. **Release Creation**: Creates Git tags, updates CHANGELOG.md, and publishes GitHub releases
 4. **Conditional Container Build**: **Only builds/pushes Docker images when a new release is actually published**
 5. **Container Publishing**: GitHub Actions builds a Docker image and pushes it to GHCR
-6. **Image Tagging**: Images are tagged with semantic versions (e.g., `1.0.0`, `1.1.0`)
+6. **Image Tagging**: Images are tagged with:
+   - Semantic versions (e.g., `1.0.0`)
+   - Minor versions (e.g., `1.0`)
+   - Major versions (e.g., `1`)
+   - Latest tag (only for stable releases)
 7. **OCI Labels**: Images include provenance information for security and traceability
 
 ## 📋 Commit Message Examples
@@ -110,11 +119,13 @@ Note: This will fail on repository access in a local environment, but it will ve
 
 Images will be published to:
 - `ghcr.io/<owner>/portfolio:<version>` (e.g., `ghcr.io/username/portfolio:1.0.0`)
-- `ghcr.io/<owner>/portfolio:latest`
+- `ghcr.io/<owner>/portfolio:<minor>` (e.g., `ghcr.io/username/portfolio:1.0`)
+- `ghcr.io/<owner>/portfolio:<major>` (e.g., `ghcr.io/username/portfolio:1`)
+- `ghcr.io/<owner>/portfolio:latest` (only for stable releases)
 
 **Important**: Images are only built and pushed when semantic-release actually publishes a new release. This prevents unnecessary image builds for non-releasable commits.
 
-**Port Configuration**: Container exposes port 8080 for non-root user compatibility, making it suitable for Kubernetes deployments.
+**Port Configuration**: Container exposes port 8080 for non-root user compatibility, making it suitable for Kubernetes deployments. Serves static files from `/srv` via Caddy's file-server.
 
 ## 🔗 Next Steps
 
@@ -122,7 +133,7 @@ Images will be published to:
 2. Push your changes to GitHub
 3. Make your first conventional commit to trigger a release
 4. Monitor the GitHub Actions workflow execution
-5. Verify the container image is published to GHCR
+5. Verify the container image is published to GHCR with multiple version tags
 
 ## 🎯 Key Improvements Made
 
@@ -131,5 +142,9 @@ Images will be published to:
 - **Non-root Compatibility**: Container runs on port 8080 for better security
 - **Consistent Package Manager**: Uses pnpm throughout the workflow
 - **Clean Configuration**: Optimized release.config.js with concise plugin definitions
+- **Fixed Serving**: Proper Caddy configuration serving static files on port 8080
+- **Concurrency Guard**: Prevents parallel workflow runs from conflicting
+- **Semver Convenience Tags**: Major and minor version tags for easier deployment targeting
+- **Pre-release Safety**: Skips latest tag on pre-releases
 
 Your Astro portfolio is now set up with rock-solid automated semantic versioning and container image publishing! 🎉

@@ -85,6 +85,7 @@ Images are automatically published to `ghcr.io/<owner>/portfolio:<version>` with
 - `latest` tag for the most recent release
 - OCI labels for source, revision, creation time, and version
 - Container exposes port 8080 for non-root user compatibility
+- Serves static files from `/srv` via Caddy's file-server on port 8080
 
 ### Deployment
 
