@@ -12,6 +12,9 @@ COPY package.json pnpm-lock.yaml ./
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
+# Set production environment for build optimization
+ENV NODE_ENV=production
+
 # Copy source code
 COPY . .
 

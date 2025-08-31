@@ -1,6 +1,6 @@
 export default {
   branches: ["main"],
-  repositoryUrl: "https://github.com/<OWNER>/<REPO>",
+  repositoryUrl: "https://github.com/yamshy/portfolio",
   plugins: [
     ["@semantic-release/commit-analyzer", { preset: "conventionalcommits" }],
     ["@semantic-release/release-notes-generator", { preset: "conventionalcommits" }],
