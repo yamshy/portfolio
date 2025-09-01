@@ -50,6 +50,10 @@ jobs:
       - name: Build metadata
         id: meta
         run: echo "NOW=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Derive short SHA
+        id: sha
+        run: echo "SHORT=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -80,11 +84,15 @@ jobs:
             ${{ steps.img.outputs.IMAGE }}:${{ steps.sv.outputs.MINOR }}
             ${{ steps.img.outputs.IMAGE }}:${{ steps.sv.outputs.MAJOR }}
             ${{ steps.img.outputs.IMAGE }}:latest
+            ${{ steps.img.outputs.IMAGE }}:sha-${{ steps.sha.outputs.SHORT }}
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.created=${{ steps.meta.outputs.NOW }}
             org.opencontainers.image.version=${{ steps.sr.outputs.new_release_version }}
+            org.opencontainers.image.title=portfolio
             org.opencontainers.image.description=Astro portfolio site
+            org.opencontainers.image.url=https://github.com/yamshy/portfolio
+            org.opencontainers.image.documentation=https://github.com/yamshy/portfolio#readme
           cache-from: type=gha
           cache-to: type=gha,mode=max

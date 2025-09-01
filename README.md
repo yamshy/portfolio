@@ -29,6 +29,12 @@ Inside of your Astro project, you'll see the following folders and files:
 
 All commands are run from the root of the project, from a terminal:
 
+### Quick Start
+```bash
+# Test the latest release locally
+docker run -p 8080:8080 ghcr.io/yamshy/portfolio:latest
+```
+
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `pnpm install`             | Installs dependencies                            |
