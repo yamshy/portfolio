@@ -1,0 +1,110 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  node-checks:
+    name: Node.js Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9'
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm -s tsc --noEmit
+
+      - name: Astro check
+        run: pnpm -s astro check
+
+      - name: Build
+        run: pnpm -s astro build
+
+  conventional-commits:
+    name: Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  container-smoke-test:
+    name: Container Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: portfolio-test:latest
+
+      - name: Run container and test
+        run: |
+          # Start container in background
+          docker run -d --name portfolio-test -p 8080:8080 portfolio-test:latest
+          
+          # Wait for container to be ready
+          echo "Waiting for container to start..."
+          sleep 5
+          
+          # Retry loop to check if the service is responding
+          max_attempts=30
+          attempt=1
+          
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt of $max_attempts..."
+            
+            if curl -f -s http://localhost:8080/ > /dev/null; then
+              echo "✅ Container is responding with 200 OK"
+              break
+            fi
+            
+            if [ $attempt -eq $max_attempts ]; then
+              echo "❌ Container failed to respond after $max_attempts attempts"
+              docker logs portfolio-test
+              exit 1
+            fi
+            
+            echo "Container not ready yet, waiting 2 seconds..."
+            sleep 2
+            attempt=$((attempt + 1))
+          done
+
+      - name: Clean up container
+        if: always()
+        run: |
+          docker stop portfolio-test || true
+          docker rm portfolio-test || true
