@@ -47,7 +47,9 @@ jobs:
         id: img
         run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER}/portfolio" >> $GITHUB_OUTPUT
 
-      - uses: docker/setup-qemu-action@v3
+      - name: Build metadata
+        id: meta
+        run: echo "NOW=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -73,7 +75,6 @@ jobs:
         with:
           context: .
           push: true
-          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ steps.img.outputs.IMAGE }}:${{ steps.sr.outputs.new_release_version }}
             ${{ steps.img.outputs.IMAGE }}:${{ steps.sv.outputs.MINOR }}
@@ -82,7 +83,7 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
+            org.opencontainers.image.created=${{ steps.meta.outputs.NOW }}
             org.opencontainers.image.version=${{ steps.sr.outputs.new_release_version }}
             org.opencontainers.image.description=Astro portfolio site
           cache-from: type=gha
