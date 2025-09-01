@@ -40,7 +40,6 @@
   - **Skips latest tag on pre-releases** (channel check)
   - **Additional semver tags**: major and minor version tags
   - **Image name variable** for consistency and reuse
-  - **Multi-architecture support**: AMD64 and ARM64 platforms
   - Builds and pushes Docker image to GHCR
   - Tags images with semantic versions + convenience tags
   - Adds OCI labels for provenance
@@ -49,7 +48,7 @@
 - ✅ Updated `README.md` with:
   - Conventional commits format explanation
   - Release process documentation
-  - Container image information (including port 8080, serving details, and multi-arch support)
+  - Container image information (including port 8080 and serving details)
   - Deployment notes
 - ✅ Created initial `CHANGELOG.md`
 
@@ -84,7 +83,6 @@ To trigger your first release:
    - Create a GitHub release
    - **Only if a release is published**: Build and push Docker image to GHCR
    - **Create multiple tags**: 1.0.0, 1.0, 1, and latest
-   - **Build for multiple architectures**: AMD64 and ARM64
 
 ## 🚀 How It Works
 
@@ -98,8 +96,7 @@ To trigger your first release:
    - Minor versions (e.g., `1.0`)
    - Major versions (e.g., `1`)
    - Latest tag (only for stable releases)
-7. **Multi-architecture**: Images built for both AMD64 and ARM64 platforms
-8. **OCI Labels**: Images include provenance information for security and traceability
+7. **OCI Labels**: Images include provenance information for security and traceability
 
 ## 📋 Commit Message Examples
 
@@ -130,7 +127,7 @@ Images will be published to:
 
 **Port Configuration**: Container exposes port 8080 for non-root user compatibility, making it suitable for Kubernetes deployments. Serves static files from `/srv` via Caddy's file-server.
 
-**Multi-architecture**: Images are built for both AMD64 and ARM64 platforms, supporting deployment on various infrastructure.
+
 
 ## 🔗 Next Steps
 
@@ -138,7 +135,7 @@ Images will be published to:
 2. Push your changes to GitHub
 3. Make your first conventional commit to trigger a release
 4. Monitor the GitHub Actions workflow execution
-5. Verify the container image is published to GHCR with multiple version tags and architectures
+5. Verify the container image is published to GHCR with multiple version tags
 
 ## 🎯 Key Improvements Made
 
@@ -151,7 +148,6 @@ Images will be published to:
 - **Concurrency Guard**: Prevents parallel workflow runs from conflicting
 - **Semver Convenience Tags**: Major and minor version tags for easier deployment targeting
 - **Pre-release Safety**: Skips latest tag on pre-releases
-- **Multi-architecture Support**: AMD64 and ARM64 platform support
 - **Build Optimization**: NODE_ENV=production for leaner images
 - **Image Name Consistency**: Centralized image naming for workflow reuse
 

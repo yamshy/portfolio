@@ -86,11 +86,12 @@ Images are automatically published to `ghcr.io/<owner>/portfolio:<version>` with
 - OCI labels for source, revision, creation time, and version
 - Container exposes port 8080 for non-root user compatibility
 - Serves static files from `/srv` via Caddy's file-server on port 8080
-- Multi-architecture support (AMD64 and ARM64)
 
 ### Deployment
 
 The Flux GitOps repository watches these image tags with a SemVer ImagePolicy to automatically deploy new versions. No Flux configuration is needed in this repository.
+
+**Note**: Set your GHCR package visibility to public if Flux needs to pull images without authentication secrets.
 
 ## 👀 Want to learn more?
 
