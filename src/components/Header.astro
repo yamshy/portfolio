@@ -2,11 +2,11 @@
 // Header component
 ---
 
-<header class="py-6 px-6 border-b border-mocha-200/30 bg-mocha-50/80 sticky top-0 z-50">
+<header class="py-4 sm:py-6 px-4 sm:px-6 border-b border-mocha-200/30 bg-mocha-50/80 sticky top-0 z-50">
     <nav class="max-w-6xl mx-auto">
         <div class="flex justify-center items-center">
-            <!-- Navigation Links -->
-            <div class="flex items-center space-x-8">
+            <!-- Navigation Links - hidden on mobile -->
+            <div class="hidden sm:flex items-center space-x-6 md:space-x-8">
                 <a 
                     href="#projects" 
                     class="text-mocha-700 hover:text-mocha-900 transition-all duration-300 font-medium relative group"
@@ -39,23 +39,11 @@
                 </a>
             </div>
             
-            <!-- Mobile Menu Button -->
-            <button 
-                class="md:hidden p-2 rounded-lg hover:bg-mocha-100/50 transition-colors duration-200"
-                aria-label="Toggle mobile menu"
-            >
-                <svg class="w-6 h-6 text-mocha-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-        
-        <!-- Mobile Navigation (hidden by default) -->
-        <div class="md:hidden mt-4 pt-4 border-t border-mocha-200/30 hidden">
-            <div class="flex flex-col space-y-4">
+            <!-- Mobile Navigation - simplified for mobile -->
+            <div class="sm:hidden flex items-center space-x-4">
                 <a 
                     href="#projects" 
-                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium text-sm"
                 >
                     Projects
                 </a>
@@ -63,21 +51,9 @@
                     href="https://github.com/yamshy" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium text-sm"
                 >
                     GitHub
-                </a>
-                <a 
-                    href="#resume" 
-                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
-                >
-                    Resume
-                </a>
-                <a 
-                    href="#blog" 
-                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
-                >
-                    Blog
                 </a>
             </div>
         </div>
