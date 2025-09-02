@@ -11,6 +11,8 @@ import Header from "../components/Header.astro";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Portfolio | Shyam Ajudia</title>
+		<!-- Preload the main font for better performance -->
+		<link rel="preload" href="/fonts/rst-thermal/rst-thermal-regular.otf" as="font" type="font/otf" crossorigin>
 	</head>
 	<body class="bg-amber-50 text-gray-900 transition-colors duration-300">
 		<Header />

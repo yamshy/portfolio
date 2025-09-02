@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+/* Set RST Thermal as the default font family */
+html, body, * {
+  font-family: 'RST Thermal', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* RST Thermal Font Family */
+@font-face {
+  font-family: 'RST Thermal';
+  src: url('/fonts/rst-thermal/rst-thermal-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RST Thermal';
+  src: url('/fonts/rst-thermal/rst-thermal-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RST Thermal';
+  src: url('/fonts/rst-thermal/rst-thermal-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RST Thermal';
+  src: url('/fonts/rst-thermal/rst-thermal-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
