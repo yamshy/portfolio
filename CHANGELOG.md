@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0](https://github.com/yamshy/portfolio/compare/v1.1.0...v1.2.0) (2025-09-02)
+
+### Features
+
+* redesign portfolio with shared background window effect ([#5](https://github.com/yamshy/portfolio/issues/5)) ([8fc26ef](https://github.com/yamshy/portfolio/commit/8fc26ef72126afdef82547847b034afa11d9d6f6))
+
 ## [1.1.0](https://github.com/yamshy/portfolio/compare/v1.0.1...v1.1.0) (2025-09-02)
 
 ### Features
