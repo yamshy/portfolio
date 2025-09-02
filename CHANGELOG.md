@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.0.0](https://github.com/yamshy/portfolio/compare/v1.4.0...v2.0.0) (2025-09-02)
+
+### ⚠ BREAKING CHANGES
+
+* ContactForm now uses new component architecture
+
+* chore: update todo list and enhance homepage content
+
+- Mark completed tasks in the todo list, including contact form validation and accessibility enhancements.
+- Revise homepage bio and project descriptions to reflect a transition from biology to infrastructure engineering.
+- Update timeline phases to better represent career progression and technical expertise.
+- Improve clarity and focus in project descriptions, emphasizing analytical skills and systematic approaches.
+
+* chore: update todo list with completed tasks and prioritize next steps
+
+- Mark several tasks as completed, including content creation and the addition of the About section.
+- Highlight the high priority for email service integration in the next steps.
+- Revise the next steps section to reflect a clearer priority order for upcoming tasks.
+
+### Features
+
+* major website redesign with enhanced UX and authentic content ([#8](https://github.com/yamshy/portfolio/issues/8)) ([143d89b](https://github.com/yamshy/portfolio/commit/143d89bee9450c781c16654f39a061f720685130))
+
 ## [1.4.0](https://github.com/yamshy/portfolio/compare/v1.3.0...v1.4.0) (2025-09-02)
 
 ### Features
