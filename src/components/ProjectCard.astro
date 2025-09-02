@@ -1,56 +1,71 @@
 ---
 export interface Props {
     title: string;
-    image: string;
     link: string;
     description?: string;
     technologies?: string[];
+    index?: number;
 }
 
-const { title, image, link, description, technologies } = Astro.props;
+const { title, link, description, technologies, index = 0 } = Astro.props;
+
+// Calculate background position based on grid layout (2 columns)
+const gridCol = index % 2;
+const gridRow = Math.floor(index / 2);
+const offsetX = gridCol * 300;
+const offsetY = gridRow * 200;
 ---
 
 <a href={link} target="_blank" rel="noopener noreferrer" class="group block">
     <div
-        class="aspect-[4/3] bg-orange-50 mb-4 overflow-hidden relative rounded-lg border border-orange-200 shadow-sm hover:shadow-md transition-shadow duration-300"
+        class="aspect-[4/3] bg-gradient-to-br from-warm-blue-100 to-digital-lavender-100 mb-6 overflow-hidden relative organic-blob border border-warm-blue-300 organic-shadow hover:organic-shadow-lg transition-all duration-500 hover:scale-[1.02]"
     >
+        <!-- Shared background layer - each card shows different part -->
+        <div 
+            class="absolute inset-0 w-full h-full opacity-80"
+            style={`background: linear-gradient(45deg, rgba(164, 120, 100, 0.8) 0%, rgba(226, 114, 91, 0.8) 33%, rgba(167, 139, 250, 0.8) 66%, rgba(255, 221, 68, 0.8) 100%); background-size: 800% 800%; background-position: -${offsetX}px -${offsetY}px; animation: liquidGradient 8s ease-in-out infinite;`}
+        ></div>
+        
+        <!-- Project content -->
         <div
-            class="w-full h-full bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center text-orange-600"
+            class="w-full h-full flex items-center justify-center relative group-hover:opacity-0 transition-opacity duration-500 z-10"
         >
-            <div class="text-center">
-                <div class="text-lg font-medium mb-2 text-gray-800">
+            
+            <div class="text-center relative z-10">
+                <div class="text-2xl font-bold mb-2 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
                     {title}
                 </div>
-                <div class="text-sm">Project Image</div>
+                <div class="text-sm text-white font-medium" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.4);">Project Preview</div>
             </div>
         </div>
 
         <!-- Hover Overlay -->
         <div
-            class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+            class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-75 flex items-center justify-center"
         >
-            <div class="text-center text-gray-800 px-6">
-                <h3 class="text-xl font-bold mb-3 text-gray-900">
+            <div class="text-center text-mocha-800 px-8 py-6">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">
                     {title}
                 </h3>
                 {
                     description && (
-                        <p class="text-gray-600 text-sm mb-4 leading-relaxed" set:html={description} />
+                        <p class="text-mocha-700 text-sm mb-6 leading-relaxed" set:html={description} />
                     )
                 }
                 {
                     technologies && technologies.length > 0 && (
-                        <div class="flex flex-wrap justify-center gap-2">
+                        <div class="flex flex-wrap justify-center gap-2 mb-6">
                             {technologies.map((tech) => (
-                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full border border-blue-200 font-medium">
+                                <span class="px-3 py-1 bg-mocha-100 text-mocha-700 text-xs rounded-full border border-mocha-200 font-medium">
                                     {tech}
                                 </span>
                             ))}
                         </div>
                     )
                 }
-                <div class="mt-4 text-blue-600 text-sm font-medium">
-                    View Project →
+                <div class="inline-flex items-center gap-2 text-mocha-600 text-sm font-medium bg-mocha-100/50 px-4 py-2 rounded-full border border-mocha-200/50">
+                    View Project
+                    <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </div>
             </div>
         </div>

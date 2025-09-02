@@ -13,10 +13,14 @@ import Header from "../components/Header.astro";
 		<title>Portfolio | Shyam Ajudia</title>
 		<!-- Preload the main font for better performance -->
 		<link rel="preload" href="/fonts/rst-thermal/rst-thermal-regular.otf" as="font" type="font/otf" crossorigin>
+		<meta name="description" content="Shyam Ajudia - Software Engineer & Developer Portfolio showcasing modern web development projects and expertise.">
+		<meta name="theme-color" content="#a47864">
 	</head>
-	<body class="bg-amber-50 text-gray-900 transition-colors duration-300">
+	<body class="bg-mocha-50 text-mocha-900 transition-colors duration-300 min-h-screen">
 		<Header />
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</body>
 </html>
 
@@ -26,5 +30,23 @@ import Header from "../components/Header.astro";
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+	
+	/* Enhanced scrollbar styling */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	
+	::-webkit-scrollbar-track {
+		background: #f7f4f2;
+	}
+	
+	::-webkit-scrollbar-thumb {
+		background: #a47864;
+		border-radius: 4px;
+	}
+	
+	::-webkit-scrollbar-thumb:hover {
+		background: #8f6b5a;
 	}
 </style>
