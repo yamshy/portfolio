@@ -13,72 +13,7 @@ export default {
         'medium': '500',
         'bold': '700',
       },
-      colors: {
-        // High-contrast warm palette with strategic bright accents
-        'warm-white': '#FEFCF8',
-        'coral-primary': '#E85A2B',
-        'text-dark': '#1A0D08',
-        'accent-yellow': '#FFD644',
-        'mocha-mousse': '#A47864',
-        'cool-contrast': '#2563EB',
-        
-        // Glassmorphism colors
-        'glass-coral': 'rgba(232, 90, 43, 0.2)',
-        'glass-mocha': 'rgba(164, 120, 100, 0.15)',
-        'glass-yellow': 'rgba(255, 214, 68, 0.15)',
-        'glass-blue': 'rgba(37, 99, 235, 0.1)',
-        'glass-dark': 'rgba(26, 13, 8, 0.1)',
-        
-        // Legacy colors for compatibility
-        'mocha': {
-          50: '#f7f4f2',
-          100: '#ede6e1',
-          200: '#d9ccc2',
-          300: '#c2b0a3',
-          400: '#a47864',
-          500: '#8f6b5a',
-          600: '#7a5a4c',
-          700: '#654a3f',
-          800: '#503c33',
-          900: '#3b2e27',
-        },
-        'terracotta': {
-          50: '#fdf4f2',
-          100: '#fbe8e4',
-          200: '#f6d1c9',
-          300: '#eeb3a6',
-          400: '#e2725b',
-          500: '#d45a42',
-          600: '#b84a35',
-          700: '#9a3d2d',
-          800: '#7c3226',
-          900: '#5e271f',
-        },
-        'neon-yellow': {
-          50: '#fffbeb',
-          100: '#fff7d1',
-          200: '#ffed9a',
-          300: '#ffdd44',
-          400: '#f5c842',
-          500: '#e6b73a',
-          600: '#d4a632',
-          700: '#c2952a',
-          800: '#b08422',
-          900: '#9e731a',
-        },
-        'warm-blue': {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        }
-      },
+      // Colors are now defined in @theme directive in global.css
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.8s ease-out',
