@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1](https://github.com/yamshy/portfolio/compare/v1.0.0...v1.0.1) (2025-09-02)
+
+### Bug Fixes
+
+* strip capabilities from Caddy binary in Dockerfile ([14ab24c](https://github.com/yamshy/portfolio/commit/14ab24c5369e1259249feff8dce81b903068ecc5))
+
 ## 1.0.0 (2025-09-02)
 
 ### Features
