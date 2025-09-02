@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github.com/yamshy/portfolio/compare/v1.0.1...v1.1.0) (2025-09-02)
+
+### Features
+
+* replace placeholder hero text with professional introduction ([#4](https://github.com/yamshy/portfolio/issues/4)) ([000453f](https://github.com/yamshy/portfolio/commit/000453fe2b31907bc10a8eb1a71610ceb7074784))
+
 ## [1.0.1](https://github.com/yamshy/portfolio/compare/v1.0.0...v1.0.1) (2025-09-02)
 
 ### Bug Fixes
