@@ -1,12 +1,12 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
 
 // Portfolio data - your actual projects
 const projects = [
 	{
 		title: "Homelab Kubernetes",
-		image: "/homelab-thumbnail.jpg",
 		link: "https://github.com/yamshy/homelab",
 		description:
 			"Personal homelab infrastructure using Kubernetes with FluxCD for GitOps deployment. Manages various services and applications with automated CI/CD pipelines.",
@@ -14,7 +14,6 @@ const projects = [
 	},
 	{
 		title: "Portfolio Website",
-		image: "/portfolio-thumbnail.jpg",
 		link: "https://github.com/yamshy/portfolio",
 		description:
 			"Portfolio website built with Astro and Tailwind CSS.<br>(the site you're looking at)",
@@ -25,34 +24,77 @@ const projects = [
 
 <Layout>
 	<!-- Hero Section -->
-	<section class="pt-24 pb-20 px-6">
-		<div class="text-center max-w-4xl mx-auto">
-			<h1
-				class="text-6xl md:text-8xl font-light mb-8 leading-tight text-gray-900"
-			>
-				<span class="font-bold text-gray-900">Shyam Ajudia</span>
+	<section class="pt-16 pb-24 px-6 relative overflow-hidden">
+		<!-- Decorative organic shapes -->
+		<div class="absolute top-20 right-10 w-64 h-64 organic-blob-2 bg-gradient-to-br from-mocha-200/30 to-terracotta-200/30 animate-float"></div>
+		<div class="absolute bottom-20 left-10 w-48 h-48 organic-blob-3 bg-gradient-to-br from-digital-lavender-200/30 to-honey-200/30 animate-float" style="animation-delay: -3s;"></div>
+		
+		<div class="text-center max-w-6xl mx-auto relative z-10">
+			<!-- Main heading with liquid typography -->
+			<h1 class="text-7xl md:text-9xl font-light mb-8 leading-tight animate-slide-up">
+				<span class="liquid-text font-bold">Shyam</span>
+				<span class="text-mocha-900 font-light"> Ajudia</span>
 			</h1>
-			<p
-				class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-light"
-			>
-				yabba dabba doo blah blah blah lorem ipsum and so on
-			</p>
+			
+			<!-- Subtitle with enhanced typography -->
+			<div class="max-w-3xl mx-auto mb-12 animate-fade-in" style="animation-delay: 0.3s;">
+				<p class="text-xl md:text-2xl text-mocha-700 leading-relaxed font-light mb-6">
+					Software Engineer & DevOps Specialist building 
+					<span class="gradient-text font-medium">scalable infrastructure</span> 
+					and <span class="gradient-text font-medium">automated systems</span>
+				</p>
+				<p class="text-lg text-mocha-600 leading-relaxed">
+					Expert in Kubernetes, cloud architecture, CI/CD pipelines, and infrastructure 
+					as code. Turning complex systems into reliable, maintainable solutions.
+				</p>
+			</div>
+			
+			<!-- Call-to-action buttons -->
+			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style="animation-delay: 0.6s;">
+				<a 
+					href="#projects" 
+					class="group px-8 py-4 bg-gradient-to-r from-mocha-600 to-terracotta-500 text-mocha-900 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-mocha-700 hover:border-mocha-800"
+				>
+					View My Work
+					<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-y-1">↓</span>
+				</a>
+				<a 
+					href="mailto:sajudia@proton.me" 
+					class="group px-8 py-4 border-2 border-mocha-300 text-mocha-700 rounded-full font-medium transition-all duration-300 hover:bg-mocha-50 hover:border-mocha-400"
+				>
+					Get In Touch
+					<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+				</a>
+			</div>
 		</div>
 	</section>
 
 	<!-- Projects Section -->
-	<section id="projects" class="px-6 pb-20">
+	<section id="projects" class="px-6 pb-24 relative">
 		<div class="max-w-7xl mx-auto">
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+			<!-- Section header -->
+			<div class="text-center mb-16 animate-fade-in">
+				<h2 class="text-4xl md:text-5xl font-light text-mocha-900 mb-6">
+					Featured <span class="gradient-text font-medium">Projects</span>
+				</h2>
+				<p class="text-lg text-mocha-600 max-w-2xl mx-auto leading-relaxed">
+					A collection of projects spanning technology, design, and creative work.
+				</p>
+			</div>
+			
+			<!-- Projects grid with enhanced layout -->
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 				{
-					projects.map((project) => (
-						<ProjectCard
-							title={project.title}
-							image={project.image}
-							link={project.link}
-							description={project.description}
-							technologies={project.technologies}
-						/>
+					projects.map((project, index) => (
+						<div class="animate-slide-up" style={`animation-delay: ${index * 0.2}s;`}>
+							<ProjectCard
+								title={project.title}
+								link={project.link}
+								description={project.description}
+								technologies={project.technologies}
+								index={index}
+							/>
+						</div>
 					))
 				}
 			</div>
@@ -60,25 +102,5 @@ const projects = [
 	</section>
 
 	<!-- Footer -->
-	<footer class="px-6 py-12 border-t border-amber-200">
-		<div class="max-w-4xl mx-auto text-center">
-			<p class="text-gray-600 mb-4">© 2025 Shyam Ajudia.</p>
-			<div class="flex justify-center gap-6 text-sm">
-				<a
-					href="mailto:sajudia@proton.me"
-					class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-				>
-					Contact
-				</a>
-				<a
-					href="https://github.com/yamshy"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
-				>
-					GitHub
-				</a>
-			</div>
-		</div>
-	</footer>
+	<Footer />
 </Layout>

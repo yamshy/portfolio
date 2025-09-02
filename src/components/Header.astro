@@ -1,34 +1,85 @@
 ---
-// Header component with centered navigation
+// Header component
 ---
 
-<header class="py-6 px-6 border-b border-amber-200">
-    <nav class="max-w-4xl mx-auto">
-        <div class="flex justify-center items-center space-x-12">
-            <a 
-                href="#projects" 
-                class="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
+<header class="py-6 px-6 border-b border-mocha-200/30 bg-mocha-50/80 sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto">
+        <div class="flex justify-center items-center">
+            <!-- Navigation Links -->
+            <div class="flex items-center space-x-8">
+                <a 
+                    href="#projects" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-all duration-300 font-medium relative group"
+                >
+                    Projects
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-mocha-400 to-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a 
+                    href="https://github.com/yamshy" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-mocha-700 hover:text-mocha-900 transition-all duration-300 font-medium relative group"
+                >
+                    GitHub
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-mocha-400 to-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a 
+                    href="#resume" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-all duration-300 font-medium relative group"
+                >
+                    Resume
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-mocha-400 to-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a 
+                    href="#blog" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-all duration-300 font-medium relative group"
+                >
+                    Blog
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-mocha-400 to-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button 
+                class="md:hidden p-2 rounded-lg hover:bg-mocha-100/50 transition-colors duration-200"
+                aria-label="Toggle mobile menu"
             >
-                Projects
-            </a>
-            <a 
-                href="https://github.com/yamshy" 
-                class="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
-            >
-                GitHub
-            </a>
-            <a 
-                href="#resume" 
-                class="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
-            >
-                Resume
-            </a>
-            <a 
-                href="#blog" 
-                class="text-gray-700 hover:text-gray-900 transition-colors duration-200 font-medium"
-            >
-                Blog
-            </a>
+                <svg class="w-6 h-6 text-mocha-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation (hidden by default) -->
+        <div class="md:hidden mt-4 pt-4 border-t border-mocha-200/30 hidden">
+            <div class="flex flex-col space-y-4">
+                <a 
+                    href="#projects" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                >
+                    Projects
+                </a>
+                <a 
+                    href="https://github.com/yamshy" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                >
+                    GitHub
+                </a>
+                <a 
+                    href="#resume" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                >
+                    Resume
+                </a>
+                <a 
+                    href="#blog" 
+                    class="text-mocha-700 hover:text-mocha-900 transition-colors duration-200 font-medium py-2"
+                >
+                    Blog
+                </a>
+            </div>
         </div>
     </nav>
 </header>
