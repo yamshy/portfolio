@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import ContactForm from "../components/ContactForm.astro";
 import Footer from "../components/Footer.astro";
 
 // Portfolio data - your actual projects
@@ -23,83 +24,308 @@ const projects = [
 ---
 
 <Layout>
-	<!-- Hero Section -->
-	<section class="pt-12 sm:pt-16 pb-16 sm:pb-24 px-4 sm:px-6 relative overflow-hidden">
-		<!-- Decorative organic shapes - hidden on mobile, adjusted on tablet -->
-		<div class="hidden sm:block absolute top-20 right-10 w-48 h-48 md:w-64 md:h-64 organic-blob-2 bg-gradient-to-br from-mocha-200/30 to-terracotta-200/30 animate-float"></div>
-		<div class="hidden sm:block absolute bottom-20 left-10 w-32 h-32 md:w-48 md:h-48 organic-blob-3 bg-gradient-to-br from-digital-lavender-200/30 to-honey-200/30 animate-float" style="animation-delay: -3s;"></div>
-		
-		<div class="text-center max-w-6xl mx-auto relative z-10">
-			<!-- Main heading with liquid typography -->
-			<h1 class="text-5xl sm:text-7xl md:text-9xl font-light mb-6 sm:mb-8 leading-tight animate-slide-up">
-				<span class="liquid-text font-bold">Shyam</span>
-				<span class="text-mocha-900 font-light"> Ajudia</span>
-			</h1>
-			
-			<!-- Subtitle with enhanced typography -->
-			<div class="max-w-3xl mx-auto mb-8 sm:mb-12 animate-fade-in" style="animation-delay: 0.3s;">
-				<p class="text-lg sm:text-xl md:text-2xl text-mocha-700 leading-relaxed font-light mb-4 sm:mb-6 px-2 sm:px-0">
-					Software Engineer & DevOps Specialist building 
-					<span class="gradient-text font-medium">scalable infrastructure</span> 
-					and <span class="gradient-text font-medium">automated systems</span>
-				</p>
-				<p class="text-base sm:text-lg text-mocha-600 leading-relaxed px-2 sm:px-0">
-					Expert in Kubernetes, cloud architecture, CI/CD pipelines, and infrastructure 
-					as code. Turning complex systems into reliable, maintainable solutions.
-				</p>
+	<!-- Hero Section with Asymmetrical Layout -->
+	<section id="hero" class="h-[85vh] bg-warm-white relative overflow-hidden">
+		<!-- Organic background shapes -->
+		<div class="absolute inset-0 pointer-events-none">
+			<!-- Large coral blob -->
+			<div class="absolute top-20 -left-20 w-96 h-96 bg-glass-coral rounded-full animate-morph blur-lg opacity-70"></div>
+			<!-- Medium mocha blob -->
+			<div class="absolute top-1/3 right-10 w-64 h-64 bg-glass-mocha rounded-full animate-organic-float blur-md opacity-50"></div>
+			<!-- Small yellow accent -->
+			<div class="absolute bottom-1/4 left-1/3 w-32 h-32 bg-glass-yellow rounded-full animate-float blur-sm opacity-60"></div>
+		</div>
+
+		<!-- Asymmetrical grid layout -->
+		<div class="grid grid-cols-12 min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<!-- Left side - 2/3 width for main content -->
+			<div class="col-span-12 lg:col-span-8 flex flex-col justify-center relative z-10">
+				<!-- Main heading with asymmetrical positioning -->
+				<div class="mb-8 lg:mb-12">
+					<h1 class="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light leading-tight animate-grow">
+						<span class="block text-coral-primary font-bold">Shyam</span>
+						<span class="block text-text-dark font-light ml-8 lg:ml-16">Ajudia</span>
+					</h1>
+				</div>
+				
+				<!-- Bio text positioned asymmetrically -->
+				<div class="max-w-2xl lg:ml-16 mb-12 animate-fade-in" style="animation-delay: 0.3s;">
+					<p class="text-xl lg:text-2xl text-text-dark leading-relaxed font-light mb-6">
+						Infrastructure Engineer specializing in 
+						<span class="text-coral-primary font-medium">DevOps, system administration,</span> 
+						and <span class="text-coral-primary font-medium">data engineering</span>
+					</p>
+					<p class="text-lg text-mocha-mousse leading-relaxed">
+						Starting in molecular biology research, the transition to infrastructure engineering came naturally 
+						through understanding how biological systems work - complex, interconnected, and self-regulating. 
+						This systems thinking translates directly to building reliable infrastructure and data pipelines.
+					</p>
+				</div>
 			</div>
-			
-			<!-- Call-to-action buttons -->
-			<div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in px-4 sm:px-0" style="animation-delay: 0.6s;">
-				<a 
-					href="#projects" 
-					class="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-mocha-600 to-terracotta-500 text-mocha-900 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:scale-105 border-2 border-mocha-700 hover:border-mocha-800 text-center"
-				>
-					View My Work
-					<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-y-1">↓</span>
-				</a>
-				<a 
-					href="mailto:sajudia@proton.me" 
-					class="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-mocha-300 text-mocha-700 rounded-full font-medium transition-all duration-300 hover:bg-mocha-50 hover:border-mocha-400 text-center"
-				>
-					Get In Touch
-					<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-				</a>
+
+			<!-- Right side - 1/3 width for CTAs and floating elements -->
+			<div class="col-span-12 lg:col-span-4 flex flex-col justify-center items-end lg:items-start relative">
+				<!-- Glassmorphism CTA container -->
+				<div class="w-full lg:w-auto space-y-4 animate-fade-in" style="animation-delay: 0.6s;">
+					<!-- Primary CTA with glassmorphism -->
+					<a 
+						href="#projects" 
+						class="group block w-full lg:w-auto px-8 py-4 bg-glass-yellow backdrop-blur-lg border border-accent-yellow/30 rounded-full font-medium text-text-dark transition-all duration-300 hover:bg-accent-yellow hover:shadow-2xl hover:scale-105 text-center"
+					>
+						Learn More
+						<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-y-1">↓</span>
+					</a>
+					
+					<!-- Secondary CTA with glassmorphism -->
+					<a 
+						href="mailto:sajudia@proton.me" 
+						class="group block w-full lg:w-auto px-8 py-4 bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/30 rounded-full font-medium text-text-dark transition-all duration-300 hover:bg-mocha-mousse hover:shadow-xl hover:scale-105 text-center"
+					>
+						Get In Touch
+						<span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+					</a>
+				</div>
+
+				<!-- Floating accent shape -->
+				<div class="hidden lg:block absolute -top-20 -right-10 w-40 h-40 bg-glass-coral rounded-full animate-organic-float blur-xl opacity-30"></div>
+			</div>
+		</div>
+
+		<!-- Scroll indicator -->
+		<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+			<div class="w-6 h-10 border-2 border-coral-primary rounded-full flex justify-center">
+				<div class="w-1 h-3 bg-coral-primary rounded-full mt-2 animate-pulse"></div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Projects Section -->
-	<section id="projects" class="px-4 sm:px-6 pb-16 sm:pb-24 relative">
-		<div class="max-w-7xl mx-auto">
+	<!-- Professional Evolution Timeline -->
+	<section id="evolution" class="py-20 bg-gradient-to-b from-warm-white to-mocha-50 relative overflow-hidden">
+		<!-- Background organic shapes -->
+		<div class="absolute inset-0 pointer-events-none">
+			<div class="absolute top-1/4 left-1/4 w-72 h-72 bg-glass-blue rounded-full animate-morph blur-lg opacity-40"></div>
+			<div class="absolute bottom-1/3 right-1/4 w-48 h-48 bg-glass-coral rounded-full animate-organic-float blur-md opacity-50"></div>
+		</div>
+
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 			<!-- Section header -->
-			<div class="text-center mb-12 sm:mb-16 animate-fade-in">
-				<h2 class="text-3xl sm:text-4xl md:text-5xl font-light text-mocha-900 mb-4 sm:mb-6 px-2 sm:px-0">
-					Featured <span class="gradient-text font-medium">Projects</span>
+			<div class="text-center mb-16 animate-fade-in">
+				<h2 class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
+					Professional <span class="text-coral-primary font-medium">Evolution</span>
 				</h2>
-				<p class="text-base sm:text-lg text-mocha-600 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
-					A collection of projects spanning technology, design, and creative work.
+				<p class="text-xl text-mocha-mousse max-w-3xl mx-auto leading-relaxed">
+					From molecular biology research to cloud architecture - a journey of applying analytical thinking 
+					and systematic approaches to increasingly complex technical challenges
 				</p>
 			</div>
-			
-			<!-- Projects grid with enhanced layout -->
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-				{
-					projects.map((project, index) => (
-						<div class="animate-slide-up" style={`animation-delay: ${index * 0.2}s;`}>
-							<ProjectCard
-								title={project.title}
-								link={project.link}
-								description={project.description}
-								technologies={project.technologies}
-								index={index}
-							/>
+
+			<!-- Timeline container -->
+			<div class="relative">
+				<!-- Timeline path -->
+				<div class="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-coral-primary via-mocha-mousse to-cool-contrast transform lg:-translate-x-1/2"></div>
+
+							<!-- Timeline phases -->
+			<div class="space-y-16">
+				<!-- Phase 1: Biology Research Associate -->
+				<div class="relative flex items-center animate-slide-up">
+					<!-- Timeline node -->
+					<div class="absolute left-6 lg:left-1/2 w-4 h-4 bg-coral-primary rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"></div>
+					
+					<!-- Content -->
+					<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pr-16">
+						<div class="bg-glass-coral backdrop-blur-lg border border-coral-primary/20 rounded-3xl p-8 shadow-xl">
+							<div class="flex items-center mb-4">
+								<span class="text-sm font-medium text-coral-primary bg-coral-primary/10 px-3 py-1 rounded-full">2019-2021</span>
+							</div>
+							<h3 class="text-2xl font-medium text-text-dark mb-3">Biology Research Associate</h3>
+							<p class="text-mocha-mousse leading-relaxed mb-4">
+								Began as a molecular and cellular biology research associate, conducting bench work, 
+								experimental design, and data analysis. Built the foundation of analytical precision 
+								and systematic problem-solving that would later define my technical approach.
+							</p>
+							<div class="flex flex-wrap gap-2">
+								<span class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full">Molecular Biology</span>
+								<span class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full">Bench Work</span>
+								<span class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full">Research</span>
+							</div>
 						</div>
-					))
-				}
+					</div>
+				</div>
+
+				<!-- Phase 2: Computational Integration -->
+				<div class="relative flex items-center animate-slide-up" style="animation-delay: 0.2s;">
+					<div class="absolute left-6 lg:left-1/2 w-4 h-4 bg-mocha-mousse rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"></div>
+					
+					<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pl-16 lg:ml-auto">
+						<div class="bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/20 rounded-3xl p-8 shadow-xl">
+							<div class="flex items-center mb-4">
+								<span class="text-sm font-medium text-mocha-mousse bg-mocha-mousse/10 px-3 py-1 rounded-full">2021-2022</span>
+							</div>
+							<h3 class="text-2xl font-medium text-text-dark mb-3">Computational Integration</h3>
+							<p class="text-mocha-mousse leading-relaxed mb-4">
+								Recognized inefficiencies in manual processes and began applying programming to 
+								biological workflows. This natural progression from data analysis to automation 
+								marked the beginning of my technical evolution.
+							</p>
+							<div class="flex flex-wrap gap-2">
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Automation</span>
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Programming</span>
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Workflows</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Phase 3: Technical Leadership -->
+				<div class="relative flex items-center animate-slide-up" style="animation-delay: 0.4s;">
+					<div class="absolute left-6 lg:left-1/2 w-4 h-4 bg-mocha-mousse rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"></div>
+					
+					<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pr-16">
+						<div class="bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/20 rounded-3xl p-8 shadow-xl">
+							<div class="flex items-center mb-4">
+								<span class="text-sm font-medium text-mocha-mousse bg-mocha-mousse/10 px-3 py-1 rounded-full">2022-2024</span>
+							</div>
+							<h3 class="text-2xl font-medium text-text-dark mb-3">Technical Leadership</h3>
+							<p class="text-mocha-mousse leading-relaxed mb-4">
+								Transitioned into technical leadership, managing infrastructure, bioinformatics pipelines, 
+								and internal web development. This role uniquely positioned me to bridge domain expertise 
+								with technical implementation, creating solutions that truly served the research needs.
+							</p>
+							<div class="flex flex-wrap gap-2">
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Infrastructure</span>
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Bioinformatics</span>
+								<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full">Web Development</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+					<!-- Phase 4: Current Evolution -->
+					<div class="relative flex items-center animate-slide-up" style="animation-delay: 0.6s;">
+						<div class="absolute left-6 lg:left-1/2 w-6 h-6 bg-cool-contrast rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10 shadow-lg"></div>
+						
+						<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pl-16 lg:ml-auto">
+							<div class="bg-glass-blue backdrop-blur-lg border border-cool-contrast/20 rounded-3xl p-8 shadow-xl">
+								<div class="flex items-center mb-4">
+									<span class="text-sm font-medium text-cool-contrast bg-cool-contrast/10 px-3 py-1 rounded-full">2024+</span>
+									<span class="ml-2 text-xs bg-accent-yellow/20 text-text-dark px-2 py-1 rounded-full font-medium">Current</span>
+								</div>
+								<h3 class="text-2xl font-medium text-text-dark mb-3">Infrastructure & Data Engineering</h3>
+								<p class="text-mocha-mousse leading-relaxed mb-4">
+									Now specializing across DevOps, system administration, and data engineering, applying 
+									the same analytical precision from laboratory research to building scalable infrastructure, 
+									managing systems, and designing data pipelines.
+								</p>
+								<div class="flex flex-wrap gap-2">
+									<span class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full">DevOps</span>
+									<span class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full">System Admin</span>
+									<span class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full">Data Engineering</span>
+									<span class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full">Infrastructure</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
+
+	<!-- Featured Work Section -->
+	<section id="projects" class="py-20 bg-warm-white relative overflow-hidden">
+		<!-- Background organic shapes -->
+		<div class="absolute inset-0 pointer-events-none">
+			<div class="absolute top-1/3 right-1/4 w-80 h-80 bg-glass-yellow rounded-full animate-morph blur-lg opacity-30"></div>
+			<div class="absolute bottom-1/4 left-1/5 w-64 h-64 bg-glass-coral rounded-full animate-organic-float blur-md opacity-40"></div>
+		</div>
+
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+			<!-- Section header -->
+			<div class="text-center mb-16 animate-fade-in">
+				<h2 class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
+					Featured <span class="text-coral-primary font-medium">Work</span>
+				</h2>
+				<p class="text-xl text-mocha-mousse max-w-3xl mx-auto leading-relaxed">
+					Infrastructure projects and technical solutions built with precision and scalability in mind
+				</p>
+			</div>
+			
+			<!-- Asymmetrical Bento Grid Layout -->
+			<div class="grid grid-cols-12 gap-6 lg:gap-8">
+				<!-- Featured Project - Large (spans 2 columns, 1.5x height) -->
+				<div class="col-span-12 lg:col-span-8 animate-grow">
+					<div class="bg-glass-coral backdrop-blur-xl border border-coral-primary/20 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] group">
+						<div class="flex flex-col h-full">
+							<div class="flex items-center justify-between mb-6">
+								<h3 class="text-2xl lg:text-3xl font-medium text-text-dark group-hover:text-coral-primary transition-colors duration-300">
+									{projects[0].title}
+								</h3>
+								<a 
+									href={projects[0].link} 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="w-12 h-12 bg-coral-primary/10 hover:bg-coral-primary rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+								>
+									<span class="text-coral-primary group-hover:text-warm-white transition-colors duration-300">→</span>
+								</a>
+							</div>
+							<p class="text-lg text-mocha-mousse leading-relaxed mb-8 flex-grow" set:html={projects[0].description}></p>
+							<div class="flex flex-wrap gap-3">
+								{projects[0].technologies.map((tech) => (
+									<span class="text-sm bg-coral-primary/20 text-coral-primary px-4 py-2 rounded-full font-medium">
+										{tech}
+									</span>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Secondary Project - Medium (spans 1 column) -->
+				<div class="col-span-12 lg:col-span-4 animate-grow" style="animation-delay: 0.2s;">
+					<div class="bg-glass-mocha backdrop-blur-xl border border-mocha-mousse/20 rounded-3xl p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] group h-full">
+						<div class="flex flex-col h-full">
+							<div class="flex items-center justify-between mb-4">
+								<h3 class="text-xl lg:text-2xl font-medium text-text-dark group-hover:text-mocha-mousse transition-colors duration-300">
+									{projects[1].title}
+								</h3>
+								<a 
+									href={projects[1].link} 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="w-10 h-10 bg-mocha-mousse/10 hover:bg-mocha-mousse rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+								>
+									<span class="text-mocha-mousse group-hover:text-warm-white transition-colors duration-300">→</span>
+								</a>
+							</div>
+							<p class="text-mocha-mousse leading-relaxed mb-6 flex-grow" set:html={projects[1].description}></p>
+							<div class="flex flex-wrap gap-2">
+								{projects[1].technologies.map((tech) => (
+									<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-3 py-1 rounded-full font-medium">
+										{tech}
+									</span>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Additional space for future projects or organic shapes -->
+				<div class="col-span-12 lg:col-span-4 lg:col-start-9 animate-fade-in" style="animation-delay: 0.4s;">
+					<div class="bg-glass-blue backdrop-blur-lg border border-cool-contrast/20 rounded-3xl p-8 shadow-lg h-full flex items-center justify-center">
+						<div class="text-center">
+							<div class="w-16 h-16 bg-cool-contrast/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<span class="text-2xl text-cool-contrast">+</span>
+							</div>
+							<p class="text-mocha-mousse font-medium">More projects coming soon</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Form -->
+	<ContactForm />
 
 	<!-- Footer -->
 	<Footer />

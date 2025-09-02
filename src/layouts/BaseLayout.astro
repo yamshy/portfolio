@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
+import SidebarNav from "../components/SidebarNav.astro";
 ---
 
 <!doctype html>
@@ -16,9 +16,12 @@ import Header from "../components/Header.astro";
 		<meta name="description" content="Shyam Ajudia - Software Engineer & Developer Portfolio showcasing modern web development projects and expertise.">
 		<meta name="theme-color" content="#a47864">
 	</head>
-	<body class="bg-mocha-50 text-mocha-900 transition-colors duration-300 min-h-screen">
-		<Header />
-		<main>
+	<body class="bg-warm-white text-text-dark transition-colors duration-300 min-h-screen">
+		<!-- Skip link for keyboard navigation -->
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		
+		<SidebarNav />
+		<main id="main-content" role="main">
 			<slot />
 		</main>
 	</body>
@@ -38,15 +41,33 @@ import Header from "../components/Header.astro";
 	}
 	
 	::-webkit-scrollbar-track {
-		background: #f7f4f2;
+		background: #FEFCF8;
 	}
 	
 	::-webkit-scrollbar-thumb {
-		background: #a47864;
+		background: #A47864;
 		border-radius: 4px;
 	}
 	
 	::-webkit-scrollbar-thumb:hover {
-		background: #8f6b5a;
+		background: #E85A2B;
+	}
+	
+	/* Skip link for accessibility */
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 6px;
+		background: var(--color-coral-primary);
+		color: var(--color-warm-white);
+		padding: 8px;
+		text-decoration: none;
+		border-radius: 4px;
+		z-index: 1000;
+		transition: top 0.3s;
+	}
+	
+	.skip-link:focus {
+		top: 6px;
 	}
 </style>
