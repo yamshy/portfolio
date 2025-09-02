@@ -14,13 +14,28 @@ export default {
         'bold': '700',
       },
       colors: {
-        // Colors
+        // High-contrast warm palette with strategic bright accents
+        'warm-white': '#FEFCF8',
+        'coral-primary': '#E85A2B',
+        'text-dark': '#1A0D08',
+        'accent-yellow': '#FFD644',
+        'mocha-mousse': '#A47864',
+        'cool-contrast': '#2563EB',
+        
+        // Glassmorphism colors
+        'glass-coral': 'rgba(232, 90, 43, 0.2)',
+        'glass-mocha': 'rgba(164, 120, 100, 0.15)',
+        'glass-yellow': 'rgba(255, 214, 68, 0.15)',
+        'glass-blue': 'rgba(37, 99, 235, 0.1)',
+        'glass-dark': 'rgba(26, 13, 8, 0.1)',
+        
+        // Legacy colors for compatibility
         'mocha': {
           50: '#f7f4f2',
           100: '#ede6e1',
           200: '#d9ccc2',
           300: '#c2b0a3',
-          400: '#a47864', // Pantone Color of the Year: Mocha Mousse
+          400: '#a47864',
           500: '#8f6b5a',
           600: '#7a5a4c',
           700: '#654a3f',
@@ -32,42 +47,18 @@ export default {
           100: '#fbe8e4',
           200: '#f6d1c9',
           300: '#eeb3a6',
-          400: '#e2725b', // Terracotta red
+          400: '#e2725b',
           500: '#d45a42',
           600: '#b84a35',
           700: '#9a3d2d',
           800: '#7c3226',
           900: '#5e271f',
         },
-        'honey': {
-          50: '#fefdf8',
-          100: '#fdf9ed',
-          200: '#faf1d3',
-          300: '#f6e6b1',
-          400: '#f0d485',
-          500: '#e8c05a',
-          600: '#d4a842',
-          700: '#b89035',
-          800: '#9c782d',
-          900: '#806125',
-        },
-        'digital-lavender': {
-          50: '#f7f4ff',
-          100: '#ede6ff',
-          200: '#ddd1ff',
-          300: '#c7b3ff',
-          400: '#a78bfa', // Digital lavender
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-        },
         'neon-yellow': {
           50: '#fffbeb',
           100: '#fff7d1',
           200: '#ffed9a',
-          300: '#ffdd44', // Neon yellow accent
+          300: '#ffdd44',
           400: '#f5c842',
           500: '#e6b73a',
           600: '#d4a632',
@@ -86,18 +77,6 @@ export default {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
-        },
-        'warm-green': {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
         }
       },
       animation: {
@@ -105,6 +84,10 @@ export default {
         'slide-up': 'slideUp 0.8s ease-out',
         'float': 'float 3s ease-in-out infinite',
         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+        'grow': 'grow 0.6s ease-out',
+        'morph': 'morph 8s ease-in-out infinite',
+        'draw-line': 'drawLine 1.5s ease-out',
+        'organic-float': 'organicFloat 4s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -123,6 +106,34 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.8' },
         },
+        grow: {
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        morph: {
+          '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+          '25%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+          '50%': { borderRadius: '50% 30% 60% 40% / 30% 50% 60% 70%' },
+          '75%': { borderRadius: '40% 70% 50% 60% / 70% 40% 50% 30%' },
+        },
+        drawLine: {
+          '0%': { strokeDashoffset: '100%' },
+          '100%': { strokeDashoffset: '0%' },
+        },
+        organicFloat: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+          '33%': { transform: 'translateY(-8px) rotate(1deg)' },
+          '66%': { transform: 'translateY(4px) rotate(-0.5deg)' },
+        },
+      },
+      backdropBlur: {
+        'xs': '2px',
+        'sm': '4px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '20px',
+        '3xl': '24px',
       },
 
     },

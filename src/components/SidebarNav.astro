@@ -1,0 +1,427 @@
+---
+// Fixed sidebar navigation with progress indicator
+
+// Main navigation sections
+const mainNavItems = [
+	{
+		href: "#hero",
+		label: "Home",
+		section: "hero",
+		style: "bg-coral-primary/20 border-coral-primary/30 text-coral-primary hover:bg-coral-primary hover:rotate-1"
+	},
+	{
+		href: "#evolution", 
+		label: "Experience",
+		section: "evolution",
+		style: "bg-glass-mocha border-mocha-mousse/30 text-mocha-mousse hover:bg-mocha-mousse hover:-rotate-1"
+	},
+	{
+		href: "#projects",
+		label: "Projects", 
+		section: "projects",
+		style: "bg-glass-blue border-cool-contrast/30 text-cool-contrast hover:bg-cool-contrast hover:rotate-1"
+	},
+	{
+		href: "#contact",
+		label: "Contact",
+		section: "contact", 
+		style: "bg-glass-yellow border-accent-yellow/30 text-text-dark hover:bg-accent-yellow hover:-rotate-1"
+	}
+];
+
+// External links (smaller buttons)
+const externalLinks = [
+	{
+		href: "https://github.com/yamshy",
+		label: "GitHub",
+		style: "bg-glass-mocha border-mocha-mousse/30 text-mocha-mousse hover:bg-mocha-mousse hover:-rotate-1"
+	},
+	{
+		href: "mailto:sajudia@proton.me",
+		label: "Email", 
+		style: "bg-glass-coral border-coral-primary/30 text-coral-primary hover:bg-coral-primary hover:rotate-1"
+	}
+];
+---
+
+<nav class="fixed left-0 top-0 h-full w-40 lg:w-48 z-50 pointer-events-none">
+	<div class="h-full flex flex-col items-center justify-center space-y-8 pointer-events-auto">
+		<!-- Navigation container with organic progress bar -->
+		<div class="relative flex flex-col items-start">
+			<!-- Organic progress indicator background -->
+			<div class="absolute left-3 top-0 w-1 h-full rounded-full overflow-hidden z-0">
+				<!-- Single progress bar that grows between navigation buttons -->
+				<div 
+					id="progress-bar" 
+					class="absolute top-0 left-0 w-full bg-gradient-to-b from-coral-primary via-mocha-mousse to-cool-contrast rounded-full transition-all duration-300 ease-out"
+					style="height: 0%"
+				></div>
+			</div>
+
+			<!-- Main navigation sections -->
+			{mainNavItems.map((item, index) => (
+				<div class={`relative z-20 ml-8 ${index === mainNavItems.length - 1 ? 'mb-20' : 'mb-4'}`}>
+					<a 
+						href={item.href}
+						class="nav-organic-button group relative z-20"
+						data-section={item.section}
+					>
+						<div class={`organic-nav-shape backdrop-blur-lg border ${item.style} px-6 py-3 transition-all duration-300 hover:scale-105`}>
+							<span class="text-sm font-medium transition-colors duration-300 group-hover:text-warm-white">
+								{item.label}
+							</span>
+						</div>
+					</a>
+				</div>
+			))}
+
+			<!-- External links (smaller buttons) -->
+			{externalLinks.map((link, index) => (
+				<div class={`relative z-20 ml-8 ${index === externalLinks.length - 1 ? '' : 'mb-4'}`}>
+					<a 
+						href={link.href}
+						class="nav-organic-button group relative z-20"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class={`organic-nav-shape backdrop-blur-lg border ${link.style} px-4 py-2 transition-all duration-300 hover:scale-110`}>
+							<span class="text-xs font-medium transition-colors duration-300 group-hover:text-warm-white">
+								{link.label}
+							</span>
+						</div>
+					</a>
+				</div>
+			))}
+		</div>
+	</div>
+</nav>
+
+<style>
+	.nav-dot {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-label {
+		position: absolute;
+		left: 2rem;
+		background: rgba(26, 13, 8, 0.9);
+		color: #FEFCF8;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all 0.3s ease;
+		pointer-events: none;
+		white-space: nowrap;
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(164, 120, 100, 0.2);
+	}
+
+	.nav-dot:hover .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-dot.active .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-dot.active > div {
+		background: #E85A2B !important;
+		transform: scale(1.25);
+	}
+
+	.nav-button {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-button .nav-label {
+		position: absolute;
+		left: 2rem;
+		background: rgba(26, 13, 8, 0.9);
+		color: #FEFCF8;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all 0.3s ease;
+		pointer-events: none;
+		white-space: nowrap;
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(164, 120, 100, 0.2);
+	}
+
+	.nav-button:hover .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-button.active .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-button.active > div {
+		background: #E85A2B !important;
+		transform: scale(1.1);
+	}
+
+	.nav-section-button {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-section-button .nav-label {
+		position: absolute;
+		left: 2rem;
+		background: rgba(26, 13, 8, 0.9);
+		color: #FEFCF8;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all 0.3s ease;
+		pointer-events: none;
+		white-space: nowrap;
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(164, 120, 100, 0.2);
+	}
+
+	.nav-section-button:hover .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-section-button.active .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-section-button.active > div {
+		background: #E85A2B !important;
+		transform: scale(1.05);
+	}
+
+	.nav-section-button.active > div > span {
+		color: #FEFCF8 !important;
+	}
+
+	/* Organic navigation button styles */
+	.nav-organic-button {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.organic-nav-shape {
+		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+		animation: organicNavFloat 6s ease-in-out infinite;
+		backdrop-filter: blur(8px);
+	}
+
+	.organic-nav-shape:hover {
+		border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+		animation: organicNavMorph 0.3s ease-out;
+	}
+
+	.nav-organic-button .nav-label {
+		position: absolute;
+		left: 2rem;
+		background: rgba(26, 13, 8, 0.9);
+		color: #FEFCF8;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all 0.3s ease;
+		pointer-events: none;
+		white-space: nowrap;
+		backdrop-filter: blur(8px);
+		border: 1px solid rgba(164, 120, 100, 0.2);
+	}
+
+	.nav-organic-button:hover .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-organic-button.active .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.nav-organic-button.active > div {
+		background: #E85A2B !important;
+		transform: scale(1.05);
+	}
+
+	.nav-organic-button.active > div > span {
+		color: #FEFCF8 !important;
+	}
+
+	@keyframes organicNavFloat {
+		0%, 100% { 
+			border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+			transform: translateY(0px) rotate(0deg);
+		}
+		25% { 
+			border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+			transform: translateY(-2px) rotate(0.5deg);
+		}
+		50% { 
+			border-radius: 50% 30% 50% 70% / 40% 60% 40% 60%;
+			transform: translateY(1px) rotate(-0.3deg);
+		}
+		75% { 
+			border-radius: 70% 40% 30% 60% / 60% 30% 70% 40%;
+			transform: translateY(-1px) rotate(0.2deg);
+		}
+	}
+
+	@keyframes organicNavMorph {
+		0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+		50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+		100% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+	}
+
+	/* Mobile responsive */
+	@media (max-width: 1024px) {
+		nav {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	// Progress bar and navigation functionality
+	function updateProgress() {
+		const progressBar = document.getElementById('progress-bar');
+		const allNavElements = document.querySelectorAll('.nav-organic-button');
+		
+		if (!progressBar || allNavElements.length === 0) return;
+
+		const scrollTop = window.pageYOffset;
+		const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+		
+		// Define navigation elements in order (top to bottom)
+		const navOrder = [
+			{ selector: '.nav-organic-button[data-section="hero"]', target: '#hero' },
+			{ selector: '.nav-organic-button[data-section="evolution"]', target: '#evolution' },
+			{ selector: '.nav-organic-button[data-section="projects"]', target: '#projects' },
+			{ selector: '.nav-organic-button[data-section="contact"]', target: '#contact' },
+			{ selector: '.nav-organic-button[href*="github"]', target: null }, // External link
+			{ selector: '.nav-organic-button[href*="mailto"]', target: null }  // External link
+		];
+
+		// Calculate progress based on scroll position relative to navigation targets
+		let progressPercentage = 0;
+		let activeElement: HTMLElement | null = null;
+
+		// For external links (GitHub, Email), we'll use the bottom of the page
+		const pageBottom = document.documentElement.scrollHeight;
+
+		navOrder.forEach((navItem, index) => {
+			const element = document.querySelector(navItem.selector);
+			if (!element) return;
+
+			let targetPosition;
+			
+			if (navItem.target) {
+				const targetElement = document.querySelector(navItem.target);
+				if (targetElement) {
+					targetPosition = (targetElement as HTMLElement).offsetTop;
+				} else {
+					// If target doesn't exist, use a calculated position
+					targetPosition = (index + 1) * (pageBottom / navOrder.length);
+				}
+			} else {
+				// For external links, use the bottom of the page
+				targetPosition = pageBottom;
+			}
+
+			// Check if we've reached this navigation point
+			// Use a smaller offset for more precise detection
+			if (scrollTop >= targetPosition - 50) {
+				// Calculate progress as a percentage of the total navigation elements
+				progressPercentage = ((index + 1) / navOrder.length) * 100;
+				activeElement = element as HTMLElement;
+			}
+		});
+
+		// Update progress bar to align with center of active button
+		if (activeElement) {
+			const activeButton = (activeElement as HTMLElement).querySelector('.organic-nav-shape');
+			if (activeButton) {
+				const buttonRect = activeButton.getBoundingClientRect();
+				const navContainer = document.querySelector('nav > div > div');
+				if (navContainer) {
+					const containerRect = navContainer.getBoundingClientRect();
+					const relativeTop = buttonRect.top - containerRect.top;
+					const buttonCenter = relativeTop + (buttonRect.height / 2);
+					const containerHeight = containerRect.height;
+					const centerPercentage = (buttonCenter / containerHeight) * 100;
+					
+					// Set progress bar to extend to the center of the active button
+					progressBar.style.height = `${Math.min(centerPercentage, 100)}%`;
+				}
+			}
+		} else {
+			// Fallback to percentage-based approach
+			progressBar.style.height = `${Math.min(progressPercentage, 100)}%`;
+		}
+
+		// Update active states
+		allNavElements.forEach(element => {
+			(element as HTMLElement).classList.remove('active');
+		});
+
+		if (activeElement) {
+			(activeElement as HTMLElement).classList.add('active');
+		}
+	}
+
+	// Smooth scroll for navigation links
+	document.addEventListener('DOMContentLoaded', () => {
+		const navLinks = document.querySelectorAll('.nav-organic-button');
+		
+		navLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const href = link.getAttribute('href');
+				if (!href) return;
+				
+				const targetId = href.substring(1);
+				const targetElement = document.getElementById(targetId);
+				
+				if (targetElement) {
+					targetElement.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			});
+		});
+
+		// Update progress on scroll
+		window.addEventListener('scroll', updateProgress);
+		updateProgress(); // Initial call
+	});
+</script>
