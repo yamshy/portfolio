@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0](https://github.com/yamshy/portfolio/compare/v1.3.0...v1.4.0) (2025-09-02)
+
+### Features
+
+* add glass-like effect to header component ([#7](https://github.com/yamshy/portfolio/issues/7)) ([f56a665](https://github.com/yamshy/portfolio/commit/f56a665e26cadf6e9c6f4b2c3423c034045fb45a))
+
 ## [1.3.0](https://github.com/yamshy/portfolio/compare/v1.2.0...v1.3.0) (2025-09-02)
 
 ### Features
