@@ -17,8 +17,11 @@ import SidebarNav from "../components/SidebarNav.astro";
 		<meta name="theme-color" content="#a47864">
 	</head>
 	<body class="bg-warm-white text-text-dark transition-colors duration-300 min-h-screen">
+		<!-- Skip link for keyboard navigation -->
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		
 		<SidebarNav />
-		<main>
+		<main id="main-content" role="main">
 			<slot />
 		</main>
 	</body>
@@ -48,5 +51,23 @@ import SidebarNav from "../components/SidebarNav.astro";
 	
 	::-webkit-scrollbar-thumb:hover {
 		background: #E85A2B;
+	}
+	
+	/* Skip link for accessibility */
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 6px;
+		background: var(--color-coral-primary);
+		color: var(--color-warm-white);
+		padding: 8px;
+		text-decoration: none;
+		border-radius: 4px;
+		z-index: 1000;
+		transition: top 0.3s;
+	}
+	
+	.skip-link:focus {
+		top: 6px;
 	}
 </style>

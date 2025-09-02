@@ -1,4 +1,8 @@
 ---
+import GlassCard from './GlassCard.astro';
+import FormInput from './FormInput.astro';
+import type { ContactFormData, FormValidation } from '../types/index';
+
 // Contact form component with glassmorphism styling
 ---
 
@@ -13,7 +17,7 @@
 	<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 		<!-- Section header -->
 		<div class="text-center mb-16 animate-fade-in">
-			<h2 class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
+			<h2 id="contact-heading" class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
 				Get In <span class="text-coral-primary font-medium">Touch</span>
 			</h2>
 			<p class="text-xl text-mocha-mousse max-w-3xl mx-auto leading-relaxed">
@@ -22,67 +26,44 @@
 		</div>
 
 		<!-- Contact form with glassmorphism -->
-		<div class="bg-glass-mocha backdrop-blur-xl border border-mocha-mousse/20 rounded-3xl p-8 lg:p-12 shadow-2xl animate-grow">
-			<form class="space-y-8" id="contact-form">
+		<GlassCard variant="mocha" size="lg" class="animate-grow">
+			<form class="space-y-8" id="contact-form" role="form" aria-labelledby="contact-heading">
 				<!-- Name and Email Row -->
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div class="space-y-2">
-						<label for="name" class="block text-sm font-medium text-text-dark">
-							Name *
-						</label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							required
-							class="w-full px-4 py-3 bg-warm-white/50 backdrop-blur-sm border border-mocha-mousse/30 rounded-2xl text-text-dark placeholder-mocha-mousse/60 focus:outline-none focus:ring-2 focus:ring-coral-primary/50 focus:border-coral-primary/50 transition-all duration-300"
-							placeholder="Your name"
-						/>
-					</div>
-					<div class="space-y-2">
-						<label for="email" class="block text-sm font-medium text-text-dark">
-							Email *
-						</label>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							required
-							class="w-full px-4 py-3 bg-warm-white/50 backdrop-blur-sm border border-mocha-mousse/30 rounded-2xl text-text-dark placeholder-mocha-mousse/60 focus:outline-none focus:ring-2 focus:ring-coral-primary/50 focus:border-coral-primary/50 transition-all duration-300"
-							placeholder="your.email@example.com"
-						/>
-					</div>
-				</div>
-
-				<!-- Subject -->
-				<div class="space-y-2">
-					<label for="subject" class="block text-sm font-medium text-text-dark">
-						Subject *
-					</label>
-					<input
+					<FormInput 
 						type="text"
-						id="subject"
-						name="subject"
-						required
-						class="w-full px-4 py-3 bg-warm-white/50 backdrop-blur-sm border border-mocha-mousse/30 rounded-2xl text-text-dark placeholder-mocha-mousse/60 focus:outline-none focus:ring-2 focus:ring-coral-primary/50 focus:border-coral-primary/50 transition-all duration-300"
-						placeholder="What's this about?"
+						name="name" 
+						label="Name" 
+						placeholder="Your name" 
+						required 
+					/>
+					<FormInput 
+						type="email"
+						name="email" 
+						label="Email" 
+						placeholder="your.email@example.com" 
+						required 
 					/>
 				</div>
 
+				<!-- Subject -->
+				<FormInput 
+					type="text"
+					name="subject" 
+					label="Subject" 
+					placeholder="What's this about?" 
+					required 
+				/>
+
 				<!-- Message -->
-				<div class="space-y-2">
-					<label for="message" class="block text-sm font-medium text-text-dark">
-						Message *
-					</label>
-					<textarea
-						id="message"
-						name="message"
-						rows="6"
-						required
-						class="w-full px-4 py-3 bg-warm-white/50 backdrop-blur-sm border border-mocha-mousse/30 rounded-2xl text-text-dark placeholder-mocha-mousse/60 focus:outline-none focus:ring-2 focus:ring-coral-primary/50 focus:border-coral-primary/50 transition-all duration-300 resize-none"
-						placeholder="Tell me about your project, ideas, or just say hello..."
-					></textarea>
-				</div>
+				<FormInput 
+					type="textarea"
+					name="message" 
+					label="Message" 
+					placeholder="Tell me about your project, ideas, or just say hello..." 
+					required 
+					rows={6}
+				/>
 
 				<!-- Submit Button -->
 				<div class="flex justify-center">
@@ -146,7 +127,30 @@
 </section>
 
 <script>
-	// Contact form handling
+	// Contact form handling with TypeScript types
+	interface ContactFormData {
+		name: string;
+		email: string;
+		subject: string;
+		message: string;
+	}
+
+	interface FormValidation {
+		name: boolean;
+		email: boolean;
+		subject: boolean;
+		message: boolean;
+	}
+
+	const validateForm = (data: ContactFormData): FormValidation => {
+		return {
+			name: data.name.trim().length > 0,
+			email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email),
+			subject: data.subject.trim().length > 0,
+			message: data.message.trim().length > 10
+		};
+	};
+
 	document.addEventListener('DOMContentLoaded', () => {
 		const form = document.getElementById('contact-form') as HTMLFormElement;
 		const formStatus = document.getElementById('form-status');
@@ -163,14 +167,26 @@
 			successMessage.classList.add('hidden');
 			errorMessage.classList.add('hidden');
 
-			// Get form data
+			// Get form data with proper typing
 			const formData = new FormData(form);
-			const data = {
-				name: formData.get('name'),
-				email: formData.get('email'),
-				subject: formData.get('subject'),
-				message: formData.get('message')
+			const data: ContactFormData = {
+				name: (formData.get('name') as string) || '',
+				email: (formData.get('email') as string) || '',
+				subject: (formData.get('subject') as string) || '',
+				message: (formData.get('message') as string) || ''
 			};
+
+			// Validate form data
+			const validation = validateForm(data);
+			const isValid = Object.values(validation).every(Boolean);
+
+			if (!isValid) {
+				console.error('Form validation failed:', validation);
+				// Show error message for validation failure
+				formStatus.classList.remove('hidden');
+				errorMessage.classList.remove('hidden');
+				return;
+			}
 
 			try {
 				// For now, we'll simulate a successful submission
@@ -223,52 +239,15 @@
 </script>
 
 <style>
-	/* Custom animations for the contact form */
-	@keyframes fade-in {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
+	/* Contact form specific styles - animations are now in global.css */
 
-	@keyframes grow {
-		from { opacity: 0; transform: scale(0.95); }
-		to { opacity: 1; transform: scale(1); }
-	}
-
-	@keyframes float {
-		0%, 100% { transform: translateY(0px); }
-		50% { transform: translateY(-10px); }
-	}
-
-	.animate-fade-in {
-		animation: fade-in 0.6s ease-out;
-	}
-
-	.animate-grow {
-		animation: grow 0.6s ease-out;
-	}
-
-	.animate-float {
-		animation: float 3s ease-in-out infinite;
-	}
-
-	/* Form input focus effects */
-	.form-input:focus {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgb(from var(--color-coral-primary) r g b / 0.15);
-	}
-
-	/* Button hover effects */
-	.submit-button:hover {
-		box-shadow: 0 10px 30px rgb(from var(--color-coral-primary) r g b / 0.3);
-	}
-
-	/* Responsive adjustments */
+	/* Responsive adjustments for contact section */
 	@media (max-width: 768px) {
-		.contact-form {
+		#contact .max-w-4xl {
 			padding: 1.5rem;
 		}
 		
-		.contact-form h2 {
+		#contact h2 {
 			font-size: 2.5rem;
 		}
 	}

@@ -44,7 +44,7 @@ const externalLinks = [
 ];
 ---
 
-<nav class="fixed left-0 top-0 h-full w-40 lg:w-48 z-50 pointer-events-none">
+<nav class="fixed left-0 top-0 h-full w-40 lg:w-48 z-50 pointer-events-none" role="navigation" aria-label="Main navigation">
 	<div class="h-full flex flex-col items-center justify-center space-y-8 pointer-events-auto">
 		<!-- Navigation container with organic progress bar -->
 		<div class="relative flex flex-col items-start">
@@ -65,6 +65,7 @@ const externalLinks = [
 						href={item.href}
 						class="nav-organic-button group relative z-20"
 						data-section={item.section}
+						aria-label={`Navigate to ${item.label} section`}
 					>
 						<div class={`organic-nav-shape backdrop-blur-lg border ${item.style} px-6 py-3 transition-all duration-300 hover:scale-105`}>
 							<span class="text-sm font-medium transition-colors duration-300 group-hover:text-warm-white">
@@ -83,6 +84,7 @@ const externalLinks = [
 						class="nav-organic-button group relative z-20"
 						target="_blank"
 						rel="noopener noreferrer"
+						aria-label={`Open ${link.label} in new tab`}
 					>
 						<div class={`organic-nav-shape backdrop-blur-lg border ${link.style} px-4 py-2 transition-all duration-300 hover:scale-110`}>
 							<span class="text-xs font-medium transition-colors duration-300 group-hover:text-warm-white">

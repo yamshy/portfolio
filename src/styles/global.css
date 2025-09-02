@@ -10,12 +10,12 @@
   --color-mocha-mousse: #A47864;
   --color-cool-contrast: #2563EB;
   
-  /* Glassmorphism colors */
-  --color-glass-coral: rgba(232, 90, 43, 0.2);
-  --color-glass-mocha: rgba(164, 120, 100, 0.15);
-  --color-glass-yellow: rgba(255, 214, 68, 0.15);
-  --color-glass-blue: rgba(37, 99, 235, 0.1);
-  --color-glass-dark: rgba(26, 13, 8, 0.1);
+  /* Glassmorphism colors - derived from core colors */
+  --color-glass-coral: rgb(from var(--color-coral-primary) r g b / 0.2);
+  --color-glass-mocha: rgb(from var(--color-mocha-mousse) r g b / 0.15);
+  --color-glass-yellow: rgb(from var(--color-accent-yellow) r g b / 0.15);
+  --color-glass-blue: rgb(from var(--color-cool-contrast) r g b / 0.1);
+  --color-glass-dark: rgb(from var(--color-text-dark) r g b / 0.1);
   
   /* Mocha color scale */
   --color-mocha-50: #FEFCF8;
@@ -76,6 +76,42 @@
   --color-digital-lavender-700: #7c3aed;
   --color-digital-lavender-800: #6d28d9;
   --color-digital-lavender-900: #5b21b6;
+  
+  /* Glassmorphism utility classes */
+  --glass-backdrop-filter: blur(12px);
+  --glass-border-width: 1px;
+  --glass-border-style: solid;
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: rgba(255, 255, 255, 0.1);
+  border: var(--glass-border-width) var(--glass-border-style) rgba(255, 255, 255, 0.2);
+}
+
+.glass-coral {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--color-glass-coral);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-coral-primary) r g b / 0.3);
+}
+
+.glass-mocha {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--color-glass-mocha);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-mocha-mousse) r g b / 0.2);
+}
+
+.glass-blue {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--color-glass-blue);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-cool-contrast) r g b / 0.2);
+}
+
+.glass-yellow {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--color-glass-yellow);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-accent-yellow) r g b / 0.2);
 }
 
 /* Set RST Thermal as the default font family */

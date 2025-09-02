@@ -1,0 +1,75 @@
+---
+export interface Props {
+  type?: 'text' | 'email' | 'textarea';
+  name: string;
+  label: string;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  class?: string;
+}
+
+const { 
+  type = 'text', 
+  name, 
+  label, 
+  placeholder, 
+  required = false, 
+  rows = 4,
+  class: className = ''
+} = Astro.props;
+
+const baseInputClasses = `
+  w-full 
+  px-4 
+  py-3 
+  bg-warm-white/50 
+  backdrop-blur-sm 
+  border 
+  border-mocha-mousse/30 
+  rounded-2xl 
+  text-text-dark 
+  placeholder-mocha-mousse/60 
+  focus:outline-none 
+  focus:ring-2 
+  focus:ring-coral-primary/50 
+  focus:border-coral-primary/50 
+  transition-all 
+  duration-300
+`;
+
+const textareaClasses = `${baseInputClasses} resize-none`;
+const inputClasses = baseInputClasses;
+---
+
+<div class={`space-y-2 ${className}`}>
+  <label for={name} class="block text-sm font-medium text-text-dark">
+    {label} {required && <span class="text-coral-primary">*</span>}
+  </label>
+  {type === 'textarea' ? (
+    <textarea
+      id={name}
+      name={name}
+      rows={rows}
+      required={required}
+      class={textareaClasses}
+      placeholder={placeholder}
+      aria-describedby={placeholder ? `${name}-help` : undefined}
+    />
+  ) : (
+    <input
+      type={type}
+      id={name}
+      name={name}
+      required={required}
+      class={inputClasses}
+      placeholder={placeholder}
+      aria-describedby={placeholder ? `${name}-help` : undefined}
+    />
+  )}
+  {placeholder && (
+    <div id={`${name}-help`} class="sr-only">
+      {placeholder}
+    </div>
+  )}
+</div>
