@@ -30,7 +30,9 @@ RUN addgroup -g 1001 -S app && adduser -S app -u 1001 -G app
 # Copy built site from builder stage
 COPY --from=builder --chown=app:app /app/dist /srv
 
-# Switch to non-root user
+# Strip capabilities from Caddy binary
+USER root
+RUN apk add --no-cache libcap && setcap -r /usr/bin/caddy
 USER app
 
 # Expose port 8080 for non-root user compatibility
