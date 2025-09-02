@@ -71,6 +71,7 @@ jobs:
           context: .
           push: false
           tags: portfolio-test:latest
+          load: true
 
       - name: Run container and test
         run: |
