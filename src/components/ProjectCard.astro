@@ -43,27 +43,27 @@ const offsetY = gridRow * 200;
         <div
             class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-75 flex items-center justify-center"
         >
-            <div class="text-center text-mocha-800 px-8 py-6">
-                <h3 class="text-2xl font-bold mb-4 gradient-text">
+            <div class="text-center text-mocha-800 px-4 sm:px-8 py-4 sm:py-6">
+                <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 gradient-text">
                     {title}
                 </h3>
                 {
                     description && (
-                        <p class="text-mocha-700 text-sm mb-6 leading-relaxed" set:html={description} />
+                        <p class="text-mocha-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed" set:html={description} />
                     )
                 }
                 {
                     technologies && technologies.length > 0 && (
-                        <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <div class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-4 sm:mb-6">
                             {technologies.map((tech) => (
-                                <span class="px-3 py-1 bg-mocha-100 text-mocha-700 text-xs rounded-full border border-mocha-200 font-medium">
+                                <span class="px-2 sm:px-3 py-1 bg-mocha-100 text-mocha-700 text-xs rounded-full border border-mocha-200 font-medium">
                                     {tech}
                                 </span>
                             ))}
                         </div>
                     )
                 }
-                <div class="inline-flex items-center gap-2 text-mocha-600 text-sm font-medium bg-mocha-100/50 px-4 py-2 rounded-full border border-mocha-200/50">
+                <div class="inline-flex items-center gap-2 text-mocha-600 text-xs sm:text-sm font-medium bg-mocha-100/50 px-3 sm:px-4 py-2 rounded-full border border-mocha-200/50">
                     View Project
                     <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </div>
