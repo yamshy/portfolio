@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0](https://github.com/yamshy/portfolio/compare/v1.2.0...v1.3.0) (2025-09-02)
+
+### Features
+
+* improve mobile responsiveness for homepage ([#6](https://github.com/yamshy/portfolio/issues/6)) ([b052e02](https://github.com/yamshy/portfolio/commit/b052e021713c75b5128e3854a58768b29e6652a8))
+
 ## [1.2.0](https://github.com/yamshy/portfolio/compare/v1.1.0...v1.2.0) (2025-09-02)
 
 ### Features
