@@ -2,70 +2,38 @@
 import Layout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 
-// Portfolio data - you can customize this with your actual projects
+// Portfolio data - your actual projects
 const projects = [
 	{
-		title: "Project 1",
-		image: "/project1-thumbnail.jpg", // Add your project images to the public folder
-		link: "https://github.com/yourusername/project1",
+		title: "Homelab Kubernetes",
+		image: "/homelab-thumbnail.jpg",
+		link: "https://github.com/yamshy/homelab",
 		description:
-			"A modern web application built with React and Node.js. Features include user authentication, real-time updates, and responsive design.",
-		technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
+			"Personal homelab infrastructure using Kubernetes with FluxCD for GitOps deployment. Manages various services and applications with automated CI/CD pipelines.",
+		technologies: ["Kubernetes", "FluxCD", "GitOps", "Docker", "Helm"],
 	},
 	{
-		title: "Project 2",
-		image: "/project2-thumbnail.jpg",
-		link: "https://github.com/yourusername/project2",
+		title: "Portfolio Website",
+		image: "/portfolio-thumbnail.jpg",
+		link: "https://github.com/yamshy/portfolio",
 		description:
-			"Full-stack e-commerce platform with payment integration, inventory management, and admin dashboard.",
-		technologies: ["Vue.js", "Express", "PostgreSQL", "Stripe"],
-	},
-	{
-		title: "Project 3",
-		image: "/project3-thumbnail.jpg",
-		link: "https://github.com/yourusername/project3",
-		description:
-			"Machine learning-powered data analysis tool that processes and visualizes complex datasets.",
-		technologies: ["Python", "Django", "TensorFlow", "Redis"],
-	},
-	{
-		title: "Project 4",
-		image: "/project4-thumbnail.jpg",
-		link: "https://github.com/yourusername/project4",
-		description:
-			"Mobile-first progressive web app for task management with offline capabilities and cloud sync.",
-		technologies: ["React Native", "Firebase", "PWA", "TypeScript"],
-	},
-	{
-		title: "Project 5",
-		image: "/project5-thumbnail.jpg",
-		link: "https://github.com/yourusername/project5",
-		description:
-			"Real-time collaborative code editor with syntax highlighting and version control integration.",
-		technologies: ["WebRTC", "Monaco Editor", "Git", "WebSockets"],
-	},
-	{
-		title: "Project 6",
-		image: "/project6-thumbnail.jpg",
-		link: "https://github.com/yourusername/project6",
-		description:
-			"AI-powered content generation platform with natural language processing and template system.",
-		technologies: ["OpenAI API", "Next.js", "Prisma", "Tailwind CSS"],
+			"Portfolio website built with Astro and Tailwind CSS.<br>(the site you're looking at)",
+		technologies: ["Astro", "Tailwind CSS", "TypeScript", "Responsive Design"],
 	},
 ];
 ---
 
 <Layout>
 	<!-- Hero Section -->
-	<section class="pt-16 pb-20 px-6">
+	<section class="pt-24 pb-20 px-6">
 		<div class="text-center max-w-4xl mx-auto">
 			<h1
-				class="text-6xl md:text-8xl font-light mb-8 leading-tight text-white"
+				class="text-6xl md:text-8xl font-light mb-8 leading-tight text-gray-900"
 			>
-				<span class="font-semibold text-blue-400">Shyam Ajudia</span>
+				<span class="font-semibold text-gray-900">Shyam Ajudia</span>
 			</h1>
 			<p
-				class="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-light"
+				class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-light"
 			>
 				yabba dabba doo blah blah blah lorem ipsum and so on
 			</p>
@@ -73,7 +41,7 @@ const projects = [
 	</section>
 
 	<!-- Projects Section -->
-	<section class="px-6 pb-20">
+	<section id="projects" class="px-6 pb-20">
 		<div class="max-w-7xl mx-auto">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
 				{
@@ -92,21 +60,21 @@ const projects = [
 	</section>
 
 	<!-- Footer -->
-	<footer class="px-6 py-12 border-t border-slate-700">
+	<footer class="px-6 py-12 border-t border-amber-200">
 		<div class="max-w-4xl mx-auto text-center">
-			<p class="text-slate-400 mb-4">© 2025 Your Name.</p>
+			<p class="text-gray-600 mb-4">© 2025 Shyam Ajudia.</p>
 			<div class="flex justify-center gap-6 text-sm">
 				<a
-					href="mailto:your.email@example.com"
-					class="text-slate-400 hover:text-white transition-colors"
+					href="mailto:sajudia@proton.me"
+					class="text-gray-600 hover:text-gray-900 transition-colors"
 				>
 					Contact
 				</a>
 				<a
-					href="https://github.com/yourusername"
+					href="https://github.com/yamshy"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-slate-400 hover:text-white transition-colors"
+					class="text-gray-600 hover:text-gray-900 transition-colors"
 				>
 					GitHub
 				</a>

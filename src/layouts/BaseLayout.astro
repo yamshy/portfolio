@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Header from "../components/Header.astro";
 ---
 
 <!doctype html>
@@ -9,9 +10,10 @@ import "../styles/global.css";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio | Your Name</title>
+		<title>Portfolio | Shyam Ajudia</title>
 	</head>
-	<body class="bg-slate-900 text-slate-100 transition-colors duration-300">
+	<body class="bg-amber-50 text-gray-900 transition-colors duration-300">
+		<Header />
 		<slot />
 	</body>
 </html>
