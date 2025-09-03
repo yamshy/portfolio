@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.0](https://github.com/yamshy/portfolio/compare/v2.1.0...v2.2.0) (2025-09-03)
+
+### Features
+
+* implement global background shapes with performance optimizations ([#11](https://github.com/yamshy/portfolio/issues/11)) ([7da4e3d](https://github.com/yamshy/portfolio/commit/7da4e3d304addfa4effe7b171724ad9e28bda192))
+
 ## [2.1.0](https://github.com/yamshy/portfolio/compare/v2.0.0...v2.1.0) (2025-09-03)
 
 ### Features
