@@ -80,7 +80,7 @@ const externalLinks = [
 							aria-label={`Navigate to ${item.label} section`}
 						>
 							<div
-								class={`organic-nav-shape backdrop-blur-lg border ${item.style} px-6 py-3 transition-all duration-300 hover:scale-105`}
+								class={`cell-nav-shape backdrop-blur-lg border ${item.style} px-6 py-3 transition-all duration-300 hover:scale-105`}
 							>
 								<span class="text-sm font-medium transition-colors duration-300 group-hover:text-warm-white">
 									{item.label}
@@ -105,7 +105,7 @@ const externalLinks = [
 							aria-label={`Open ${link.label} in new tab`}
 						>
 							<div
-								class={`organic-nav-shape backdrop-blur-lg border ${link.style} px-4 py-2 transition-all duration-300 hover:scale-110`}
+								class={`cell-nav-shape backdrop-blur-lg border ${link.style} px-4 py-2 transition-all duration-300 hover:scale-110`}
 							>
 								<span class="text-xs font-medium transition-colors duration-300 group-hover:text-warm-white">
 									{link.label}
@@ -120,131 +120,20 @@ const externalLinks = [
 </nav>
 
 <style>
-	.nav-dot {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.nav-label {
-		position: absolute;
-		left: 2rem;
-		background: rgb(from var(--color-text-dark) r g b / 0.9);
-		color: var(--color-warm-white);
-		padding: 0.5rem 1rem;
-		border-radius: 0.5rem;
-		font-size: 0.875rem;
-		font-weight: 500;
-		opacity: 0;
-		transform: translateX(-10px);
-		transition: all 0.3s ease;
-		pointer-events: none;
-		white-space: nowrap;
+	/* Cell-like navigation button styles */
+	.cell-nav-shape {
+		border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+		animation: cellFloat 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 		backdrop-filter: blur(8px);
-		border: 1px solid rgb(from var(--color-mocha-mousse) r g b / 0.2);
+		will-change: border-radius, transform;
+		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 
-	.nav-dot:hover .nav-label {
-		opacity: 1;
-		transform: translateX(0);
+	.cell-nav-shape:hover {
+		border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
+		animation: cellBreathe 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 	}
 
-	.nav-dot.active .nav-label {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	.nav-dot.active > div {
-		background: var(--color-coral-primary) !important;
-		transform: scale(1.25);
-	}
-
-	.nav-button {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.nav-button .nav-label {
-		position: absolute;
-		left: 2rem;
-		background: rgb(from var(--color-text-dark) r g b / 0.9);
-		color: var(--color-warm-white);
-		padding: 0.5rem 1rem;
-		border-radius: 0.5rem;
-		font-size: 0.875rem;
-		font-weight: 500;
-		opacity: 0;
-		transform: translateX(-10px);
-		transition: all 0.3s ease;
-		pointer-events: none;
-		white-space: nowrap;
-		backdrop-filter: blur(8px);
-		border: 1px solid rgb(from var(--color-mocha-mousse) r g b / 0.2);
-	}
-
-	.nav-button:hover .nav-label {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	.nav-button.active .nav-label {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	.nav-button.active > div {
-		background: var(--color-coral-primary) !important;
-		transform: scale(1.1);
-	}
-
-	.nav-section-button {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.nav-section-button .nav-label {
-		position: absolute;
-		left: 2rem;
-		background: rgb(from var(--color-text-dark) r g b / 0.9);
-		color: var(--color-warm-white);
-		padding: 0.5rem 1rem;
-		border-radius: 0.5rem;
-		font-size: 0.875rem;
-		font-weight: 500;
-		opacity: 0;
-		transform: translateX(-10px);
-		transition: all 0.3s ease;
-		pointer-events: none;
-		white-space: nowrap;
-		backdrop-filter: blur(8px);
-		border: 1px solid rgb(from var(--color-mocha-mousse) r g b / 0.2);
-	}
-
-	.nav-section-button:hover .nav-label {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	.nav-section-button.active .nav-label {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	.nav-section-button.active > div {
-		background: var(--color-coral-primary) !important;
-		transform: scale(1.05);
-	}
-
-	.nav-section-button.active > div > span {
-		color: var(--color-warm-white) !important;
-	}
-
-	/* Organic navigation button styles */
 	.nav-organic-button {
 		position: relative;
 		display: flex;
@@ -252,16 +141,6 @@ const externalLinks = [
 		justify-content: center;
 	}
 
-	.organic-nav-shape {
-		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-		animation: organicNavFloat 6s ease-in-out infinite;
-		backdrop-filter: blur(8px);
-	}
-
-	.organic-nav-shape:hover {
-		border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-		animation: organicNavMorph 0.3s ease-out;
-	}
 
 	.nav-organic-button .nav-label {
 		position: absolute;
@@ -300,37 +179,6 @@ const externalLinks = [
 		color: var(--color-warm-white) !important;
 	}
 
-	@keyframes organicNavFloat {
-		0%,
-		100% {
-			border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-			transform: translateY(0px) rotate(0deg);
-		}
-		25% {
-			border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-			transform: translateY(-2px) rotate(0.5deg);
-		}
-		50% {
-			border-radius: 50% 30% 50% 70% / 40% 60% 40% 60%;
-			transform: translateY(1px) rotate(-0.3deg);
-		}
-		75% {
-			border-radius: 70% 40% 30% 60% / 60% 30% 70% 40%;
-			transform: translateY(-1px) rotate(0.2deg);
-		}
-	}
-
-	@keyframes organicNavMorph {
-		0% {
-			border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-		}
-		50% {
-			border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-		}
-		100% {
-			border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-		}
-	}
 
 	/* Mobile responsive */
 	@media (max-width: 1024px) {
