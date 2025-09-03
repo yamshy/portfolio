@@ -13,17 +13,56 @@ import MobileNav from "../components/MobileNav.astro";
 		<meta name="generator" content={Astro.generator} />
 		<title>Portfolio | Shyam Ajudia</title>
 		<!-- Preload the main font for better performance -->
-		<link rel="preload" href="/fonts/rst-thermal/rst-thermal-regular.otf" as="font" type="font/otf" crossorigin>
-		<meta name="description" content="Shyam Ajudia - Software Engineer & Developer Portfolio showcasing modern web development projects and expertise.">
-		<meta name="theme-color" content="#a47864">
+		<link
+			rel="preload"
+			href="/fonts/rst-thermal/rst-thermal-regular.otf"
+			as="font"
+			type="font/otf"
+			crossorigin
+		/>
+		<meta
+			name="description"
+			content="Shyam Ajudia - Software Engineer & Developer Portfolio showcasing modern web development projects and expertise."
+		/>
+		<meta name="theme-color" content="#a47864" />
 	</head>
-	<body class="bg-warm-white text-text-dark transition-colors duration-300 min-h-screen">
+	<body
+		class="bg-warm-white text-text-dark transition-colors duration-300 min-h-screen"
+	>
+		<!-- Global background shapes - positioned relative to viewport -->
+		<div class="fixed inset-0 pointer-events-none z-10" aria-hidden="true">
+			<!-- Large coral blob -->
+			<div
+				class="absolute top-20 -left-20 w-96 h-96 bg-glass-coral rounded-full animate-morph blur-lg opacity-70 will-change-transform"
+			>
+			</div>
+			<!-- Medium mocha blob -->
+			<div
+				class="absolute top-1/3 right-10 w-64 h-64 bg-glass-mocha rounded-full animate-organic-float blur-md opacity-50 will-change-transform"
+			>
+			</div>
+			<!-- Small yellow accent -->
+			<div
+				class="absolute bottom-1/4 left-1/3 w-32 h-32 bg-glass-yellow rounded-full animate-float blur-sm opacity-60 will-change-transform"
+			>
+			</div>
+			<!-- Additional shapes for variety -->
+			<div
+				class="absolute top-1/2 right-1/4 w-48 h-48 bg-glass-blue rounded-full animate-morph blur-md opacity-30 will-change-transform"
+			>
+			</div>
+			<div
+				class="absolute bottom-1/3 left-1/4 w-40 h-40 bg-glass-coral rounded-full animate-organic-float blur-lg opacity-40 will-change-transform"
+			>
+			</div>
+		</div>
+
 		<!-- Skip link for keyboard navigation -->
 		<a href="#main-content" class="skip-link">Skip to main content</a>
-		
-                <MobileNav />
-                <SidebarNav />
-		<main id="main-content" role="main">
+
+		<MobileNav />
+		<SidebarNav />
+		<main id="main-content" role="main" class="lg:ml-48 relative z-20">
 			<slot />
 		</main>
 	</body>
@@ -36,25 +75,25 @@ import MobileNav from "../components/MobileNav.astro";
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	/* Enhanced scrollbar styling */
 	::-webkit-scrollbar {
 		width: 8px;
 	}
-	
+
 	::-webkit-scrollbar-track {
-		background: #FEFCF8;
+		background: var(--color-warm-white);
 	}
-	
+
 	::-webkit-scrollbar-thumb {
-		background: #A47864;
+		background: var(--color-mocha-mousse);
 		border-radius: 4px;
 	}
-	
+
 	::-webkit-scrollbar-thumb:hover {
-		background: #E85A2B;
+		background: var(--color-coral-primary);
 	}
-	
+
 	/* Skip link for accessibility */
 	.skip-link {
 		position: absolute;
@@ -68,7 +107,7 @@ import MobileNav from "../components/MobileNav.astro";
 		z-index: 1000;
 		transition: top 0.3s;
 	}
-	
+
 	.skip-link:focus {
 		top: 6px;
 	}
