@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0](https://github.com/yamshy/portfolio/compare/v2.0.0...v2.1.0) (2025-09-03)
+
+### Features
+
+* improve mobile hero and navigation ([#9](https://github.com/yamshy/portfolio/issues/9)) ([d293e68](https://github.com/yamshy/portfolio/commit/d293e68e87309537a09e77d3b3c2f690a5604539))
+
 ## [2.0.0](https://github.com/yamshy/portfolio/compare/v1.4.0...v2.0.0) (2025-09-02)
 
 ### ⚠ BREAKING CHANGES
