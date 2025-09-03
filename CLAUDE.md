@@ -70,13 +70,13 @@ Workflow:
 1. **Create new branch**: Always create a new branch from main for any changes
 
    ```bash
-   git checkout -b feature/description-of-change
-   git checkout -b fix/description-of-bug
-   git checkout -b docs/description-of-docs-change
+   git checkout -b feature/description-of-change origin/main
+   git checkout -b fix/description-of-bug origin/main
+   git checkout -b docs/description-of-docs-change origin/main
    ```
 
 2. **Make changes**: Implement your changes with conventional commits
-3. **Create Pull Request**: Submit PR to merge into `master` branch
+3. **Create Pull Request**: Submit PR to merge into `main` branch
 4. **Review and merge**: All changes must be reviewed before merging to main
 
 Branch naming conventions:
