@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.1](https://github.com/yamshy/portfolio/compare/v2.3.0...v2.3.1) (2025-09-03)
+
+### Bug Fixes
+
+* repair sidebar progress bar visibility and functionality ([#15](https://github.com/yamshy/portfolio/issues/15)) ([785dd82](https://github.com/yamshy/portfolio/commit/785dd82f703aeeec403e8f0a24aa4bf725b66b00))
+
 ## [2.3.0](https://github.com/yamshy/portfolio/compare/v2.2.0...v2.3.0) (2025-09-03)
 
 ### Features
