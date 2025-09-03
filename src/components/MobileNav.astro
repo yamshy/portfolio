@@ -1,0 +1,33 @@
+---
+// Mobile top navigation with hamburger menu
+const navItems = [
+  { href: "#hero", label: "Home" },
+  { href: "#evolution", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+---
+<nav class="lg:hidden fixed top-0 left-0 w-full bg-warm-white/80 backdrop-blur-lg z-50" role="navigation" aria-label="Mobile navigation">
+  <div class="flex items-center justify-between px-4 h-16">
+    <span class="text-xl font-bold text-coral-primary">Shyam</span>
+    <button id="mobile-nav-toggle" class="p-2 text-text-dark" aria-label="Toggle navigation">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-nav-menu" class="hidden flex-col items-center space-y-4 pb-4">
+    {navItems.map((item) => (
+      <a href={item.href} class="text-lg text-text-dark" onClick="document.getElementById('mobile-nav-menu').classList.add('hidden')">
+        {item.label}
+      </a>
+    ))}
+  </div>
+</nav>
+<script>
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const menu = document.getElementById('mobile-nav-menu');
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
