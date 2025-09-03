@@ -30,29 +30,29 @@ import MobileNav from "../components/MobileNav.astro";
 		class="bg-warm-white text-text-dark transition-colors duration-300 min-h-screen"
 	>
 		<!-- Global background shapes - positioned relative to viewport -->
-		<div class="fixed inset-0 pointer-events-none z-10">
+		<div class="fixed inset-0 pointer-events-none z-10" aria-hidden="true">
 			<!-- Large coral blob -->
 			<div
-				class="absolute top-20 -left-20 w-96 h-96 bg-glass-coral rounded-full animate-morph blur-lg opacity-70"
+				class="absolute top-20 -left-20 w-96 h-96 bg-glass-coral rounded-full animate-morph blur-lg opacity-70 will-change-transform"
 			>
 			</div>
 			<!-- Medium mocha blob -->
 			<div
-				class="absolute top-1/3 right-10 w-64 h-64 bg-glass-mocha rounded-full animate-organic-float blur-md opacity-50"
+				class="absolute top-1/3 right-10 w-64 h-64 bg-glass-mocha rounded-full animate-organic-float blur-md opacity-50 will-change-transform"
 			>
 			</div>
 			<!-- Small yellow accent -->
 			<div
-				class="absolute bottom-1/4 left-1/3 w-32 h-32 bg-glass-yellow rounded-full animate-float blur-sm opacity-60"
+				class="absolute bottom-1/4 left-1/3 w-32 h-32 bg-glass-yellow rounded-full animate-float blur-sm opacity-60 will-change-transform"
 			>
 			</div>
 			<!-- Additional shapes for variety -->
 			<div
-				class="absolute top-1/2 right-1/4 w-48 h-48 bg-glass-blue rounded-full animate-morph blur-md opacity-30"
+				class="absolute top-1/2 right-1/4 w-48 h-48 bg-glass-blue rounded-full animate-morph blur-md opacity-30 will-change-transform"
 			>
 			</div>
 			<div
-				class="absolute bottom-1/3 left-1/4 w-40 h-40 bg-glass-coral rounded-full animate-organic-float blur-lg opacity-40"
+				class="absolute bottom-1/3 left-1/4 w-40 h-40 bg-glass-coral rounded-full animate-organic-float blur-lg opacity-40 will-change-transform"
 			>
 			</div>
 		</div>
@@ -82,16 +82,16 @@ import MobileNav from "../components/MobileNav.astro";
 	}
 
 	::-webkit-scrollbar-track {
-		background: #fefcf8;
+		background: var(--color-warm-white);
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: #a47864;
+		background: var(--color-mocha-mousse);
 		border-radius: 4px;
 	}
 
 	::-webkit-scrollbar-thumb:hover {
-		background: #e85a2b;
+		background: var(--color-coral-primary);
 	}
 
 	/* Skip link for accessibility */

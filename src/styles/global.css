@@ -9,14 +9,14 @@
   --color-accent-yellow: #FFD644;
   --color-mocha-mousse: #A47864;
   --color-cool-contrast: #2563EB;
-  
+
   /* Glassmorphism colors - derived from core colors */
   --color-glass-coral: rgb(from var(--color-coral-primary) r g b / 0.2);
   --color-glass-mocha: rgb(from var(--color-mocha-mousse) r g b / 0.15);
   --color-glass-yellow: rgb(from var(--color-accent-yellow) r g b / 0.15);
   --color-glass-blue: rgb(from var(--color-cool-contrast) r g b / 0.1);
   --color-glass-dark: rgb(from var(--color-text-dark) r g b / 0.1);
-  
+
   /* Mocha color scale */
   --color-mocha-50: #FEFCF8;
   --color-mocha-100: #ede6e1;
@@ -28,7 +28,7 @@
   --color-mocha-700: #654a3f;
   --color-mocha-800: #503c33;
   --color-mocha-900: #1A0D08;
-  
+
   /* Terracotta color scale */
   --color-terracotta-50: #fdf4f2;
   --color-terracotta-100: #fbe8e4;
@@ -40,7 +40,7 @@
   --color-terracotta-700: #9a3d2d;
   --color-terracotta-800: #7c3226;
   --color-terracotta-900: #5e271f;
-  
+
   /* Neon yellow color scale */
   --color-neon-yellow-50: #fffbeb;
   --color-neon-yellow-100: #fff7d1;
@@ -52,7 +52,7 @@
   --color-neon-yellow-700: #c2952a;
   --color-neon-yellow-800: #b08422;
   --color-neon-yellow-900: #9e731a;
-  
+
   /* Warm blue color scale */
   --color-warm-blue-50: #f0f9ff;
   --color-warm-blue-100: #e0f2fe;
@@ -64,7 +64,7 @@
   --color-warm-blue-700: #0369a1;
   --color-warm-blue-800: #075985;
   --color-warm-blue-900: #0c4a6e;
-  
+
   /* Digital lavender color scale */
   --color-digital-lavender-50: #f8f7ff;
   --color-digital-lavender-100: #f0edff;
@@ -76,7 +76,7 @@
   --color-digital-lavender-700: #7c3aed;
   --color-digital-lavender-800: #6d28d9;
   --color-digital-lavender-900: #5b21b6;
-  
+
   /* Glassmorphism utility classes */
   --glass-backdrop-filter: blur(12px);
   --glass-border-width: 1px;
@@ -115,7 +115,9 @@
 }
 
 /* Set RST Thermal as the default font family */
-html, body, * {
+html,
+body,
+* {
   font-family: 'RST Thermal', ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -154,42 +156,49 @@ html, body, * {
 
 /* Organic Shapes and Enhanced Styling */
 
-/* Organic blob shapes using CSS */
+/* Organic blob shapes using CSS - optimized for performance */
 .organic-blob {
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob 7s ease-in-out infinite;
+  will-change: border-radius;
 }
 
 .organic-blob-2 {
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   animation: blob 7s ease-in-out infinite reverse;
+  will-change: border-radius;
 }
 
 .organic-blob-3 {
   border-radius: 50% 30% 50% 70% / 40% 60% 40% 60%;
   animation: blob 7s ease-in-out infinite;
   animation-delay: -3.5s;
+  will-change: border-radius;
 }
 
 @keyframes blob {
   0% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
+
   25% {
     border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
   }
+
   50% {
     border-radius: 50% 30% 50% 70% / 40% 60% 40% 60%;
   }
+
   75% {
     border-radius: 70% 40% 30% 60% / 60% 30% 70% 40%;
   }
+
   100% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
 }
 
-/* Liquid typography effect */
+/* Liquid typography effect - optimized for performance */
 .liquid-text {
   background: linear-gradient(45deg, var(--color-mocha-mousse), var(--color-coral-primary), var(--color-cool-contrast), var(--color-accent-yellow));
   background-size: 300% 300%;
@@ -197,12 +206,16 @@ html, body, * {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: liquidGradient 4s ease-in-out infinite;
+  will-change: background-position;
 }
 
 @keyframes liquidGradient {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -210,26 +223,73 @@ html, body, * {
 
 /* Custom animation keyframes */
 @keyframes grow {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes morph {
-  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50% { border-radius: 50% 30% 60% 40% / 30% 50% 60% 70%; }
-  75% { border-radius: 40% 70% 50% 60% / 70% 40% 50% 30%; }
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  50% {
+    border-radius: 50% 30% 60% 40% / 30% 50% 60% 70%;
+  }
+
+  75% {
+    border-radius: 40% 70% 50% 60% / 70% 40% 50% 30%;
+  }
 }
 
 @keyframes drawLine {
-  0% { stroke-dashoffset: 100%; }
-  100% { stroke-dashoffset: 0%; }
+  0% {
+    stroke-dashoffset: 100%;
+  }
+
+  100% {
+    stroke-dashoffset: 0%;
+  }
 }
 
 @keyframes organicFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(1deg); }
-  66% { transform: translateY(4px) rotate(-0.5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(4px) rotate(-0.5deg);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Enhanced scroll behavior */
@@ -245,19 +305,21 @@ html {
 }
 
 /* Smooth transitions for all interactive elements */
-a, button, [role="button"] {
+a,
+button,
+[role="button"] {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Organic shadow effects */
 .organic-shadow {
-  box-shadow: 
+  box-shadow:
     0 4px 20px rgb(from var(--color-mocha-mousse) r g b / 0.15),
     0 2px 8px rgb(from var(--color-mocha-mousse) r g b / 0.1);
 }
 
 .organic-shadow-lg {
-  box-shadow: 
+  box-shadow:
     0 8px 40px rgb(from var(--color-mocha-mousse) r g b / 0.2),
     0 4px 16px rgb(from var(--color-mocha-mousse) r g b / 0.15);
 }
@@ -300,7 +362,7 @@ a, button, [role="button"] {
     --tw-bg-opacity: 1;
     --tw-text-opacity: 1;
   }
-  
+
   .high-contrast .gradient-text {
     background: none;
     -webkit-background-clip: unset;
@@ -308,7 +370,7 @@ a, button, [role="button"] {
     background-clip: unset;
     color: #000;
   }
-  
+
   .high-contrast .liquid-text {
     background: none;
     -webkit-background-clip: unset;
@@ -320,6 +382,7 @@ a, button, [role="button"] {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -328,7 +391,7 @@ a, button, [role="button"] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .organic-blob,
   .organic-blob-2,
   .organic-blob-3 {
