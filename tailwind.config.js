@@ -18,11 +18,12 @@ export default {
         'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.8s ease-out',
         'float': 'float 3s ease-in-out infinite',
-        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
         'grow': 'grow 0.6s ease-out',
         'morph': 'morph 8s ease-in-out infinite',
         'draw-line': 'drawLine 1.5s ease-out',
         'organic-float': 'organicFloat 4s ease-in-out infinite',
+        'cell-float': 'cellFloat 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite',
+        'cell-breathe': 'cellBreathe 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
         'bounce': 'bounce 1s infinite',
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
@@ -38,10 +39,6 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' },
-        },
-        pulseSoft: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.8' },
         },
         grow: {
           '0%': { opacity: '0', transform: 'scale(0.8)' },
@@ -70,6 +67,38 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '.5' },
         },
+        cellFloat: {
+          '0%, 100%': { 
+            borderRadius: '50% 50% 50% 50% / 55% 55% 45% 45%',
+            transform: 'translateY(0px) rotate(0deg)'
+          },
+          '25%': { 
+            borderRadius: '45% 55% 55% 45% / 50% 50% 50% 50%',
+            transform: 'translateY(-1px) rotate(0.5deg)'
+          },
+          '50%': { 
+            borderRadius: '55% 45% 45% 55% / 45% 55% 55% 45%',
+            transform: 'translateY(1px) rotate(-0.3deg)'
+          },
+          '75%': { 
+            borderRadius: '45% 55% 55% 45% / 55% 55% 45% 45%',
+            transform: 'translateY(-1px) rotate(0.2deg)'
+          }
+        },
+        cellBreathe: {
+          '0%': { 
+            transform: 'scale(1)',
+            borderRadius: '50% 50% 50% 50% / 55% 55% 45% 45%'
+          },
+          '50%': { 
+            transform: 'scale(1.08)',
+            borderRadius: '40% 60% 60% 40% / 45% 55% 55% 45%'
+          },
+          '100%': { 
+            transform: 'scale(1.03)',
+            borderRadius: '52% 48% 48% 52% / 50% 50% 50% 50%'
+          }
+        },
       },
       backdropBlur: {
         'xs': '2px',
@@ -88,6 +117,13 @@ export default {
       boxShadow: {
         'organic': '0 4px 20px rgb(from var(--color-mocha-mousse) r g b / 0.15), 0 2px 8px rgb(from var(--color-mocha-mousse) r g b / 0.1)',
         'organic-lg': '0 8px 40px rgb(from var(--color-mocha-mousse) r g b / 0.2), 0 4px 16px rgb(from var(--color-mocha-mousse) r g b / 0.15)',
+      },
+      // Text shadow utilities
+      textShadow: {
+        'sm': '0 1px 2px rgb(0 0 0 / 0.05)',
+        'md': '0 2px 4px rgb(0 0 0 / 0.1)',
+        'lg': '0 4px 8px rgb(0 0 0 / 0.15)',
+        'organic': '0 2px 4px rgb(from var(--color-mocha-mousse) r g b / 0.2)',
       },
     },
   },
@@ -109,6 +145,17 @@ export default {
           'animation-delay': '-3.5s',
         },
       });
+    },
+    // Text shadow plugin
+    function({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      );
     },
   ],
 }

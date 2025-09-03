@@ -221,76 +221,7 @@ body,
   }
 }
 
-/* Custom animation keyframes */
-@keyframes grow {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes morph {
-
-  0%,
-  100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-
-  25% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-
-  50% {
-    border-radius: 50% 30% 60% 40% / 30% 50% 60% 70%;
-  }
-
-  75% {
-    border-radius: 40% 70% 50% 60% / 70% 40% 50% 30%;
-  }
-}
-
-@keyframes drawLine {
-  0% {
-    stroke-dashoffset: 100%;
-  }
-
-  100% {
-    stroke-dashoffset: 0%;
-  }
-}
-
-@keyframes organicFloat {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  33% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-
-  66% {
-    transform: translateY(4px) rotate(-0.5deg);
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
+/* Custom animation keyframes not in Tailwind config */
 
 /* Enhanced scroll behavior */
 html {
