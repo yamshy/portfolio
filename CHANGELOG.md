@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.0](https://github.com/yamshy/portfolio/compare/v2.2.0...v2.3.0) (2025-09-03)
+
+### Features
+
+* implement cell-like sidebar navigation with Tailwind optimizations ([#14](https://github.com/yamshy/portfolio/issues/14)) ([37aa3b0](https://github.com/yamshy/portfolio/commit/37aa3b0fd1275d26b795ad314724362b270529df))
+
 ## [2.2.0](https://github.com/yamshy/portfolio/compare/v2.1.0...v2.2.0) (2025-09-03)
 
 ### Features
