@@ -57,6 +57,27 @@ pnpm release            # Run semantic-release locally for testing
 
 ## Development Guidelines
 
+### Branching and Pull Request Workflow
+**IMPORTANT**: All changes must be made in feature branches and merged to main via pull requests.
+
+Workflow:
+1. **Create new branch**: Always create a new branch for any changes
+   ```bash
+   git checkout -b feature/description-of-change
+   git checkout -b fix/description-of-bug
+   git checkout -b docs/description-of-docs-change
+   ```
+2. **Make changes**: Implement your changes with conventional commits
+3. **Create Pull Request**: Submit PR to merge into `master` branch
+4. **Review and merge**: All changes must be reviewed before merging to main
+
+Branch naming conventions:
+- `feature/` - New features
+- `fix/` - Bug fixes  
+- `docs/` - Documentation updates
+- `refactor/` - Code refactoring
+- `chore/` - Maintenance tasks
+
 ### Commit Messages
 **IMPORTANT**: All commits must use Conventional Commits format. This is critical for automated versioning and releases.
 
