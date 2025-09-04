@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0](https://github.com/yamshy/portfolio/compare/v3.0.1...v3.1.0) (2025-09-04)
+
+### Features
+
+* add VS Code devcontainer configuration ([9388086](https://github.com/yamshy/portfolio/commit/93880865f81975375882cbdf56083b8829f6a70c))
+
 ## [3.0.1](https://github.com/yamshy/portfolio/compare/v3.0.0...v3.0.1) (2025-09-04)
 
 ### Bug Fixes
