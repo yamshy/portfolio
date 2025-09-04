@@ -1,113 +1,72 @@
 ---
-export interface Props {
-  href: string;
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
-  class?: string;
-}
-
-const { href, variant = 'primary', size = 'md', class: className } = Astro.props;
-
-const variantClasses = {
-  primary: 'cta-primary',
-  secondary: 'cta-secondary'
-};
-
-const sizeClasses = {
-  sm: 'cta-sm',
-  md: 'cta-md',
-  lg: 'cta-lg'
-};
+const { href = "#", children, variant = "primary" } = Astro.props;
 ---
 
-<a 
-  href={href} 
-  class:list={['cta', variantClasses[variant], sizeClasses[size], className]}
->
-  <slot />
+<a class={`cta ${variant} u-glass u-glass--yellow u-r-xl u-elevate`} href={href}>
+  {children}
 </a>
 
 <style>
-@layer components {
   .cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--size-2) var(--size-4);
-    border-radius: 999px;
-    background: var(--glass-yellow);
-    backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in oklab, var(--accent-yellow), transparent 80%);
-    box-shadow: var(--shadow-lg-warm);
-    transition: background var(--dur-med) ease, 
-                transform var(--dur-med) var(--ease-organic), 
-                box-shadow var(--dur-med) ease;
-    font-weight: 600;
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border: 1px solid color-mix(in oklab, var(--accent-yellow) 35%, transparent);
+    transition: background 300ms var(--ease-3), color 300ms var(--ease-3), transform 300ms var(--ease-3);
     text-decoration: none;
+    font-weight: 600;
     color: var(--text-dark);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
+    min-width: 120px;
   }
   
   .cta:hover {
     background: var(--accent-yellow);
+    color: oklch(18% 0 0 / 1);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
+  }
+  
+  .cta:focus-visible { 
+    outline: 2px solid var(--accent-yellow); 
+    outline-offset: 2px; 
   }
   
   .cta:active {
     transform: translateY(0);
   }
   
-  /* Size variants */
-  .cta-sm {
-    padding: var(--size-1) var(--size-3);
-    font-size: var(--font-size-0);
-  }
-  
-  .cta-md {
-    padding: var(--size-2) var(--size-4);
-    font-size: var(--font-size-1);
-  }
-  
-  .cta-lg {
-    padding: var(--size-3) var(--size-6);
-    font-size: var(--font-size-2);
-  }
-  
-  /* Color variants */
-  .cta-primary {
+  /* Variant styles */
+  .cta.primary {
     background: var(--glass-yellow);
-    border: 1px solid color-mix(in oklab, var(--accent-yellow), transparent 80%);
   }
   
-  .cta-primary:hover {
-    background: var(--accent-yellow);
+  .cta.secondary {
+    background: color-mix(in oklab, var(--glass-yellow), transparent 30%);
+    border-color: color-mix(in oklab, var(--accent-yellow) 25%, transparent);
   }
   
-  .cta-secondary {
-    background: var(--glass-coral);
-    border: 1px solid color-mix(in oklab, var(--coral), transparent 80%);
+  .cta.large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    min-width: 160px;
   }
   
-  .cta-secondary:hover {
-    background: var(--coral);
-    color: var(--bg);
+  .cta.small {
+    padding: .5rem 1rem;
+    font-size: 0.9rem;
+    min-width: 100px;
   }
   
-  /* Focus styles */
-  .cta:focus-visible {
-    outline: 2px solid var(--coral);
-    outline-offset: 2px;
-  }
-  
-  /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .cta, .cta:hover {
-      transition: none;
+    .cta {
+      transition: background 300ms var(--ease-3), color 300ms var(--ease-3);
+    }
+    
+    .cta:hover {
+      transform: none;
+    }
+    
+    .cta:active {
       transform: none;
     }
   }
-}
 </style>

@@ -1,0 +1,197 @@
+<section class="timeline" id="evolution" aria-label="Professional Evolution">
+  <h2 class="section-title">Professional Evolution</h2>
+  <ol class="phases">
+    <li class="node phase-a">
+      <span class="badge">2018–2021</span>
+      <div class="card">
+        <h3>Education & Pure Biology</h3>
+        <p>Deep dive into molecular biology, genetics, and evolutionary theory. Built foundation in scientific methodology and research.</p>
+      </div>
+    </li>
+    <li class="node phase-b">
+      <span class="badge">2021–2022</span>
+      <div class="card">
+        <h3>Hybrid Transition</h3>
+        <p>Began integrating computational tools with biological research. Learned Python, R, and data analysis techniques.</p>
+      </div>
+    </li>
+    <li class="node phase-c">
+      <span class="badge">2022–2024</span>
+      <div class="card">
+        <h3>Technical Leadership</h3>
+        <p>Led cross-functional teams, developed full-stack applications, and mentored junior developers while maintaining biological perspective.</p>
+      </div>
+    </li>
+    <li class="node phase-d">
+      <span class="badge">2024+</span>
+      <div class="card">
+        <h3>Current Evolution</h3>
+        <p>Exploring AI/ML applications in biology, contributing to open source, and bridging the gap between life sciences and technology.</p>
+      </div>
+    </li>
+  </ol>
+  <svg class="path" viewBox="0 0 1000 140" aria-hidden="true">
+    <path class="stroke" d="M0,120 C250,40 450,40 700,90 S1000,100 1000,60"/>
+  </svg>
+</section>
+
+<style>
+  .timeline { 
+    position: relative; 
+    padding: var(--sp-8) var(--sp-6);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--sp-8);
+    color: var(--text-dark);
+    font-weight: 700;
+  }
+  
+  .phases { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: var(--sp-6); 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    position: relative;
+    z-index: var(--z-fg);
+  }
+  
+  .node { 
+    position: relative; 
+    display: grid; 
+    gap: var(--sp-3); 
+    align-content: start; 
+  }
+  
+  .badge { 
+    font-size: .85rem; 
+    color: color-mix(in oklab, var(--text-dark), var(--mocha) 40%);
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .card { 
+    background: var(--glass-dark); 
+    backdrop-filter: blur(var(--blur-20)); 
+    border-radius: var(--r-lg); 
+    padding: var(--sp-4); 
+    border: 1px solid color-mix(in oklab, var(--coral) 18%, transparent);
+    transition: transform 300ms var(--ease-3), box-shadow 300ms var(--ease-3);
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .card h3 {
+    margin: 0 0 var(--sp-2);
+    font-size: 1.1rem;
+    color: var(--text-dark);
+  }
+  
+  .card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: color-mix(in oklab, var(--text-dark), transparent 20%);
+  }
+  
+  /* Phase-specific styling */
+  .phase-a .card {
+    border-color: color-mix(in oklab, var(--coral) 25%, transparent);
+  }
+  
+  .phase-b .card {
+    border-color: color-mix(in oklab, var(--coral) 20%, var(--mocha) 20%);
+  }
+  
+  .phase-c .card {
+    border-color: color-mix(in oklab, var(--mocha) 25%, var(--blue) 15%);
+  }
+  
+  .phase-d .card {
+    border-color: color-mix(in oklab, var(--blue) 25%, transparent);
+  }
+
+  .path { 
+    position: absolute; 
+    inset: auto 0 0 0; 
+    width: 100%; 
+    height: 140px; 
+    z-index: var(--z-bg);
+  }
+  
+  .stroke {
+    fill: none;
+    stroke: color-mix(in oklab, var(--coral) 60%, var(--blue) 40%);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw 1.6s var(--ease-3) forwards;
+  }
+  
+  @media (prefers-reduced-motion: reduce) { 
+    .stroke { 
+      animation: none; 
+      stroke-dashoffset: 0; 
+    }
+    .card {
+      transition: none;
+    }
+    .card:hover {
+      transform: none;
+    }
+  }
+  
+  @keyframes draw { 
+    to { 
+      stroke-dashoffset: 0; 
+    } 
+  }
+  
+  @media (max-width: 1023px) {
+    .phases {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4);
+    }
+    
+    .path {
+      height: 200px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .phases {
+      grid-template-columns: 1fr;
+      gap: var(--sp-4);
+      overflow-x: auto;
+      padding-bottom: var(--sp-4);
+    }
+    
+    .phases::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    .phases::-webkit-scrollbar-track {
+      background: color-mix(in oklab, var(--mocha) 10%, transparent);
+      border-radius: 2px;
+    }
+    
+    .phases::-webkit-scrollbar-thumb {
+      background: color-mix(in oklab, var(--coral) 40%, transparent);
+      border-radius: 2px;
+    }
+    
+    .path {
+      display: none;
+    }
+  }
+</style>

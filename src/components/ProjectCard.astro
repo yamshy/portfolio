@@ -1,122 +1,154 @@
 ---
-export interface Props {
-    title: string;
-    link: string;
-    description?: string;
-    technologies?: string[];
-    index?: number;
-}
-
-const { title, link, description, technologies, index = 0 } = Astro.props;
+const { 
+  title, 
+  description, 
+  href = "#", 
+  variant = "standard",
+  tags = [],
+  image
+} = Astro.props;
 ---
 
-<article class="card">
-    <div class="card-header">
-        <h3 class="card-title">{title}</h3>
-        <a href={link} target="_blank" rel="noopener noreferrer" class="card-link">
-            <span>→</span>
-        </a>
+<article class={`card ${variant} u-glass u-glass--coral u-border-coral-20 u-r-xl u-elevate`} role="article">
+  {image && (
+    <div class="image-container">
+      <img src={image} alt={`${title} project screenshot`} loading="lazy" />
     </div>
-    
-    {description && (
-        <p class="card-description" set:html={description} />
-    )}
-    
-    {technologies && technologies.length > 0 && (
-        <div class="card-technologies">
-            {technologies.map((tech) => (
-                <span class="tech-tag">{tech}</span>
-            ))}
-        </div>
-    )}
+  )}
+  <header class="header">
+    <h3><a href={href}>{title}</a></h3>
+  </header>
+  <p class="description">{description}</p>
+  {tags.length > 0 && (
+    <ul class="tags" role="list">
+      {tags.map((tag: string) => (
+        <li class="tag">{tag}</li>
+      ))}
+    </ul>
+  )}
 </article>
 
 <style>
-@layer components {
+  .card { 
+    padding: var(--sp-6); 
+    box-shadow: 0 16px 32px color-mix(in oklab, var(--text-dark) 18%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    min-height: 200px;
+  }
+  
+  .image-container {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: var(--sp-2);
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms var(--ease-3);
+  }
+  
+  .card:hover .image-container img {
+    transform: scale(1.05);
+  }
+  
+  .header h3 { 
+    margin: 0; 
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 600;
+  }
+  
+  .header a { 
+    color: var(--text-dark); 
+    text-decoration: none;
+    transition: color 200ms var(--ease-3);
+  }
+  
+  .header a:hover { 
+    color: var(--coral);
+    text-decoration: underline; 
+    text-underline-offset: 0.2em; 
+  }
+  
+  .header a:focus-visible {
+    outline: 2px solid var(--accent-yellow);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  .description { 
+    margin: 0; 
+    max-width: 60ch;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--text-dark), transparent 15%);
+    flex-grow: 1;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .tag {
+    background: color-mix(in oklab, var(--coral) 15%, transparent);
+    color: var(--coral);
+    padding: var(--sp-1) var(--sp-2);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid color-mix(in oklab, var(--coral) 20%, transparent);
+  }
+  
+  /* Variant-specific styling */
+  .card.featured {
+    background: color-mix(in oklab, var(--glass-coral), var(--accent-yellow) 5%);
+    border-color: color-mix(in oklab, var(--coral) 30%, transparent);
+  }
+  
+  .card.standard {
+    background: var(--glass-coral);
+  }
+  
+  .card.secondary {
+    background: color-mix(in oklab, var(--glass-coral), transparent 20%);
+    border-color: color-mix(in oklab, var(--coral) 15%, transparent);
+  }
+  
+  .card.wide {
+    min-height: 180px;
+  }
+  
+  .card.tall {
+    min-height: 300px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover .image-container img {
+      transform: none;
+    }
+  }
+  
+  @media (max-width: 767px) {
     .card {
-        background: var(--glass-coral);
-        backdrop-filter: blur(20px);
-        border: 1px solid color-mix(in oklab, var(--coral), transparent 80%);
-        border-radius: var(--radius-organic);
-        box-shadow: var(--shadow-lg-warm);
-        padding: var(--size-4);
-        transition: transform var(--dur-med) var(--ease-organic),
-                    box-shadow var(--dur-med) ease;
-        will-change: transform, box-shadow;
-        position: relative;
-        overflow: hidden;
+      padding: var(--sp-4);
+      min-height: 160px;
     }
     
-    .card:hover {
-        transform: translateY(-8px) rotate(.5deg);
-        box-shadow: var(--shadow-hover);
+    .image-container {
+      height: 100px;
     }
     
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: var(--size-3);
+    .card.tall {
+      min-height: 200px;
     }
-    
-    .card-title {
-        font-size: var(--font-size-3);
-        font-weight: var(--font-weight-6);
-        color: var(--text-dark);
-        margin: 0;
-        line-height: var(--font-lineheight-1);
-    }
-    
-    .card-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: var(--size-6);
-        height: var(--size-6);
-        background: color-mix(in oklab, var(--coral), transparent 70%);
-        border-radius: 50%;
-        color: var(--coral);
-        font-size: var(--font-size-2);
-        font-weight: var(--font-weight-6);
-        transition: all var(--dur-med) var(--ease-organic);
-        text-decoration: none;
-    }
-    
-    .card-link:hover {
-        background: var(--coral);
-        color: var(--bg);
-        transform: scale(1.1);
-    }
-    
-    .card-description {
-        color: var(--text-dark);
-        line-height: var(--font-lineheight-3);
-        margin-bottom: var(--size-3);
-        opacity: 0.9;
-    }
-    
-    .card-technologies {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--size-2);
-    }
-    
-    .tech-tag {
-        display: inline-block;
-        padding: var(--size-1) var(--size-2);
-        background: color-mix(in oklab, var(--mocha), transparent 80%);
-        color: var(--mocha);
-        border-radius: var(--radius-2);
-        font-size: var(--font-size-0);
-        font-weight: var(--font-weight-4);
-        border: 1px solid color-mix(in oklab, var(--mocha), transparent 60%);
-    }
-    
-    @media (prefers-reduced-motion: reduce) {
-        .card, .card:hover, .card-link, .card-link:hover {
-            transition: none;
-            transform: none;
-        }
-    }
-}
+  }
 </style>

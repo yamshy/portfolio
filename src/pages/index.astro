@@ -1,115 +1,226 @@
 ---
-import Layout from "../layouts/BaseLayout.astro";
-import ProfessionalTimeline from "../components/ProfessionalTimeline.astro";
-import BentoProjectsGrid from "../components/BentoProjectsGrid.astro";
-import ContactForm from "../components/ContactForm.astro";
-import Footer from "../components/Footer.astro";
-import CTAButton from "../components/CTAButton.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavGlass from '../components/NavGlass.astro';
+import BentoGrid from '../components/BentoGrid.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import CTAButton from '../components/CTAButton.astro';
+import OrganicShapes from '../components/OrganicShapes.astro';
+
+// Sample project data
+const projects = [
+  {
+    title: "BioML Pipeline",
+    description: "Machine learning pipeline for analyzing genomic data with real-time visualization and statistical modeling.",
+    href: "#",
+    variant: "featured",
+    tags: ["Python", "ML", "Genomics", "React"],
+    image: "/src/assets/background.svg"
+  },
+  {
+    title: "Evolution Simulator",
+    description: "Interactive web application simulating evolutionary processes with customizable parameters and visual feedback.",
+    href: "#",
+    variant: "standard",
+    tags: ["JavaScript", "D3.js", "Biology", "Simulation"]
+  },
+  {
+    title: "Research Dashboard",
+    description: "Data visualization dashboard for tracking research metrics and collaboration patterns across institutions.",
+    href: "#",
+    variant: "standard",
+    tags: ["Vue.js", "D3.js", "Analytics", "Research"]
+  },
+  {
+    title: "Gene Expression Tool",
+    description: "Web-based tool for analyzing and visualizing gene expression data with statistical significance testing.",
+    href: "#",
+    variant: "secondary",
+    tags: ["R", "Shiny", "Bioinformatics", "Statistics"]
+  },
+  {
+    title: "Collaboration Platform",
+    description: "Cross-institutional platform for sharing research data and fostering scientific collaboration.",
+    href: "#",
+    variant: "wide",
+    tags: ["Node.js", "MongoDB", "Collaboration", "Research"]
+  },
+  {
+    title: "Data Visualization Library",
+    description: "Reusable React components for creating interactive biological data visualizations.",
+    href: "#",
+    variant: "secondary",
+    tags: ["React", "TypeScript", "Visualization", "Library"]
+  }
+];
 ---
 
-<Layout>
-	<!-- Hero Section -->
-	<section id="hero">
-		<div>
-			<!-- Main heading -->
-			<div>
-				<h1>
-					<span>Shyam</span>
-					<span>Ajudia</span>
-				</h1>
-			</div>
+<BaseLayout title="yamshy - Biology-Inspired Portfolio">
+  <OrganicShapes />
+  <NavGlass />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Bridging <span class="highlight">Biology</span> & <span class="highlight">Technology</span>
+        </h1>
+        <p class="hero-description">
+          I'm a biologist-turned-developer exploring the intersection of life sciences and technology. 
+          From molecular research to full-stack development, I bring a unique perspective to solving complex problems.
+        </p>
+        <div class="hero-actions">
+          <CTAButton href="#work" variant="primary" class="large">View My Work</CTAButton>
+          <CTAButton href="#evolution" variant="secondary">My Journey</CTAButton>
+        </div>
+      </div>
+    </section>
 
-			<!-- Bio text -->
-			<div>
-				<p>
-					<strong>Software Engineer & DevOps Specialist</strong> building scalable infrastructure and automated systems. I bring analytical precision and systems thinking to cloud architecture, Kubernetes, and CI/CD pipelines.
-				</p>
-				<p>
-					Starting in molecular biology research, the transition to infrastructure engineering came naturally through understanding how biological systems work - complex, interconnected, and self-regulating. This systems thinking translates directly to building reliable infrastructure and data pipelines.
-				</p>
-			</div>
-		</div>
+    <!-- Featured Work -->
+    <BentoGrid>
+      {projects.map(project => (
+        <ProjectCard {...project} />
+      ))}
+    </BentoGrid>
 
-		<!-- CTAs -->
-		<div class="hero-ctas">
-			<CTAButton href="#projects" variant="primary" size="lg">
-				View Featured Work
-			</CTAButton>
-			<CTAButton href="mailto:sajudia@proton.me" variant="secondary" size="lg">
-				Let's Build Together
-			</CTAButton>
-		</div>
+    <!-- Professional Evolution Timeline -->
+    <Timeline />
 
-		<!-- Scroll indicator -->
-		<div>
-			<div></div>
-		</div>
-	</section>
-
-	<!-- Professional Evolution Timeline -->
-	<ProfessionalTimeline />
-
-	<!-- Featured Work Section -->
-	<BentoProjectsGrid />
-
-	<!-- Contact Form -->
-	<ContactForm />
-
-	<!-- Footer -->
-	<Footer />
-</Layout>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="contact-content">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="contact-description">
+          Interested in collaborating on projects that bridge biology and technology? 
+          I'm always excited to discuss new opportunities and innovative ideas.
+        </p>
+        <div class="contact-actions">
+          <CTAButton href="mailto:hello@yamshy.dev" variant="primary" class="large">
+            Get In Touch
+          </CTAButton>
+          <CTAButton href="https://github.com/yamshy" variant="secondary">
+            View GitHub
+          </CTAButton>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
 
 <style>
-@layer layouts {
-	#hero {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		padding: var(--space-section) var(--container-padding);
-		position: relative;
-	}
-	
-	.hero-ctas {
-		display: flex;
-		gap: var(--size-4);
-		margin-top: var(--size-6);
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	
-	#hero h1 {
-		font-size: var(--font-size-hero);
-		font-weight: var(--font-weight-7);
-		line-height: var(--line-height-hero);
-		margin-bottom: var(--size-6);
-		color: var(--text-dark);
-	}
-	
-	#hero p {
-		font-size: var(--font-size-body-large);
-		line-height: var(--line-height-body);
-		color: var(--text-dark);
-		max-width: var(--content-width-wide);
-		margin: 0 auto var(--size-4);
-	}
-	
-	#hero strong {
-		color: var(--coral);
-		font-weight: var(--font-weight-6);
-	}
-	
-	@media (max-width: 768px) {
-		.hero-ctas {
-			flex-direction: column;
-			align-items: center;
-		}
-		
-		#hero h1 {
-			font-size: clamp(2rem, 8vw, 3rem);
-		}
-	}
-}
+  main {
+    position: relative;
+    z-index: var(--z-fg);
+  }
+  
+  .hero {
+    padding: var(--sp-8) var(--sp-6);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    align-items: center;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--text-dark);
+  }
+  
+  .highlight {
+    color: var(--coral);
+    position: relative;
+  }
+  
+  .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--coral), var(--accent-yellow));
+    border-radius: 2px;
+  }
+  
+  .hero-description {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--text-dark), transparent 20%);
+    max-width: 60ch;
+    margin: 0;
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .contact {
+    padding: var(--sp-8) var(--sp-6);
+    text-align: center;
+    background: color-mix(in oklab, var(--warm-bg), var(--glass-mocha) 30%);
+    margin-top: var(--sp-8);
+  }
+  
+  .contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+  
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-dark);
+  }
+  
+  .contact-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--text-dark), transparent 15%);
+    margin: 0;
+  }
+  
+  .contact-actions {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  @media (max-width: 767px) {
+    .hero {
+      padding: var(--sp-6) var(--sp-4);
+      min-height: 50vh;
+    }
+    
+    .hero-actions,
+    .contact-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .contact {
+      padding: var(--sp-6) var(--sp-4);
+    }
+  }
 </style>

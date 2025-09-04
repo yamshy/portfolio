@@ -1,27 +1,22 @@
 ---
-import "../styles/global.css";
-import StickyGlassHeader from "../components/StickyGlassHeader.astro";
-import OrganicBackground from "../components/OrganicBackground.astro";
-import SidebarNav from "../components/SidebarNav.astro";
-import MobileNav from "../components/MobileNav.astro";
+const { title = 'yamshy' } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Shyam Ajudia - Infrastructure Engineer specializing in DevOps, system administration, and data engineering" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="Biology-inspired portfolio showcasing professional evolution and technical expertise" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Shyam Ajudia - Infrastructure Engineer</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="generator" content={Astro.generator} />
+    <style is:global>
+      @import "/src/styles/tokens.css";
+      @import "/src/styles/utilities.css";
+    </style>
   </head>
-  <body style={`background: var(--bg); color: var(--text-dark);`}>
-    <OrganicBackground density="medium" />
-    <StickyGlassHeader />
-    <SidebarNav />
-    <MobileNav />
-    <main>
-      <slot />
-    </main>
+  <body class="u-bg-warm u-text-dark">
+    <slot />
   </body>
 </html>

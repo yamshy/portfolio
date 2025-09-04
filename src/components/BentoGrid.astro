@@ -1,0 +1,114 @@
+<section class="bento" id="work" aria-label="Featured Work">
+  <h2 class="section-title">Featured Work</h2>
+  <div class="grid">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .bento {
+    padding: var(--sp-8) var(--sp-6);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--sp-8);
+    color: var(--text-dark);
+    font-weight: 700;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--sp-6);
+    container-type: inline-size;
+  }
+  
+  @media (--md) { 
+    .grid { 
+      gap: var(--sp-8); 
+    } 
+  }
+  
+  /* Grid item variants - children can use these classes */
+  .grid :global(.card.featured) { 
+    grid-column: span 6; 
+    transform: rotate(1.5deg);
+    z-index: var(--z-fg);
+  }
+  
+  .grid :global(.card.standard) { 
+    grid-column: span 4; 
+  }
+  
+  .grid :global(.card.secondary) { 
+    grid-column: span 3; 
+  }
+  
+  .grid :global(.card.wide) {
+    grid-column: span 8;
+  }
+  
+  .grid :global(.card.tall) {
+    grid-row: span 2;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .grid :global(.card.featured) { 
+      grid-column: span 3; 
+      transform: rotate(0.5deg);
+    }
+    
+    .grid :global(.card.standard) { 
+      grid-column: span 2; 
+    }
+    
+    .grid :global(.card.secondary) { 
+      grid-column: span 2; 
+    }
+    
+    .grid :global(.card.wide) {
+      grid-column: span 4;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4);
+    }
+    
+    .grid :global(.card.featured),
+    .grid :global(.card.standard),
+    .grid :global(.card.secondary),
+    .grid :global(.card.wide) { 
+      grid-column: span 1; 
+      transform: none;
+    }
+    
+    .grid :global(.card.tall) {
+      grid-row: span 1;
+    }
+  }
+  
+  /* Container query support for dynamic sizing */
+  @container card (inline-size > 380px) {
+    .grid :global(.card) {
+      padding: var(--sp-6);
+    }
+  }
+  
+  @container card (inline-size <= 380px) {
+    .grid :global(.card) {
+      padding: var(--sp-4);
+    }
+  }
+</style>
