@@ -1,0 +1,168 @@
+<section class="bento" id="work" aria-label="Featured Work">
+  <div class="grid">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .bento {
+    padding: var(--size-10) var(--size-6);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--size-6);
+    container-type: inline-size;
+    align-items: start;
+  }
+  
+  @media (--md) { 
+    .grid { 
+      gap: var(--size-7); 
+    } 
+  }
+  
+  @media (--lg) { 
+    .grid { 
+      gap: var(--size-8); 
+    } 
+  }
+  
+  /* Optimized card sizing system for better visual balance */
+  .grid :global(.card.featured) { 
+    grid-column: span 6; /* Large featured - prominent showcase projects */
+    transform: rotate(1.5deg);
+    z-index: var(--z-fg);
+    min-height: var(--size-15);
+    align-self: start;
+  }
+  
+  .grid :global(.card.standard) { 
+    grid-column: span 6; /* Medium standard - balanced content area */
+    min-height: var(--size-12);
+    align-self: start;
+  }
+  
+  .grid :global(.card.secondary) { 
+    grid-column: span 4; /* Small secondary - compact but readable */
+    min-height: var(--size-10);
+    align-self: start;
+  }
+  
+  .grid :global(.card.wide) {
+    grid-column: span 8; /* Wide cards for special layouts */
+    min-height: var(--size-12);
+    align-self: start;
+  }
+  
+  .grid :global(.card.tall) {
+    grid-row: span 2; /* Tall cards for vertical content */
+    min-height: var(--size-15);
+    align-self: start;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--size-5);
+    }
+    
+    .grid :global(.card.featured) { 
+      grid-column: span 3; /* Half width on tablet */
+      transform: rotate(0.5deg);
+      min-height: var(--size-12);
+    }
+    
+    .grid :global(.card.standard) { 
+      grid-column: span 3; /* Half width on tablet */
+      min-height: var(--size-10);
+    }
+    
+    .grid :global(.card.secondary) { 
+      grid-column: span 2; /* Compact secondary */
+      min-height: var(--size-8);
+    }
+    
+    .grid :global(.card.wide) {
+      grid-column: span 6; /* Full width on tablet */
+      min-height: var(--size-10);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .bento {
+      padding: var(--size-8) var(--size-4);
+    }
+    
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--size-3);
+    }
+    
+    .grid :global(.card.featured),
+    .grid :global(.card.standard),
+    .grid :global(.card.secondary),
+    .grid :global(.card.wide) { 
+      grid-column: span 1; 
+      transform: none;
+      min-height: var(--size-8); /* Consistent mobile height */
+    }
+    
+    .grid :global(.card.tall) {
+      grid-row: span 1;
+      min-height: var(--size-8);
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 480px) {
+    .bento {
+      padding: var(--size-6) var(--size-3);
+    }
+    
+    .grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-3);
+    }
+    
+    .grid :global(.card.featured),
+    .grid :global(.card.standard),
+    .grid :global(.card.secondary),
+    .grid :global(.card.wide),
+    .grid :global(.card.tall) { 
+      grid-column: span 1; 
+      transform: none;
+      min-height: var(--size-7);
+    }
+  }
+  
+  /* Enhanced container query support for dynamic sizing */
+  @container card (inline-size > 500px) {
+    .grid :global(.card) {
+      padding: var(--size-7);
+    }
+  }
+  
+  @container card (inline-size > 380px) and (inline-size <= 500px) {
+    .grid :global(.card) {
+      padding: var(--size-6);
+    }
+  }
+  
+  @container card (inline-size <= 380px) {
+    .grid :global(.card) {
+      padding: var(--size-4);
+    }
+  }
+  
+  @container card (inline-size <= 280px) {
+    .grid :global(.card) {
+      padding: var(--size-3);
+    }
+  }
+</style>

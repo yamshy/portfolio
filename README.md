@@ -14,9 +14,15 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── assets
 │   │   └── astro.svg
 │   ├── components
-│   │   └── Welcome.astro
+│   │   ├── BentoGrid.astro
+│   │   ├── CTAButton.astro
+│   │   ├── GlassmorphicContainer.astro
+│   │   ├── OrganicShapes.astro
+│   │   ├── ProjectCard.astro
+│   │   ├── SidebarNav.astro
+│   │   └── Timeline.astro
 │   ├── layouts
-│   │   └── Layout.astro
+│   │   └── BaseLayout.astro
 │   └── pages
 │       └── index.astro
 ├── package.json

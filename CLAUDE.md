@@ -6,10 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is Shyam Ajudia's portfolio website built with Astro v5 and featuring a modern design with glassmorphism effects and animated organic shapes. The site showcases professional evolution from molecular biology research to infrastructure engineering.
 
+**Current State**: The project has been reset to a clean slate with minimal styling, ready for rebuilding with Open Props and native Astro scoped CSS instead of Tailwind.
+
 ## Tech Stack
 
 - **Framework**: Astro v5 with Svelte integration
-- **Styling**: Tailwind CSS v4 with custom design system
+- **Styling**: Open Props design tokens with native Astro scoped CSS
 - **Font**: Custom RST Thermal font family
 - **Deployment**: Docker containers via GitHub Container Registry
 - **CI/CD**: Automated releases with semantic-release
@@ -36,22 +38,26 @@ pnpm release            # Run semantic-release locally for testing
 
 - **BaseLayout.astro**: Main layout with global background shapes, navigation, and accessibility features
 - **Global background shapes**: Fixed positioned animated organic blobs using CSS animations
-- **Navigation**: Dual navigation system with SidebarNav for desktop and MobileNav for mobile
+- **Navigation**: Fixed SidebarNav for desktop navigation
 
 ### Design System
 
-- **Color Palette**: Warm colors (coral, mocha, accent yellow) with custom CSS variables defined in global.css
-- **Glassmorphism**: Custom utility classes with backdrop-blur effects
-- **Animations**: Organic morphing shapes, floating elements, and smooth transitions
-- **Typography**: RST Thermal font with multiple weights preloaded for performance
+- **Design Tokens**: Open Props provides comprehensive CSS custom properties for colors, spacing, typography, and animations
+- **Color Palette**: Warm brand colors (coral #E85A2B, mocha #A47864, accent yellow #FFD644) defined as custom properties
+- **Glassmorphism**: Backdrop-blur effects using CSS custom properties and Astro scoped styles
+- **Animations**: Organic morphing shapes, floating elements, and smooth transitions using Open Props easing functions
+- **Typography**: RST Thermal font with multiple weights + Open Props typography scale
+- **Architecture**: Component-scoped CSS using Astro's `<style>` tags with semantic class names
 
 ### Component Structure
 
-- **ContactForm.astro**: Contact form component
+- **BentoGrid.astro**: Asymmetrical project grid
+- **SidebarNav.astro**: Fixed sidebar navigation
 - **ProjectCard.astro**: Reusable project showcase cards
-- **GlassCard.astro**: Glassmorphism effect containers
-- **FormInput.astro**: Styled form input components
-- **Footer.astro**: Site footer
+- **Timeline.astro**: Professional evolution timeline
+- **CTAButton.astro**: Call-to-action button component
+- **GlassmorphicContainer.astro**: Reusable glass container wrapper
+- **OrganicShapes.astro**: Animated background shapes
 
 ### Content Architecture
 
@@ -111,12 +117,15 @@ docs: update CLAUDE.md with commit guidelines
 style: format CSS with prettier
 ```
 
-### Styling
+### Styling Approach
 
-- Uses Tailwind v4 with `@theme` directive for custom color definitions
-- Global CSS animations are performance-optimized with `will-change` properties
-- Supports accessibility features (reduced motion, high contrast, focus indicators)
-- Responsive design with mobile-first approach
+- **Open Props Integration**: Uses Open Props design tokens for consistent spacing, colors, typography, and animations
+- **Scoped CSS**: Each Astro component uses `<style>` tags for component-scoped styling
+- **Semantic Classes**: Meaningful class names instead of utility classes (e.g., `.hero-title` vs `.text-6xl`)
+- **Custom Properties**: Brand colors and design tokens defined as CSS custom properties
+- **Performance**: Animations optimized with `will-change` properties and Open Props easing functions
+- **Accessibility**: Supports reduced motion, high contrast, and proper focus indicators
+- **Responsive**: Mobile-first approach using CSS custom media queries and Open Props breakpoints
 
 ### Performance Considerations
 
@@ -142,8 +151,26 @@ The site uses automated CI/CD with semantic-release:
 - **Deployment**: GitOps with Flux monitoring image tags for automatic updates
 - **Environment**: Runs in Docker on port 8080 with Caddy server
 
+## Current Project State
+
+### Style Reset Status
+
+The project has undergone a complete style reset to enable a fresh approach with Open Props:
+
+- **Minimal Styling**: Only basic reset CSS with Open Props integration
+- **Clean Components**: All components stripped to semantic HTML structure
+- **Ready for Rebuild**: Foundation prepared for incremental styling with Open Props design tokens
+
+### Development Approach
+
+1. **Use Open Props tokens** for consistent spacing, colors, typography, and animations
+2. **Build incrementally** - start with layout, then typography, then visual effects
+3. **Scope styles** to components using Astro's `<style>` tags
+4. **Preserve accessibility** and responsive behavior
+
 ## Project Structure Notes
 
+- `src/styles/global.css`: Minimal reset with Open Props integration and RST Thermal font
 - `src/types/index.ts`: TypeScript type definitions
 - `public/fonts/rst-thermal/`: Custom font files (.otf format)
 - `src/assets/`: Static assets including background SVGs

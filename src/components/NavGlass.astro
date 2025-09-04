@@ -1,0 +1,102 @@
+<nav class="nav u-glass u-glass--mocha u-r-xl u-border-mocha-20" role="navigation" aria-label="Primary">
+  <a href="/" class="brand">YAMSHY</a>
+  <ul class="links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Featured Work</a></li>
+    <li><a href="#evolution">Professional Evolution</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    position: sticky; 
+    top: 1rem; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; 
+    align-items: center; 
+    gap: var(--sp-6);
+    padding: var(--sp-3) var(--sp-4);
+    z-index: var(--z-nav);
+    border: 1px solid color-mix(in oklab, var(--mocha) 25%, transparent);
+    backdrop-filter: blur(var(--blur-20));
+    background: color-mix(in oklab, var(--warm-bg) 85%, var(--glass-mocha) 15%);
+    max-width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px color-mix(in oklab, var(--text-dark) 8%, transparent);
+  }
+  
+  .brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  
+  .brand:hover {
+    color: color-mix(in oklab, var(--text-dark), var(--mocha) 30%);
+  }
+  
+  .links { 
+    display: flex; 
+    gap: var(--sp-4); 
+    margin: 0; 
+    padding: 0; 
+    list-style: none; 
+  }
+  
+  .links a { 
+    text-decoration: none; 
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 300ms var(--ease-3);
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--r-lg);
+  }
+  
+  .links a[aria-current="page"], 
+  .links a:hover {
+    color: var(--coral);
+    background: color-mix(in oklab, var(--glass-coral) 40%, transparent);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  
+  .links a:focus-visible {
+    outline: 2px solid var(--accent-yellow);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  @media (--md) {
+    .nav {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      inset-inline: 0;
+      margin: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+    
+    .links {
+      gap: var(--sp-2);
+    }
+    
+    .links a {
+      font-size: 0.9rem;
+    }
+  }
+</style>

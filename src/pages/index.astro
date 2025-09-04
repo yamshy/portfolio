@@ -1,532 +1,572 @@
 ---
-import Layout from "../layouts/BaseLayout.astro";
-import ContactForm from "../components/ContactForm.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SidebarNav from '../components/SidebarNav.astro';
+import BentoGrid from '../components/BentoGrid.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import CTAButton from '../components/CTAButton.astro';
+import OrganicShapes from '../components/OrganicShapes.astro';
+import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
-// Portfolio data - your actual projects
+// Sample project data
 const projects = [
-	{
-		title: "Homelab Kubernetes",
-		link: "https://github.com/yamshy/homelab",
-		description:
-			"Personal homelab infrastructure using Kubernetes with FluxCD for GitOps deployment. Manages various services and applications with automated CI/CD pipelines.",
-		technologies: ["Kubernetes", "FluxCD", "GitOps", "Docker", "Helm"],
-	},
-	{
-		title: "Portfolio Website",
-		link: "https://github.com/yamshy/portfolio",
-		description:
-			"Portfolio website built with Astro and Tailwind CSS.<br>(the site you're looking at)",
-		technologies: [
-			"Astro",
-			"Tailwind CSS",
-			"TypeScript",
-			"Responsive Design",
-		],
-	},
+  {
+    title: "BioML Pipeline",
+    description: "Machine learning pipeline for analyzing genomic data with real-time visualization and statistical modeling.",
+    href: "#",
+    variant: "featured",
+    tags: ["Python", "ML", "Genomics", "React"],
+    image: "/src/assets/background.svg"
+  },
+  {
+    title: "Evolution Simulator",
+    description: "Interactive web application simulating evolutionary processes with customizable parameters and visual feedback.",
+    href: "#",
+    variant: "standard",
+    tags: ["JavaScript", "D3.js", "Biology", "Simulation"]
+  },
+  {
+    title: "Research Dashboard",
+    description: "Data visualization dashboard for tracking research metrics and collaboration patterns across institutions.",
+    href: "#",
+    variant: "standard",
+    tags: ["Vue.js", "D3.js", "Analytics", "Research"]
+  },
+  {
+    title: "Gene Expression Tool",
+    description: "Web-based tool for analyzing and visualizing gene expression data with statistical significance testing.",
+    href: "#",
+    variant: "secondary",
+    tags: ["R", "Shiny", "Bioinformatics", "Statistics"]
+  },
+  {
+    title: "Collaboration Platform",
+    description: "Cross-institutional platform for sharing research data and fostering scientific collaboration.",
+    href: "#",
+    variant: "wide",
+    tags: ["Node.js", "MongoDB", "Collaboration", "Research"]
+  },
+  {
+    title: "Data Visualization Library",
+    description: "Reusable React components for creating interactive biological data visualizations.",
+    href: "#",
+    variant: "secondary",
+    tags: ["React", "TypeScript", "Visualization", "Library"]
+  }
 ];
 ---
 
-<Layout>
-	<!-- Hero Section with Asymmetrical Layout -->
-	<section
-		id="hero"
-		class="min-h-screen lg:min-h-0 lg:h-[85vh] relative overflow-hidden pt-20 lg:pt-0"
-	>
-		<!-- Asymmetrical grid layout -->
-		<div
-			class="grid grid-cols-12 min-h-screen lg:min-h-0 lg:h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-		>
-			<!-- Left side - 2/3 width for main content -->
-			<div
-				class="col-span-12 lg:col-span-8 flex flex-col justify-center relative z-10"
-			>
-				<!-- Main heading with asymmetrical positioning -->
-				<div class="mb-8 lg:mb-12">
-					<h1
-						class="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light leading-tight animate-grow"
-					>
-						<span class="block text-coral-primary font-bold"
-							>Shyam</span
-						>
-						<span
-							class="block text-text-dark font-light ml-8 lg:ml-16"
-							>Ajudia</span
-						>
-					</h1>
-				</div>
+<BaseLayout title="yamshy - Biology-Inspired Portfolio">
+  <OrganicShapes />
+  <SidebarNav />
+  
+  <main>
+    <!-- Hero Section with Asymmetrical Layout -->
+    <section class="hero" id="about">
+      <!-- Asymmetrical grid layout -->
+      <div class="hero-grid">
+        <!-- Left side - 2/3 width for main content -->
+        <div class="hero-main">
+          <!-- Main heading with asymmetrical positioning -->
+          <div class="hero-title-container">
+            <h1 class="hero-title">
+              <span class="hero-name-primary">Shyam</span>
+              <span class="hero-name-secondary">Ajudia</span>
+            </h1>
+          </div>
 
-				<!-- Bio text positioned asymmetrically -->
-				<div
-					class="max-w-2xl lg:ml-16 mb-12 animate-fade-in"
-					style="animation-delay: 0.3s;"
-				>
-					<p
-						class="text-xl lg:text-2xl text-text-dark leading-relaxed font-light mb-6"
-					>
-						Infrastructure Engineer specializing in
-						<span class="text-coral-primary font-medium"
-							>DevOps, system administration,</span
-						>
-						and <span class="text-coral-primary font-medium"
-							>data engineering</span
-						>
-					</p>
-					<p class="text-lg text-mocha-mousse leading-relaxed">
-						Starting in molecular biology research, the transition
-						to infrastructure engineering came naturally through
-						understanding how biological systems work - complex,
-						interconnected, and self-regulating. This systems
-						thinking translates directly to building reliable
-						infrastructure and data pipelines.
-					</p>
-				</div>
-			</div>
+          <!-- Bio text positioned asymmetrically -->
+          <div class="hero-bio">
+            <p class="hero-bio-primary">
+              Infrastructure Engineer specializing in
+              <span class="highlight-text">DevOps, system administration,</span>
+              and <span class="highlight-text">data engineering</span>
+            </p>
+            <p class="hero-bio-secondary">
+              Starting in molecular biology research, the transition to infrastructure engineering came naturally through 
+              understanding how biological systems work - complex, interconnected, and self-regulating. This systems 
+              thinking translates directly to building reliable infrastructure and data pipelines.
+            </p>
+          </div>
+        </div>
 
-			<!-- Right side - 1/3 width for CTAs and floating elements -->
-			<div
-				class="col-span-12 lg:col-span-4 flex flex-col justify-center items-end lg:items-start relative"
-			>
-				<!-- Glassmorphism CTA container -->
-				<div
-					class="w-full lg:w-auto space-y-4 animate-fade-in"
-					style="animation-delay: 0.6s;"
-				>
-					<!-- Primary CTA with glassmorphism -->
-					<a
-						href="#projects"
-						class="group block w-full lg:w-auto px-8 py-4 bg-glass-yellow backdrop-blur-lg border border-accent-yellow/30 rounded-full font-medium text-text-dark transition-all duration-300 hover:bg-accent-yellow hover:shadow-2xl hover:scale-105 text-center"
-					>
-						Learn More
-						<span
-							class="inline-block ml-2 transition-transform duration-300 group-hover:translate-y-1"
-							>↓</span
-						>
-					</a>
+        <!-- Right side - 1/3 width for CTAs and floating elements -->
+        <div class="hero-actions-container">
+          <!-- Glassmorphism CTA container -->
+          <div class="hero-cta-wrapper">
+            <!-- Primary CTA with glassmorphism -->
+            <a href="#work" class="cta-primary">
+              Learn More
+              <span class="cta-arrow">↓</span>
+            </a>
 
-					<!-- Secondary CTA with glassmorphism -->
-					<a
-						href="mailto:sajudia@proton.me"
-						class="group block w-full lg:w-auto px-8 py-4 bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/30 rounded-full font-medium text-text-dark transition-all duration-300 hover:bg-mocha-mousse hover:shadow-xl hover:scale-105 text-center"
-					>
-						Get In Touch
-						<span
-							class="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1"
-							>→</span
-						>
-					</a>
-				</div>
+            <!-- Secondary CTA with glassmorphism -->
+            <a href="mailto:sajudia@proton.me" class="cta-secondary">
+              Get In Touch
+              <span class="cta-arrow">→</span>
+            </a>
+          </div>
 
-				<!-- Floating accent shape -->
-				<div
-					class="hidden lg:block absolute -top-20 -right-10 w-40 h-40 bg-glass-coral rounded-full animate-organic-float blur-xl opacity-30"
-				>
-				</div>
-			</div>
-		</div>
+          <!-- Floating accent shape -->
+          <div class="floating-accent"></div>
+        </div>
+      </div>
 
-		<!-- Scroll indicator -->
-		<div
-			class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-		>
-			<div
-				class="w-6 h-10 border-2 border-coral-primary rounded-full flex justify-center"
-			>
-				<div
-					class="w-1 h-3 bg-coral-primary rounded-full mt-2 animate-pulse"
-				>
-				</div>
-			</div>
-		</div>
-	</section>
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-mouse">
+          <div class="scroll-dot"></div>
+        </div>
+      </div>
+    </section>
 
-	<!-- Professional Evolution Timeline -->
-	<section id="evolution" class="py-20 relative overflow-hidden">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-			<!-- Section header -->
-			<div class="text-center mb-16 animate-fade-in">
-				<h2 class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
-					Professional <span class="text-coral-primary font-medium"
-						>Evolution</span
-					>
-				</h2>
-				<p
-					class="text-xl text-mocha-mousse max-w-3xl mx-auto leading-relaxed"
-				>
-					From molecular biology research to cloud architecture - a
-					journey of applying analytical thinking and systematic
-					approaches to increasingly complex technical challenges
-				</p>
-			</div>
+    <!-- Featured Work -->
+    <section id="work" class="work-section">
+      <div class="work-content">
+        <h2 class="section-title">Featured Work</h2>
+        <BentoGrid>
+          {projects.map(project => (
+            <ProjectCard {...project} />
+          ))}
+        </BentoGrid>
+      </div>
+    </section>
 
-			<!-- Timeline container -->
-			<div class="relative">
-				<!-- Timeline path -->
-				<div
-					class="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-coral-primary via-mocha-mousse to-cool-contrast transform lg:-translate-x-1/2"
-				>
-				</div>
+    <!-- Professional Evolution Timeline -->
+    <Timeline />
 
-				<!-- Timeline phases -->
-				<div class="space-y-16">
-					<!-- Phase 1: Biology Research Associate -->
-					<div class="relative flex items-center animate-slide-up">
-						<!-- Timeline node -->
-						<div
-							class="absolute left-6 lg:left-1/2 w-4 h-4 bg-coral-primary rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"
-						>
-						</div>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <GlassmorphicContainer variant="primary" size="large" tag="div" class="contact-content">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="contact-description">
+          Interested in collaborating on projects that bridge biology and technology? 
+          I'm always excited to discuss new opportunities and innovative ideas.
+        </p>
+        <div class="contact-actions">
+          <CTAButton href="mailto:hello@yamshy.dev" variant="primary" class="large">
+            Get In Touch
+          </CTAButton>
+          <CTAButton href="https://github.com/yamshy" variant="secondary">
+            View GitHub
+          </CTAButton>
+        </div>
+      </GlassmorphicContainer>
+    </section>
+  </main>
+</BaseLayout>
 
-						<!-- Content -->
-						<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pr-16">
-							<div
-								class="bg-glass-coral backdrop-blur-lg border border-coral-primary/20 rounded-3xl p-8 shadow-xl"
-							>
-								<div class="flex items-center mb-4">
-									<span
-										class="text-sm font-medium text-coral-primary bg-coral-primary/10 px-3 py-1 rounded-full"
-										>2019-2021</span
-									>
-								</div>
-								<h3
-									class="text-2xl font-medium text-text-dark mb-3"
-								>
-									Biology Research Associate
-								</h3>
-								<p
-									class="text-mocha-mousse leading-relaxed mb-4"
-								>
-									Began as a molecular and cellular biology
-									research associate, conducting bench work,
-									experimental design, and data analysis.
-									Built the foundation of analytical precision
-									and systematic problem-solving that would
-									later define my technical approach.
-								</p>
-								<div class="flex flex-wrap gap-2">
-									<span
-										class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full"
-										>Molecular Biology</span
-									>
-									<span
-										class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full"
-										>Bench Work</span
-									>
-									<span
-										class="text-xs bg-coral-primary/20 text-coral-primary px-2 py-1 rounded-full"
-										>Research</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
+<style>
+  main {
+    position: relative;
+    z-index: var(--z-fg);
+  }
+  
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding: var(--sp-8) var(--sp-8) var(--sp-12) var(--sp-8);
+  }
+  
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: var(--z-fg);
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: var(--sp-16);
+    }
+  }
+  
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: var(--z-fg);
+  }
+  
+  .hero-title-container {
+    margin-bottom: var(--sp-12);
+    animation: fade-in-up 1s var(--ease-3) 0.2s both;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-title-container {
+      margin-bottom: var(--sp-16);
+    }
+  }
+  
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    line-height: 0.8;
+    margin: 0;
+  }
+  
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: clamp(4rem, 10vw, 7rem);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: clamp(5rem, 12vw, 8rem);
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .hero-title {
+      font-size: clamp(6rem, 14vw, 9rem);
+    }
+  }
+  
+  .hero-name-primary {
+    display: block;
+    color: var(--coral);
+    font-weight: 700;
+    padding-bottom: var(--sp-4);
+  }
+  
+  .hero-name-secondary {
+    display: block;
+    color: var(--text-dark);
+    font-weight: 300;
+    margin-left: var(--sp-6);
+    margin-top: var(--sp-2);
+    padding-bottom: var(--sp-6);
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-name-secondary {
+      margin-left: var(--sp-12);
+      margin-top: var(--sp-3);
+      padding-bottom: var(--sp-8);
+    }
+  }
+  
+  .hero-bio {
+    max-width: 600px;
+    margin-left: 0;
+    animation: fade-in-up 1s var(--ease-3) 0.4s both;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-bio {
+      margin-left: var(--sp-8);
+      max-width: 700px;
+    }
+  }
+  
+  .hero-bio-primary {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin: 0 0 var(--sp-6) 0;
+    font-weight: 300;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-bio-primary {
+      font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+    }
+  }
+  
+  .hero-bio-secondary {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    line-height: 1.7;
+    color: color-mix(in oklab, var(--text-dark), transparent 25%);
+    margin: 0;
+  }
+  
+  .highlight-text {
+    color: var(--coral);
+    font-weight: 500;
+  }
+  
+  .hero-actions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero-actions-container {
+      align-items: flex-start;
+    }
+  }
+  
+  .hero-cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    width: 100%;
+    max-width: 320px;
+    animation: fade-in-up 1s var(--ease-3) 0.6s both;
+  }
+  
+  .cta-primary,
+  .cta-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: var(--sp-4) var(--sp-6);
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-3);
+    backdrop-filter: blur(var(--blur-12));
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-primary {
+    background: var(--glass-yellow);
+    border-color: color-mix(in oklab, var(--accent-yellow), transparent 70%);
+    color: var(--text-dark);
+  }
+  
+  .cta-primary:hover {
+    background: var(--accent-yellow);
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.05);
+  }
+  
+  .cta-secondary {
+    background: var(--glass-mocha);
+    border-color: color-mix(in oklab, var(--mocha), transparent 70%);
+    color: var(--text-dark);
+  }
+  
+  .cta-secondary:hover {
+    background: var(--mocha);
+    color: var(--warm-bg);
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.05);
+  }
+  
+  .cta-arrow {
+    transition: transform 0.3s var(--ease-3);
+  }
+  
+  .cta-primary:hover .cta-arrow {
+    transform: translateY(4px);
+  }
+  
+  .cta-secondary:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+  
+  .floating-accent {
+    position: absolute;
+    top: -60px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background: var(--glass-coral);
+    border-radius: 50%;
+    filter: blur(var(--blur-20));
+    opacity: 0.3;
+    animation: organic-float 6s var(--ease-in-out-3) infinite;
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .floating-accent {
+      display: block;
+    }
+  }
+  
+  .scroll-indicator {
+    position: absolute;
+    bottom: var(--sp-8);
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s var(--ease-in-out-3) infinite;
+  }
+  
+  .scroll-mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--coral);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-dot {
+    width: 4px;
+    height: 12px;
+    background: var(--coral);
+    border-radius: 2px;
+    animation: pulse 2s var(--ease-in-out-3) infinite;
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes organic-float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+  
+  .work-section {
+    padding: var(--sp-16) var(--sp-6);
+  }
 
-					<!-- Phase 2: Computational Integration -->
-					<div
-						class="relative flex items-center animate-slide-up"
-						style="animation-delay: 0.2s;"
-					>
-						<div
-							class="absolute left-6 lg:left-1/2 w-4 h-4 bg-mocha-mousse rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"
-						>
-						</div>
+  .work-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 
-						<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pl-16 lg:ml-auto">
-							<div
-								class="bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/20 rounded-3xl p-8 shadow-xl"
-							>
-								<div class="flex items-center mb-4">
-									<span
-										class="text-sm font-medium text-mocha-mousse bg-mocha-mousse/10 px-3 py-1 rounded-full"
-										>2021-2022</span
-									>
-								</div>
-								<h3
-									class="text-2xl font-medium text-text-dark mb-3"
-								>
-									Computational Integration
-								</h3>
-								<p
-									class="text-mocha-mousse leading-relaxed mb-4"
-								>
-									Recognized inefficiencies in manual
-									processes and began applying programming to
-									biological workflows. This natural
-									progression from data analysis to automation
-									marked the beginning of my technical
-									evolution.
-								</p>
-								<div class="flex flex-wrap gap-2">
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Automation</span
-									>
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Programming</span
-									>
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Workflows</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<!-- Phase 3: Technical Leadership -->
-					<div
-						class="relative flex items-center animate-slide-up"
-						style="animation-delay: 0.4s;"
-					>
-						<div
-							class="absolute left-6 lg:left-1/2 w-4 h-4 bg-mocha-mousse rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10"
-						>
-						</div>
-
-						<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pr-16">
-							<div
-								class="bg-glass-mocha backdrop-blur-lg border border-mocha-mousse/20 rounded-3xl p-8 shadow-xl"
-							>
-								<div class="flex items-center mb-4">
-									<span
-										class="text-sm font-medium text-mocha-mousse bg-mocha-mousse/10 px-3 py-1 rounded-full"
-										>2022-2024</span
-									>
-								</div>
-								<h3
-									class="text-2xl font-medium text-text-dark mb-3"
-								>
-									Technical Leadership
-								</h3>
-								<p
-									class="text-mocha-mousse leading-relaxed mb-4"
-								>
-									Transitioned into technical leadership,
-									managing infrastructure, bioinformatics
-									pipelines, and internal web development.
-									This role uniquely positioned me to bridge
-									domain expertise with technical
-									implementation, creating solutions that
-									truly served the research needs.
-								</p>
-								<div class="flex flex-wrap gap-2">
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Infrastructure</span
-									>
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Bioinformatics</span
-									>
-									<span
-										class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-2 py-1 rounded-full"
-										>Web Development</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Phase 4: Current Evolution -->
-					<div
-						class="relative flex items-center animate-slide-up"
-						style="animation-delay: 0.6s;"
-					>
-						<div
-							class="absolute left-6 lg:left-1/2 w-6 h-6 bg-cool-contrast rounded-full border-4 border-warm-white transform lg:-translate-x-1/2 z-10 shadow-lg"
-						>
-						</div>
-
-						<div class="ml-16 lg:ml-0 lg:w-1/2 lg:pl-16 lg:ml-auto">
-							<div
-								class="bg-glass-blue backdrop-blur-lg border border-cool-contrast/20 rounded-3xl p-8 shadow-xl"
-							>
-								<div class="flex items-center mb-4">
-									<span
-										class="text-sm font-medium text-cool-contrast bg-cool-contrast/10 px-3 py-1 rounded-full"
-										>2024+</span
-									>
-									<span
-										class="ml-2 text-xs bg-accent-yellow/20 text-text-dark px-2 py-1 rounded-full font-medium"
-										>Current</span
-									>
-								</div>
-								<h3
-									class="text-2xl font-medium text-text-dark mb-3"
-								>
-									Infrastructure & Data Engineering
-								</h3>
-								<p
-									class="text-mocha-mousse leading-relaxed mb-4"
-								>
-									Now specializing across DevOps, system
-									administration, and data engineering,
-									applying the same analytical precision from
-									laboratory research to building scalable
-									infrastructure, managing systems, and
-									designing data pipelines.
-								</p>
-								<div class="flex flex-wrap gap-2">
-									<span
-										class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full"
-										>DevOps</span
-									>
-									<span
-										class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full"
-										>System Admin</span
-									>
-									<span
-										class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full"
-										>Data Engineering</span
-									>
-									<span
-										class="text-xs bg-cool-contrast/20 text-cool-contrast px-2 py-1 rounded-full"
-										>Infrastructure</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Featured Work Section -->
-	<section id="projects" class="py-20 relative overflow-hidden">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-			<!-- Section header -->
-			<div class="text-center mb-16 animate-fade-in">
-				<h2 class="text-4xl lg:text-5xl font-light text-text-dark mb-6">
-					Featured <span class="text-coral-primary font-medium"
-						>Work</span
-					>
-				</h2>
-				<p
-					class="text-xl text-mocha-mousse max-w-3xl mx-auto leading-relaxed"
-				>
-					Infrastructure projects and technical solutions built with
-					precision and scalability in mind
-				</p>
-			</div>
-
-			<!-- Asymmetrical Bento Grid Layout -->
-			<div class="grid grid-cols-12 gap-6 lg:gap-8">
-				<!-- Featured Project - Large (spans 2 columns, 1.5x height) -->
-				<div class="col-span-12 lg:col-span-8 animate-grow">
-					<div
-						class="bg-glass-coral backdrop-blur-xl border border-coral-primary/20 rounded-3xl p-8 lg:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] group"
-					>
-						<div class="flex flex-col h-full">
-							<div class="flex items-center justify-between mb-6">
-								<h3
-									class="text-2xl lg:text-3xl font-medium text-text-dark group-hover:text-coral-primary transition-colors duration-300"
-								>
-									{projects[0].title}
-								</h3>
-								<a
-									href={projects[0].link}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="w-12 h-12 bg-coral-primary/10 hover:bg-coral-primary rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-								>
-									<span
-										class="text-coral-primary group-hover:text-warm-white transition-colors duration-300"
-										>→</span
-									>
-								</a>
-							</div>
-							<p
-								class="text-lg text-mocha-mousse leading-relaxed mb-8 flex-grow"
-								set:html={projects[0].description}
-							/>
-							<div class="flex flex-wrap gap-3">
-								{
-									projects[0].technologies.map((tech) => (
-										<span class="text-sm bg-coral-primary/20 text-coral-primary px-4 py-2 rounded-full font-medium">
-											{tech}
-										</span>
-									))
-								}
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Secondary Project - Medium (spans 1 column) -->
-				<div
-					class="col-span-12 lg:col-span-4 animate-grow"
-					style="animation-delay: 0.2s;"
-				>
-					<div
-						class="bg-glass-mocha backdrop-blur-xl border border-mocha-mousse/20 rounded-3xl p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] group h-full"
-					>
-						<div class="flex flex-col h-full">
-							<div class="flex items-center justify-between mb-4">
-								<h3
-									class="text-xl lg:text-2xl font-medium text-text-dark group-hover:text-mocha-mousse transition-colors duration-300"
-								>
-									{projects[1].title}
-								</h3>
-								<a
-									href={projects[1].link}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="w-10 h-10 bg-mocha-mousse/10 hover:bg-mocha-mousse rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-								>
-									<span
-										class="text-mocha-mousse group-hover:text-warm-white transition-colors duration-300"
-										>→</span
-									>
-								</a>
-							</div>
-							<p
-								class="text-mocha-mousse leading-relaxed mb-6 flex-grow"
-								set:html={projects[1].description}
-							/>
-							<div class="flex flex-wrap gap-2">
-								{
-									projects[1].technologies.map((tech) => (
-										<span class="text-xs bg-mocha-mousse/20 text-mocha-mousse px-3 py-1 rounded-full font-medium">
-											{tech}
-										</span>
-									))
-								}
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Additional space for future projects or organic shapes -->
-				<div
-					class="col-span-12 lg:col-span-4 lg:col-start-9 animate-fade-in"
-					style="animation-delay: 0.4s;"
-				>
-					<div
-						class="bg-glass-blue backdrop-blur-lg border border-cool-contrast/20 rounded-3xl p-8 shadow-lg h-full flex items-center justify-center"
-					>
-						<div class="text-center">
-							<div
-								class="w-16 h-16 bg-cool-contrast/10 rounded-full flex items-center justify-center mx-auto mb-4"
-							>
-								<span class="text-2xl text-cool-contrast"
-									>+</span
-								>
-							</div>
-							<p class="text-mocha-mousse font-medium">
-								More projects coming soon
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Contact Form -->
-	<ContactForm />
-
-	<!-- Footer -->
-	<Footer />
-</Layout>
+  .contact {
+    padding: var(--sp-8) var(--sp-6);
+    text-align: center;
+    margin-top: var(--sp-8);
+  }
+  
+  .contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-fluid-2);
+    font-weight: var(--font-weight-7);
+    line-height: var(--font-lineheight-1);
+    margin: 0 0 var(--size-8) 0;
+    color: var(--text-dark);
+    text-align: center;
+  }
+  
+  .contact-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    color: color-mix(in oklab, var(--text-dark), transparent 15%);
+    margin: 0;
+  }
+  
+  .contact-actions {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .hero-content {
+      animation: none;
+    }
+    
+    .highlight::after {
+      animation: none;
+      transform: scaleX(1);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .hero {
+      padding: var(--sp-6) var(--sp-6) var(--sp-8) var(--sp-6);
+      min-height: 100vh;
+    }
+    
+    .hero-main {
+      justify-content: center;
+    }
+    
+    .hero-actions-container {
+      justify-content: center;
+    }
+    
+    .hero-grid {
+      gap: var(--sp-6);
+    }
+    
+    
+    .hero-bio {
+      margin-left: 0;
+      max-width: 100%;
+    }
+    
+    .hero-bio-primary {
+      margin-bottom: var(--sp-4);
+    }
+    
+    .hero-name-secondary {
+      margin-left: var(--sp-3);
+      margin-top: var(--sp-1);
+    }
+    
+    .hero-actions-container {
+      align-items: center;
+    }
+    
+    .hero-cta-wrapper {
+      gap: var(--sp-4);
+    }
+    
+    .contact-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .contact {
+      padding: var(--sp-6) var(--sp-4);
+    }
+  }
+</style>

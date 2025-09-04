@@ -1,0 +1,452 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
+---
+
+<BaseLayout title="Glassmorphic Container Test - yamshy">
+  <main class="test-page">
+    <div class="test-hero">
+      <h1>Glassmorphic Container Component</h1>
+      <p>Testing all variants and sizes with different content types</p>
+    </div>
+
+    <section class="test-section">
+      <h2>Primary Variant (Featured Content)</h2>
+      <div class="background-elements">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+        <div class="bg-element bg-element-3"></div>
+      </div>
+      <div class="test-grid">
+        <GlassmorphicContainer variant="primary" size="small">
+          <h3>Small Primary</h3>
+          <p>Compact content with coral-tinted glass effect.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="primary" size="medium">
+          <h3>Medium Primary</h3>
+          <p>Standard content with enhanced coral glassmorphism. Perfect for featured project cards and hero sections.</p>
+          <button class="test-button">Call to Action</button>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="primary" size="large">
+          <h3>Large Primary</h3>
+          <p>Generous spacing for major content areas. This variant uses the strongest glassmorphism effect with maximum blur and coral tinting.</p>
+          <div class="test-content">
+            <ul>
+              <li>Enhanced visual prominence</li>
+              <li>Maximum backdrop blur</li>
+              <li>Warm coral accent</li>
+            </ul>
+          </div>
+        </GlassmorphicContainer>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Secondary Variant (Standard Content)</h2>
+      <div class="test-grid">
+        <GlassmorphicContainer variant="secondary" size="small">
+          <h3>Small Secondary</h3>
+          <p>Mocha-tinted glass for subtle content.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="secondary" size="medium">
+          <h3>Medium Secondary</h3>
+          <p>Balanced mocha glassmorphism for standard content sections. Ideal for project cards and timeline phases.</p>
+          <div class="test-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">CSS</span>
+          </div>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="secondary" size="large">
+          <h3>Large Secondary</h3>
+          <p>Spacious mocha glass container for detailed content. Perfect for comprehensive project descriptions and detailed sections.</p>
+          <div class="test-form">
+            <input type="text" placeholder="Enter your name" />
+            <textarea placeholder="Your message here..."></textarea>
+            <button class="test-button">Submit</button>
+          </div>
+        </GlassmorphicContainer>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Neutral Variant (Background Content)</h2>
+      <div class="test-grid">
+        <GlassmorphicContainer variant="neutral" size="small">
+          <h3>Small Neutral</h3>
+          <p>Minimal tint for subtle background content.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="neutral" size="medium">
+          <h3>Medium Neutral</h3>
+          <p>Clean, minimal glassmorphism for supporting content. Great for navigation elements and sidebars.</p>
+          <nav class="test-nav">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="neutral" size="large">
+          <h3>Large Neutral</h3>
+          <p>Spacious neutral container for background content. Perfect for navigation panels and supporting information sections.</p>
+          <div class="test-stats">
+            <div class="stat">
+              <span class="stat-number">5+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">20+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Satisfaction</span>
+            </div>
+          </div>
+        </GlassmorphicContainer>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Custom HTML Tags</h2>
+      <div class="test-grid">
+        <GlassmorphicContainer variant="primary" size="medium" tag="article">
+          <h3>Article Tag</h3>
+          <p>Using semantic HTML with the article tag for better accessibility and SEO.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="secondary" size="medium" tag="section">
+          <h3>Section Tag</h3>
+          <p>Using section tag for content organization and semantic structure.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="neutral" size="medium" tag="aside">
+          <h3>Aside Tag</h3>
+          <p>Using aside tag for supplementary content and sidebars.</p>
+        </GlassmorphicContainer>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Long Content Test</h2>
+      <GlassmorphicContainer variant="primary" size="large">
+        <h3>Content Overflow Handling</h3>
+        <p>This container tests how the glassmorphic effect handles longer content and ensures proper overflow behavior.</p>
+        <div class="long-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        </div>
+      </GlassmorphicContainer>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .test-page {
+    min-height: 100vh;
+    padding: var(--size-6);
+    background: var(--warm-bg);
+    background-image: 
+      radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--mocha) 8%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--coral) 6%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--accent-yellow) 4%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 60% 10%, color-mix(in oklab, var(--blue) 3%, transparent) 0%, transparent 40%),
+      radial-gradient(circle at 10% 60%, color-mix(in oklab, var(--mocha) 5%, transparent) 0%, transparent 60%);
+    position: relative;
+  }
+
+  .test-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(45deg, transparent 30%, color-mix(in oklab, var(--coral), transparent 95%) 50%, transparent 70%),
+      linear-gradient(-45deg, transparent 30%, color-mix(in oklab, var(--mocha), transparent 95%) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .test-hero {
+    text-align: center;
+    margin-bottom: var(--size-8);
+    padding: var(--size-6);
+    position: relative;
+    z-index: 1;
+  }
+
+  .test-hero h1 {
+    font-size: var(--font-size-fluid-3);
+    font-weight: var(--font-weight-7);
+    color: var(--text-dark);
+    margin-bottom: var(--size-3);
+  }
+
+  .test-hero p {
+    font-size: var(--font-size-2);
+    color: color-mix(in oklab, var(--text-dark), transparent 25%);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .test-section {
+    margin-bottom: var(--size-8);
+    position: relative;
+    z-index: 1;
+  }
+
+  .test-section h2 {
+    font-size: var(--font-size-fluid-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-dark);
+    margin-bottom: var(--size-4);
+    text-align: center;
+  }
+
+  .background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .bg-element {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .bg-element-1 {
+    width: 200px;
+    height: 200px;
+    background: var(--coral);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .bg-element-2 {
+    width: 150px;
+    height: 150px;
+    background: var(--mocha);
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+  }
+
+  .bg-element-3 {
+    width: 180px;
+    height: 180px;
+    background: var(--accent-yellow);
+    bottom: 20%;
+    left: 60%;
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-20px) rotate(120deg);
+    }
+    66% {
+      transform: translateY(10px) rotate(240deg);
+    }
+  }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--size-4);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Ensure containers are visible */
+  .test-grid > * {
+    position: relative;
+    z-index: 3;
+  }
+
+  .test-button {
+    background: var(--coral);
+    color: var(--warm-bg);
+    border: none;
+    padding: var(--size-2) var(--size-4);
+    border-radius: var(--radius-2);
+    font-weight: var(--font-weight-5);
+    cursor: pointer;
+    transition: all var(--ease-3) 200ms;
+  }
+
+  .test-button:hover {
+    background: color-mix(in oklab, var(--coral), black 10%);
+    transform: translateY(-1px);
+  }
+
+  .test-content ul {
+    list-style: none;
+    padding: 0;
+    margin: var(--size-3) 0;
+  }
+
+  .test-content li {
+    padding: var(--size-1) 0;
+    position: relative;
+    padding-left: var(--size-4);
+  }
+
+  .test-content li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--coral);
+    font-weight: bold;
+  }
+
+  .test-tags {
+    display: flex;
+    gap: var(--size-2);
+    flex-wrap: wrap;
+    margin-top: var(--size-3);
+  }
+
+  .tag {
+    background: color-mix(in oklab, var(--mocha), transparent 80%);
+    color: var(--mocha);
+    padding: var(--size-1) var(--size-2);
+    border-radius: var(--radius-1);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-4);
+  }
+
+  .test-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+    margin-top: var(--size-3);
+  }
+
+  .test-form input,
+  .test-form textarea {
+    padding: var(--size-2);
+    border: 1px solid color-mix(in oklab, var(--text-dark), transparent 80%);
+    border-radius: var(--radius-1);
+    background: color-mix(in oklab, var(--warm-bg), transparent 50%);
+    color: var(--text-dark);
+    font-family: inherit;
+  }
+
+  .test-form input:focus,
+  .test-form textarea:focus {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+    border-color: var(--coral);
+  }
+
+  .test-nav {
+    display: flex;
+    gap: var(--size-3);
+    margin-top: var(--size-3);
+  }
+
+  .test-nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: var(--font-weight-4);
+    padding: var(--size-1) var(--size-2);
+    border-radius: var(--radius-1);
+    transition: all var(--ease-3) 200ms;
+  }
+
+  .test-nav a:hover {
+    background: color-mix(in oklab, var(--text-dark), transparent 90%);
+    color: var(--coral);
+  }
+
+  .test-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--size-4);
+    margin-top: var(--size-4);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: var(--font-size-5);
+    font-weight: var(--font-weight-7);
+    color: var(--coral);
+    line-height: 1;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: var(--font-size-1);
+    color: color-mix(in oklab, var(--text-dark), transparent 25%);
+    margin-top: var(--size-1);
+  }
+
+  .long-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: var(--size-2);
+  }
+
+  .long-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .long-content::-webkit-scrollbar-track {
+    background: color-mix(in oklab, var(--text-dark), transparent 95%);
+    border-radius: var(--radius-1);
+  }
+
+  .long-content::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--coral), transparent 70%);
+    border-radius: var(--radius-1);
+  }
+
+  .long-content::-webkit-scrollbar-thumb:hover {
+    background: var(--coral);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .test-page {
+      padding: var(--size-4);
+    }
+
+    .test-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-3);
+    }
+
+    .test-hero {
+      padding: var(--size-4);
+    }
+
+    .test-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

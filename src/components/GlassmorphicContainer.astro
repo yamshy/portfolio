@@ -1,0 +1,276 @@
+---
+// Component props interface
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'neutral';
+  size?: 'small' | 'medium' | 'large';
+  class?: string;
+  tag?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer';
+}
+
+const {
+  variant = 'neutral',
+  size = 'medium',
+  class: className = '',
+  tag = 'div'
+} = Astro.props;
+
+import { getGlassmorphicClasses } from '../utils/glassmorphic';
+
+const allowedTags = {
+  div: 'div',
+  section: 'section',
+  article: 'article',
+  aside: 'aside',
+  header: 'header',
+  footer: 'footer'
+} as const;
+const Tag = allowedTags[tag] ?? 'div';
+
+// Build class string
+const classes = getGlassmorphicClasses(variant, size, className);
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>
+
+<style>
+  /* Base glassmorphic container styles */
+  .glassmorphic-container {
+    /* Core glassmorphism properties */
+    background: var(--glass-dark);
+    backdrop-filter: blur(var(--blur-12));
+    -webkit-backdrop-filter: blur(var(--blur-12));
+    border: 2px solid color-mix(in oklab, var(--text-dark), transparent 70%);
+    border-radius: var(--radius-3);
+    box-shadow: 
+      var(--shadow-2),
+      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 50%),
+      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 80%);
+    
+    /* Layout and spacing */
+    position: relative;
+    overflow: hidden;
+    
+    /* Smooth transitions */
+    transition: 
+      transform var(--ease-3) 300ms,
+      box-shadow var(--ease-3) 300ms,
+      border-color var(--ease-3) 300ms;
+    
+    /* GPU acceleration for better performance */
+    transform: translate3d(0, 0, 0);
+    will-change: transform, box-shadow;
+  }
+
+  /* Variant styles */
+  .glassmorphic-container--primary {
+    background: var(--glass-coral);
+    backdrop-filter: blur(var(--blur-20));
+    -webkit-backdrop-filter: blur(var(--blur-20));
+    border: 2px solid color-mix(in oklab, var(--coral), transparent 50%);
+    box-shadow: 
+      var(--shadow-3),
+      inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 30%),
+      inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 60%),
+      0 0 0 1px color-mix(in oklab, var(--coral), transparent 85%);
+  }
+
+  .glassmorphic-container--secondary {
+    background: var(--glass-mocha);
+    backdrop-filter: blur(var(--blur-16));
+    -webkit-backdrop-filter: blur(var(--blur-16));
+    border: 2px solid color-mix(in oklab, var(--mocha), transparent 60%);
+    box-shadow: 
+      var(--shadow-2),
+      inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 40%),
+      inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 70%),
+      0 0 0 1px color-mix(in oklab, var(--mocha), transparent 90%);
+  }
+
+  .glassmorphic-container--neutral {
+    background: color-mix(in oklab, var(--warm-bg), transparent 20%);
+    backdrop-filter: blur(var(--blur-12));
+    -webkit-backdrop-filter: blur(var(--blur-12));
+    border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
+    box-shadow: 
+      var(--shadow-1),
+      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
+      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
+  }
+
+  /* Size variants */
+  .glassmorphic-container--small {
+    padding: var(--size-3);
+    margin: var(--size-2);
+  }
+
+  .glassmorphic-container--medium {
+    padding: var(--size-4);
+    margin: var(--size-3);
+  }
+
+  .glassmorphic-container--large {
+    padding: var(--size-6);
+    margin: var(--size-4);
+  }
+
+  /* Interactive states */
+  .glassmorphic-container:hover {
+    transform: translateY(-2px) translate3d(0, 0, 0);
+    box-shadow: 
+      var(--shadow-4),
+      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 40%),
+      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
+  }
+
+  .glassmorphic-container--primary:hover {
+    box-shadow: 
+      var(--shadow-4),
+      inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 20%),
+      inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 50%),
+      0 0 0 1px color-mix(in oklab, var(--coral), transparent 60%);
+    border-color: color-mix(in oklab, var(--coral), transparent 40%);
+  }
+
+  .glassmorphic-container--secondary:hover {
+    box-shadow: 
+      var(--shadow-3),
+      inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 30%),
+      inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 60%),
+      0 0 0 1px color-mix(in oklab, var(--mocha), transparent 70%);
+    border-color: color-mix(in oklab, var(--mocha), transparent 50%);
+  }
+
+  .glassmorphic-container--neutral:hover {
+    box-shadow: 
+      var(--shadow-2),
+      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 20%),
+      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 60%);
+    border-color: color-mix(in oklab, var(--text-dark), transparent 50%);
+  }
+
+  /* Focus states for accessibility */
+  .glassmorphic-container:focus-within {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+    box-shadow: 
+      var(--shadow-3),
+      0 0 0 4px color-mix(in oklab, var(--coral), transparent 80%);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .glassmorphic-container {
+      transition: none;
+    }
+    
+    .glassmorphic-container:hover {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: more) {
+    .glassmorphic-container {
+      border-width: 2px;
+      border-color: var(--text-dark);
+    }
+    
+    .glassmorphic-container--primary {
+      border-color: var(--coral);
+    }
+    
+    .glassmorphic-container--secondary {
+      border-color: var(--mocha);
+    }
+  }
+
+  /* Fallback for browsers without backdrop-filter support */
+  @supports not (backdrop-filter: blur(1px)) {
+    .glassmorphic-container {
+      background: color-mix(in oklab, var(--warm-bg), transparent 85%);
+      border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
+      box-shadow: 
+        var(--shadow-2),
+        inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
+        inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
+    }
+    
+    .glassmorphic-container--primary {
+      background: color-mix(in oklab, var(--coral), transparent 80%);
+      border: 2px solid color-mix(in oklab, var(--coral), transparent 50%);
+      box-shadow: 
+        var(--shadow-3),
+        inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 30%),
+        inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 60%),
+        0 0 0 1px color-mix(in oklab, var(--coral), transparent 85%);
+    }
+    
+    .glassmorphic-container--secondary {
+      background: color-mix(in oklab, var(--mocha), transparent 82%);
+      border: 2px solid color-mix(in oklab, var(--mocha), transparent 60%);
+      box-shadow: 
+        var(--shadow-2),
+        inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 40%),
+        inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 70%),
+        0 0 0 1px color-mix(in oklab, var(--mocha), transparent 90%);
+    }
+    
+    .glassmorphic-container--neutral {
+      background: color-mix(in oklab, var(--warm-bg), transparent 88%);
+      border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
+      box-shadow: 
+        var(--shadow-1),
+        inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
+        inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .glassmorphic-container {
+      /* Reduce blur on mobile for better performance */
+      backdrop-filter: blur(var(--blur-8));
+      -webkit-backdrop-filter: blur(var(--blur-8));
+    }
+    
+    .glassmorphic-container--primary {
+      backdrop-filter: blur(var(--blur-12));
+      -webkit-backdrop-filter: blur(var(--blur-12));
+    }
+    
+    .glassmorphic-container--secondary {
+      backdrop-filter: blur(var(--blur-10));
+      -webkit-backdrop-filter: blur(var(--blur-10));
+    }
+    
+    /* Adjust padding for mobile */
+    .glassmorphic-container--small {
+      padding: var(--size-2);
+      margin: var(--size-1);
+    }
+    
+    .glassmorphic-container--medium {
+      padding: var(--size-3);
+      margin: var(--size-2);
+    }
+    
+    .glassmorphic-container--large {
+      padding: var(--size-4);
+      margin: var(--size-3);
+    }
+  }
+
+  /* Dark mode adjustments */
+  @media (prefers-color-scheme: dark) {
+    .glassmorphic-container {
+      border-color: color-mix(in oklab, var(--warm-bg), transparent 80%);
+    }
+    
+    .glassmorphic-container--neutral {
+      background: color-mix(in oklab, var(--text-dark), transparent 85%);
+      border-color: color-mix(in oklab, var(--warm-bg), transparent 70%);
+    }
+  }
+</style>

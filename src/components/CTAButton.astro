@@ -1,0 +1,82 @@
+---
+export interface Props {
+  href: string;
+  variant?: string;
+  children: any;
+}
+
+const { href, children, variant = "primary" } = Astro.props;
+---
+
+<a class={`cta ${variant} u-glass u-glass--yellow u-r-xl u-elevate`} href={href}>
+  {children}
+</a>
+
+<style>
+  .cta {
+    display: inline-block;
+    padding: .75rem 1.25rem;
+    border: 1px solid color-mix(in oklab, var(--accent-yellow) 35%, transparent);
+    transition: all 300ms var(--ease-3);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    min-width: 120px;
+    letter-spacing: 0.01em;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta:hover {
+    background: var(--accent-yellow);
+    color: oklch(18% 0 0 / 1);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px color-mix(in oklab, var(--accent-yellow) 30%, transparent);
+  }
+  
+  .cta:focus-visible { 
+    outline: 2px solid var(--accent-yellow); 
+    outline-offset: 2px; 
+  }
+  
+  .cta:active {
+    transform: translateY(0);
+  }
+  
+  /* Variant styles */
+  .cta.primary {
+    background: var(--glass-yellow);
+  }
+  
+  .cta.secondary {
+    background: color-mix(in oklab, var(--glass-yellow), transparent 30%);
+    border-color: color-mix(in oklab, var(--accent-yellow) 25%, transparent);
+  }
+  
+  .cta.large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    min-width: 160px;
+  }
+  
+  .cta.small {
+    padding: .5rem 1rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .cta {
+      transition: background 300ms var(--ease-3), color 300ms var(--ease-3);
+    }
+    
+    .cta:hover {
+      transform: none;
+    }
+    
+    .cta:active {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,2 @@
+// Vitest setup file
+export {};

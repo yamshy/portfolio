@@ -1,0 +1,223 @@
+<div class="organic-shapes" aria-hidden="true">
+  <!-- Large background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="blob blob-5"></div>
+  
+  <!-- Subtle floating elements -->
+  <div class="floating-element element-1"></div>
+  <div class="floating-element element-2"></div>
+  <div class="floating-element element-3"></div>
+  
+  <!-- Organic connection lines -->
+  <svg class="connections" viewBox="0 0 1000 600" width="100%" height="100%">
+    <defs>
+      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:var(--coral);stop-opacity:0.15" />
+        <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:0.2" />
+        <stop offset="100%" style="stop-color:var(--blue);stop-opacity:0.15" />
+      </linearGradient>
+    </defs>
+    <path class="connection-line line-1" d="M50,150 Q200,100 400,120 T800,140" stroke="url(#lineGradient)" stroke-width="1.5" fill="none" />
+    <path class="connection-line line-2" d="M100,300 Q300,250 500,270 T900,290" stroke="url(#lineGradient)" stroke-width="1" fill="none" />
+    <path class="connection-line line-3" d="M0,450 Q250,400 450,420 T850,440" stroke="url(#lineGradient)" stroke-width="1.2" fill="none" />
+  </svg>
+</div>
+
+<style>
+  .organic-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(25px);
+    opacity: 0.05;
+    animation: organic-float 12s ease-in-out infinite;
+    /* Add subtle organic variation */
+    transform-origin: center;
+  }
+  
+  .blob-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--coral);
+    top: 5%;
+    left: -8%;
+    animation-delay: 0s;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  
+  .blob-2 {
+    width: 200px;
+    height: 200px;
+    background: var(--mocha);
+    top: 15%;
+    right: -6%;
+    animation-delay: 3s;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  
+  .blob-3 {
+    width: 250px;
+    height: 250px;
+    background: var(--accent-yellow);
+    bottom: 10%;
+    left: -5%;
+    animation-delay: 6s;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  }
+  
+  .blob-4 {
+    width: 180px;
+    height: 180px;
+    background: var(--blue);
+    top: 70%;
+    right: -4%;
+    animation-delay: 9s;
+    border-radius: 40% 60% 60% 40% / 70% 30% 30% 70%;
+  }
+  
+  .blob-5 {
+    width: 220px;
+    height: 220px;
+    background: var(--coral);
+    bottom: 5%;
+    right: -3%;
+    animation-delay: 1.5s;
+    border-radius: 70% 30% 30% 70% / 40% 60% 60% 40%;
+  }
+  
+  .floating-element {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    animation: gentle-float 8s ease-in-out infinite;
+  }
+  
+  .element-1 {
+    width: 60px;
+    height: 60px;
+    background: var(--mocha);
+    top: 25%;
+    left: 15%;
+    animation-delay: 2s;
+  }
+  
+  .element-2 {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-yellow);
+    top: 70%;
+    right: 25%;
+    animation-delay: 5s;
+  }
+  
+  .element-3 {
+    width: 80px;
+    height: 80px;
+    background: var(--blue);
+    bottom: 30%;
+    left: 70%;
+    animation-delay: 7s;
+  }
+  
+  .connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+  }
+  
+  .connection-line {
+    stroke-dasharray: 20 10;
+    stroke-dashoffset: 0;
+    animation: line-flow 6s ease-in-out infinite;
+  }
+  
+  .line-1 {
+    animation-delay: 0s;
+  }
+  
+  .line-2 {
+    animation-delay: 2s;
+  }
+  
+  .line-3 {
+    animation-delay: 4s;
+  }
+  
+  @keyframes organic-float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateY(-30px) translateX(10px) rotate(1deg) scale(1.02);
+    }
+    50% {
+      transform: translateY(-15px) translateX(-5px) rotate(-0.5deg) scale(0.98);
+    }
+    75% {
+      transform: translateY(-25px) translateX(5px) rotate(0.5deg) scale(1.01);
+    }
+  }
+  
+  @keyframes gentle-float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.1);
+    }
+  }
+  
+  @keyframes line-flow {
+    0%, 100% {
+      stroke-dashoffset: 0;
+      opacity: 0.3;
+    }
+    50% {
+      stroke-dashoffset: -30;
+      opacity: 0.5;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .blob,
+    .floating-element {
+      animation: none;
+    }
+    
+    .connection-line {
+      animation: none;
+      opacity: 0.1;
+    }
+  }
+  
+  /* Hide on very small screens to avoid clutter */
+  @media (max-width: 480px) {
+    .organic-shapes {
+      display: none;
+    }
+  }
+  
+  /* Print styles */
+  @media print {
+    .organic-shapes {
+      display: none;
+    }
+  }
+</style>
