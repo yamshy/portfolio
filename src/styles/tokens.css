@@ -34,31 +34,43 @@
   @custom-media --container-lg (width >= 1024px);
 
   /* ==========================================================================
-     BRAND COLOR TOKENS
+     BRAND COLOR TOKENS - Biology-Inspired Palette
      ========================================================================== */
   :root {
-    /* Brand Primary Colors */
-    --coral-primary: #E85A2B;
-    --coral-light: color-mix(in oklab, var(--coral-primary), white 20%);
-    --coral-dark: color-mix(in oklab, var(--coral-primary), black 20%);
-
-    --mocha-mousse: #A47864;
-    --mocha-light: color-mix(in oklab, var(--mocha-mousse), white 20%);
-    --mocha-dark: color-mix(in oklab, var(--mocha-mousse), black 20%);
-
+    /* Primary Brand Colors */
+    --bg: #FEFCF8;
+    --coral: #E85A2B;
+    --text-dark: #1A0D08;
     --accent-yellow: #FFD644;
-    --accent-yellow-light: color-mix(in oklab, var(--accent-yellow), white 20%);
-    --accent-yellow-dark: color-mix(in oklab, var(--accent-yellow), black 20%);
+    --mocha: #A47864;
+    --blue: #2563EB;
 
-    /* Surface Colors - Light Theme */
-    --surface-warm-white: #FEFCF8;
-    --surface-warm-gray: color-mix(in oklab, var(--surface-warm-white), var(--gray-2) 15%);
-    --surface-cool-contrast: #2563EB;
+    /* Glass tints */
+    --glass-coral: rgba(232, 90, 43, 0.2);
+    --glass-mocha: rgba(164, 120, 100, 0.15);
+    --glass-yellow: rgba(255, 214, 68, 0.15);
+    --glass-blue: rgba(37, 99, 235, 0.1);
+    --glass-dark: rgba(26, 13, 8, 0.1);
 
-    /* Text Colors */
-    --text-primary-dark: #1A0D08;
-    --text-secondary: var(--mocha-mousse);
-    --text-accent: var(--coral-primary);
+    /* Shadows & radii using Open Props as base */
+    --radius-organic: 24px;
+    --shadow-lg-warm: 0 16px 32px rgba(26, 13, 8, 0.15);
+    --shadow-hover: 0 24px 48px rgba(26, 13, 8, 0.2);
+
+    /* Motion */
+    --ease-organic: var(--ease-elastic-3);
+    --dur-fast: 150ms;
+    --dur-med: 300ms;
+    --dur-slow: 600ms;
+
+    /* Grid helpers */
+    --container: min(1120px, 90vw);
+
+    /* Legacy aliases for compatibility */
+    --coral-primary: var(--coral);
+    --mocha-mousse: var(--mocha);
+    --surface-warm-white: var(--bg);
+    --text-primary-dark: var(--text-dark);
 
     /* ==========================================================================
        ADAPTIVE COLOR ALIASES - Theme-Agnostic

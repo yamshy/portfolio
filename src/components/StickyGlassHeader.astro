@@ -5,12 +5,13 @@ export interface Props {
 
 const { class: className } = Astro.props;
 
-// Navigation items
+// Navigation items - Updated section headers
 const navItems = [
   { href: "#hero", label: "Home" },
-  { href: "#evolution", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "#evolution", label: "Professional Evolution" },
+  { href: "#projects", label: "Featured Work" },
+  { href: "#skills", label: "Technical Expertise" },
+  { href: "#contact", label: "Let's Build Together" },
 ];
 ---
 
@@ -35,23 +36,19 @@ const navItems = [
 <style>
   @layer components {
     .glass-header {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: var(--layer-4);
-      
-      /* Glassmorphism effect */
-      background: var(--glass-bg-primary);
-      border-bottom: var(--glass-border);
-      backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
-      box-shadow: var(--shadow-glass);
+      z-index: 50;
+      background: var(--glass-mocha);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid color-mix(in oklab, var(--mocha), transparent 82%);
+      padding: var(--size-3) var(--size-4);
       
       /* Smooth transitions */
       transition: 
-        background-color var(--duration-medium) var(--ease-glass),
-        backdrop-filter var(--duration-medium) var(--ease-glass),
-        box-shadow var(--duration-medium) var(--ease-glass);
+        background-color var(--dur-med) var(--ease-organic),
+        backdrop-filter var(--dur-med) var(--ease-organic),
+        box-shadow var(--dur-med) var(--ease-organic);
     }
 
     /* Backdrop-filter fallback */
@@ -88,29 +85,29 @@ const navItems = [
       padding: var(--size-2) var(--size-3);
       font-weight: var(--font-weight-5);
       font-size: var(--font-size-1);
-      color: var(--text-1);
-      border-radius: var(--radius-button);
+      color: var(--text-dark);
+      border-radius: var(--radius-3);
       transition: 
-        color var(--duration-fast) var(--ease-glass),
-        background-color var(--duration-fast) var(--ease-glass),
-        transform var(--duration-fast) var(--ease-glass);
+        color var(--dur-fast) var(--ease-organic),
+        background-color var(--dur-fast) var(--ease-organic),
+        transform var(--dur-fast) var(--ease-organic);
       
       /* Focus styles */
       &:focus-visible {
-        outline: var(--border-focus);
+        outline: 2px solid var(--coral);
         outline-offset: 2px;
       }
       
       /* Hover effects */
       &:hover {
-        color: var(--text-accent);
-        background: var(--glass-bg-secondary);
-        transform: var(--transform-scale-hover);
+        color: var(--text-dark);
+        background: color-mix(in oklab, var(--mocha), transparent 70%);
+        box-shadow: 0 0 0 6px color-mix(in oklab, var(--mocha), transparent 90%) inset;
       }
       
       /* Active state */
       &:active {
-        transform: var(--transform-scale-active);
+        transform: scale(0.98);
       }
       
       @media (--mobile-only) {

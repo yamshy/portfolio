@@ -1,36 +1,250 @@
 ---
 // Fixed sidebar navigation with progress indicator
-// Main navigation sections
+// Main navigation sections - Updated with new headers
 const mainNavItems = [
 	{
 		href: "#hero",
 		label: "Home",
+		icon: "🏠"
 	},
 	{
 		href: "#evolution",
-		label: "Experience",
+		label: "Professional Evolution",
+		icon: "📈"
 	},
 	{
 		href: "#projects",
-		label: "Projects",
+		label: "Featured Work",
+		icon: "💼"
+	},
+	{
+		href: "#skills",
+		label: "Technical Expertise",
+		icon: "⚡"
 	},
 	{
 		href: "#contact",
-		label: "Contact",
+		label: "Let's Build Together",
+		icon: "🤝"
 	},
 ];
 ---
 
-<aside>
-	<nav>
-		<ul>
+<aside class="sidebar-nav" aria-label="Main navigation">
+	<div class="progress-indicator" aria-hidden="true">
+		<div class="progress-bar"></div>
+	</div>
+	
+	<nav class="sidebar-content">
+		<ul class="nav-list" role="list">
 			{
-				mainNavItems.map((item) => (
-					<li>
-						<a href={item.href}>{item.label}</a>
+				mainNavItems.map((item, index) => (
+					<li class="nav-item">
+						<a 
+							href={item.href} 
+							class="nav-link"
+							data-section={item.href.slice(1)}
+							aria-label={`Navigate to ${item.label} section`}
+						>
+							<span class="nav-icon" aria-hidden="true">{item.icon}</span>
+							<span class="nav-label">{item.label}</span>
+						</a>
 					</li>
 				))
 			}
 		</ul>
 	</nav>
 </aside>
+
+<style>
+@layer components {
+	.sidebar-nav {
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 80px;
+		background: var(--glass-mocha);
+		backdrop-filter: blur(14px);
+		border-right: 1px solid color-mix(in oklab, var(--mocha), transparent 82%);
+		z-index: 40;
+		display: flex;
+		flex-direction: column;
+		transition: width var(--dur-med) var(--ease-organic);
+	}
+	
+	.sidebar-nav:hover {
+		width: 200px;
+	}
+	
+	.progress-indicator {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: color-mix(in oklab, var(--mocha), transparent 80%);
+	}
+	
+	.progress-bar {
+		height: 100%;
+		background: linear-gradient(90deg, var(--coral), var(--mocha), var(--blue));
+		width: 0%;
+		transition: width var(--dur-med) ease;
+	}
+	
+	.sidebar-content {
+		flex: 1;
+		padding: var(--size-4) 0;
+		overflow-y: auto;
+	}
+	
+	.nav-list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-2);
+		padding: 0 var(--size-2);
+	}
+	
+	.nav-item {
+		position: relative;
+	}
+	
+	.nav-link {
+		display: flex;
+		align-items: center;
+		gap: var(--size-3);
+		padding: var(--size-3);
+		border-radius: var(--radius-3);
+		color: var(--text-dark);
+		text-decoration: none;
+		transition: all var(--dur-fast) var(--ease-organic);
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.nav-link:hover {
+		background: color-mix(in oklab, var(--mocha), transparent 70%);
+		transform: translateX(4px);
+	}
+	
+	.nav-link.active {
+		background: color-mix(in oklab, var(--coral), transparent 80%);
+		box-shadow: 0 0 0 2px color-mix(in oklab, var(--coral), transparent 90%) inset;
+	}
+	
+	.nav-icon {
+		font-size: var(--font-size-2);
+		flex-shrink: 0;
+		width: 24px;
+		text-align: center;
+	}
+	
+	.nav-label {
+		font-size: var(--font-size-0);
+		font-weight: var(--font-weight-5);
+		white-space: nowrap;
+		opacity: 0;
+		transform: translateX(-10px);
+		transition: all var(--dur-fast) var(--ease-organic);
+	}
+	
+	.sidebar-nav:hover .nav-label {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	
+	/* Mobile responsiveness */
+	@media (max-width: 768px) {
+		.sidebar-nav {
+			display: none;
+		}
+	}
+	
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.sidebar-nav, .nav-link, .nav-label, .progress-bar {
+			transition: none;
+		}
+		
+		.sidebar-nav:hover {
+			width: 80px;
+		}
+	}
+}
+</style>
+
+<script>
+	// Progress indicator and active state management
+	class SidebarNav extends HTMLElement {
+		private progressBar: HTMLElement;
+		private navLinks: NodeListOf<HTMLAnchorElement>;
+		private sections: HTMLElement[] = [];
+		
+		constructor() {
+			super();
+			this.progressBar = this.querySelector('.progress-bar') as HTMLElement;
+			this.navLinks = this.querySelectorAll('.nav-link') as NodeListOf<HTMLAnchorElement>;
+			this.init();
+		}
+		
+		private init(): void {
+			// Get all sections
+			this.navLinks.forEach(link => {
+				const sectionId = link.dataset.section;
+				if (sectionId) {
+					const section = document.getElementById(sectionId);
+					if (section) {
+						this.sections.push(section);
+					}
+				}
+			});
+			
+			// Set up scroll listener
+			window.addEventListener('scroll', this.updateProgress.bind(this), { passive: true });
+			window.addEventListener('scroll', this.updateActiveState.bind(this), { passive: true });
+			
+			// Initial state
+			this.updateProgress();
+			this.updateActiveState();
+		}
+		
+		private updateProgress(): void {
+			const scrollTop = window.pageYOffset;
+			const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+			const scrollPercent = (scrollTop / docHeight) * 100;
+			
+			if (this.progressBar) {
+				this.progressBar.style.width = `${Math.min(100, Math.max(0, scrollPercent))}%`;
+			}
+		}
+		
+		private updateActiveState(): void {
+			const scrollTop = window.pageYOffset + 100;
+			
+			this.sections.forEach((section, index) => {
+				const sectionTop = section.offsetTop;
+				const sectionBottom = sectionTop + section.offsetHeight;
+				const link = this.navLinks[index];
+				
+				if (link) {
+					if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+						link.classList.add('active');
+					} else {
+						link.classList.remove('active');
+					}
+				}
+			});
+		}
+		
+		disconnectedCallback(): void {
+			window.removeEventListener('scroll', this.updateProgress.bind(this));
+			window.removeEventListener('scroll', this.updateActiveState.bind(this));
+		}
+	}
+	
+	// Register the custom element
+	if ('customElements' in window) {
+		customElements.define('sidebar-nav', SidebarNav);
+	}
+</script>

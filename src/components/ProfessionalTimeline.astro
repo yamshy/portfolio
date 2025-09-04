@@ -7,12 +7,12 @@ export interface Props {
 
 const { class: className } = Astro.props;
 
-// Timeline data - structured for expandable interactions
+// Timeline data - Updated experience phases
 const timelinePhases: TimelinePhase[] = [
   {
-    id: 'biology-research',
-    period: '2019-2021',
-    title: 'Biology Research Associate',
+    id: 'education-biology',
+    period: '2018-2021',
+    title: 'Education & Pure Biology',
     description: 'Began as a molecular and cellular biology research associate, conducting bench work, experimental design, and data analysis.',
     expandedDescription: 'Built the foundation of analytical precision and systematic problem-solving that would later define my technical approach. Specialized in protein purification, cell culture techniques, and quantitative analysis methods. Developed expertise in troubleshooting complex experimental protocols and maintaining rigorous documentation standards.',
     skills: ['Molecular Biology', 'Bench Work', 'Research', 'Data Analysis', 'Protocol Development'],
@@ -26,9 +26,9 @@ const timelinePhases: TimelinePhase[] = [
     ]
   },
   {
-    id: 'computational-integration',
+    id: 'hybrid-transition',
     period: '2021-2022',
-    title: 'Computational Integration',
+    title: 'Hybrid Transition',
     description: 'Recognized inefficiencies in manual processes and began applying programming to biological workflows.',
     expandedDescription: 'This natural progression from data analysis to automation marked the beginning of my technical evolution. Developed Python scripts for data processing, implemented automated reporting systems, and created workflow optimization tools that reduced manual processing time by 60%.',
     skills: ['Automation', 'Programming', 'Workflows', 'Python', 'Data Processing'],
@@ -51,9 +51,9 @@ const timelinePhases: TimelinePhase[] = [
     themeColor: 'mocha'
   },
   {
-    id: 'infrastructure-engineering',
+    id: 'current-evolution',
     period: '2024+',
-    title: 'Infrastructure & Data Engineering',
+    title: 'Current Evolution',
     description: 'Now specializing across DevOps, system administration, and data engineering, applying analytical precision to building scalable infrastructure.',
     expandedDescription: 'Managing systems, and designing data pipelines with the same methodical approach learned in laboratory research. Currently focusing on Kubernetes orchestration, cloud-native architectures, and building resilient data processing systems that can handle complex scientific workloads.',
     skills: ['DevOps', 'System Admin', 'Data Engineering', 'Infrastructure', 'Kubernetes', 'Cloud Architecture'],
@@ -84,17 +84,34 @@ const timelinePhases: TimelinePhase[] = [
       </p>
     </header>
 
-    <!-- Timeline -->
+    <!-- Timeline with SVG backbone -->
     <div class="timeline-wrapper">
-      <div class="timeline-line" aria-hidden="true"></div>
+      <svg class="timeline-svg" viewBox="0 0 800 600" aria-hidden="true">
+        <defs>
+          <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:var(--coral);stop-opacity:1" />
+            <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--blue);stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path 
+          class="timeline-path"
+          d="M 50 100 Q 200 150 350 200 T 650 300 T 750 500"
+          stroke="url(#timelineGradient)"
+          stroke-width="2"
+          fill="none"
+          stroke-dasharray="1000"
+          stroke-dashoffset="1000"
+        />
+      </svg>
       
       <ol class="timeline-list" role="list">
         {timelinePhases.map((phase, index) => (
           <li class="timeline-item" data-theme={phase.themeColor}>
             <article class="timeline-phase">
-              <!-- Timeline marker -->
+              <!-- Timeline marker - Glass circle -->
               <div class="timeline-marker" aria-hidden="true">
-                <div class="marker-dot"></div>
+                <div class="marker-glass"></div>
               </div>
 
               <!-- Phase content -->
@@ -219,29 +236,30 @@ const timelinePhases: TimelinePhase[] = [
       line-height: var(--line-height-body);
     }
 
-    /* Timeline Structure */
+    /* Timeline Structure with SVG backbone */
     .timeline-wrapper {
       position: relative;
       max-width: 800px;
       margin: 0 auto;
+      height: 600px;
     }
 
-    .timeline-line {
+    .timeline-svg {
       position: absolute;
-      left: 50%;
       top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(
-        to bottom,
-        var(--brand) 0%,
-        var(--brand-secondary) 50%,
-        var(--surface-accent) 100%
-      );
-      transform: translateX(-50%);
-      
-      @media (--mobile-only) {
-        left: 2rem;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .timeline-path {
+      animation: drawPath 3s ease-in-out forwards;
+    }
+
+    @keyframes drawPath {
+      to {
+        stroke-dashoffset: 0;
       }
     }
 
@@ -302,48 +320,56 @@ const timelinePhases: TimelinePhase[] = [
       z-index: 2;
     }
 
-    .marker-dot {
+    .marker-glass {
       width: 2rem;
       height: 2rem;
-      border-radius: var(--radius-round);
-      border: 3px solid var(--surface-1);
-      transition: all var(--duration-medium) var(--ease-glass);
+      border-radius: 50%;
+      background: var(--glass-coral);
+      backdrop-filter: blur(12px);
+      border: 1px solid color-mix(in oklab, var(--coral), transparent 80%);
+      box-shadow: var(--shadow-lg-warm);
+      transition: all var(--dur-med) var(--ease-organic);
+      transform: scale(0.95);
       
       /* Theme-based colors */
       .timeline-item[data-theme="coral"] & {
-        background: var(--brand);
-        box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand), transparent 80%);
+        background: var(--glass-coral);
+        border: 1px solid color-mix(in oklab, var(--coral), transparent 80%);
       }
       
       .timeline-item[data-theme="mocha"] & {
-        background: var(--brand-secondary);
-        box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand-secondary), transparent 80%);
+        background: var(--glass-mocha);
+        border: 1px solid color-mix(in oklab, var(--mocha), transparent 80%);
       }
       
       .timeline-item[data-theme="blue"] & {
-        background: var(--surface-accent);
-        box-shadow: 0 0 0 4px color-mix(in oklab, var(--surface-accent), transparent 80%);
+        background: var(--glass-blue);
+        border: 1px solid color-mix(in oklab, var(--blue), transparent 80%);
       }
       
       .timeline-item[data-theme="yellow"] & {
-        background: var(--brand-accent);
-        box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand-accent), transparent 80%);
+        background: var(--glass-yellow);
+        border: 1px solid color-mix(in oklab, var(--accent-yellow), transparent 80%);
       }
     }
 
-    /* Phase Content */
+    .timeline-phase:hover .marker-glass {
+      transform: scale(1);
+    }
+
+    /* Phase Content - Glassmorphism */
     .phase-content {
-      background: var(--glass-bg-primary);
-      border: var(--glass-border);
-      border-radius: var(--radius-glass);
-      backdrop-filter: var(--glass-backdrop-blur);
-      box-shadow: var(--shadow-glass);
+      background: var(--glass-mocha);
+      backdrop-filter: blur(20px);
+      border: 1px solid color-mix(in oklab, var(--mocha), transparent 80%);
+      border-radius: var(--radius-organic);
+      box-shadow: var(--shadow-lg-warm);
       overflow: hidden;
-      transition: all var(--duration-medium) var(--ease-glass);
+      transition: all var(--dur-med) var(--ease-organic);
       
       &:hover {
-        box-shadow: var(--shadow-glass-hover);
-        transform: var(--transform-scale-hover);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
       }
     }
 
@@ -763,3 +789,4 @@ const timelinePhases: TimelinePhase[] = [
   `;
   document.head.appendChild(style);
 </script>
+

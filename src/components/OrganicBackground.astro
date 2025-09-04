@@ -1,0 +1,318 @@
+---
+import OrganicShape from './OrganicShape.astro';
+
+export interface Props {
+  density?: 'low' | 'medium' | 'high';
+  class?: string;
+}
+
+const { density = 'medium', class: className } = Astro.props;
+
+// Define organic shapes configuration based on density
+const getShapesConfig = (density: string) => {
+  const baseShapes = [
+    {
+      variant: 'blob' as const,
+      size: 'large' as const,
+      color: 'primary' as const,
+      animation: 'float' as const,
+      style: 'top: 10%; left: -5%; z-index: -3;'
+    },
+    {
+      variant: 'cell' as const,
+      size: 'medium' as const,
+      color: 'secondary' as const,
+      animation: 'drift' as const,
+      style: 'top: 60%; right: -8%; z-index: -2;'
+    },
+    {
+      variant: 'membrane' as const,
+      size: 'xlarge' as const,
+      color: 'neutral' as const,
+      animation: 'morph' as const,
+      style: 'bottom: 20%; left: 10%; z-index: -4;'
+    }
+  ];
+
+  const mediumShapes = [
+    ...baseShapes,
+    {
+      variant: 'nucleus' as const,
+      size: 'small' as const,
+      color: 'accent' as const,
+      animation: 'pulse' as const,
+      style: 'top: 30%; right: 15%; z-index: -1;'
+    },
+    {
+      variant: 'blob' as const,
+      size: 'medium' as const,
+      color: 'secondary' as const,
+      animation: 'float' as const,
+      style: 'bottom: 40%; right: 5%; z-index: -3;'
+    }
+  ];
+
+  const highShapes = [
+    ...mediumShapes,
+    {
+      variant: 'cell' as const,
+      size: 'small' as const,
+      color: 'primary' as const,
+      animation: 'drift' as const,
+      style: 'top: 80%; left: 20%; z-index: -2;'
+    },
+    {
+      variant: 'membrane' as const,
+      size: 'medium' as const,
+      color: 'accent' as const,
+      animation: 'pulse' as const,
+      style: 'top: 5%; right: 30%; z-index: -4;'
+    },
+    {
+      variant: 'nucleus' as const,
+      size: 'large' as const,
+      color: 'neutral' as const,
+      animation: 'morph' as const,
+      style: 'bottom: 10%; left: 60%; z-index: -5;'
+    }
+  ];
+
+  switch (density) {
+    case 'low': return baseShapes;
+    case 'high': return highShapes;
+    default: return mediumShapes;
+  }
+};
+
+const shapesConfig = getShapesConfig(density);
+---
+
+<div 
+  class:list={["organic-background", `density-${density}`, className]}
+  aria-hidden="true"
+  role="presentation"
+>
+  {shapesConfig.map((config, index) => (
+    <OrganicShape
+      variant={config.variant}
+      size={config.size}
+      color={config.color}
+      animation={config.animation}
+      position="fixed"
+      style={config.style}
+      class="bg-shape"
+      data-shape-index={index}
+    />
+  ))}
+</div>
+
+<style>
+  @layer layouts {
+    .organic-background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -10;
+      overflow: hidden;
+    }
+
+    /* Density-based opacity adjustments */
+    .density-low {
+      opacity: 0.3;
+    }
+
+    .density-medium {
+      opacity: 0.5;
+    }
+
+    .density-high {
+      opacity: 0.4;
+    }
+
+    /* Background shapes positioning */
+    .bg-shape {
+      transition: opacity var(--duration-slow) var(--ease-glass);
+    }
+
+    /* Responsive adjustments */
+    @media (--mobile-only) {
+      .organic-background {
+        opacity: 0.3;
+      }
+      
+      .density-high .bg-shape:nth-child(n+6) {
+        display: none; /* Hide extra shapes on mobile for performance */
+      }
+    }
+
+    /* Reduced motion - hide animated backgrounds */
+    @media (--motionNotOK) {
+      .organic-background {
+        opacity: 0.2;
+      }
+      
+      .bg-shape {
+        animation: none !important;
+      }
+    }
+
+    /* High contrast - hide decorative backgrounds */
+    @media (--highContrast) {
+      .organic-background {
+        display: none;
+      }
+    }
+
+    /* Dark mode adjustments */
+    @media (--OSdark) {
+      .density-low {
+        opacity: 0.2;
+      }
+
+      .density-medium {
+        opacity: 0.3;
+      }
+
+      .density-high {
+        opacity: 0.25;
+      }
+    }
+
+    /* Print - hide backgrounds */
+    @media print {
+      .organic-background {
+        display: none;
+      }
+    }
+
+    /* Performance optimization for low-end devices */
+    @media (max-resolution: 1dppx) {
+      .density-high .bg-shape:nth-child(n+4) {
+        display: none;
+      }
+    }
+  }
+</style>
+
+<script>
+  class OrganicBackgroundManager {
+    private background: HTMLElement | null;
+    private shapes: NodeListOf<HTMLElement>;
+    private resizeObserver: ResizeObserver | null = null;
+
+    constructor() {
+      this.background = document.querySelector('.organic-background');
+      this.shapes = document.querySelectorAll('.bg-shape');
+      this.init();
+    }
+
+    private init(): void {
+      if (!this.background) return;
+
+      // Optimize for different screen sizes
+      this.setupResponsiveOptimization();
+      
+      // Add scroll-based parallax effect (subtle)
+      this.setupScrollParallax();
+      
+      // Monitor viewport changes
+      this.setupResizeObserver();
+    }
+
+    private setupResponsiveOptimization(): void {
+      const updateShapeVisibility = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const pixelRatio = window.devicePixelRatio || 1;
+
+        // Hide shapes on very small screens or low pixel density
+        if (width < 480 || pixelRatio < 1.5) {
+          this.shapes.forEach((shape, index) => {
+            if (index > 3) {
+              (shape as HTMLElement).style.display = 'none';
+            }
+          });
+        }
+      };
+
+      updateShapeVisibility();
+      window.addEventListener('resize', updateShapeVisibility);
+    }
+
+    private setupScrollParallax(): void {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      let ticking = false;
+
+      const updateParallax = () => {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const scrollProgress = scrollY / windowHeight;
+
+        this.shapes.forEach((shape, index) => {
+          const rate = 0.1 + (index * 0.05); // Different parallax rates
+          const yOffset = scrollProgress * rate * 50; // Subtle movement
+          
+          shape.style.transform = `translateY(${yOffset}px)`;
+        });
+
+        ticking = false;
+      };
+
+      const requestParallaxUpdate = () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+    }
+
+    private setupResizeObserver(): void {
+      if (!('ResizeObserver' in window)) return;
+
+      this.resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach(() => {
+          // Reposition shapes based on new viewport size
+          this.repositionShapes();
+        });
+      });
+
+      if (this.background) {
+        this.resizeObserver.observe(this.background);
+      }
+    }
+
+    private repositionShapes(): void {
+      // Dynamically adjust shape positions for different aspect ratios
+      const aspectRatio = window.innerWidth / window.innerHeight;
+      
+      this.shapes.forEach((shape, index) => {
+        const shapeElement = shape as HTMLElement;
+        
+        // Adjust positioning for very wide or tall screens
+        if (aspectRatio > 2) {
+          // Ultra-wide screens - spread shapes more horizontally
+          shapeElement.style.left = `${10 + (index * 15)}%`;
+        } else if (aspectRatio < 0.7) {
+          // Very tall screens - adjust vertical distribution
+          shapeElement.style.top = `${5 + (index * 12)}%`;
+        }
+      });
+    }
+
+    destroy(): void {
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+      }
+    }
+  }
+
+  // Initialize background manager
+  document.addEventListener('DOMContentLoaded', () => {
+    new OrganicBackgroundManager();
+  });
+</script>

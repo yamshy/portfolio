@@ -4,6 +4,7 @@ import ProfessionalTimeline from "../components/ProfessionalTimeline.astro";
 import BentoProjectsGrid from "../components/BentoProjectsGrid.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Footer from "../components/Footer.astro";
+import CTAButton from "../components/CTAButton.astro";
 ---
 
 <Layout>
@@ -21,31 +22,22 @@ import Footer from "../components/Footer.astro";
 			<!-- Bio text -->
 			<div>
 				<p>
-					Infrastructure Engineer specializing in
-					<span>DevOps, system administration,</span>
-					and <span>data engineering</span>
+					<strong>Software Engineer & DevOps Specialist</strong> building scalable infrastructure and automated systems. I bring analytical precision and systems thinking to cloud architecture, Kubernetes, and CI/CD pipelines.
 				</p>
 				<p>
-					Starting in molecular biology research, the transition
-					to infrastructure engineering came naturally through
-					understanding how biological systems work - complex,
-					interconnected, and self-regulating. This systems
-					thinking translates directly to building reliable
-					infrastructure and data pipelines.
+					Starting in molecular biology research, the transition to infrastructure engineering came naturally through understanding how biological systems work - complex, interconnected, and self-regulating. This systems thinking translates directly to building reliable infrastructure and data pipelines.
 				</p>
 			</div>
 		</div>
 
 		<!-- CTAs -->
-		<div>
-			<a href="#projects">
-				Learn More
-				<span>↓</span>
-			</a>
-			<a href="mailto:sajudia@proton.me">
-				Get In Touch
-				<span>→</span>
-			</a>
+		<div class="hero-ctas">
+			<CTAButton href="#projects" variant="primary" size="lg">
+				View Featured Work
+			</CTAButton>
+			<CTAButton href="mailto:sajudia@proton.me" variant="secondary" size="lg">
+				Let's Build Together
+			</CTAButton>
 		</div>
 
 		<!-- Scroll indicator -->
@@ -66,3 +58,58 @@ import Footer from "../components/Footer.astro";
 	<!-- Footer -->
 	<Footer />
 </Layout>
+
+<style>
+@layer layouts {
+	#hero {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding: var(--space-section) var(--container-padding);
+		position: relative;
+	}
+	
+	.hero-ctas {
+		display: flex;
+		gap: var(--size-4);
+		margin-top: var(--size-6);
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	#hero h1 {
+		font-size: var(--font-size-hero);
+		font-weight: var(--font-weight-7);
+		line-height: var(--line-height-hero);
+		margin-bottom: var(--size-6);
+		color: var(--text-dark);
+	}
+	
+	#hero p {
+		font-size: var(--font-size-body-large);
+		line-height: var(--line-height-body);
+		color: var(--text-dark);
+		max-width: var(--content-width-wide);
+		margin: 0 auto var(--size-4);
+	}
+	
+	#hero strong {
+		color: var(--coral);
+		font-weight: var(--font-weight-6);
+	}
+	
+	@media (max-width: 768px) {
+		.hero-ctas {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		#hero h1 {
+			font-size: clamp(2rem, 8vw, 3rem);
+		}
+	}
+}
+</style>

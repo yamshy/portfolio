@@ -1,0 +1,425 @@
+---
+export interface Props {
+  variant?: 'blob' | 'cell' | 'membrane' | 'nucleus';
+  size?: 'small' | 'medium' | 'large' | 'xlarge';
+  color?: 'primary' | 'secondary' | 'accent' | 'neutral';
+  animation?: 'float' | 'morph' | 'pulse' | 'drift' | 'none';
+  position?: 'fixed' | 'absolute' | 'relative';
+  zIndex?: number;
+  class?: string;
+  'aria-hidden'?: boolean;
+}
+
+const {
+  variant = 'blob',
+  size = 'medium',
+  color = 'primary',
+  animation = 'float',
+  position = 'absolute',
+  zIndex = -1,
+  class: className,
+  'aria-hidden': ariaHidden = true,
+  ...rest
+} = Astro.props;
+
+// Generate unique ID for animation keyframes
+const shapeId = `organic-shape-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  class:list={[
+    "organic-shape",
+    `variant-${variant}`,
+    `size-${size}`,
+    `color-${color}`,
+    `animation-${animation}`,
+    `position-${position}`,
+    className
+  ]}
+  data-shape-id={shapeId}
+  aria-hidden={ariaHidden}
+  style={`z-index: ${zIndex}`}
+  {...rest}
+>
+  <div class="shape-inner">
+    <svg class="shape-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Blob variant -->
+      {variant === 'blob' && (
+        <path
+          class="shape-path"
+          d="M44.7,-76.4C58.8,-69.2,71.8,-56.2,79.6,-40.1C87.4,-24,89.9,-4.8,85.7,12.8C81.5,30.4,70.6,46.4,56.2,58.8C41.8,71.2,23.9,80,4.8,73.1C-14.3,66.2,-28.6,43.5,-39.8,22.4C-51,1.3,-59.1,-18.2,-61.7,-40.1C-64.3,-62,-61.4,-86.3,-50.2,-94.4C-39,-102.5,-19.5,-94.4,-0.8,-93.2C17.9,-92,35.8,-97.7,44.7,-76.4Z"
+          fill="currentColor"
+        />
+      )}
+      
+      <!-- Cell variant -->
+      {variant === 'cell' && (
+        <circle
+          class="shape-path"
+          cx="100"
+          cy="100"
+          r="80"
+          fill="currentColor"
+          opacity="0.6"
+        />
+      )}
+      
+      <!-- Membrane variant -->
+      {variant === 'membrane' && (
+        <ellipse
+          class="shape-path"
+          cx="100"
+          cy="100"
+          rx="90"
+          ry="60"
+          fill="currentColor"
+          opacity="0.4"
+        />
+      )}
+      
+      <!-- Nucleus variant -->
+      {variant === 'nucleus' && (
+        <path
+          class="shape-path"
+          d="M100,20 C140,20 180,50 180,100 C180,150 140,180 100,180 C60,180 20,150 20,100 C20,50 60,20 100,20 Z"
+          fill="currentColor"
+          opacity="0.8"
+        />
+      )}
+    </svg>
+  </div>
+</div>
+
+<style>
+  @layer components {
+    .organic-shape {
+      pointer-events: none;
+      user-select: none;
+      will-change: transform;
+    }
+
+    .position-fixed {
+      position: fixed;
+    }
+    
+    .position-absolute {
+      position: absolute;
+    }
+    
+    .position-relative {
+      position: relative;
+    }
+
+    /* Size variants - Fibonacci sequence */
+    .size-small {
+      width: 89px;
+      height: 89px;
+    }
+
+    .size-medium {
+      width: 144px;
+      height: 144px;
+    }
+
+    .size-large {
+      width: 233px;
+      height: 233px;
+    }
+
+    .size-xlarge {
+      width: 377px;
+      height: 377px;
+    }
+
+    /* Color variants - Biology-inspired gradients */
+    .color-primary {
+      background: linear-gradient(135deg, 
+        color-mix(in oklab, var(--coral), white 20%), 
+        color-mix(in oklab, var(--mocha), white 25%)
+      );
+      filter: drop-shadow(0 20px 30px rgba(26,13,8,.1));
+    }
+
+    .color-secondary {
+      background: linear-gradient(135deg, 
+        color-mix(in oklab, var(--mocha), white 15%), 
+        color-mix(in oklab, var(--coral), white 30%)
+      );
+      filter: drop-shadow(0 20px 30px rgba(26,13,8,.1));
+    }
+
+    .color-accent {
+      background: linear-gradient(135deg, 
+        color-mix(in oklab, var(--accent-yellow), white 20%), 
+        color-mix(in oklab, var(--coral), white 25%)
+      );
+      filter: drop-shadow(0 20px 30px rgba(26,13,8,.1));
+    }
+
+    .color-neutral {
+      background: linear-gradient(135deg, 
+        color-mix(in oklab, var(--blue), white 20%), 
+        color-mix(in oklab, var(--mocha), white 25%)
+      );
+      filter: drop-shadow(0 20px 30px rgba(26,13,8,.1));
+    }
+
+    /* Shape structure */
+    .shape-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 60% 40% 55% 45% / 55% 35% 65% 45%; /* irregular organic */
+      overflow: hidden;
+    }
+
+    .shape-svg {
+      width: 100%;
+      height: 100%;
+      filter: blur(1px);
+    }
+
+    .shape-path {
+      transition: all var(--duration-organic) var(--ease-organic);
+      fill: currentColor;
+    }
+
+    /* Animation variants */
+    .animation-float {
+      animation: organicFloat var(--duration-organic) var(--ease-organic) infinite alternate;
+    }
+
+    .animation-morph {
+      animation: organicMorph calc(var(--duration-organic) * 2) var(--ease-organic) infinite;
+    }
+
+    .animation-pulse {
+      animation: organicPulse calc(var(--duration-organic) * 0.8) var(--ease-organic) infinite alternate;
+    }
+
+    .animation-drift {
+      animation: organicDrift calc(var(--duration-organic) * 3) linear infinite;
+    }
+
+    /* Keyframe animations */
+    @keyframes organicFloat {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    @keyframes organicMorph {
+      0%, 100% {
+        clip-path: var(--organic-morph-1);
+      }
+      50% {
+        clip-path: var(--organic-morph-2);
+      }
+    }
+
+    @keyframes organicPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes organicDrift {
+      0% {
+        transform: translateX(-10px) translateY(-5px) rotate(0deg);
+      }
+      25% {
+        transform: translateX(10px) translateY(-10px) rotate(90deg);
+      }
+      50% {
+        transform: translateX(15px) translateY(5px) rotate(180deg);
+      }
+      75% {
+        transform: translateX(-5px) translateY(10px) rotate(270deg);
+      }
+      100% {
+        transform: translateX(-10px) translateY(-5px) rotate(360deg);
+      }
+    }
+
+    /* Variant-specific enhancements */
+    .variant-blob .shape-path {
+      filter: drop-shadow(0 4px 8px color-mix(in oklab, currentColor, transparent 70%));
+    }
+
+    .variant-cell .shape-path {
+      stroke: color-mix(in oklab, currentColor, transparent 60%);
+      stroke-width: 2;
+    }
+
+    .variant-membrane .shape-path {
+      stroke: color-mix(in oklab, currentColor, transparent 50%);
+      stroke-width: 1;
+      stroke-dasharray: 5,5;
+    }
+
+    .variant-nucleus .shape-path {
+      filter: drop-shadow(0 0 10px color-mix(in oklab, currentColor, transparent 50%));
+    }
+
+    /* Reduced motion preferences */
+    @media (--motionNotOK) {
+      .organic-shape {
+        animation: none !important;
+      }
+      
+      .shape-path {
+        transition: none;
+      }
+      
+      .animation-float,
+      .animation-morph,
+      .animation-pulse,
+      .animation-drift {
+        animation: none;
+      }
+    }
+
+    /* High contrast mode */
+    @media (--highContrast) {
+      .organic-shape {
+        display: none;
+      }
+    }
+
+    /* Dark mode adjustments */
+    @media (--OSdark) {
+      .color-primary {
+        color: color-mix(in oklab, var(--brand), transparent 90%);
+      }
+      
+      .color-secondary {
+        color: color-mix(in oklab, var(--brand-secondary), transparent 90%);
+      }
+      
+      .color-accent {
+        color: color-mix(in oklab, var(--brand-accent), transparent 90%);
+      }
+      
+      .color-neutral {
+        color: color-mix(in oklab, var(--surface-accent), transparent 95%);
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .organic-shape {
+        display: none;
+      }
+    }
+
+    /* Performance optimizations */
+    .organic-shape {
+      transform: translateZ(0); /* Force GPU acceleration */
+      backface-visibility: hidden;
+    }
+
+    /* Container query optimizations */
+    @container (max-width: 480px) {
+      .size-large {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .size-xlarge {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  }
+</style>
+
+<script>
+  class OrganicShapeManager {
+    private shapes: NodeListOf<HTMLElement>;
+    private animationFrameId: number | null = null;
+
+    constructor() {
+      this.shapes = document.querySelectorAll('.organic-shape');
+      this.init();
+    }
+
+    private init(): void {
+      // Only initialize if motion is preferred
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      // Add intersection observer for performance
+      this.setupIntersectionObserver();
+      
+      // Add random delays to stagger animations
+      this.staggerAnimations();
+    }
+
+    private setupIntersectionObserver(): void {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            const shape = entry.target as HTMLElement;
+            if (entry.isIntersecting) {
+              shape.style.animationPlayState = 'running';
+            } else {
+              shape.style.animationPlayState = 'paused';
+            }
+          });
+        },
+        { threshold: 0, rootMargin: '100px' }
+      );
+
+      this.shapes.forEach(shape => observer.observe(shape));
+    }
+
+    private staggerAnimations(): void {
+      this.shapes.forEach((shape, index) => {
+        const delay = (index * 0.2) + Math.random() * 0.5;
+        shape.style.animationDelay = `${delay}s`;
+      });
+    }
+
+    private addMouseInteraction(): void {
+      // Add subtle mouse interaction for enhanced organic feel
+      document.addEventListener('mousemove', (e) => {
+        if (this.animationFrameId) return;
+
+        this.animationFrameId = requestAnimationFrame(() => {
+          const mouseX = e.clientX / window.innerWidth;
+          const mouseY = e.clientY / window.innerHeight;
+
+          this.shapes.forEach((shape, index) => {
+            const influence = 0.02 + (index * 0.01);
+            const offsetX = (mouseX - 0.5) * influence * 20;
+            const offsetY = (mouseY - 0.5) * influence * 20;
+            
+            shape.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+          });
+
+          this.animationFrameId = null;
+        });
+      });
+    }
+
+    destroy(): void {
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+    }
+  }
+
+  // Initialize organic shapes when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new OrganicShapeManager();
+  });
+</script>
