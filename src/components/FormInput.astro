@@ -1,100 +1,43 @@
 ---
 export interface Props {
-  type?: 'text' | 'email' | 'textarea';
-  name: string;
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-  rows?: number;
-  class?: string;
+	type?: 'text' | 'email' | 'textarea';
+	name: string;
+	label: string;
+	placeholder?: string;
+	required?: boolean;
+	rows?: number;
+	class?: string;
 }
 
-const { 
-  type = 'text', 
-  name, 
-  label, 
-  placeholder, 
-  required = false, 
-  rows = 4,
-  class: className = ''
+const {
+	type = 'text',
+	name,
+	label,
+	placeholder = '',
+	required = false,
+	rows = 3,
+	class: className = '',
 } = Astro.props;
 ---
 
-<div class={`form-input-group ${className}`}>
-  <label for={name} class="form-label">
-    {label} {required && <span class="required-indicator">*</span>}
-  </label>
-  {type === 'textarea' ? (
-    <textarea
-      id={name}
-      name={name}
-      rows={rows}
-      required={required}
-      class="form-textarea"
-      placeholder={placeholder}
-      aria-describedby={placeholder ? `${name}-help` : undefined}
-    />
-  ) : (
-    <input
-      type={type}
-      id={name}
-      name={name}
-      required={required}
-      class="form-input"
-      placeholder={placeholder}
-      aria-describedby={placeholder ? `${name}-help` : undefined}
-    />
-  )}
-  {placeholder && (
-    <div id={`${name}-help`} class="sr-only">
-      {placeholder}
-    </div>
-  )}
+<div class={className}>
+	<label for={name}>{label} {required && <span>*</span>}</label>
+	
+	{type === 'textarea' ? (
+		<textarea
+			id={name}
+			name={name}
+			placeholder={placeholder}
+			required={required}
+			rows={rows}
+		></textarea>
+	) : (
+		<input
+			id={name}
+			type={type}
+			name={name}
+			placeholder={placeholder}
+			required={required}
+		/>
+	)}
 </div>
-
-<style>
-  .form-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
-  }
-
-  .form-label {
-    display: block;
-    font-size: var(--font-size-0);
-    font-weight: var(--font-weight-5);
-    color: var(--brand-text-dark);
-  }
-
-  .required-indicator {
-    color: var(--brand-coral-primary);
-  }
-
-  .form-input,
-  .form-textarea {
-    width: 100%;
-    padding: var(--size-3) var(--size-4);
-    background: rgb(from var(--brand-warm-white) r g b / 0.5);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgb(from var(--brand-mocha-mousse) r g b / 0.3);
-    border-radius: var(--radius-4);
-    color: var(--brand-text-dark);
-    transition: all var(--animation-duration-normal);
-  }
-
-  .form-input::placeholder,
-  .form-textarea::placeholder {
-    color: rgb(from var(--brand-mocha-mousse) r g b / 0.6);
-  }
-
-  .form-input:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: rgb(from var(--brand-coral-primary) r g b / 0.5);
-    box-shadow: 0 0 0 2px rgb(from var(--brand-coral-primary) r g b / 0.5);
-  }
-
-  .form-textarea {
-    resize: none;
-  }
-</style>

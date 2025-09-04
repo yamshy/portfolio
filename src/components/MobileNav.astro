@@ -1,153 +1,29 @@
 ---
 // Mobile top navigation with hamburger menu
 const navItems = [
-  { href: "#hero", label: "Home" },
-  { href: "#evolution", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+	{ href: "#hero", label: "Home" },
+	{ href: "#evolution", label: "Experience" },
+	{ href: "#projects", label: "Projects" },
+	{ href: "#contact", label: "Contact" },
 ];
 ---
 
-<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-  <div class="mobile-nav-header">
-    <span class="mobile-nav-brand">Shyam</span>
-    <button
-      id="mobile-nav-toggle"
-      class="mobile-nav-toggle"
-      aria-label="Toggle navigation"
-    >
-      <svg
-        class="mobile-nav-icon"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-  </div>
-  <div id="mobile-nav-menu" class="mobile-nav-menu mobile-nav-menu--hidden">
-    {
-      navItems.map((item) => (
-        <a href={item.href} class="mobile-nav-link">
-          {item.label}
-        </a>
-      ))
-    }
-  </div>
+<nav>
+	<button>
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+	
+	<div>
+		<ul>
+			{
+				navItems.map((item) => (
+					<li>
+						<a href={item.href}>{item.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
 </nav>
-
-<style>
-  .mobile-nav {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgb(from var(--brand-warm-white) r g b / 0.8);
-    backdrop-filter: blur(12px);
-    z-index: 50;
-  }
-
-  @media (min-width: 1024px) {
-    .mobile-nav {
-      display: none;
-    }
-  }
-
-  .mobile-nav-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 var(--size-4);
-    height: 4rem;
-  }
-
-  .mobile-nav-brand {
-    font-size: var(--font-size-3);
-    font-weight: var(--font-weight-7);
-    color: var(--brand-coral-primary);
-  }
-
-  .mobile-nav-toggle {
-    padding: var(--size-2);
-    color: var(--brand-text-dark);
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: var(--radius-2);
-    transition: background-color var(--animation-duration-normal);
-  }
-
-  .mobile-nav-toggle:hover {
-    background: rgb(from var(--brand-text-dark) r g b / 0.1);
-  }
-
-  .mobile-nav-toggle:focus-visible {
-    outline: 2px solid var(--brand-coral-primary);
-    outline-offset: 2px;
-  }
-
-  .mobile-nav-icon {
-    width: var(--size-6);
-    height: var(--size-6);
-  }
-
-  .mobile-nav-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--size-4);
-    padding-bottom: var(--size-4);
-  }
-
-  .mobile-nav-menu--hidden {
-    display: none;
-  }
-
-  .mobile-nav-link {
-    font-size: var(--font-size-2);
-    color: var(--brand-text-dark);
-    text-decoration: none;
-    padding: var(--size-2) var(--size-4);
-    border-radius: var(--radius-2);
-    transition: all var(--animation-duration-normal);
-  }
-
-  .mobile-nav-link:hover {
-    background: var(--brand-glass-coral);
-    color: var(--brand-coral-primary);
-  }
-
-  .mobile-nav-link:focus-visible {
-    outline: 2px solid var(--brand-coral-primary);
-    outline-offset: 2px;
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("mobile-nav-toggle");
-    const menu = document.getElementById("mobile-nav-menu");
-    const navLinks = document.querySelectorAll(".mobile-nav-link");
-
-    if (toggle && menu) {
-      toggle.addEventListener("click", () => {
-        menu.classList.toggle("mobile-nav-menu--hidden");
-      });
-    }
-
-    // Close menu when clicking on navigation links
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (menu) {
-          menu.classList.add("mobile-nav-menu--hidden");
-        }
-      });
-    });
-  });
-</script>

@@ -2,161 +2,22 @@
 // Footer component
 ---
 
-<footer class="site-footer">
-	<div class="footer-container">
-		<div class="footer-header">
-			<div class="footer-brand">
-				<span class="footer-brand-name">Shyam Ajudia</span>
-			</div>
+<footer>
+	<div>
+		<div>
+			<span>Shyam Ajudia</span>
 		</div>
-		
-		<div class="footer-content">
-			<p class="footer-copyright">© 2025 Shyam Ajudia. All rights reserved.</p>
-			<div class="footer-links">
-				<a href="mailto:sajudia@proton.me" class="footer-link">
-					Contact
-					<span class="footer-link-underline"></span>
-				</a>
-				<a
-					href="https://github.com/yamshy"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="footer-link"
-				>
-					GitHub
-					<span class="footer-link-underline"></span>
-				</a>
-				<a href="#" class="footer-link">
-					Resume
-					<span class="footer-link-underline"></span>
-				</a>
-			</div>
+		<div>
+			<p>© 2025 Shyam Ajudia. All rights reserved.</p>
+		</div>
+		<div>
+			<a href="mailto:sajudia@proton.me">Contact</a>
+			<a href="https://github.com/yamshy" target="_blank" rel="noopener noreferrer">
+				GitHub
+			</a>
+			<a href="/resume" target="_blank" rel="noopener noreferrer">
+				Resume
+			</a>
 		</div>
 	</div>
 </footer>
-
-<style>
-	.site-footer {
-		padding: var(--size-8) var(--size-4) var(--size-10);
-		border-top: 1px solid rgb(from var(--brand-mocha-200) r g b / 0.3);
-		background: rgb(from var(--brand-mocha-50) r g b / 0.3);
-	}
-
-	@media (min-width: 640px) {
-		.site-footer {
-			padding: var(--size-10) var(--size-6) var(--size-12);
-		}
-	}
-
-	.footer-container {
-		max-width: 72rem;
-		margin: 0 auto;
-	}
-
-	.footer-header {
-		text-align: center;
-		margin-bottom: var(--size-6);
-	}
-
-	@media (min-width: 640px) {
-		.footer-header {
-			margin-bottom: var(--size-8);
-		}
-	}
-
-	.footer-brand {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: var(--size-3);
-		margin-bottom: var(--size-4);
-	}
-
-	@media (min-width: 640px) {
-		.footer-brand {
-			margin-bottom: var(--size-6);
-		}
-	}
-
-	.footer-brand-name {
-		font-size: var(--font-size-3);
-		font-weight: var(--font-weight-5);
-		background: linear-gradient(135deg, var(--brand-mocha-mousse) 0%, var(--brand-coral-primary) 50%, var(--brand-cool-contrast) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	@media (min-width: 640px) {
-		.footer-brand-name {
-			font-size: var(--font-size-4);
-		}
-	}
-
-	.footer-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--size-4);
-	}
-
-	@media (min-width: 640px) {
-		.footer-content {
-			flex-direction: row;
-			justify-content: space-between;
-			gap: var(--size-6);
-		}
-	}
-
-	.footer-copyright {
-		color: var(--brand-mocha-500);
-		font-size: var(--font-size-00);
-		margin: 0;
-	}
-
-	@media (min-width: 640px) {
-		.footer-copyright {
-			font-size: var(--font-size-0);
-		}
-	}
-
-	.footer-links {
-		display: flex;
-		justify-content: center;
-		gap: var(--size-4);
-		font-size: var(--font-size-00);
-	}
-
-	@media (min-width: 640px) {
-		.footer-links {
-			gap: var(--size-8);
-			font-size: var(--font-size-0);
-		}
-	}
-
-	.footer-link {
-		color: var(--brand-mocha-600);
-		text-decoration: none;
-		font-weight: var(--font-weight-5);
-		position: relative;
-		transition: all var(--animation-duration-normal);
-	}
-
-	.footer-link:hover {
-		color: var(--brand-mocha-900);
-	}
-
-	.footer-link-underline {
-		position: absolute;
-		bottom: -1px;
-		left: 0;
-		width: 0;
-		height: 2px;
-		background: linear-gradient(to right, var(--brand-mocha-400), var(--brand-terracotta-400));
-		transition: all var(--animation-duration-normal);
-	}
-
-	.footer-link:hover .footer-link-underline {
-		width: 100%;
-	}
-</style>

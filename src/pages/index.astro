@@ -28,77 +28,62 @@ const projects = [
 ---
 
 <Layout>
-	<!-- Hero Section with Asymmetrical Layout -->
-	<section id="hero" class="hero-section">
-		<!-- Asymmetrical grid layout -->
-		<div class="hero-container">
-			<!-- Left side - 2/3 width for main content -->
-			<div class="hero-content">
-				<!-- Main heading with asymmetrical positioning -->
-				<div class="hero-heading">
-					<h1 class="hero-title">
-						<span class="hero-title-first">Shyam</span>
-						<span class="hero-title-last">Ajudia</span>
-					</h1>
-				</div>
-
-				<!-- Bio text positioned asymmetrically -->
-				<div class="hero-bio">
-					<p class="hero-bio-primary">
-						Infrastructure Engineer specializing in
-						<span class="hero-accent">DevOps, system administration,</span>
-						and <span class="hero-accent">data engineering</span>
-					</p>
-					<p class="hero-bio-secondary">
-						Starting in molecular biology research, the transition
-						to infrastructure engineering came naturally through
-						understanding how biological systems work - complex,
-						interconnected, and self-regulating. This systems
-						thinking translates directly to building reliable
-						infrastructure and data pipelines.
-					</p>
-				</div>
+	<!-- Hero Section -->
+	<section id="hero">
+		<div>
+			<!-- Main heading -->
+			<div>
+				<h1>
+					<span>Shyam</span>
+					<span>Ajudia</span>
+				</h1>
 			</div>
 
-			<!-- Right side - 1/3 width for CTAs and floating elements -->
-			<div class="hero-cta-section">
-				<!-- Glassmorphism CTA container -->
-				<div class="hero-cta-container">
-					<!-- Primary CTA with glassmorphism -->
-					<a href="#projects" class="hero-cta hero-cta--primary">
-						Learn More
-						<span class="hero-cta-arrow hero-cta-arrow--down">↓</span>
-					</a>
-
-					<!-- Secondary CTA with glassmorphism -->
-					<a href="mailto:sajudia@proton.me" class="hero-cta hero-cta--secondary">
-						Get In Touch
-						<span class="hero-cta-arrow hero-cta-arrow--right">→</span>
-					</a>
-				</div>
-
-				<!-- Floating accent shape -->
-				<div class="hero-floating-shape"></div>
+			<!-- Bio text -->
+			<div>
+				<p>
+					Infrastructure Engineer specializing in
+					<span>DevOps, system administration,</span>
+					and <span>data engineering</span>
+				</p>
+				<p>
+					Starting in molecular biology research, the transition
+					to infrastructure engineering came naturally through
+					understanding how biological systems work - complex,
+					interconnected, and self-regulating. This systems
+					thinking translates directly to building reliable
+					infrastructure and data pipelines.
+				</p>
 			</div>
 		</div>
 
+		<!-- CTAs -->
+		<div>
+			<a href="#projects">
+				Learn More
+				<span>↓</span>
+			</a>
+			<a href="mailto:sajudia@proton.me">
+				Get In Touch
+				<span>→</span>
+			</a>
+		</div>
+
 		<!-- Scroll indicator -->
-		<div class="scroll-indicator">
-			<div class="scroll-indicator-body">
-				<div class="scroll-indicator-dot"></div>
-			</div>
+		<div>
+			<div></div>
 		</div>
 	</section>
 
 	<!-- Professional Evolution Timeline -->
-	<section id="evolution" class="evolution-section">
-		<div class="evolution-container">
+	<section id="evolution">
+		<div>
 			<!-- Section header -->
-			<div class="section-header">
-				<h2 class="section-title">
-					Professional <span class="section-title-accent">Evolution</span>
+			<div>
+				<h2>
+					Professional <span>Evolution</span>
 				</h2>
-				<p class="section-description">
+				<p>
 					From molecular biology research to cloud architecture - a
 					journey of applying analytical thinking and systematic
 					approaches to increasingly complex technical challenges
@@ -106,129 +91,100 @@ const projects = [
 			</div>
 
 			<!-- Timeline container -->
-			<div class="timeline-wrapper">
-				<!-- Timeline path -->
-				<div class="timeline-path"></div>
-
+			<div>
 				<!-- Timeline phases -->
-				<div class="timeline-phases">
+				<div>
 					<!-- Phase 1: Biology Research Associate -->
-					<div class="timeline-phase">
-						<!-- Timeline node -->
-						<div class="timeline-node timeline-node--coral"></div>
-
-						<!-- Content -->
-						<div class="timeline-content timeline-content--left">
-							<div class="timeline-card timeline-card--coral">
-								<div class="timeline-period">
-									<span class="timeline-period-badge timeline-period-badge--coral">2019-2021</span>
-								</div>
-								<h3 class="timeline-title">
-									Biology Research Associate
-								</h3>
-								<p class="timeline-description">
-									Began as a molecular and cellular biology
-									research associate, conducting bench work,
-									experimental design, and data analysis.
-									Built the foundation of analytical precision
-									and systematic problem-solving that would
-									later define my technical approach.
-								</p>
-								<div class="timeline-tags">
-									<span class="timeline-tag timeline-tag--coral">Molecular Biology</span>
-									<span class="timeline-tag timeline-tag--coral">Bench Work</span>
-									<span class="timeline-tag timeline-tag--coral">Research</span>
-								</div>
+					<div>
+						<div>
+							<div>
+								<span>2019-2021</span>
+							</div>
+							<h3>Biology Research Associate</h3>
+							<p>
+								Began as a molecular and cellular biology
+								research associate, conducting bench work,
+								experimental design, and data analysis.
+								Built the foundation of analytical precision
+								and systematic problem-solving that would
+								later define my technical approach.
+							</p>
+							<div>
+								<span>Molecular Biology</span>
+								<span>Bench Work</span>
+								<span>Research</span>
 							</div>
 						</div>
 					</div>
 
 					<!-- Phase 2: Computational Integration -->
-					<div class="timeline-phase timeline-phase--delayed">
-						<div class="timeline-node timeline-node--mocha"></div>
-
-						<div class="timeline-content timeline-content--right">
-							<div class="timeline-card timeline-card--mocha">
-								<div class="timeline-period">
-									<span class="timeline-period-badge timeline-period-badge--mocha">2021-2022</span>
-								</div>
-								<h3 class="timeline-title">
-									Computational Integration
-								</h3>
-								<p class="timeline-description">
-									Recognized inefficiencies in manual
-									processes and began applying programming to
-									biological workflows. This natural
-									progression from data analysis to automation
-									marked the beginning of my technical
-									evolution.
-								</p>
-								<div class="timeline-tags">
-									<span class="timeline-tag timeline-tag--mocha">Automation</span>
-									<span class="timeline-tag timeline-tag--mocha">Programming</span>
-									<span class="timeline-tag timeline-tag--mocha">Workflows</span>
-								</div>
+					<div>
+						<div>
+							<div>
+								<span>2021-2022</span>
+							</div>
+							<h3>Computational Integration</h3>
+							<p>
+								Recognized inefficiencies in manual
+								processes and began applying programming to
+								biological workflows. This natural
+								progression from data analysis to automation
+								marked the beginning of my technical
+								evolution.
+							</p>
+							<div>
+								<span>Automation</span>
+								<span>Programming</span>
+								<span>Workflows</span>
 							</div>
 						</div>
 					</div>
 
 					<!-- Phase 3: Technical Leadership -->
-					<div class="timeline-phase timeline-phase--delayed-2">
-						<div class="timeline-node timeline-node--mocha"></div>
-
-						<div class="timeline-content timeline-content--left">
-							<div class="timeline-card timeline-card--mocha">
-								<div class="timeline-period">
-									<span class="timeline-period-badge timeline-period-badge--mocha">2022-2024</span>
-								</div>
-								<h3 class="timeline-title">
-									Technical Leadership
-								</h3>
-								<p class="timeline-description">
-									Transitioned into technical leadership,
-									managing infrastructure, bioinformatics
-									pipelines, and internal web development.
-									This role uniquely positioned me to bridge
-									domain expertise with technical
-									implementation, creating solutions that
-									truly served the research needs.
-								</p>
-								<div class="timeline-tags">
-									<span class="timeline-tag timeline-tag--mocha">Infrastructure</span>
-									<span class="timeline-tag timeline-tag--mocha">Bioinformatics</span>
-									<span class="timeline-tag timeline-tag--mocha">Web Development</span>
-								</div>
+					<div>
+						<div>
+							<div>
+								<span>2022-2024</span>
+							</div>
+							<h3>Technical Leadership</h3>
+							<p>
+								Transitioned into technical leadership,
+								managing infrastructure, bioinformatics
+								pipelines, and internal web development.
+								This role uniquely positioned me to bridge
+								domain expertise with technical
+								implementation, creating solutions that
+								truly served the research needs.
+							</p>
+							<div>
+								<span>Infrastructure</span>
+								<span>Bioinformatics</span>
+								<span>Web Development</span>
 							</div>
 						</div>
 					</div>
 
 					<!-- Phase 4: Current Evolution -->
-					<div class="timeline-phase timeline-phase--delayed-3">
-						<div class="timeline-node timeline-node--blue timeline-node--current"></div>
-
-						<div class="timeline-content timeline-content--right">
-							<div class="timeline-card timeline-card--blue">
-								<div class="timeline-period">
-									<span class="timeline-period-badge timeline-period-badge--blue">2024+</span>
-									<span class="timeline-current-badge">Current</span>
-								</div>
-								<h3 class="timeline-title">
-									Infrastructure & Data Engineering
-								</h3>
-								<p class="timeline-description">
-									Now specializing across DevOps, system
-									administration, and data engineering,
-									applying the same analytical precision from
-									laboratory research to building scalable
-									infrastructure, managing systems, and
-									designing data pipelines.
-								</p>
-								<div class="timeline-tags">
-									<span class="timeline-tag timeline-tag--blue">DevOps</span>
-									<span class="timeline-tag timeline-tag--blue">System Admin</span>
-									<span class="timeline-tag timeline-tag--blue">Data Engineering</span>
-									<span class="timeline-tag timeline-tag--blue">Infrastructure</span>
-								</div>
+					<div>
+						<div>
+							<div>
+								<span>2024+</span>
+								<span>Current</span>
+							</div>
+							<h3>Infrastructure & Data Engineering</h3>
+							<p>
+								Now specializing across DevOps, system
+								administration, and data engineering,
+								applying the same analytical precision from
+								laboratory research to building scalable
+								infrastructure, managing systems, and
+								designing data pipelines.
+							</p>
+							<div>
+								<span>DevOps</span>
+								<span>System Admin</span>
+								<span>Data Engineering</span>
+								<span>Infrastructure</span>
 							</div>
 						</div>
 					</div>
@@ -238,90 +194,76 @@ const projects = [
 	</section>
 
 	<!-- Featured Work Section -->
-	<section id="projects" class="projects-section">
-		<div class="projects-container">
+	<section id="projects">
+		<div>
 			<!-- Section header -->
-			<div class="section-header">
-				<h2 class="section-title">
-					Featured <span class="section-title-accent">Work</span>
+			<div>
+				<h2>
+					Featured <span>Work</span>
 				</h2>
-				<p class="section-description">
+				<p>
 					Infrastructure projects and technical solutions built with
 					precision and scalability in mind
 				</p>
 			</div>
 
-			<!-- Asymmetrical Bento Grid Layout -->
-			<div class="projects-grid">
-				<!-- Featured Project - Large (spans 2 columns, 1.5x height) -->
-				<div class="project-featured">
-					<div class="project-card project-card--featured project-card--coral">
-						<div class="project-content">
-							<div class="project-header">
-								<h3 class="project-title">
-									{projects[0].title}
-								</h3>
-								<a
-									href={projects[0].link}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="project-link project-link--coral"
-								>
-									<span class="project-link-arrow">→</span>
-								</a>
-							</div>
-							<p class="project-description" set:html={projects[0].description} />
-							<div class="project-technologies">
-								{
-									projects[0].technologies.map((tech) => (
-										<span class="project-tech project-tech--coral">{tech}</span>
-									))
-								}
-							</div>
+			<!-- Project grid -->
+			<div>
+				<!-- Featured Project - Large -->
+				<div>
+					<div>
+						<div>
+							<h3>{projects[0].title}</h3>
+							<a
+								href={projects[0].link}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span>→</span>
+							</a>
+						</div>
+						<p set:html={projects[0].description} />
+						<div>
+							{
+								projects[0].technologies.map((tech) => (
+									<span>{tech}</span>
+								))
+							}
 						</div>
 					</div>
 				</div>
 
-				<!-- Secondary Project - Medium (spans 1 column) -->
-				<div class="project-secondary">
-					<div class="project-card project-card--secondary project-card--mocha">
-						<div class="project-content">
-							<div class="project-header">
-								<h3 class="project-title project-title--secondary">
-									{projects[1].title}
-								</h3>
-								<a
-									href={projects[1].link}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="project-link project-link--mocha project-link--small"
-								>
-									<span class="project-link-arrow">→</span>
-								</a>
-							</div>
-							<p class="project-description" set:html={projects[1].description} />
-							<div class="project-technologies">
-								{
-									projects[1].technologies.map((tech) => (
-										<span class="project-tech project-tech--mocha project-tech--small">{tech}</span>
-									))
-								}
-							</div>
+				<!-- Secondary Project - Medium -->
+				<div>
+					<div>
+						<div>
+							<h3>{projects[1].title}</h3>
+							<a
+								href={projects[1].link}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span>→</span>
+							</a>
+						</div>
+						<p set:html={projects[1].description} />
+						<div>
+							{
+								projects[1].technologies.map((tech) => (
+									<span>{tech}</span>
+								))
+							}
 						</div>
 					</div>
 				</div>
 
 				<!-- Additional space for future projects -->
-				<div class="project-placeholder">
-					<div class="project-card project-card--placeholder project-card--blue">
-						<div class="placeholder-content">
-							<div class="placeholder-icon">
-								<span class="placeholder-plus">+</span>
-							</div>
-							<p class="placeholder-text">
-								More projects coming soon
-							</p>
+				<div>
+					<div>
+						<div>
+							<span>+</span>
 						</div>
+						<p>More projects coming soon</p>
 					</div>
 				</div>
 			</div>
@@ -334,818 +276,3 @@ const projects = [
 	<!-- Footer -->
 	<Footer />
 </Layout>
-
-<style>
-	/* Hero Section */
-	.hero-section {
-		min-height: 100vh;
-		position: relative;
-		overflow: hidden;
-		padding-top: var(--size-12);
-	}
-
-	@media (min-width: 1024px) {
-		.hero-section {
-			min-height: 0;
-			height: 85vh;
-			padding-top: 0;
-		}
-	}
-
-	.hero-container {
-		display: grid;
-		grid-template-columns: 1fr;
-		min-height: 100vh;
-		max-width: 80rem;
-		margin: 0 auto;
-		padding: 0 var(--size-4);
-		position: relative;
-		z-index: 10;
-	}
-
-	@media (min-width: 640px) {
-		.hero-container {
-			padding: 0 var(--size-6);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.hero-container {
-			grid-template-columns: 2fr 1fr;
-			min-height: 0;
-			height: 100%;
-			padding: 0 var(--size-8);
-		}
-	}
-
-	.hero-content {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		position: relative;
-		z-index: 10;
-	}
-
-	.hero-heading {
-		margin-bottom: var(--size-8);
-	}
-
-	@media (min-width: 1024px) {
-		.hero-heading {
-			margin-bottom: var(--size-12);
-		}
-	}
-
-	.hero-title {
-		font-size: var(--text-6xl);
-		font-weight: var(--font-weight-3);
-		line-height: var(--font-lineheight-1);
-		animation: grow 0.6s var(--ease-out-3);
-	}
-
-	@media (min-width: 640px) {
-		.hero-title {
-			font-size: var(--text-7xl);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.hero-title {
-			font-size: var(--text-8xl);
-		}
-	}
-
-	@media (min-width: 1280px) {
-		.hero-title {
-			font-size: var(--text-9xl);
-		}
-	}
-
-	.hero-title-first {
-		display: block;
-		color: var(--brand-coral-primary);
-		font-weight: var(--font-weight-7);
-	}
-
-	.hero-title-last {
-		display: block;
-		color: var(--brand-text-dark);
-		font-weight: var(--font-weight-3);
-		margin-left: var(--size-8);
-	}
-
-	@media (min-width: 1024px) {
-		.hero-title-last {
-			margin-left: var(--size-10);
-		}
-	}
-
-	.hero-bio {
-		max-width: 32rem;
-		margin-bottom: var(--size-8);
-		animation: fadeIn 0.6s var(--ease-out-3);
-		animation-delay: 0.3s;
-		animation-fill-mode: both;
-	}
-
-	@media (min-width: 1024px) {
-		.hero-bio {
-			margin-left: var(--size-10);
-			margin-bottom: var(--size-12);
-		}
-	}
-
-	.hero-bio-primary {
-		font-size: var(--text-xl);
-		color: var(--brand-text-dark);
-		line-height: var(--font-lineheight-4);
-		font-weight: var(--font-weight-3);
-		margin-bottom: var(--size-6);
-	}
-
-	@media (min-width: 1024px) {
-		.hero-bio-primary {
-			font-size: var(--text-2xl);
-		}
-	}
-
-	.hero-accent {
-		color: var(--brand-coral-primary);
-		font-weight: var(--font-weight-5);
-	}
-
-	.hero-bio-secondary {
-		font-size: var(--text-lg);
-		color: var(--brand-mocha-mousse);
-		line-height: var(--font-lineheight-4);
-	}
-
-	.hero-cta-section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-end;
-		position: relative;
-	}
-
-	@media (min-width: 1024px) {
-		.hero-cta-section {
-			align-items: flex-start;
-		}
-	}
-
-	.hero-cta-container {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-4);
-		animation: fadeIn 0.6s var(--ease-out-3);
-		animation-delay: 0.6s;
-		animation-fill-mode: both;
-	}
-
-	@media (min-width: 1024px) {
-		.hero-cta-container {
-			width: auto;
-		}
-	}
-
-	.hero-cta {
-		display: block;
-		width: 100%;
-		padding: var(--size-4) var(--size-8);
-		backdrop-filter: blur(12px);
-		border: 1px solid;
-		border-radius: var(--radius-round);
-		font-weight: var(--font-weight-5);
-		color: var(--brand-text-dark);
-		text-decoration: none;
-		text-align: center;
-		transition: all var(--animation-duration-normal);
-	}
-
-	@media (min-width: 1024px) {
-		.hero-cta {
-			width: auto;
-		}
-	}
-
-	.hero-cta--primary {
-		background: var(--brand-glass-yellow);
-		border-color: rgb(from var(--brand-accent-yellow) r g b / 0.3);
-	}
-
-	.hero-cta--primary:hover {
-		background: var(--brand-accent-yellow);
-		box-shadow: var(--shadow-6);
-		transform: scale(1.05);
-	}
-
-	.hero-cta--secondary {
-		background: var(--brand-glass-mocha);
-		border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.3);
-	}
-
-	.hero-cta--secondary:hover {
-		background: var(--brand-mocha-mousse);
-		box-shadow: var(--shadow-4);
-		transform: scale(1.05);
-	}
-
-	.hero-cta-arrow {
-		display: inline-block;
-		margin-left: var(--size-2);
-		transition: transform var(--animation-duration-normal);
-	}
-
-	.hero-cta:hover .hero-cta-arrow--down {
-		transform: translateY(var(--size-1));
-	}
-
-	.hero-cta:hover .hero-cta-arrow--right {
-		transform: translateX(var(--size-1));
-	}
-
-	.hero-floating-shape {
-		display: none;
-		position: absolute;
-		top: -5rem;
-		right: -2.5rem;
-		width: 10rem;
-		height: 10rem;
-		background: var(--brand-glass-coral);
-		border-radius: 50%;
-		animation: organicFloat 4s var(--ease-in-out-3) infinite;
-		filter: blur(var(--size-4));
-		opacity: 0.3;
-	}
-
-	@media (min-width: 1024px) {
-		.hero-floating-shape {
-			display: block;
-		}
-	}
-
-	.scroll-indicator {
-		position: absolute;
-		bottom: var(--size-8);
-		left: 50%;
-		transform: translateX(-50%);
-		animation: bounce 1s infinite;
-	}
-
-	.scroll-indicator-body {
-		width: var(--size-6);
-		height: var(--size-8);
-		border: 2px solid var(--brand-coral-primary);
-		border-radius: var(--radius-round);
-		display: flex;
-		justify-content: center;
-	}
-
-	.scroll-indicator-dot {
-		width: var(--size-1);
-		height: var(--size-3);
-		background: var(--brand-coral-primary);
-		border-radius: var(--radius-round);
-		margin-top: var(--size-2);
-		animation: pulse 2s var(--ease-in-out-2) infinite;
-	}
-
-	/* Evolution Section */
-	.evolution-section {
-		padding: var(--size-12) 0;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.evolution-container {
-		max-width: 80rem;
-		margin: 0 auto;
-		padding: 0 var(--size-4);
-		position: relative;
-		z-index: 10;
-	}
-
-	@media (min-width: 640px) {
-		.evolution-container {
-			padding: 0 var(--size-6);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.evolution-container {
-			padding: 0 var(--size-8);
-		}
-	}
-
-	.section-header {
-		text-align: center;
-		margin-bottom: var(--size-10);
-		animation: fadeIn 0.6s var(--ease-out-3);
-	}
-
-	.section-title {
-		font-size: var(--text-4xl);
-		font-weight: var(--font-weight-3);
-		color: var(--brand-text-dark);
-		margin-bottom: var(--size-6);
-	}
-
-	@media (min-width: 1024px) {
-		.section-title {
-			font-size: var(--text-5xl);
-		}
-	}
-
-	.section-title-accent {
-		color: var(--brand-coral-primary);
-		font-weight: var(--font-weight-5);
-	}
-
-	.section-description {
-		font-size: var(--text-xl);
-		color: var(--brand-mocha-mousse);
-		max-width: 48rem;
-		margin: 0 auto;
-		line-height: var(--font-lineheight-4);
-	}
-
-	.timeline-wrapper {
-		position: relative;
-	}
-
-	.timeline-path {
-		position: absolute;
-		left: var(--size-8);
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background: linear-gradient(to bottom, var(--brand-coral-primary), var(--brand-mocha-mousse), var(--brand-cool-contrast));
-		transform: translateX(-50%);
-	}
-
-	@media (min-width: 1024px) {
-		.timeline-path {
-			left: 50%;
-		}
-	}
-
-	.timeline-phases {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-10);
-	}
-
-	.timeline-phase {
-		position: relative;
-		display: flex;
-		align-items: center;
-		animation: slideUp 0.8s var(--ease-out-3);
-	}
-
-	.timeline-phase--delayed {
-		animation-delay: 0.2s;
-		animation-fill-mode: both;
-	}
-
-	.timeline-phase--delayed-2 {
-		animation-delay: 0.4s;
-		animation-fill-mode: both;
-	}
-
-	.timeline-phase--delayed-3 {
-		animation-delay: 0.6s;
-		animation-fill-mode: both;
-	}
-
-	.timeline-node {
-		position: absolute;
-		left: var(--size-6);
-		width: var(--size-4);
-		height: var(--size-4);
-		border-radius: 50%;
-		border: 4px solid var(--brand-warm-white);
-		z-index: 10;
-		transform: translateX(-50%);
-	}
-
-	@media (min-width: 1024px) {
-		.timeline-node {
-			left: 50%;
-		}
-	}
-
-	.timeline-node--coral {
-		background: var(--brand-coral-primary);
-	}
-
-	.timeline-node--mocha {
-		background: var(--brand-mocha-mousse);
-	}
-
-	.timeline-node--blue {
-		background: var(--brand-cool-contrast);
-	}
-
-	.timeline-node--current {
-		width: var(--size-6);
-		height: var(--size-6);
-		box-shadow: var(--shadow-2);
-	}
-
-	.timeline-content {
-		margin-left: var(--size-10);
-		width: 100%;
-	}
-
-	@media (min-width: 1024px) {
-		.timeline-content {
-			width: 50%;
-			margin-left: 0;
-		}
-
-		.timeline-content--left {
-			padding-right: var(--size-10);
-		}
-
-		.timeline-content--right {
-			margin-left: 50%;
-			padding-left: var(--size-10);
-		}
-	}
-
-	.timeline-card {
-		backdrop-filter: blur(16px);
-		border: 1px solid;
-		border-radius: var(--radius-6);
-		padding: var(--size-8);
-		box-shadow: var(--shadow-4);
-	}
-
-	.timeline-card--coral {
-		background: var(--brand-glass-coral);
-		border-color: rgb(from var(--brand-coral-primary) r g b / 0.2);
-	}
-
-	.timeline-card--mocha {
-		background: var(--brand-glass-mocha);
-		border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.2);
-	}
-
-	.timeline-card--blue {
-		background: var(--brand-glass-blue);
-		border-color: rgb(from var(--brand-cool-contrast) r g b / 0.2);
-	}
-
-	.timeline-period {
-		display: flex;
-		align-items: center;
-		margin-bottom: var(--size-4);
-	}
-
-	.timeline-period-badge {
-		font-size: var(--font-size-0);
-		font-weight: var(--font-weight-5);
-		padding: var(--size-1) var(--size-3);
-		border-radius: var(--radius-round);
-	}
-
-	.timeline-period-badge--coral {
-		color: var(--brand-coral-primary);
-		background: rgb(from var(--brand-coral-primary) r g b / 0.1);
-	}
-
-	.timeline-period-badge--mocha {
-		color: var(--brand-mocha-mousse);
-		background: rgb(from var(--brand-mocha-mousse) r g b / 0.1);
-	}
-
-	.timeline-period-badge--blue {
-		color: var(--brand-cool-contrast);
-		background: rgb(from var(--brand-cool-contrast) r g b / 0.1);
-	}
-
-	.timeline-current-badge {
-		margin-left: var(--size-2);
-		font-size: var(--font-size-00);
-		background: rgb(from var(--brand-accent-yellow) r g b / 0.2);
-		color: var(--brand-text-dark);
-		padding: var(--size-1) var(--size-2);
-		border-radius: var(--radius-round);
-		font-weight: var(--font-weight-5);
-	}
-
-	.timeline-title {
-		font-size: var(--text-2xl);
-		font-weight: var(--font-weight-5);
-		color: var(--brand-text-dark);
-		margin-bottom: var(--size-3);
-	}
-
-	.timeline-description {
-		color: var(--brand-mocha-mousse);
-		line-height: var(--font-lineheight-4);
-		margin-bottom: var(--size-4);
-	}
-
-	.timeline-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--size-2);
-	}
-
-	.timeline-tag {
-		font-size: var(--font-size-00);
-		padding: var(--size-1) var(--size-2);
-		border-radius: var(--radius-round);
-	}
-
-	.timeline-tag--coral {
-		background: rgb(from var(--brand-coral-primary) r g b / 0.2);
-		color: var(--brand-coral-primary);
-	}
-
-	.timeline-tag--mocha {
-		background: rgb(from var(--brand-mocha-mousse) r g b / 0.2);
-		color: var(--brand-mocha-mousse);
-	}
-
-	.timeline-tag--blue {
-		background: rgb(from var(--brand-cool-contrast) r g b / 0.2);
-		color: var(--brand-cool-contrast);
-	}
-
-	/* Projects Section */
-	.projects-section {
-		padding: var(--size-12) 0;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.projects-container {
-		max-width: 80rem;
-		margin: 0 auto;
-		padding: 0 var(--size-4);
-		position: relative;
-		z-index: 10;
-	}
-
-	@media (min-width: 640px) {
-		.projects-container {
-			padding: 0 var(--size-6);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.projects-container {
-			padding: 0 var(--size-8);
-		}
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--size-6);
-	}
-
-	@media (min-width: 1024px) {
-		.projects-grid {
-			grid-template-columns: 2fr 1fr;
-			gap: var(--size-8);
-		}
-	}
-
-	.project-featured {
-		animation: grow 0.6s var(--ease-out-3);
-	}
-
-	@media (min-width: 1024px) {
-		.project-featured {
-			grid-column: span 1;
-		}
-	}
-
-	.project-secondary {
-		animation: grow 0.6s var(--ease-out-3);
-		animation-delay: 0.2s;
-		animation-fill-mode: both;
-	}
-
-	.project-placeholder {
-		animation: fadeIn 0.6s var(--ease-out-3);
-		animation-delay: 0.4s;
-		animation-fill-mode: both;
-	}
-
-	@media (min-width: 1024px) {
-		.project-placeholder {
-			grid-column: span 1;
-			grid-row-start: 2;
-		}
-	}
-
-	.project-card {
-		backdrop-filter: blur(16px);
-		border: 1px solid;
-		border-radius: var(--radius-6);
-		box-shadow: var(--shadow-4);
-		transition: all var(--animation-duration-slow);
-		height: 100%;
-	}
-
-	.project-card:hover {
-		box-shadow: var(--shadow-6);
-		transform: scale(1.02);
-	}
-
-	.project-card--coral {
-		background: var(--brand-glass-coral);
-		border-color: rgb(from var(--brand-coral-primary) r g b / 0.2);
-	}
-
-	.project-card--mocha {
-		background: var(--brand-glass-mocha);
-		border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.2);
-	}
-
-	.project-card--blue {
-		background: var(--brand-glass-blue);
-		border-color: rgb(from var(--brand-cool-contrast) r g b / 0.2);
-	}
-
-	.project-card--featured {
-		padding: var(--size-8);
-	}
-
-	@media (min-width: 1024px) {
-		.project-card--featured {
-			padding: var(--size-12);
-		}
-	}
-
-	.project-card--secondary {
-		padding: var(--size-6);
-	}
-
-	@media (min-width: 1024px) {
-		.project-card--secondary {
-			padding: var(--size-8);
-		}
-	}
-
-	.project-card--placeholder {
-		padding: var(--size-8);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.project-content {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-	}
-
-	.project-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: var(--size-6);
-	}
-
-	.project-title {
-		font-size: var(--text-2xl);
-		font-weight: var(--font-weight-5);
-		color: var(--brand-text-dark);
-		transition: color var(--animation-duration-normal);
-	}
-
-	@media (min-width: 1024px) {
-		.project-title {
-			font-size: var(--text-3xl);
-		}
-	}
-
-	.project-title--secondary {
-		font-size: var(--text-xl);
-	}
-
-	@media (min-width: 1024px) {
-		.project-title--secondary {
-			font-size: var(--text-2xl);
-		}
-	}
-
-	.project-card:hover .project-title {
-		color: var(--brand-coral-primary);
-	}
-
-	.project-card--mocha:hover .project-title {
-		color: var(--brand-mocha-mousse);
-	}
-
-	.project-link {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: var(--size-8);
-		height: var(--size-8);
-		border-radius: 50%;
-		text-decoration: none;
-		transition: all var(--animation-duration-normal);
-	}
-
-	.project-link--small {
-		width: var(--size-6);
-		height: var(--size-6);
-	}
-
-	.project-link--coral {
-		background: rgb(from var(--brand-coral-primary) r g b / 0.1);
-		color: var(--brand-coral-primary);
-	}
-
-	.project-link--coral:hover {
-		background: var(--brand-coral-primary);
-		color: var(--brand-warm-white);
-		transform: scale(1.1);
-	}
-
-	.project-link--mocha {
-		background: rgb(from var(--brand-mocha-mousse) r g b / 0.1);
-		color: var(--brand-mocha-mousse);
-	}
-
-	.project-link--mocha:hover {
-		background: var(--brand-mocha-mousse);
-		color: var(--brand-warm-white);
-		transform: scale(1.1);
-	}
-
-	.project-link-arrow {
-		transition: color var(--animation-duration-normal);
-	}
-
-	.project-description {
-		font-size: var(--text-lg);
-		color: var(--brand-mocha-mousse);
-		line-height: var(--font-lineheight-4);
-		margin-bottom: var(--size-8);
-		flex-grow: 1;
-	}
-
-	.project-technologies {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--size-3);
-	}
-
-	.project-tech {
-		font-size: var(--font-size-0);
-		padding: var(--size-2) var(--size-4);
-		border-radius: var(--radius-round);
-		font-weight: var(--font-weight-5);
-	}
-
-	.project-tech--small {
-		font-size: var(--font-size-00);
-		padding: var(--size-1) var(--size-3);
-	}
-
-	.project-tech--coral {
-		background: rgb(from var(--brand-coral-primary) r g b / 0.2);
-		color: var(--brand-coral-primary);
-	}
-
-	.project-tech--mocha {
-		background: rgb(from var(--brand-mocha-mousse) r g b / 0.2);
-		color: var(--brand-mocha-mousse);
-	}
-
-	.placeholder-content {
-		text-align: center;
-	}
-
-	.placeholder-icon {
-		width: var(--size-10);
-		height: var(--size-10);
-		background: rgb(from var(--brand-cool-contrast) r g b / 0.1);
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto var(--size-4);
-	}
-
-	.placeholder-plus {
-		font-size: var(--font-size-4);
-		color: var(--brand-cool-contrast);
-	}
-
-	.placeholder-text {
-		color: var(--brand-mocha-mousse);
-		font-weight: var(--font-weight-5);
-		margin: 0;
-	}
-</style>

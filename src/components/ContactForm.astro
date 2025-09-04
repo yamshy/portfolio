@@ -2,507 +2,87 @@
 import GlassCard from "./GlassCard.astro";
 import FormInput from "./FormInput.astro";
 
-// Contact form component with glassmorphism styling
+// Contact form component
 ---
 
-<section id="contact" class="contact-section">
-	<div class="contact-container">
+<section id="contact">
+	<div>
 		<!-- Section header -->
-		<div class="contact-header">
-			<h2 id="contact-heading" class="contact-title">
-				Get In <span class="contact-title-accent">Touch</span>
-			</h2>
-			<p class="contact-description">
-				Ready to collaborate on your next project? Let's discuss how we
-				can build something amazing together.
+		<div>
+			<h2>Get In Touch</h2>
+			<p>
+				Ready to collaborate on your next project? Let's discuss how we can build something amazing together.
 			</p>
 		</div>
 
-		<!-- Contact form with glassmorphism -->
-		<GlassCard variant="mocha" size="lg" class="contact-form-card">
-			<form class="contact-form" id="contact-form" role="form" aria-labelledby="contact-heading">
-				<!-- Name and Email Row -->
-				<div class="form-row">
+		<!-- Contact form -->
+		<div>
+			<GlassCard>
+				<form>
 					<FormInput
 						type="text"
 						name="name"
 						label="Name"
 						placeholder="Your name"
-						required
+						required={true}
 					/>
+
 					<FormInput
 						type="email"
 						name="email"
 						label="Email"
-						placeholder="your.email@example.com"
-						required
+						placeholder="you@example.com"
+						required={true}
 					/>
-				</div>
 
-				<!-- Subject -->
-				<FormInput
-					type="text"
-					name="subject"
-					label="Subject"
-					placeholder="What's this about?"
-					required
-				/>
+					<FormInput
+						type="text"
+						name="subject"
+						label="Subject"
+						placeholder="What's this about?"
+						required={true}
+					/>
 
-				<!-- Message -->
-				<FormInput
-					type="textarea"
-					name="message"
-					label="Message"
-					placeholder="Tell me about your project, ideas, or just say hello..."
-					required
-					rows={6}
-				/>
+					<FormInput
+						type="textarea"
+						name="message"
+						label="Message"
+						placeholder="Tell me about your project, ideas, or just say hello..."
+						rows={5}
+						required={true}
+					/>
 
-				<!-- Submit Button -->
-				<div class="form-submit">
-					<button type="submit" class="submit-button">
-						<span class="submit-text">Send Message</span>
-						<div class="submit-overlay"></div>
-						<span class="submit-arrow">→</span>
+					<button type="submit">
+						Send Message →
 					</button>
-				</div>
+				</form>
 
-				<!-- Form Status Messages -->
-				<div id="form-status" class="form-status form-status--hidden">
-					<div id="success-message" class="status-message status-message--success status-message--hidden">
-						<svg class="status-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M5 13l4 4L19 7"
-							></path>
-						</svg>
-						<p class="status-title">Message sent successfully!</p>
-						<p class="status-subtitle">I'll get back to you soon.</p>
-					</div>
-					<div id="error-message" class="status-message status-message--error status-message--hidden">
-						<svg class="status-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M6 18L18 6M6 6l12 12"
-							></path>
-						</svg>
-						<p class="status-title">Something went wrong</p>
-						<p class="status-subtitle">Please try again or email me directly.</p>
+				<!-- Success/Error messages -->
+				<div>
+					<div>
+						<h3>Message sent successfully!</h3>
+						<p>I'll get back to you soon.</p>
 					</div>
 				</div>
-			</form>
-		</GlassCard>
 
-		<!-- Alternative contact methods -->
-		<div class="contact-methods">
-			<p class="contact-methods-label">Or reach out directly:</p>
-			<div class="contact-links">
-				<a href="mailto:sajudia@proton.me" class="contact-link contact-link--coral">
-					<svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-						></path>
-					</svg>
-					sajudia@proton.me
-				</a>
-				<a
-					href="https://github.com/yamshy"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="contact-link contact-link--mocha"
-				>
-					<svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-						></path>
-					</svg>
-					GitHub
-				</a>
+				<div>
+					<div>
+						<h3>Something went wrong</h3>
+						<p>Please try again or email me directly.</p>
+					</div>
+				</div>
+			</GlassCard>
+
+			<!-- Direct contact info -->
+			<div>
+				<p>Or reach out directly:</p>
+				<div>
+					<a href="mailto:sajudia@proton.me">sajudia@proton.me</a>
+					<a href="https://github.com/yamshy" target="_blank" rel="noopener noreferrer">
+						GitHub
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-<style>
-	.contact-section {
-		padding: var(--size-12) 0;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.contact-container {
-		max-width: 64rem;
-		margin: 0 auto;
-		padding: 0 var(--size-4);
-		position: relative;
-		z-index: 10;
-	}
-
-	@media (min-width: 640px) {
-		.contact-container {
-			padding: 0 var(--size-6);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.contact-container {
-			padding: 0 var(--size-8);
-		}
-	}
-
-	.contact-header {
-		text-align: center;
-		margin-bottom: var(--size-10);
-		animation: fadeIn 0.6s var(--ease-out-3);
-	}
-
-	.contact-title {
-		font-size: var(--font-size-6);
-		font-weight: var(--font-weight-3);
-		color: var(--brand-text-dark);
-		margin-bottom: var(--size-6);
-	}
-
-	@media (min-width: 1024px) {
-		.contact-title {
-			font-size: var(--font-size-7);
-		}
-	}
-
-	.contact-title-accent {
-		color: var(--brand-coral-primary);
-		font-weight: var(--font-weight-5);
-	}
-
-	.contact-description {
-		font-size: var(--font-size-3);
-		color: var(--brand-mocha-mousse);
-		max-width: 48rem;
-		margin: 0 auto;
-		line-height: var(--font-lineheight-4);
-	}
-
-	.contact-form-card {
-		animation: grow 0.6s var(--ease-out-3);
-	}
-
-	.contact-form {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-8);
-	}
-
-	.form-row {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--size-6);
-	}
-
-	@media (min-width: 768px) {
-		.form-row {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-
-	.form-submit {
-		display: flex;
-		justify-content: center;
-	}
-
-	.submit-button {
-		position: relative;
-		padding: var(--size-4) var(--size-12);
-		background: linear-gradient(to right, var(--brand-coral-primary), rgb(from var(--brand-coral-primary) r g b / 0.8));
-		color: var(--brand-warm-white);
-		font-weight: var(--font-weight-5);
-		border: none;
-		border-radius: var(--radius-round);
-		cursor: pointer;
-		transition: all var(--animation-duration-normal);
-	}
-
-	.submit-button:hover {
-		background: linear-gradient(to right, rgb(from var(--brand-coral-primary) r g b / 0.9), var(--brand-coral-primary));
-		transform: scale(1.05);
-		box-shadow: var(--shadow-6);
-	}
-
-	.submit-button:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 2px rgb(from var(--brand-coral-primary) r g b / 0.5), 0 0 0 4px var(--brand-warm-white);
-	}
-
-	.submit-text {
-		position: relative;
-		z-index: 10;
-	}
-
-	.submit-overlay {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to right, rgb(from var(--brand-coral-primary) r g b / 0.2), rgb(from var(--brand-coral-primary) r g b / 0.1));
-		border-radius: var(--radius-round);
-		opacity: 0;
-		transition: opacity var(--animation-duration-normal);
-	}
-
-	.submit-button:hover .submit-overlay {
-		opacity: 1;
-	}
-
-	.submit-arrow {
-		display: inline-block;
-		margin-left: var(--size-2);
-		transition: transform var(--animation-duration-normal);
-	}
-
-	.submit-button:hover .submit-arrow {
-		transform: translateX(var(--size-1));
-	}
-
-	.form-status {
-		text-align: center;
-	}
-
-	.form-status--hidden {
-		display: none;
-	}
-
-	.status-message {
-		padding: var(--size-4);
-		border: 1px solid;
-		border-radius: var(--radius-4);
-	}
-
-	.status-message--hidden {
-		display: none;
-	}
-
-	.status-message--success {
-		background: var(--brand-glass-blue);
-		border-color: rgb(from var(--brand-cool-contrast) r g b / 0.3);
-		color: var(--brand-cool-contrast);
-	}
-
-	.status-message--error {
-		background: var(--brand-glass-coral);
-		border-color: rgb(from var(--brand-coral-primary) r g b / 0.3);
-		color: var(--brand-coral-primary);
-	}
-
-	.status-icon {
-		width: var(--size-6);
-		height: var(--size-6);
-		margin: 0 auto var(--size-2);
-	}
-
-	.status-title {
-		font-weight: var(--font-weight-5);
-		margin: 0 0 var(--size-1);
-	}
-
-	.status-subtitle {
-		font-size: var(--font-size-0);
-		opacity: 0.8;
-		margin: 0;
-	}
-
-	.contact-methods {
-		margin-top: var(--size-8);
-		text-align: center;
-		animation: fadeIn 0.6s var(--ease-out-3);
-		animation-delay: 0.3s;
-		animation-fill-mode: both;
-	}
-
-	.contact-methods-label {
-		color: var(--brand-mocha-mousse);
-		margin-bottom: var(--size-6);
-	}
-
-	.contact-links {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--size-4);
-	}
-
-	@media (min-width: 640px) {
-		.contact-links {
-			flex-direction: row;
-			justify-content: center;
-			gap: var(--size-8);
-		}
-	}
-
-	.contact-link {
-		display: flex;
-		align-items: center;
-		gap: var(--size-3);
-		padding: var(--size-3) var(--size-6);
-		backdrop-filter: blur(12px);
-		border: 1px solid;
-		border-radius: var(--radius-round);
-		text-decoration: none;
-		font-weight: var(--font-weight-5);
-		transition: all var(--animation-duration-normal);
-	}
-
-	.contact-link--coral {
-		background: var(--brand-glass-coral);
-		border-color: rgb(from var(--brand-coral-primary) r g b / 0.3);
-		color: var(--brand-coral-primary);
-	}
-
-	.contact-link--coral:hover {
-		background: var(--brand-coral-primary);
-		color: var(--brand-warm-white);
-		transform: scale(1.05);
-	}
-
-	.contact-link--mocha {
-		background: var(--brand-glass-mocha);
-		border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.3);
-		color: var(--brand-mocha-mousse);
-	}
-
-	.contact-link--mocha:hover {
-		background: var(--brand-mocha-mousse);
-		color: var(--brand-warm-white);
-		transform: scale(1.05);
-	}
-
-	.contact-icon {
-		width: var(--size-5);
-		height: var(--size-5);
-	}
-
-	/* Responsive adjustments for contact section */
-	@media (max-width: 768px) {
-		.contact-container {
-			padding: var(--size-6);
-		}
-
-		.contact-title {
-			font-size: var(--font-size-5);
-		}
-	}
-</style>
-
-<script>
-	// Contact form handling with TypeScript types
-	interface ContactFormData {
-		name: string;
-		email: string;
-		subject: string;
-		message: string;
-	}
-
-	interface FormValidation {
-		name: boolean;
-		email: boolean;
-		subject: boolean;
-		message: boolean;
-	}
-
-	const validateForm = (data: ContactFormData): FormValidation => {
-		return {
-			name: data.name.trim().length > 0,
-			email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email),
-			subject: data.subject.trim().length > 0,
-			message: data.message.trim().length > 10,
-		};
-	};
-
-	document.addEventListener("DOMContentLoaded", () => {
-		const form = document.getElementById("contact-form") as HTMLFormElement;
-		const formStatus = document.getElementById("form-status");
-		const successMessage = document.getElementById("success-message");
-		const errorMessage = document.getElementById("error-message");
-
-		if (!form || !formStatus || !successMessage || !errorMessage) return;
-
-		form.addEventListener("submit", async (e) => {
-			e.preventDefault();
-
-			// Hide any previous status messages
-			formStatus.classList.add("form-status--hidden");
-			successMessage.classList.add("status-message--hidden");
-			errorMessage.classList.add("status-message--hidden");
-
-			// Get form data with proper typing
-			const formData = new FormData(form);
-			const data: ContactFormData = {
-				name: (formData.get("name") as string) || "",
-				email: (formData.get("email") as string) || "",
-				subject: (formData.get("subject") as string) || "",
-				message: (formData.get("message") as string) || "",
-			};
-
-			// Validate form data
-			const validation = validateForm(data);
-			const isValid = Object.values(validation).every(Boolean);
-
-			if (!isValid) {
-				console.error("Form validation failed:", validation);
-				// Show error message for validation failure
-				formStatus.classList.remove("form-status--hidden");
-				errorMessage.classList.remove("status-message--hidden");
-				return;
-			}
-
-			try {
-				// For now, we'll simulate a successful submission
-				// In a real implementation, you would send this to your backend
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-
-				// Show success message
-				formStatus.classList.remove("form-status--hidden");
-				successMessage.classList.remove("status-message--hidden");
-
-				// Reset form
-				form.reset();
-
-				// Hide success message after 5 seconds
-				setTimeout(() => {
-					formStatus.classList.add("form-status--hidden");
-					successMessage.classList.add("status-message--hidden");
-				}, 5000);
-			} catch (error) {
-				console.error("Form submission error:", error);
-
-				// Show error message
-				formStatus.classList.remove("form-status--hidden");
-				errorMessage.classList.remove("status-message--hidden");
-
-				// Hide error message after 5 seconds
-				setTimeout(() => {
-					formStatus.classList.add("form-status--hidden");
-					errorMessage.classList.add("status-message--hidden");
-				}, 5000);
-			}
-		});
-
-		// Add smooth scrolling for contact section
-		const contactLinks = document.querySelectorAll('a[href="#contact"]');
-		contactLinks.forEach((link) => {
-			link.addEventListener("click", (e) => {
-				e.preventDefault();
-				const contactSection = document.getElementById("contact");
-				if (contactSection) {
-					contactSection.scrollIntoView({
-						behavior: "smooth",
-						block: "start",
-					});
-				}
-			});
-		});
-	});
-</script>
