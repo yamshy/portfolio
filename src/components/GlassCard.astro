@@ -14,34 +14,79 @@ const {
   class: className = '',
   hover = true
 } = Astro.props;
-
-const variantClasses = {
-  coral: 'bg-glass-coral border-coral-primary/20',
-  mocha: 'bg-glass-mocha border-mocha-mousse/20',
-  blue: 'bg-glass-blue border-cool-contrast/20',
-  yellow: 'bg-glass-yellow border-accent-yellow/20'
-};
-
-const sizeClasses = {
-  sm: 'p-4 lg:p-6',
-  md: 'p-6 lg:p-8',
-  lg: 'p-8 lg:p-12'
-};
-
-const hoverClasses = hover 
-  ? 'transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl' 
-  : '';
 ---
 
-<div class={`
-  backdrop-blur-xl 
-  border 
-  rounded-3xl 
-  shadow-xl 
-  ${variantClasses[variant]} 
-  ${sizeClasses[size]} 
-  ${hoverClasses}
-  ${className}
-`}>
+<div class={`glass-card glass-card--${variant} glass-card--${size} ${hover ? 'glass-card--hover' : ''} ${className}`}>
   <slot />
 </div>
+
+<style>
+  .glass-card {
+    backdrop-filter: blur(16px);
+    border: 1px solid;
+    border-radius: var(--radius-6);
+    box-shadow: var(--shadow-4);
+  }
+
+  /* Variant styles */
+  .glass-card--coral {
+    background: var(--brand-glass-coral);
+    border-color: rgb(from var(--brand-coral-primary) r g b / 0.2);
+  }
+
+  .glass-card--mocha {
+    background: var(--brand-glass-mocha);
+    border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.2);
+  }
+
+  .glass-card--blue {
+    background: var(--brand-glass-blue);
+    border-color: rgb(from var(--brand-cool-contrast) r g b / 0.2);
+  }
+
+  .glass-card--yellow {
+    background: var(--brand-glass-yellow);
+    border-color: rgb(from var(--brand-accent-yellow) r g b / 0.2);
+  }
+
+  /* Size styles */
+  .glass-card--sm {
+    padding: var(--size-4);
+  }
+
+  @media (min-width: 1024px) {
+    .glass-card--sm {
+      padding: var(--size-6);
+    }
+  }
+
+  .glass-card--md {
+    padding: var(--size-6);
+  }
+
+  @media (min-width: 1024px) {
+    .glass-card--md {
+      padding: var(--size-8);
+    }
+  }
+
+  .glass-card--lg {
+    padding: var(--size-8);
+  }
+
+  @media (min-width: 1024px) {
+    .glass-card--lg {
+      padding: var(--size-12);
+    }
+  }
+
+  /* Hover effects */
+  .glass-card--hover {
+    transition: all var(--animation-duration-slow) var(--ease-3);
+  }
+
+  .glass-card--hover:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-6);
+  }
+</style>

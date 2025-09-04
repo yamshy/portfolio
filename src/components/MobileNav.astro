@@ -8,20 +8,16 @@ const navItems = [
 ];
 ---
 
-<nav
-  class="lg:hidden fixed top-0 left-0 w-full bg-warm-white/80 backdrop-blur-lg z-50"
-  role="navigation"
-  aria-label="Mobile navigation"
->
-  <div class="flex items-center justify-between px-4 h-16">
-    <span class="text-xl font-bold text-coral-primary">Shyam</span>
+<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <div class="mobile-nav-header">
+    <span class="mobile-nav-brand">Shyam</span>
     <button
       id="mobile-nav-toggle"
-      class="p-2 text-text-dark"
+      class="mobile-nav-toggle"
       aria-label="Toggle navigation"
     >
       <svg
-        class="w-6 h-6"
+        class="mobile-nav-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -34,16 +30,105 @@ const navItems = [
       </svg>
     </button>
   </div>
-  <div id="mobile-nav-menu" class="hidden flex-col items-center space-y-4 pb-4">
+  <div id="mobile-nav-menu" class="mobile-nav-menu mobile-nav-menu--hidden">
     {
       navItems.map((item) => (
-        <a href={item.href} class="text-lg text-text-dark mobile-nav-link">
+        <a href={item.href} class="mobile-nav-link">
           {item.label}
         </a>
       ))
     }
   </div>
 </nav>
+
+<style>
+  .mobile-nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(from var(--brand-warm-white) r g b / 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 50;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--size-4);
+    height: 4rem;
+  }
+
+  .mobile-nav-brand {
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-7);
+    color: var(--brand-coral-primary);
+  }
+
+  .mobile-nav-toggle {
+    padding: var(--size-2);
+    color: var(--brand-text-dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-2);
+    transition: background-color var(--animation-duration-normal);
+  }
+
+  .mobile-nav-toggle:hover {
+    background: rgb(from var(--brand-text-dark) r g b / 0.1);
+  }
+
+  .mobile-nav-toggle:focus-visible {
+    outline: 2px solid var(--brand-coral-primary);
+    outline-offset: 2px;
+  }
+
+  .mobile-nav-icon {
+    width: var(--size-6);
+    height: var(--size-6);
+  }
+
+  .mobile-nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--size-4);
+    padding-bottom: var(--size-4);
+  }
+
+  .mobile-nav-menu--hidden {
+    display: none;
+  }
+
+  .mobile-nav-link {
+    font-size: var(--font-size-2);
+    color: var(--brand-text-dark);
+    text-decoration: none;
+    padding: var(--size-2) var(--size-4);
+    border-radius: var(--radius-2);
+    transition: all var(--animation-duration-normal);
+  }
+
+  .mobile-nav-link:hover {
+    background: var(--brand-glass-coral);
+    color: var(--brand-coral-primary);
+  }
+
+  .mobile-nav-link:focus-visible {
+    outline: 2px solid var(--brand-coral-primary);
+    outline-offset: 2px;
+  }
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("mobile-nav-toggle");
@@ -52,7 +137,7 @@ const navItems = [
 
     if (toggle && menu) {
       toggle.addEventListener("click", () => {
-        menu.classList.toggle("hidden");
+        menu.classList.toggle("mobile-nav-menu--hidden");
       });
     }
 
@@ -60,7 +145,7 @@ const navItems = [
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
         if (menu) {
-          menu.classList.add("hidden");
+          menu.classList.add("mobile-nav-menu--hidden");
         }
       });
     });

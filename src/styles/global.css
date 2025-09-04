@@ -1,124 +1,105 @@
-@import "tailwindcss";
+/* Open Props Integration with Custom Brand Colors */
+@import "open-props/style";
 
-/* Theme colors defined using @theme directive for Tailwind v4 */
-@theme {
-  /* Custom color palette */
-  --color-warm-white: #FEFCF8;
-  --color-coral-primary: #E85A2B;
-  --color-text-dark: #1A0D08;
-  --color-accent-yellow: #FFD644;
-  --color-mocha-mousse: #A47864;
-  --color-cool-contrast: #2563EB;
+/* Custom Brand Colors - preserved from original design */
+:root {
+  /* Core brand colors - these define the visual identity */
+  --brand-warm-white: #FEFCF8;
+  --brand-coral-primary: #E85A2B;
+  --brand-text-dark: #1A0D08;
+  --brand-accent-yellow: #FFD644;
+  --brand-mocha-mousse: #A47864;
+  --brand-cool-contrast: #2563EB;
 
   /* Glassmorphism colors - derived from core colors */
-  --color-glass-coral: rgb(from var(--color-coral-primary) r g b / 0.2);
-  --color-glass-mocha: rgb(from var(--color-mocha-mousse) r g b / 0.15);
-  --color-glass-yellow: rgb(from var(--color-accent-yellow) r g b / 0.15);
-  --color-glass-blue: rgb(from var(--color-cool-contrast) r g b / 0.1);
-  --color-glass-dark: rgb(from var(--color-text-dark) r g b / 0.1);
+  --brand-glass-coral: rgb(from var(--brand-coral-primary) r g b / 0.2);
+  --brand-glass-mocha: rgb(from var(--brand-mocha-mousse) r g b / 0.15);
+  --brand-glass-yellow: rgb(from var(--brand-accent-yellow) r g b / 0.15);
+  --brand-glass-blue: rgb(from var(--brand-cool-contrast) r g b / 0.1);
+  --brand-glass-dark: rgb(from var(--brand-text-dark) r g b / 0.1);
 
-  /* Mocha color scale */
-  --color-mocha-50: #FEFCF8;
-  --color-mocha-100: #ede6e1;
-  --color-mocha-200: #E5D5CC;
-  --color-mocha-300: #c2b0a3;
-  --color-mocha-400: #a47864;
-  --color-mocha-500: #A47864;
-  --color-mocha-600: #8B6B5A;
-  --color-mocha-700: #654a3f;
-  --color-mocha-800: #503c33;
-  --color-mocha-900: #1A0D08;
+  /* Typography scale matching Tailwind's text-* classes */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  --text-7xl: 4.5rem;     /* 72px */
+  --text-8xl: 6rem;       /* 96px */
+  --text-9xl: 8rem;       /* 128px */
 
-  /* Terracotta color scale */
-  --color-terracotta-50: #fdf4f2;
-  --color-terracotta-100: #fbe8e4;
-  --color-terracotta-200: #f6d1c9;
-  --color-terracotta-300: #eeb3a6;
-  --color-terracotta-400: #E85A2B;
-  --color-terracotta-500: #d45a42;
-  --color-terracotta-600: #b84a35;
-  --color-terracotta-700: #9a3d2d;
-  --color-terracotta-800: #7c3226;
-  --color-terracotta-900: #5e271f;
+  /* Extended brand color scales */
+  --brand-mocha-50: #FEFCF8;
+  --brand-mocha-100: #ede6e1;
+  --brand-mocha-200: #E5D5CC;
+  --brand-mocha-300: #c2b0a3;
+  --brand-mocha-400: #a47864;
+  --brand-mocha-500: #A47864;
+  --brand-mocha-600: #8B6B5A;
+  --brand-mocha-700: #654a3f;
+  --brand-mocha-800: #503c33;
+  --brand-mocha-900: #1A0D08;
 
-  /* Neon yellow color scale */
-  --color-neon-yellow-50: #fffbeb;
-  --color-neon-yellow-100: #fff7d1;
-  --color-neon-yellow-200: #ffed9a;
-  --color-neon-yellow-300: #ffdd44;
-  --color-neon-yellow-400: #f5c842;
-  --color-neon-yellow-500: #e6b73a;
-  --color-neon-yellow-600: #d4a632;
-  --color-neon-yellow-700: #c2952a;
-  --color-neon-yellow-800: #b08422;
-  --color-neon-yellow-900: #9e731a;
+  --brand-terracotta-50: #fdf4f2;
+  --brand-terracotta-100: #fbe8e4;
+  --brand-terracotta-200: #f6d1c9;
+  --brand-terracotta-300: #eeb3a6;
+  --brand-terracotta-400: #E85A2B;
+  --brand-terracotta-500: #d45a42;
+  --brand-terracotta-600: #b84a35;
+  --brand-terracotta-700: #9a3d2d;
+  --brand-terracotta-800: #7c3226;
+  --brand-terracotta-900: #5e271f;
 
-  /* Warm blue color scale */
-  --color-warm-blue-50: #f0f9ff;
-  --color-warm-blue-100: #e0f2fe;
-  --color-warm-blue-200: #bae6fd;
-  --color-warm-blue-300: #7dd3fc;
-  --color-warm-blue-400: #38bdf8;
-  --color-warm-blue-500: #0ea5e9;
-  --color-warm-blue-600: #0284c7;
-  --color-warm-blue-700: #0369a1;
-  --color-warm-blue-800: #075985;
-  --color-warm-blue-900: #0c4a6e;
+  --brand-neon-yellow-50: #fffbeb;
+  --brand-neon-yellow-100: #fff7d1;
+  --brand-neon-yellow-200: #ffed9a;
+  --brand-neon-yellow-300: #ffdd44;
+  --brand-neon-yellow-400: #f5c842;
+  --brand-neon-yellow-500: #e6b73a;
+  --brand-neon-yellow-600: #d4a632;
+  --brand-neon-yellow-700: #c2952a;
+  --brand-neon-yellow-800: #b08422;
+  --brand-neon-yellow-900: #9e731a;
 
-  /* Digital lavender color scale */
-  --color-digital-lavender-50: #f8f7ff;
-  --color-digital-lavender-100: #f0edff;
-  --color-digital-lavender-200: #e6e0ff;
-  --color-digital-lavender-300: #d1c7ff;
-  --color-digital-lavender-400: #b5a3ff;
-  --color-digital-lavender-500: #9b7fff;
-  --color-digital-lavender-600: #8b5cf6;
-  --color-digital-lavender-700: #7c3aed;
-  --color-digital-lavender-800: #6d28d9;
-  --color-digital-lavender-900: #5b21b6;
+  --brand-warm-blue-50: #f0f9ff;
+  --brand-warm-blue-100: #e0f2fe;
+  --brand-warm-blue-200: #bae6fd;
+  --brand-warm-blue-300: #7dd3fc;
+  --brand-warm-blue-400: #38bdf8;
+  --brand-warm-blue-500: #0ea5e9;
+  --brand-warm-blue-600: #0284c7;
+  --brand-warm-blue-700: #0369a1;
+  --brand-warm-blue-800: #075985;
+  --brand-warm-blue-900: #0c4a6e;
 
-  /* Glassmorphism utility classes */
+  --brand-digital-lavender-50: #f8f7ff;
+  --brand-digital-lavender-100: #f0edff;
+  --brand-digital-lavender-200: #e6e0ff;
+  --brand-digital-lavender-300: #d1c7ff;
+  --brand-digital-lavender-400: #b5a3ff;
+  --brand-digital-lavender-500: #9b7fff;
+  --brand-digital-lavender-600: #8b5cf6;
+  --brand-digital-lavender-700: #7c3aed;
+  --brand-digital-lavender-800: #6d28d9;
+  --brand-digital-lavender-900: #5b21b6;
+
+  /* Glassmorphism configuration */
   --glass-backdrop-filter: blur(12px);
   --glass-border-width: 1px;
   --glass-border-style: solid;
-}
 
-/* Glassmorphism utility classes */
-.glass {
-  backdrop-filter: var(--glass-backdrop-filter);
-  background: rgba(255, 255, 255, 0.1);
-  border: var(--glass-border-width) var(--glass-border-style) rgba(255, 255, 255, 0.2);
-}
-
-.glass-coral {
-  backdrop-filter: var(--glass-backdrop-filter);
-  background: var(--color-glass-coral);
-  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-coral-primary) r g b / 0.3);
-}
-
-.glass-mocha {
-  backdrop-filter: var(--glass-backdrop-filter);
-  background: var(--color-glass-mocha);
-  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-mocha-mousse) r g b / 0.2);
-}
-
-.glass-blue {
-  backdrop-filter: var(--glass-backdrop-filter);
-  background: var(--color-glass-blue);
-  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-cool-contrast) r g b / 0.2);
-}
-
-.glass-yellow {
-  backdrop-filter: var(--glass-backdrop-filter);
-  background: var(--color-glass-yellow);
-  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--color-accent-yellow) r g b / 0.2);
-}
-
-/* Set RST Thermal as the default font family */
-html,
-body,
-* {
-  font-family: 'RST Thermal', ui-sans-serif, system-ui, sans-serif;
+  /* Custom animations using Open Props easing */
+  --animation-morph: morph 8s var(--ease-in-out-3) infinite;
+  --animation-float: float 3s var(--ease-in-out-2) infinite;
+  --animation-organic-float: organicFloat 4s var(--ease-in-out-3) infinite;
+  --animation-cell-float: cellFloat 6s var(--ease-out-4) infinite;
+  --animation-cell-breathe: cellBreathe 0.4s var(--ease-out-4) forwards;
 }
 
 /* RST Thermal Font Family */
@@ -154,28 +135,70 @@ body,
   font-display: swap;
 }
 
-/* Organic Shapes and Enhanced Styling */
+/* Set RST Thermal as the default font family */
+html,
+body,
+* {
+  font-family: 'RST Thermal', var(--font-sans);
+}
+
+/* Enhanced scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism utility classes using Open Props */
+.glass {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: rgba(255, 255, 255, 0.1);
+  border: var(--glass-border-width) var(--glass-border-style) rgba(255, 255, 255, 0.2);
+}
+
+.glass-coral {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--brand-glass-coral);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--brand-coral-primary) r g b / 0.3);
+}
+
+.glass-mocha {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--brand-glass-mocha);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--brand-mocha-mousse) r g b / 0.2);
+}
+
+.glass-blue {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--brand-glass-blue);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--brand-cool-contrast) r g b / 0.2);
+}
+
+.glass-yellow {
+  backdrop-filter: var(--glass-backdrop-filter);
+  background: var(--brand-glass-yellow);
+  border: var(--glass-border-width) var(--glass-border-style) rgb(from var(--brand-accent-yellow) r g b / 0.2);
+}
 
 /* Organic blob shapes using CSS - optimized for performance */
 .organic-blob {
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  animation: blob 7s ease-in-out infinite;
+  animation: blob 7s var(--ease-in-out-3) infinite;
   will-change: border-radius;
 }
 
 .organic-blob-2 {
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  animation: blob 7s ease-in-out infinite reverse;
+  animation: blob 7s var(--ease-in-out-3) infinite reverse;
   will-change: border-radius;
 }
 
 .organic-blob-3 {
   border-radius: 50% 30% 50% 70% / 40% 60% 40% 60%;
-  animation: blob 7s ease-in-out infinite;
+  animation: blob 7s var(--ease-in-out-3) infinite;
   animation-delay: -3.5s;
   will-change: border-radius;
 }
 
+/* Animation keyframes */
 @keyframes blob {
   0% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -198,69 +221,142 @@ body,
   }
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(var(--size-5)); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(var(--size-8)); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes grow {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 30% 60% 40% / 30% 50% 60% 70%; }
+  75% { border-radius: 40% 70% 50% 60% / 70% 40% 50% 30%; }
+}
+
+@keyframes drawLine {
+  0% { stroke-dashoffset: 100%; }
+  100% { stroke-dashoffset: 0%; }
+}
+
+@keyframes organicFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-0.5deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-25%); animation-timing-function: var(--ease-out-4); }
+  50% { transform: none; animation-timing-function: var(--ease-in-4); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+@keyframes cellFloat {
+  0%, 100% { 
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% { 
+    border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
+    transform: translateY(-1px) rotate(0.5deg);
+  }
+  50% { 
+    border-radius: 55% 45% 45% 55% / 45% 55% 55% 45%;
+    transform: translateY(1px) rotate(-0.3deg);
+  }
+  75% { 
+    border-radius: 45% 55% 55% 45% / 55% 55% 45% 45%;
+    transform: translateY(-1px) rotate(0.2deg);
+  }
+}
+
+@keyframes cellBreathe {
+  0% { 
+    transform: scale(1);
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+  }
+  50% { 
+    transform: scale(1.08);
+    border-radius: 40% 60% 60% 40% / 45% 55% 55% 45%;
+  }
+  100% { 
+    transform: scale(1.03);
+    border-radius: 52% 48% 48% 52% / 50% 50% 50% 50%;
+  }
+}
+
 /* Liquid typography effect - optimized for performance */
 .liquid-text {
-  background: linear-gradient(45deg, var(--color-mocha-mousse), var(--color-coral-primary), var(--color-cool-contrast), var(--color-accent-yellow));
+  background: linear-gradient(45deg, var(--brand-mocha-mousse), var(--brand-coral-primary), var(--brand-cool-contrast), var(--brand-accent-yellow));
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: liquidGradient 4s ease-in-out infinite;
+  animation: liquidGradient 4s var(--ease-in-out-3) infinite;
   will-change: background-position;
 }
 
 @keyframes liquidGradient {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-/* Custom animation keyframes not in Tailwind config */
-
-/* Enhanced scroll behavior */
-html {
-  scroll-behavior: smooth;
+/* Gradient text effects */
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-mocha-mousse) 0%, var(--brand-coral-primary) 50%, var(--brand-cool-contrast) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Enhanced focus states for accessibility */
+/* Organic shadow effects using Open Props shadows as base */
+.organic-shadow {
+  box-shadow: var(--shadow-2), 0 2px 8px rgb(from var(--brand-mocha-mousse) r g b / 0.1);
+}
+
+.organic-shadow-lg {
+  box-shadow: var(--shadow-4), 0 4px 16px rgb(from var(--brand-mocha-mousse) r g b / 0.15);
+}
+
+/* Enhanced focus states for accessibility using Open Props */
 *:focus-visible {
-  outline: 2px solid var(--color-coral-primary);
+  outline: 2px solid var(--brand-coral-primary);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--radius-2);
 }
 
 /* Smooth transitions for all interactive elements */
 a,
 button,
 [role="button"] {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--animation-duration-normal) var(--ease-3);
 }
 
-/* Organic shadow effects */
-.organic-shadow {
-  box-shadow:
-    0 4px 20px rgb(from var(--color-mocha-mousse) r g b / 0.15),
-    0 2px 8px rgb(from var(--color-mocha-mousse) r g b / 0.1);
-}
-
-.organic-shadow-lg {
-  box-shadow:
-    0 8px 40px rgb(from var(--color-mocha-mousse) r g b / 0.2),
-    0 4px 16px rgb(from var(--color-mocha-mousse) r g b / 0.15);
-}
-
-/* Gradient text effects */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-mocha-mousse) 0%, var(--color-coral-primary) 50%, var(--color-cool-contrast) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Enhanced button and link accessibility */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--brand-coral-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-2);
 }
 
 /* Accessibility enhancements */
@@ -313,7 +409,6 @@ button,
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -330,18 +425,47 @@ button,
   }
 }
 
-/* Focus indicators for better accessibility */
-.focus-visible:focus-visible {
-  outline: 2px solid var(--color-coral-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* Animation utility classes using Open Props */
+.animate-fade-in {
+  animation: fadeIn 0.6s var(--ease-out-3);
 }
 
-/* Enhanced button and link accessibility */
-button:focus-visible,
-a:focus-visible,
-[role="button"]:focus-visible {
-  outline: 2px solid var(--color-coral-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
+.animate-slide-up {
+  animation: slideUp 0.8s var(--ease-out-3);
+}
+
+.animate-float {
+  animation: float 3s var(--ease-in-out-2) infinite;
+}
+
+.animate-grow {
+  animation: grow 0.6s var(--ease-out-3);
+}
+
+.animate-morph {
+  animation: morph 8s var(--ease-in-out-3) infinite;
+}
+
+.animate-draw-line {
+  animation: drawLine 1.5s var(--ease-out-3);
+}
+
+.animate-organic-float {
+  animation: organicFloat 4s var(--ease-in-out-3) infinite;
+}
+
+.animate-cell-float {
+  animation: cellFloat 6s var(--ease-out-4) infinite;
+}
+
+.animate-cell-breathe {
+  animation: cellBreathe 0.4s var(--ease-out-4) forwards;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--ease-in-out-2) infinite;
 }

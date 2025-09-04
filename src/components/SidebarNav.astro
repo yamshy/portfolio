@@ -7,25 +7,25 @@ const mainNavItems = [
 		href: "#hero",
 		label: "Home",
 		section: "hero",
-		style: "bg-coral-primary/20 border-coral-primary/30 text-coral-primary hover:bg-coral-primary hover:rotate-1",
+		variant: "coral",
 	},
 	{
 		href: "#evolution",
 		label: "Experience",
 		section: "evolution",
-		style: "bg-glass-mocha border-mocha-mousse/30 text-mocha-mousse hover:bg-mocha-mousse hover:-rotate-1",
+		variant: "mocha",
 	},
 	{
 		href: "#projects",
 		label: "Projects",
 		section: "projects",
-		style: "bg-glass-blue border-cool-contrast/30 text-cool-contrast hover:bg-cool-contrast hover:rotate-1",
+		variant: "blue",
 	},
 	{
 		href: "#contact",
 		label: "Contact",
 		section: "contact",
-		style: "bg-glass-yellow border-accent-yellow/30 text-text-dark hover:bg-accent-yellow hover:-rotate-1",
+		variant: "yellow",
 	},
 ];
 
@@ -34,57 +34,38 @@ const externalLinks = [
 	{
 		href: "https://github.com/yamshy",
 		label: "GitHub",
-		style: "bg-glass-mocha border-mocha-mousse/30 text-mocha-mousse hover:bg-mocha-mousse hover:-rotate-1",
+		variant: "mocha",
 	},
 	{
 		href: "mailto:sajudia@proton.me",
 		label: "Email",
-		style: "bg-glass-coral border-coral-primary/30 text-coral-primary hover:bg-coral-primary hover:rotate-1",
+		variant: "coral",
 	},
 ];
 ---
 
-<nav
-	class="hidden lg:block fixed left-0 top-0 h-full w-40 lg:w-48 z-50 pointer-events-none"
-	role="navigation"
-	aria-label="Main navigation"
->
-	<div
-		class="h-full flex flex-col items-center justify-center space-y-8 pointer-events-auto"
-	>
+<nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+	<div class="nav-container">
 		<!-- Navigation container with organic progress bar -->
-		<div class="relative flex flex-col items-start">
+		<div class="nav-items-wrapper">
 			<!-- Organic progress indicator background -->
-			<div
-				class="absolute left-3 top-0 w-1 h-full rounded-full overflow-hidden z-0"
-			>
+			<div class="progress-track">
 				<!-- Single progress bar that grows between navigation buttons -->
-				<div
-					id="progress-bar"
-					class="absolute top-0 left-0 w-full bg-gradient-to-b from-coral-primary via-mocha-mousse to-cool-contrast rounded-full transition-all duration-300 ease-out"
-					style="height: 0%"
-				>
-				</div>
+				<div id="progress-bar" class="progress-bar"></div>
 			</div>
 
 			<!-- Main navigation sections -->
 			{
 				mainNavItems.map((item, index) => (
-					<div
-						class={`relative z-20 ml-8 ${index === mainNavItems.length - 1 ? "mb-20" : "mb-4"}`}
-					>
+					<div class={`nav-item ${index === mainNavItems.length - 1 ? "nav-item--last-main" : ""}`}>
 						<a
 							href={item.href}
-							class="nav-organic-button group relative z-20"
+							class={`nav-button nav-button--${item.variant}`}
 							data-section={item.section}
 							aria-label={`Navigate to ${item.label} section`}
 						>
-							<div
-								class={`cell-nav-shape backdrop-blur-lg border ${item.style} px-6 py-3 transition-all duration-300 hover:scale-105`}
-							>
-								<span class="text-sm font-medium transition-colors duration-300 group-hover:text-warm-white">
-									{item.label}
-								</span>
+							<div class="nav-button-shape">
+								<span class="nav-button-text">{item.label}</span>
 							</div>
 						</a>
 					</div>
@@ -94,22 +75,16 @@ const externalLinks = [
 			<!-- External links (smaller buttons) -->
 			{
 				externalLinks.map((link, index) => (
-					<div
-						class={`relative z-20 ml-8 ${index === externalLinks.length - 1 ? "" : "mb-4"}`}
-					>
+					<div class={`nav-item nav-item--external ${index === externalLinks.length - 1 ? "" : ""}`}>
 						<a
 							href={link.href}
-							class="nav-organic-button group relative z-20"
+							class={`nav-button nav-button--small nav-button--${link.variant}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label={`Open ${link.label} in new tab`}
 						>
-							<div
-								class={`cell-nav-shape backdrop-blur-lg border ${link.style} px-4 py-2 transition-all duration-300 hover:scale-110`}
-							>
-								<span class="text-xs font-medium transition-colors duration-300 group-hover:text-warm-white">
-									{link.label}
-								</span>
+							<div class="nav-button-shape nav-button-shape--small">
+								<span class="nav-button-text nav-button-text--small">{link.label}</span>
 							</div>
 						</a>
 					</div>
@@ -120,69 +95,194 @@ const externalLinks = [
 </nav>
 
 <style>
-	/* Cell-like navigation button styles */
-	.cell-nav-shape {
-		border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
-		animation: cellFloat 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-		backdrop-filter: blur(8px);
-		will-change: border-radius, transform;
-		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	.sidebar-nav {
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 10rem; /* 160px */
+		z-index: 50;
+		pointer-events: none;
 	}
 
-	.cell-nav-shape:hover {
-		border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
-		animation: cellBreathe 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+	@media (min-width: 1024px) {
+		.sidebar-nav {
+			display: block;
+			width: 12rem; /* 192px */
+		}
 	}
 
-	.nav-organic-button {
+	.nav-container {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-8);
+		pointer-events: auto;
+	}
+
+	.nav-items-wrapper {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.progress-track {
+		position: absolute;
+		left: var(--size-3);
+		top: 0;
+		width: 1px;
+		height: 100%;
+		border-radius: var(--radius-round);
+		overflow: hidden;
+		z-index: 0;
+	}
+
+	.progress-bar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background: linear-gradient(to bottom, var(--brand-coral-primary), var(--brand-mocha-mousse), var(--brand-cool-contrast));
+		border-radius: var(--radius-round);
+		transition: all var(--animation-duration-normal) var(--ease-out-3);
+		height: 0%;
+	}
+
+	.nav-item {
+		position: relative;
+		z-index: 20;
+		margin-left: var(--size-8);
+		margin-bottom: var(--size-4);
+	}
+
+	.nav-item--last-main {
+		margin-bottom: var(--size-12);
+	}
+
+	.nav-item--external {
+		margin-bottom: var(--size-4);
+	}
+
+	.nav-button {
+		position: relative;
+		z-index: 20;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-decoration: none;
 	}
 
-
-	.nav-organic-button .nav-label {
-		position: absolute;
-		left: 2rem;
-		background: rgb(from var(--color-text-dark) r g b / 0.9);
-		color: var(--color-warm-white);
-		padding: 0.5rem 1rem;
-		border-radius: 0.5rem;
-		font-size: 0.875rem;
-		font-weight: 500;
-		opacity: 0;
-		transform: translateX(-10px);
-		transition: all 0.3s ease;
-		pointer-events: none;
-		white-space: nowrap;
+	.nav-button-shape {
 		backdrop-filter: blur(8px);
-		border: 1px solid rgb(from var(--color-mocha-mousse) r g b / 0.2);
+		border: 1px solid;
+		padding: var(--size-3) var(--size-6);
+		transition: all var(--animation-duration-slow) var(--ease-out-4);
+		border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+		animation: cellFloat 6s var(--ease-out-4) infinite;
+		will-change: border-radius, transform;
 	}
 
-	.nav-organic-button:hover .nav-label {
-		opacity: 1;
-		transform: translateX(0);
+	.nav-button-shape--small {
+		padding: var(--size-2) var(--size-4);
 	}
 
-	.nav-organic-button.active .nav-label {
-		opacity: 1;
-		transform: translateX(0);
+	.nav-button-shape:hover {
+		border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
+		animation: cellBreathe 0.4s var(--ease-out-4) forwards;
 	}
 
-	.nav-organic-button.active > div {
-		background: var(--color-coral-primary) !important;
+	/* Color variants */
+	.nav-button--coral .nav-button-shape {
+		background: var(--brand-glass-coral);
+		border-color: rgb(from var(--brand-coral-primary) r g b / 0.3);
+		color: var(--brand-coral-primary);
+	}
+
+	.nav-button--coral .nav-button-shape:hover {
+		background: var(--brand-coral-primary);
+		transform: scale(1.05) rotate(1deg);
+	}
+
+	.nav-button--coral:hover .nav-button-text {
+		color: var(--brand-warm-white);
+	}
+
+	.nav-button--mocha .nav-button-shape {
+		background: var(--brand-glass-mocha);
+		border-color: rgb(from var(--brand-mocha-mousse) r g b / 0.3);
+		color: var(--brand-mocha-mousse);
+	}
+
+	.nav-button--mocha .nav-button-shape:hover {
+		background: var(--brand-mocha-mousse);
+		transform: scale(1.05) rotate(-1deg);
+	}
+
+	.nav-button--mocha:hover .nav-button-text {
+		color: var(--brand-warm-white);
+	}
+
+	.nav-button--blue .nav-button-shape {
+		background: var(--brand-glass-blue);
+		border-color: rgb(from var(--brand-cool-contrast) r g b / 0.3);
+		color: var(--brand-cool-contrast);
+	}
+
+	.nav-button--blue .nav-button-shape:hover {
+		background: var(--brand-cool-contrast);
+		transform: scale(1.05) rotate(1deg);
+	}
+
+	.nav-button--blue:hover .nav-button-text {
+		color: var(--brand-warm-white);
+	}
+
+	.nav-button--yellow .nav-button-shape {
+		background: var(--brand-glass-yellow);
+		border-color: rgb(from var(--brand-accent-yellow) r g b / 0.3);
+		color: var(--brand-text-dark);
+	}
+
+	.nav-button--yellow .nav-button-shape:hover {
+		background: var(--brand-accent-yellow);
+		transform: scale(1.05) rotate(-1deg);
+	}
+
+	.nav-button--yellow:hover .nav-button-text {
+		color: var(--brand-text-dark);
+	}
+
+	.nav-button--small .nav-button-shape:hover {
+		transform: scale(1.1);
+	}
+
+	.nav-button-text {
+		font-size: var(--font-size-0);
+		font-weight: var(--font-weight-5);
+		transition: colors var(--animation-duration-normal);
+	}
+
+	.nav-button-text--small {
+		font-size: var(--font-size-00);
+		font-weight: var(--font-weight-5);
+	}
+
+	.nav-button.active .nav-button-shape {
+		background: var(--brand-coral-primary) !important;
 		transform: scale(1.05);
 	}
 
-	.nav-organic-button.active > div > span {
-		color: var(--color-warm-white) !important;
+	.nav-button.active .nav-button-text {
+		color: var(--brand-warm-white) !important;
 	}
-
 
 	/* Mobile responsive */
 	@media (max-width: 1024px) {
-		nav {
+		.sidebar-nav {
 			display: none;
 		}
 	}
@@ -192,7 +292,7 @@ const externalLinks = [
 	// Progress bar and navigation functionality
 	function updateProgress() {
 		const progressBar = document.getElementById("progress-bar");
-		const allNavElements = document.querySelectorAll(".nav-organic-button");
+		const allNavElements = document.querySelectorAll(".nav-button");
 
 		if (!progressBar || allNavElements.length === 0) return;
 
@@ -201,19 +301,19 @@ const externalLinks = [
 		// Define only main navigation sections (not external links)
 		const navOrder = [
 			{
-				selector: '.nav-organic-button[data-section="hero"]',
+				selector: '.nav-button[data-section="hero"]',
 				target: "#hero",
 			},
 			{
-				selector: '.nav-organic-button[data-section="evolution"]',
+				selector: '.nav-button[data-section="evolution"]',
 				target: "#evolution",
 			},
 			{
-				selector: '.nav-organic-button[data-section="projects"]',
+				selector: '.nav-button[data-section="projects"]',
 				target: "#projects",
 			},
 			{
-				selector: '.nav-organic-button[data-section="contact"]',
+				selector: '.nav-button[data-section="contact"]',
 				target: "#contact",
 			},
 		];
@@ -247,19 +347,16 @@ const externalLinks = [
 
 		// Update progress bar to align with center of active button
 		if (activeElement) {
-			const activeButton = (activeElement as HTMLElement).querySelector(
-				".cell-nav-shape",
-			);
+			const activeButton = (activeElement as HTMLElement).querySelector(".nav-button-shape");
 			if (activeButton) {
 				const buttonRect = activeButton.getBoundingClientRect();
-				const navContainer = document.querySelector("nav > div > div");
+				const navContainer = document.querySelector(".nav-items-wrapper");
 				if (navContainer) {
 					const containerRect = navContainer.getBoundingClientRect();
 					const relativeTop = buttonRect.top - containerRect.top;
 					const buttonCenter = relativeTop + buttonRect.height / 2;
 					const containerHeight = containerRect.height;
-					const centerPercentage =
-						(buttonCenter / containerHeight) * 100;
+					const centerPercentage = (buttonCenter / containerHeight) * 100;
 
 					// Set progress bar to extend to the center of the active button
 					progressBar.style.height = `${Math.min(centerPercentage, 100)}%`;
@@ -282,13 +379,13 @@ const externalLinks = [
 
 	// Smooth scroll for navigation links
 	document.addEventListener("DOMContentLoaded", () => {
-		const navLinks = document.querySelectorAll(".nav-organic-button");
+		const navLinks = document.querySelectorAll(".nav-button");
 
 		navLinks.forEach((link) => {
 			link.addEventListener("click", (e) => {
 				e.preventDefault();
 				const href = link.getAttribute("href");
-				if (!href) return;
+				if (!href || href.startsWith("http") || href.startsWith("mailto:")) return;
 
 				const targetId = href.substring(1);
 				const targetElement = document.getElementById(targetId);

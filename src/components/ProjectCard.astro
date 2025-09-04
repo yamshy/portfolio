@@ -16,58 +16,237 @@ const offsetX = gridCol * 300;
 const offsetY = gridRow * 200;
 ---
 
-<a href={link} target="_blank" rel="noopener noreferrer" class="group block">
-    <div
-        class="aspect-[4/3] bg-gradient-to-br from-warm-blue-100 to-digital-lavender-100 mb-6 overflow-hidden relative organic-blob border border-warm-blue-300 organic-shadow hover:organic-shadow-lg transition-all duration-500 hover:scale-[1.02]"
-    >
+<a href={link} target="_blank" rel="noopener noreferrer" class="project-card">
+    <div class="project-visual" style={`--offset-x: -${offsetX}px; --offset-y: -${offsetY}px;`}>
         <!-- Shared background layer - each card shows different part -->
-        <div 
-            class="absolute inset-0 w-full h-full opacity-80"
-            style={`background: linear-gradient(45deg, rgba(164, 120, 100, 0.8) 0%, rgba(226, 114, 91, 0.8) 33%, rgba(167, 139, 250, 0.8) 66%, rgba(255, 221, 68, 0.8) 100%); background-size: 800% 800%; background-position: -${offsetX}px -${offsetY}px; animation: liquidGradient 8s ease-in-out infinite;`}
-        ></div>
+        <div class="project-background"></div>
         
         <!-- Project content -->
-        <div
-            class="w-full h-full flex items-center justify-center relative group-hover:opacity-0 transition-opacity duration-500 z-10"
-        >
-            
-            <div class="text-center relative z-10">
-                <div class="text-2xl font-bold mb-2 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
-                    {title}
-                </div>
-                <div class="text-sm text-white font-medium" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.4);">Project Preview</div>
+        <div class="project-preview">
+            <div class="preview-content">
+                <div class="preview-title">{title}</div>
+                <div class="preview-label">Project Preview</div>
             </div>
         </div>
 
         <!-- Hover Overlay -->
-        <div
-            class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-75 flex items-center justify-center"
-        >
-            <div class="text-center text-mocha-800 px-4 sm:px-8 py-4 sm:py-6">
-                <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 gradient-text">
-                    {title}
-                </h3>
+        <div class="project-overlay">
+            <div class="overlay-content">
+                <h3 class="overlay-title">{title}</h3>
                 {
                     description && (
-                        <p class="text-mocha-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed" set:html={description} />
+                        <p class="overlay-description" set:html={description} />
                     )
                 }
                 {
                     technologies && technologies.length > 0 && (
-                        <div class="flex flex-wrap justify-center gap-1 sm:gap-2 mb-4 sm:mb-6">
+                        <div class="overlay-technologies">
                             {technologies.map((tech) => (
-                                <span class="px-2 sm:px-3 py-1 bg-mocha-100 text-mocha-700 text-xs rounded-full border border-mocha-200 font-medium">
-                                    {tech}
-                                </span>
+                                <span class="technology-tag">{tech}</span>
                             ))}
                         </div>
                     )
                 }
-                <div class="inline-flex items-center gap-2 text-mocha-600 text-xs sm:text-sm font-medium bg-mocha-100/50 px-3 sm:px-4 py-2 rounded-full border border-mocha-200/50">
+                <div class="overlay-cta">
                     View Project
-                    <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    <span class="cta-arrow">→</span>
                 </div>
             </div>
         </div>
     </div>
 </a>
+
+<style>
+    .project-card {
+        display: block;
+        text-decoration: none;
+    }
+
+    .project-visual {
+        aspect-ratio: 4/3;
+        background: linear-gradient(45deg, var(--brand-warm-blue-100), var(--brand-digital-lavender-100));
+        margin-bottom: var(--size-6);
+        overflow: hidden;
+        position: relative;
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        border: 1px solid var(--brand-warm-blue-300);
+        box-shadow: var(--shadow-2), 0 2px 8px rgb(from var(--brand-mocha-mousse) r g b / 0.1);
+        transition: all var(--animation-duration-slow);
+        animation: blob 7s var(--ease-in-out-3) infinite;
+    }
+
+    .project-visual:hover {
+        transform: scale(1.02);
+        box-shadow: var(--shadow-4), 0 4px 16px rgb(from var(--brand-mocha-mousse) r g b / 0.15);
+    }
+
+    .project-background {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        background: linear-gradient(45deg, 
+            rgb(from var(--brand-mocha-mousse) r g b / 0.8) 0%, 
+            rgb(from var(--brand-coral-primary) r g b / 0.8) 33%, 
+            rgb(from var(--brand-digital-lavender-500) r g b / 0.8) 66%, 
+            rgb(from var(--brand-accent-yellow) r g b / 0.8) 100%
+        );
+        background-size: 800% 800%;
+        background-position: var(--offset-x) var(--offset-y);
+        animation: liquidGradient 8s var(--ease-in-out-3) infinite;
+    }
+
+    .project-preview {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+        transition: opacity var(--animation-duration-slow);
+    }
+
+    .project-card:hover .project-preview {
+        opacity: 0;
+    }
+
+    .preview-content {
+        text-align: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    .preview-title {
+        font-size: var(--font-size-4);
+        font-weight: var(--font-weight-7);
+        margin-bottom: var(--size-2);
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .preview-label {
+        font-size: var(--font-size-0);
+        color: white;
+        font-weight: var(--font-weight-5);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+
+    .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgb(from white r g b / 0.95);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 75ms;
+    }
+
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+
+    .overlay-content {
+        text-align: center;
+        color: var(--brand-mocha-800);
+        padding: var(--size-4);
+    }
+
+    @media (min-width: 640px) {
+        .overlay-content {
+            padding: var(--size-8) var(--size-6);
+        }
+    }
+
+    .overlay-title {
+        font-size: var(--font-size-3);
+        font-weight: var(--font-weight-7);
+        margin-bottom: var(--size-3);
+        background: linear-gradient(135deg, var(--brand-mocha-mousse) 0%, var(--brand-coral-primary) 50%, var(--brand-cool-contrast) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @media (min-width: 640px) {
+        .overlay-title {
+            font-size: var(--font-size-4);
+            margin-bottom: var(--size-4);
+        }
+    }
+
+    .overlay-description {
+        color: var(--brand-mocha-700);
+        font-size: var(--font-size-00);
+        margin-bottom: var(--size-4);
+        line-height: var(--font-lineheight-4);
+    }
+
+    @media (min-width: 640px) {
+        .overlay-description {
+            font-size: var(--font-size-0);
+            margin-bottom: var(--size-6);
+        }
+    }
+
+    .overlay-technologies {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--size-1);
+        margin-bottom: var(--size-4);
+    }
+
+    @media (min-width: 640px) {
+        .overlay-technologies {
+            gap: var(--size-2);
+            margin-bottom: var(--size-6);
+        }
+    }
+
+    .technology-tag {
+        padding: var(--size-1) var(--size-2);
+        background: var(--brand-mocha-100);
+        color: var(--brand-mocha-700);
+        font-size: var(--font-size-00);
+        border-radius: var(--radius-round);
+        border: 1px solid var(--brand-mocha-200);
+        font-weight: var(--font-weight-5);
+    }
+
+    @media (min-width: 640px) {
+        .technology-tag {
+            padding: var(--size-1) var(--size-3);
+        }
+    }
+
+    .overlay-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--size-2);
+        color: var(--brand-mocha-600);
+        font-size: var(--font-size-00);
+        font-weight: var(--font-weight-5);
+        background: rgb(from var(--brand-mocha-100) r g b / 0.5);
+        padding: var(--size-2) var(--size-3);
+        border-radius: var(--radius-round);
+        border: 1px solid rgb(from var(--brand-mocha-200) r g b / 0.5);
+    }
+
+    @media (min-width: 640px) {
+        .overlay-cta {
+            font-size: var(--font-size-0);
+            padding: var(--size-2) var(--size-4);
+        }
+    }
+
+    .cta-arrow {
+        transition: transform var(--animation-duration-normal);
+    }
+
+    .project-card:hover .cta-arrow {
+        transform: translateX(var(--size-1));
+    }
+</style>

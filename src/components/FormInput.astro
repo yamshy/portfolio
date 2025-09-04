@@ -18,33 +18,11 @@ const {
   rows = 4,
   class: className = ''
 } = Astro.props;
-
-const baseInputClasses = `
-  w-full 
-  px-4 
-  py-3 
-  bg-warm-white/50 
-  backdrop-blur-sm 
-  border 
-  border-mocha-mousse/30 
-  rounded-2xl 
-  text-text-dark 
-  placeholder-mocha-mousse/60 
-  focus:outline-none 
-  focus:ring-2 
-  focus:ring-coral-primary/50 
-  focus:border-coral-primary/50 
-  transition-all 
-  duration-300
-`;
-
-const textareaClasses = `${baseInputClasses} resize-none`;
-const inputClasses = baseInputClasses;
 ---
 
-<div class={`space-y-2 ${className}`}>
-  <label for={name} class="block text-sm font-medium text-text-dark">
-    {label} {required && <span class="text-coral-primary">*</span>}
+<div class={`form-input-group ${className}`}>
+  <label for={name} class="form-label">
+    {label} {required && <span class="required-indicator">*</span>}
   </label>
   {type === 'textarea' ? (
     <textarea
@@ -52,7 +30,7 @@ const inputClasses = baseInputClasses;
       name={name}
       rows={rows}
       required={required}
-      class={textareaClasses}
+      class="form-textarea"
       placeholder={placeholder}
       aria-describedby={placeholder ? `${name}-help` : undefined}
     />
@@ -62,7 +40,7 @@ const inputClasses = baseInputClasses;
       id={name}
       name={name}
       required={required}
-      class={inputClasses}
+      class="form-input"
       placeholder={placeholder}
       aria-describedby={placeholder ? `${name}-help` : undefined}
     />
@@ -73,3 +51,50 @@ const inputClasses = baseInputClasses;
     </div>
   )}
 </div>
+
+<style>
+  .form-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .form-label {
+    display: block;
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-5);
+    color: var(--brand-text-dark);
+  }
+
+  .required-indicator {
+    color: var(--brand-coral-primary);
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: var(--size-3) var(--size-4);
+    background: rgb(from var(--brand-warm-white) r g b / 0.5);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgb(from var(--brand-mocha-mousse) r g b / 0.3);
+    border-radius: var(--radius-4);
+    color: var(--brand-text-dark);
+    transition: all var(--animation-duration-normal);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: rgb(from var(--brand-mocha-mousse) r g b / 0.6);
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: rgb(from var(--brand-coral-primary) r g b / 0.5);
+    box-shadow: 0 0 0 2px rgb(from var(--brand-coral-primary) r g b / 0.5);
+  }
+
+  .form-textarea {
+    resize: none;
+  }
+</style>
