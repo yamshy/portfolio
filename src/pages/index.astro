@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NavGlass from '../components/NavGlass.astro';
+import SidebarNav from '../components/SidebarNav.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
@@ -57,7 +57,7 @@ const projects = [
 
 <BaseLayout title="yamshy - Biology-Inspired Portfolio">
   <OrganicShapes />
-  <NavGlass />
+  <SidebarNav />
   
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
@@ -120,14 +120,24 @@ const projects = [
     </section>
 
     <!-- Featured Work -->
-    <BentoGrid>
-      {projects.map(project => (
-        <ProjectCard {...project} />
-      ))}
-    </BentoGrid>
+    <section id="work" class="work-section">
+      <div class="work-content">
+        <h2 class="section-title">Featured Work</h2>
+        <BentoGrid>
+          {projects.map(project => (
+            <ProjectCard {...project} />
+          ))}
+        </BentoGrid>
+      </div>
+    </section>
 
     <!-- Professional Evolution Timeline -->
-    <Timeline />
+    <section id="evolution" class="evolution-section">
+      <div class="evolution-content">
+        <h2 class="section-title">Professional Evolution</h2>
+        <Timeline />
+      </div>
+    </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
@@ -160,7 +170,7 @@ const projects = [
     min-height: 100vh;
     position: relative;
     overflow: hidden;
-    padding: var(--sp-12) var(--sp-8);
+    padding: var(--sp-8) var(--sp-8) var(--sp-12) var(--sp-8);
   }
   
   .hero-grid {
@@ -453,10 +463,27 @@ const projects = [
     }
   }
   
+  .work-section {
+    padding: var(--sp-16) var(--sp-6);
+  }
+
+  .work-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .evolution-section {
+    padding: var(--sp-16) var(--sp-6);
+  }
+
+  .evolution-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
   .contact {
     padding: var(--sp-8) var(--sp-6);
     text-align: center;
-    background: color-mix(in oklab, var(--warm-bg), var(--glass-mocha) 30%);
     margin-top: var(--sp-8);
   }
   
@@ -503,8 +530,16 @@ const projects = [
   
   @media (max-width: 767px) {
     .hero {
-      padding: var(--sp-8) var(--sp-6);
+      padding: var(--sp-6) var(--sp-6) var(--sp-8) var(--sp-6);
       min-height: 100vh;
+    }
+    
+    .hero-main {
+      justify-content: center;
+    }
+    
+    .hero-actions-container {
+      justify-content: center;
     }
     
     .hero-grid {
