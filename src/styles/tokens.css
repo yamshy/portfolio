@@ -5,13 +5,12 @@
 /* Cascade layers */
 @layer reset, base, tokens, utilities, components;
 
-/* Media & container queries */
+/* Media queries */
 @layer tokens {
   @custom-media --sm (width >= 480px);
   @custom-media --md (width >= 768px);
   @custom-media --lg (width >= 1024px);
   @custom-media --xl (width >= 1280px);
-  @container card (inline-size > 380px);
 }
 
 /* Project palette - Light theme */
@@ -56,24 +55,33 @@
   /* Dark theme */
   @media (prefers-color-scheme: dark) {
     :root {
-      --warm-bg: #0F0B08;
-      --coral: #FF6B35;
-      --text-dark: #F5F1ED;
-      --accent-yellow: #FFE066;
-      --mocha: #B8957A;
-      --blue: #60A5FA;
+      --warm-bg: #FEFCF8;
+      --coral: #E85A2B;
+      --text-dark: #1A0D08;
+      --accent-yellow: #FFD644;
+      --mocha: #A47864;
+      --blue: #2563EB;
 
-      /* Glass tones - darker */
-      --glass-coral: rgba(255, 107, 53, 0.15);
-      --glass-mocha: rgba(184, 149, 122, 0.12);
-      --glass-yellow: rgba(255, 224, 102, 0.12);
-      --glass-blue: rgba(96, 165, 250, 0.08);
-      --glass-dark: rgba(245, 241, 237, 0.08);
+      /* Glass tones */
+      --glass-coral: rgba(232, 90, 43, 0.20);
+      --glass-mocha: rgba(164, 120, 100, 0.15);
+      --glass-yellow: rgba(255, 214, 68, 0.15);
+      --glass-blue: rgba(37, 99, 235, 0.10);
+      --glass-dark: rgba(26, 13, 8, 0.10);
     }
   }
+
 }
 
 @layer base {
   :root { color-scheme: light dark; }
-  html, body { background: var(--warm-bg); color: var(--text-dark); }
+  html, body { 
+    background: var(--warm-bg); 
+    color: var(--text-dark);
+    /* Subtle paper-like texture */
+    background-image: 
+      radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--mocha) 2%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--coral) 1.5%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--accent-yellow) 1%, transparent) 0%, transparent 50%);
+  }
 }

@@ -36,6 +36,13 @@ const {
     flex-direction: column;
     gap: var(--sp-3);
     min-height: 200px;
+    transition: all 300ms var(--ease-3);
+    position: relative;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px color-mix(in oklab, var(--text-dark) 25%, transparent);
   }
   
   .image-container {
@@ -84,7 +91,8 @@ const {
   .description { 
     margin: 0; 
     max-width: 60ch;
-    line-height: 1.6;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
     color: color-mix(in oklab, var(--text-dark), transparent 15%);
     flex-grow: 1;
   }
@@ -106,6 +114,13 @@ const {
     font-size: 0.8rem;
     font-weight: 500;
     border: 1px solid color-mix(in oklab, var(--coral) 20%, transparent);
+    transition: all 200ms var(--ease-3);
+    letter-spacing: 0.01em;
+  }
+  
+  .tag:hover {
+    background: color-mix(in oklab, var(--coral) 25%, transparent);
+    transform: translateY(-1px);
   }
   
   /* Variant-specific styling */
