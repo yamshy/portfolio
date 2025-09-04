@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1](https://github.com/yamshy/portfolio/compare/v3.0.0...v3.0.1) (2025-09-04)
+
+### Bug Fixes
+
+* **cta-button:** use class:list for merging classes ([#19](https://github.com/yamshy/portfolio/issues/19)) ([9fb2cc0](https://github.com/yamshy/portfolio/commit/9fb2cc0da51a494f86129e65bc1f548c09a405e6))
+
 ## [3.0.0](https://github.com/yamshy/portfolio/compare/v2.3.1...v3.0.0) (2025-09-04)
 
 ### ⚠ BREAKING CHANGES
