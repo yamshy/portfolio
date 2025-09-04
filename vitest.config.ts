@@ -8,7 +8,7 @@ export default defineConfig({
       'node_modules/**',
       'dist/**',
       'tests/e2e/**',
-      '**/*.e2e.{test,spec}.{js,ts}'
+      '**/*.e2e.{test,spec}.{js,ts}',
     ],
     coverage: {
       provider: 'v8',
@@ -17,7 +17,7 @@ export default defineConfig({
         statements: 85,
         branches: 85,
         functions: 85,
-        lines: 85
+        lines: 85,
       },
       exclude: [
         'dist/**',
@@ -25,9 +25,9 @@ export default defineConfig({
         'tests/**',
         '**/*.config.*',
         '**/*.test.*',
-        '**/*.spec.*'
-      ]
+        '**/*.spec.*',
+      ],
     },
-    setupFiles: ['./tests/setup.ts']
-  }
+    setupFiles: ['./tests/setup.ts'],
+  },
 });

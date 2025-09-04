@@ -11,7 +11,7 @@ const {
   variant = 'neutral',
   size = 'medium',
   class: className = '',
-  tag = 'div'
+  tag = 'div',
 } = Astro.props;
 
 import { getGlassmorphicClasses } from '../utils/glassmorphic';
@@ -22,7 +22,7 @@ const allowedTags = {
   article: 'article',
   aside: 'aside',
   header: 'header',
-  footer: 'footer'
+  footer: 'footer',
 } as const;
 const Tag = allowedTags[tag] ?? 'div';
 
@@ -43,21 +43,21 @@ const classes = getGlassmorphicClasses(variant, size, className);
     -webkit-backdrop-filter: blur(var(--blur-12));
     border: 2px solid color-mix(in oklab, var(--text-dark), transparent 70%);
     border-radius: var(--radius-3);
-    box-shadow: 
+    box-shadow:
       var(--shadow-2),
       inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 50%),
       inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 80%);
-    
+
     /* Layout and spacing */
     position: relative;
     overflow: hidden;
-    
+
     /* Smooth transitions */
-    transition: 
+    transition:
       transform var(--ease-3) 300ms,
       box-shadow var(--ease-3) 300ms,
       border-color var(--ease-3) 300ms;
-    
+
     /* GPU acceleration for better performance */
     transform: translate3d(0, 0, 0);
     will-change: transform, box-shadow;
@@ -69,7 +69,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     backdrop-filter: blur(var(--blur-20));
     -webkit-backdrop-filter: blur(var(--blur-20));
     border: 2px solid color-mix(in oklab, var(--coral), transparent 50%);
-    box-shadow: 
+    box-shadow:
       var(--shadow-3),
       inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 30%),
       inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 60%),
@@ -81,7 +81,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     backdrop-filter: blur(var(--blur-16));
     -webkit-backdrop-filter: blur(var(--blur-16));
     border: 2px solid color-mix(in oklab, var(--mocha), transparent 60%);
-    box-shadow: 
+    box-shadow:
       var(--shadow-2),
       inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 40%),
       inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 70%),
@@ -93,7 +93,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     backdrop-filter: blur(var(--blur-12));
     -webkit-backdrop-filter: blur(var(--blur-12));
     border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
-    box-shadow: 
+    box-shadow:
       var(--shadow-1),
       inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
       inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
@@ -118,14 +118,14 @@ const classes = getGlassmorphicClasses(variant, size, className);
   /* Interactive states */
   .glassmorphic-container:hover {
     transform: translateY(-2px) translate3d(0, 0, 0);
-    box-shadow: 
+    box-shadow:
       var(--shadow-4),
       inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 40%),
       inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
   }
 
   .glassmorphic-container--primary:hover {
-    box-shadow: 
+    box-shadow:
       var(--shadow-4),
       inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 20%),
       inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 50%),
@@ -134,7 +134,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
   }
 
   .glassmorphic-container--secondary:hover {
-    box-shadow: 
+    box-shadow:
       var(--shadow-3),
       inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 30%),
       inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 60%),
@@ -143,7 +143,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
   }
 
   .glassmorphic-container--neutral:hover {
-    box-shadow: 
+    box-shadow:
       var(--shadow-2),
       inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 20%),
       inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 60%);
@@ -154,7 +154,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
   .glassmorphic-container:focus-within {
     outline: 2px solid var(--coral);
     outline-offset: 2px;
-    box-shadow: 
+    box-shadow:
       var(--shadow-3),
       0 0 0 4px color-mix(in oklab, var(--coral), transparent 80%);
   }
@@ -164,7 +164,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     .glassmorphic-container {
       transition: none;
     }
-    
+
     .glassmorphic-container:hover {
       transform: none;
     }
@@ -176,11 +176,11 @@ const classes = getGlassmorphicClasses(variant, size, className);
       border-width: 2px;
       border-color: var(--text-dark);
     }
-    
+
     .glassmorphic-container--primary {
       border-color: var(--coral);
     }
-    
+
     .glassmorphic-container--secondary {
       border-color: var(--mocha);
     }
@@ -191,36 +191,36 @@ const classes = getGlassmorphicClasses(variant, size, className);
     .glassmorphic-container {
       background: color-mix(in oklab, var(--warm-bg), transparent 85%);
       border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2),
         inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
         inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
     }
-    
+
     .glassmorphic-container--primary {
       background: color-mix(in oklab, var(--coral), transparent 80%);
       border: 2px solid color-mix(in oklab, var(--coral), transparent 50%);
-      box-shadow: 
+      box-shadow:
         var(--shadow-3),
         inset 0 1px 0 color-mix(in oklab, var(--coral), transparent 30%),
         inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent 60%),
         0 0 0 1px color-mix(in oklab, var(--coral), transparent 85%);
     }
-    
+
     .glassmorphic-container--secondary {
       background: color-mix(in oklab, var(--mocha), transparent 82%);
       border: 2px solid color-mix(in oklab, var(--mocha), transparent 60%);
-      box-shadow: 
+      box-shadow:
         var(--shadow-2),
         inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent 40%),
         inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent 70%),
         0 0 0 1px color-mix(in oklab, var(--mocha), transparent 90%);
     }
-    
+
     .glassmorphic-container--neutral {
       background: color-mix(in oklab, var(--warm-bg), transparent 88%);
       border: 2px solid color-mix(in oklab, var(--text-dark), transparent 60%);
-      box-shadow: 
+      box-shadow:
         var(--shadow-1),
         inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 30%),
         inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 70%);
@@ -234,28 +234,28 @@ const classes = getGlassmorphicClasses(variant, size, className);
       backdrop-filter: blur(var(--blur-8));
       -webkit-backdrop-filter: blur(var(--blur-8));
     }
-    
+
     .glassmorphic-container--primary {
       backdrop-filter: blur(var(--blur-12));
       -webkit-backdrop-filter: blur(var(--blur-12));
     }
-    
+
     .glassmorphic-container--secondary {
       backdrop-filter: blur(var(--blur-10));
       -webkit-backdrop-filter: blur(var(--blur-10));
     }
-    
+
     /* Adjust padding for mobile */
     .glassmorphic-container--small {
       padding: var(--size-2);
       margin: var(--size-1);
     }
-    
+
     .glassmorphic-container--medium {
       padding: var(--size-3);
       margin: var(--size-2);
     }
-    
+
     .glassmorphic-container--large {
       padding: var(--size-4);
       margin: var(--size-3);
@@ -267,7 +267,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     .glassmorphic-container {
       border-color: color-mix(in oklab, var(--warm-bg), transparent 80%);
     }
-    
+
     .glassmorphic-container--neutral {
       background: color-mix(in oklab, var(--text-dark), transparent 85%);
       border-color: color-mix(in oklab, var(--warm-bg), transparent 70%);
