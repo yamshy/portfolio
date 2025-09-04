@@ -356,8 +356,8 @@ const externalLinks = [
 </style>
 
 <script>
-	// Progress bar and navigation functionality
-	function updateProgress() {
+        // Progress bar and navigation functionality
+        function updateProgress() {
 		const progressBar = document.getElementById("progress-bar");
 		const allNavElements = document.querySelectorAll(".nav-organic-button");
 
@@ -447,9 +447,20 @@ const externalLinks = [
 		}
 	}
 
-	// Smooth scroll for navigation links
-	document.addEventListener("DOMContentLoaded", () => {
-		const navLinks = document.querySelectorAll(".nav-organic-button");
+        // Smooth scroll for navigation links
+        let ticking = false;
+        const onScroll = () => {
+                if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                                updateProgress();
+                                ticking = false;
+                        });
+                        ticking = true;
+                }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+                const navLinks = document.querySelectorAll(".nav-organic-button");
 
 		navLinks.forEach((link) => {
 			link.addEventListener("click", (e) => {
@@ -469,8 +480,8 @@ const externalLinks = [
 			});
 		});
 
-		// Update progress on scroll
-		window.addEventListener("scroll", updateProgress);
-		updateProgress(); // Initial call
-	});
+                // Update progress on scroll
+                window.addEventListener("scroll", onScroll, { passive: true });
+                updateProgress(); // Initial call
+        });
 </script>

@@ -38,7 +38,7 @@ pnpm release            # Run semantic-release locally for testing
 
 - **BaseLayout.astro**: Main layout with global background shapes, navigation, and accessibility features
 - **Global background shapes**: Fixed positioned animated organic blobs using CSS animations
-- **Navigation**: Dual navigation system with SidebarNav for desktop and MobileNav for mobile
+- **Navigation**: Fixed SidebarNav for desktop navigation
 
 ### Design System
 
@@ -51,11 +51,13 @@ pnpm release            # Run semantic-release locally for testing
 
 ### Component Structure
 
-- **ContactForm.astro**: Contact form component
+- **BentoGrid.astro**: Asymmetrical project grid
+- **SidebarNav.astro**: Fixed sidebar navigation
 - **ProjectCard.astro**: Reusable project showcase cards
-- **GlassCard.astro**: Glassmorphism effect containers
-- **FormInput.astro**: Styled form input components
-- **Footer.astro**: Site footer
+- **Timeline.astro**: Professional evolution timeline
+- **CTAButton.astro**: Call-to-action button component
+- **GlassmorphicContainer.astro**: Reusable glass container wrapper
+- **OrganicShapes.astro**: Animated background shapes
 
 ### Content Architecture
 
@@ -155,22 +157,19 @@ The site uses automated CI/CD with semantic-release:
 
 The project has undergone a complete style reset to enable a fresh approach with Open Props:
 
-- **STRUCTURE.md**: Complete documentation of all content, layout patterns, and design requirements
 - **Minimal Styling**: Only basic reset CSS with Open Props integration
 - **Clean Components**: All components stripped to semantic HTML structure
 - **Ready for Rebuild**: Foundation prepared for incremental styling with Open Props design tokens
 
 ### Development Approach
 
-1. **Reference STRUCTURE.md** for complete design requirements and content organization
-2. **Use Open Props tokens** for consistent spacing, colors, typography, and animations  
-3. **Build incrementally** - start with layout, then typography, then visual effects
-4. **Scope styles** to components using Astro's `<style>` tags
-5. **Preserve accessibility** and responsive behavior documented in STRUCTURE.md
+1. **Use Open Props tokens** for consistent spacing, colors, typography, and animations
+2. **Build incrementally** - start with layout, then typography, then visual effects
+3. **Scope styles** to components using Astro's `<style>` tags
+4. **Preserve accessibility** and responsive behavior
 
 ## Project Structure Notes
 
-- `STRUCTURE.md`: Complete website structure and design system documentation
 - `src/styles/global.css`: Minimal reset with Open Props integration and RST Thermal font
 - `src/types/index.ts`: TypeScript type definitions
 - `public/fonts/rst-thermal/`: Custom font files (.otf format)

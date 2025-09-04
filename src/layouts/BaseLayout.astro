@@ -1,4 +1,6 @@
 ---
+import '../styles/tokens.css';
+import '../styles/utilities.css';
 const { title = 'yamshy' } = Astro.props;
 ---
 <!doctype html>
@@ -11,10 +13,6 @@ const { title = 'yamshy' } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="generator" content={Astro.generator} />
-    <style is:global>
-      @import "/src/styles/tokens.css";
-      @import "/src/styles/utilities.css";
-    </style>
   </head>
   <body class="u-bg-warm u-text-dark">
     <slot />

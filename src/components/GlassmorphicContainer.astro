@@ -7,26 +7,32 @@ export interface Props {
   tag?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer';
 }
 
-const { 
-  variant = 'neutral', 
-  size = 'medium', 
+const {
+  variant = 'neutral',
+  size = 'medium',
   class: className = '',
   tag = 'div'
 } = Astro.props;
 
+import { getGlassmorphicClasses } from '../utils/glassmorphic';
+
+const allowedTags = {
+  div: 'div',
+  section: 'section',
+  article: 'article',
+  aside: 'aside',
+  header: 'header',
+  footer: 'footer'
+} as const;
+const Tag = allowedTags[tag] ?? 'div';
+
 // Build class string
-const classes = [
-  'glassmorphic-container',
-  `glassmorphic-container--${variant}`,
-  `glassmorphic-container--${size}`,
-  className
-].filter(Boolean).join(' ');
+const classes = getGlassmorphicClasses(variant, size, className);
 ---
 
-<Fragment set:html={`<${tag} class="${classes}">`}>
+<Tag class={classes}>
   <slot />
-</Fragment>
-<Fragment set:html={`</${tag}>`} />
+</Tag>
 
 <style>
   /* Base glassmorphic container styles */
