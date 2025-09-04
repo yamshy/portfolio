@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.0](https://github.com/yamshy/portfolio/compare/v2.3.1...v3.0.0) (2025-09-04)
+
+### ⚠ BREAKING CHANGES
+
+* complete portfolio redesign and removal of Tailwind (#17)
+
+### Features
+
+* complete portfolio redesign and removal of Tailwind ([#17](https://github.com/yamshy/portfolio/issues/17)) ([6e0efd1](https://github.com/yamshy/portfolio/commit/6e0efd1c91f134b98bec749144a567526d435184))
+
 ## [2.3.1](https://github.com/yamshy/portfolio/compare/v2.3.0...v2.3.1) (2025-09-03)
 
 ### Bug Fixes
