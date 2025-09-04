@@ -8,6 +8,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage --run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "release": "semantic-release"
   },
   "dependencies": {
@@ -19,11 +25,18 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/npm": "^11.0.2",
+    "@vitest/ui": "^3.2.4",
+    "axe-core": "^4.10.3",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "semantic-release": "^22.0.7"
+    "happy-dom": "^18.0.1",
+    "lighthouse": "^12.8.2",
+    "semantic-release": "^22.0.7",
+    "vitest": "^3.2.4"
   }
 }

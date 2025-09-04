@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Design Tokens - Open Props Integration with Cascade Layers
+   ========================================================================== */
+
+/* Define cascade layers in order of specificity */
+@layer tokens, base, layouts, components, utilities;
+
+/* ==========================================================================
+   TOKENS LAYER - Design System Foundation
+   ========================================================================== */
+@layer tokens {
+  /* Import Open Props foundation */
+  @import "open-props/index.css";
+  @import "open-props/normalize.min.css"; 
+  @import "open-props/colors.min.css";
+
+  /* Custom Media Queries for User Preferences */
+  @custom-media --OSdark (prefers-color-scheme: dark);
+  @custom-media --OSlight (prefers-color-scheme: light);
+  @custom-media --motionOK (prefers-reduced-motion: no-preference);
+  @custom-media --motionNotOK (prefers-reduced-motion: reduce);
+  @custom-media --highContrast (prefers-contrast: more);
+  @custom-media --lowContrast (prefers-contrast: less);
+
+  /* Responsive Breakpoints */
+  @custom-media --mobile-only (width < 640px);
+  @custom-media --tablet-only (640px <= width < 1024px);
+  @custom-media --desktop-up (width >= 1024px);
+  @custom-media --large-desktop (width >= 1280px);
+
+  /* Container Query Breakpoints */
+  @custom-media --container-sm (width >= 320px);
+  @custom-media --container-md (width >= 640px);
+  @custom-media --container-lg (width >= 1024px);
+
+  /* ==========================================================================
+     BRAND COLOR TOKENS
+     ========================================================================== */
+  :root {
+    /* Brand Primary Colors */
+    --coral-primary: #E85A2B;
+    --coral-light: color-mix(in oklab, var(--coral-primary), white 20%);
+    --coral-dark: color-mix(in oklab, var(--coral-primary), black 20%);
+
+    --mocha-mousse: #A47864;
+    --mocha-light: color-mix(in oklab, var(--mocha-mousse), white 20%);
+    --mocha-dark: color-mix(in oklab, var(--mocha-mousse), black 20%);
+
+    --accent-yellow: #FFD644;
+    --accent-yellow-light: color-mix(in oklab, var(--accent-yellow), white 20%);
+    --accent-yellow-dark: color-mix(in oklab, var(--accent-yellow), black 20%);
+
+    /* Surface Colors - Light Theme */
+    --surface-warm-white: #FEFCF8;
+    --surface-warm-gray: color-mix(in oklab, var(--surface-warm-white), var(--gray-2) 15%);
+    --surface-cool-contrast: #2563EB;
+
+    /* Text Colors */
+    --text-primary-dark: #1A0D08;
+    --text-secondary: var(--mocha-mousse);
+    --text-accent: var(--coral-primary);
+
+    /* ==========================================================================
+       ADAPTIVE COLOR ALIASES - Theme-Agnostic
+       ========================================================================== */
+    /* Light theme defaults */
+    --brand: var(--coral-primary);
+    --brand-secondary: var(--mocha-mousse);
+    --brand-accent: var(--accent-yellow);
+
+    --text-1: var(--text-primary-dark);
+    --text-2: var(--text-secondary);
+    --text-accent: var(--text-accent);
+
+    --surface-1: var(--surface-warm-white);
+    --surface-2: var(--surface-warm-gray);
+    --surface-3: var(--gray-1);
+    --surface-4: var(--gray-2);
+    --surface-accent: var(--surface-cool-contrast);
+
+    /* Link colors */
+    --link: var(--coral-primary);
+    --link-visited: var(--mocha-mousse);
+    --link-hover: var(--coral-dark);
+
+    /* ==========================================================================
+       GLASSMORPHISM TOKENS
+       ========================================================================== */
+    --glass-bg-primary: color-mix(in oklab, var(--surface-1), transparent 20%);
+    --glass-bg-secondary: color-mix(in oklab, var(--surface-2), transparent 30%);
+    --glass-bg-accent: color-mix(in oklab, var(--brand-accent), transparent 15%);
+    --glass-bg-mocha: color-mix(in oklab, var(--brand-secondary), transparent 25%);
+
+    --glass-border: color-mix(in oklab, var(--gray-4), transparent 50%);
+    --glass-border-accent: color-mix(in oklab, var(--brand), transparent 60%);
+
+    --glass-backdrop-blur: blur(12px);
+    --glass-backdrop-saturate: saturate(180%);
+
+    /* Fallback for browsers without backdrop-filter support */
+    --glass-fallback-primary: color-mix(in oklab, var(--surface-1), white 6%);
+    --glass-fallback-secondary: color-mix(in oklab, var(--surface-2), white 8%);
+    --glass-fallback-accent: color-mix(in oklab, var(--brand-accent), white 10%);
+
+    /* ==========================================================================
+       TYPOGRAPHY TOKENS
+       ========================================================================== */
+    --font-family-primary: 'RST Thermal', var(--font-sans);
+    --font-family-mono: var(--font-mono);
+
+    /* Fluid Typography Scale */
+    --font-size-hero: clamp(2.5rem, 8vw, 5rem);
+    --font-size-h1: clamp(2rem, 6vw, 3.5rem);
+    --font-size-h2: clamp(1.5rem, 4vw, 2.5rem);
+    --font-size-h3: clamp(1.25rem, 3vw, 2rem);
+    --font-size-body-large: clamp(1.125rem, 2.5vw, 1.25rem);
+    --font-size-body: var(--font-size-1);
+    --font-size-small: var(--font-size-0);
+
+    /* Line Heights */
+    --line-height-hero: 0.9;
+    --line-height-heading: var(--font-lineheight-1);
+    --line-height-body: var(--font-lineheight-3);
+
+    /* Letter Spacing */
+    --letter-spacing-tight: var(--font-letterspacing-0);
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: var(--font-letterspacing-2);
+
+    /* ==========================================================================
+       SPACING & SIZING TOKENS
+       ========================================================================== */
+    --space-section: clamp(4rem, 8vw, 8rem);
+    --space-component: clamp(2rem, 4vw, 4rem);
+    --space-element: var(--size-4);
+
+    /* Content Width Constraints */
+    --content-width-narrow: var(--size-content-1);
+    --content-width-medium: var(--size-content-2);
+    --content-width-wide: var(--size-content-3);
+    --content-width-hero: clamp(20ch, 50vw, 35ch);
+
+    /* Container Sizes */
+    --container-max-width: 1280px;
+    --container-padding: clamp(1rem, 4vw, 2rem);
+
+    /* ==========================================================================
+       BORDER & RADIUS TOKENS
+       ========================================================================== */
+    --radius-glass: var(--radius-3);
+    --radius-card: var(--radius-2);
+    --radius-button: var(--radius-2);
+    --radius-organic: var(--radius-blob-3);
+
+    --border-glass: 1px solid var(--glass-border);
+    --border-accent: 2px solid var(--glass-border-accent);
+    --border-focus: 2px solid var(--brand);
+
+    /* ==========================================================================
+       SHADOW TOKENS
+       ========================================================================== */
+    --shadow-glass: var(--shadow-3);
+    --shadow-glass-hover: var(--shadow-4);
+    --shadow-card: var(--shadow-2);
+    --shadow-card-hover: var(--shadow-3);
+    --shadow-organic: 0 8px 32px color-mix(in oklab, var(--brand), transparent 80%);
+
+    /* ==========================================================================
+       ANIMATION & MOTION TOKENS
+       ========================================================================== */
+    --duration-fast: 200ms;
+    --duration-medium: 300ms;
+    --duration-slow: 500ms;
+    --duration-organic: 3s;
+
+    --ease-glass: var(--ease-3);
+    --ease-organic: var(--ease-2);
+    --ease-bounce: var(--ease-bounce-3);
+
+    /* Organic Animation Properties */
+    --organic-morph-1: polygon(40% 0%, 40% 20%, 100% 20%, 100% 40%, 40% 40%, 40% 100%, 20% 100%, 20% 40%, 0% 40%, 0% 20%, 20% 20%, 20% 0%);
+    --organic-morph-2: polygon(20% 0%, 60% 0%, 60% 35%, 100% 35%, 100% 70%, 60% 70%, 60% 100%, 20% 100%, 20% 70%, 0% 70%, 0% 35%, 20% 35%);
+
+    /* Motion Preferences */
+    --transform-scale-hover: scale(1.02);
+    --transform-scale-active: scale(0.98);
+  }
+
+  /* ==========================================================================
+     DARK THEME OVERRIDES
+     ========================================================================== */
+  @media (--OSdark) {
+    :root {
+      --brand: var(--coral-light);
+      --brand-secondary: var(--mocha-light);
+      --brand-accent: var(--accent-yellow-light);
+
+      --text-1: var(--gray-1);
+      --text-2: var(--gray-3);
+      --text-accent: var(--coral-light);
+
+      --surface-1: var(--gray-12);
+      --surface-2: var(--gray-11);
+      --surface-3: var(--gray-10);
+      --surface-4: var(--gray-9);
+
+      --glass-bg-primary: color-mix(in oklab, var(--surface-1), transparent 30%);
+      --glass-bg-secondary: color-mix(in oklab, var(--surface-2), transparent 40%);
+      --glass-border: color-mix(in oklab, var(--gray-6), transparent 50%);
+
+      --glass-fallback-primary: color-mix(in oklab, var(--surface-1), var(--gray-8) 8%);
+      --glass-fallback-secondary: color-mix(in oklab, var(--surface-2), var(--gray-7) 10%);
+    }
+  }
+
+  /* ==========================================================================
+     REDUCED MOTION OVERRIDES
+     ========================================================================== */
+  @media (--motionNotOK) {
+    :root {
+      --duration-fast: 0ms;
+      --duration-medium: 0ms;
+      --duration-slow: 0ms;
+      --duration-organic: 0ms;
+      --transform-scale-hover: scale(1);
+      --transform-scale-active: scale(1);
+    }
+  }
+
+  /* ==========================================================================
+     HIGH CONTRAST OVERRIDES
+     ========================================================================== */
+  @media (--highContrast) {
+    :root {
+      --glass-bg-primary: var(--surface-1);
+      --glass-bg-secondary: var(--surface-2);
+      --glass-backdrop-blur: none;
+      --border-focus: 3px solid var(--brand);
+    }
+  }
+}

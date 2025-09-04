@@ -1,92 +1,147 @@
-/* Minimal Reset with Open Props */
-@import "open-props/style";
+/* ==========================================================================
+   Global Styles with Cascade Layers
+   ========================================================================== */
 
-/* Basic reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Import design tokens first */
+@import "./tokens.css";
 
-/* RST Thermal Font Family - preserve the custom font */
-@font-face {
-  font-family: 'RST Thermal';
-  src: url('/fonts/rst-thermal/rst-thermal-light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+/* ==========================================================================
+   BASE LAYER - Fundamental Resets & Defaults
+   ========================================================================== */
+@layer base {
+  /* Basic reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-@font-face {
-  font-family: 'RST Thermal';
-  src: url('/fonts/rst-thermal/rst-thermal-regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+  /* RST Thermal Font Family - preserve the custom font */
+  @font-face {
+    font-family: 'RST Thermal';
+    src: url('/fonts/rst-thermal/rst-thermal-light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
 
-@font-face {
-  font-family: 'RST Thermal';
-  src: url('/fonts/rst-thermal/rst-thermal-medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+  @font-face {
+    font-family: 'RST Thermal';
+    src: url('/fonts/rst-thermal/rst-thermal-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
 
-@font-face {
-  font-family: 'RST Thermal';
-  src: url('/fonts/rst-thermal/rst-thermal-bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+  @font-face {
+    font-family: 'RST Thermal';
+    src: url('/fonts/rst-thermal/rst-thermal-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
 
-/* Set RST Thermal as the default font family */
-html {
-  font-family: 'RST Thermal', var(--font-sans);
-  line-height: 1.5;
-}
+  @font-face {
+    font-family: 'RST Thermal';
+    src: url('/fonts/rst-thermal/rst-thermal-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
 
-/* Minimal base styles */
-body {
-  background: var(--gray-0);
-  color: var(--gray-9);
-}
+  /* Set RST Thermal as the default font family */
+  html {
+    font-family: var(--font-family-primary);
+    line-height: var(--line-height-body);
+    background-color: var(--surface-1);
+    color: var(--text-1);
+    accent-color: var(--link);
+  }
 
-/* Basic accessibility */
-*:focus-visible {
-  outline: 2px solid var(--blue-6);
-  outline-offset: 2px;
-}
+  /* Body styles with theme support */
+  body {
+    background: var(--surface-1);
+    color: var(--text-1);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+  }
 
-/* Remove default list styles */
-ul, ol {
-  list-style: none;
-}
+  /* Basic accessibility */
+  *:focus-visible {
+    outline: var(--border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-2);
+  }
 
-/* Remove default link styles */
-a {
-  text-decoration: none;
-  color: inherit;
-}
+  /* Remove default list styles */
+  ul, ol {
+    list-style: none;
+  }
 
-/* Remove default button styles */
-button {
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
+  /* Link styles */
+  a {
+    text-decoration: none;
+    color: var(--link);
+    transition: color var(--duration-fast) var(--ease-glass);
+    
+    &:hover {
+      color: var(--link-hover);
+    }
+    
+    &:visited {
+      color: var(--link-visited);
+    }
+  }
 
-/* Remove default form styles */
-input, textarea {
-  font: inherit;
-  border: none;
-  background: none;
-}
+  /* Button reset */
+  button {
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+  }
 
-/* Responsive images */
-img {
-  max-width: 100%;
-  height: auto;
+  /* Form elements */
+  input, textarea, select {
+    font: inherit;
+    border: none;
+    background: none;
+    color: inherit;
+  }
+
+  /* Responsive images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Typography hierarchy */
+  h1, h2, h3, h4 {
+    color: var(--text-1);
+    line-height: var(--line-height-heading);
+    font-weight: var(--font-weight-6);
+  }
+
+  h5, h6, small {
+    color: var(--text-2);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (--motionNotOK) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

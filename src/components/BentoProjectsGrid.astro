@@ -1,0 +1,677 @@
+---
+import type { Project } from '../types/project';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Projects data structured for bento grid layout
+const projects: Project[] = [
+  {
+    id: 'homelab-kubernetes',
+    title: 'Homelab Kubernetes',
+    description: 'Personal homelab infrastructure using Kubernetes with FluxCD for GitOps deployment. Manages various services and applications with automated CI/CD pipelines.',
+    technologies: ['Kubernetes', 'FluxCD', 'GitOps', 'Docker', 'Helm', 'Prometheus'],
+    links: {
+      github: 'https://github.com/yamshy/homelab',
+      external: 'https://homelab.shyamajudia.com'
+    },
+    priority: 'featured',
+    gridSize: 'large',
+    status: 'in-progress',
+    featured: true,
+    cover: {
+      src: '/images/homelab-preview.jpg',
+      alt: 'Kubernetes dashboard showing cluster status',
+      placeholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZjNmNGY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTI1TDE4MCA5NUwyMjAgOTVMMjAwIDEyNVoiIGZpbGw9IiNjY2QiLz4KPC9zdmc+'
+    }
+  },
+  {
+    id: 'portfolio-website',
+    title: 'Portfolio Website',
+    description: 'Modern portfolio built with Astro, featuring biology-inspired design, glassmorphism effects, and comprehensive accessibility features.',
+    technologies: ['Astro', 'Open Props', 'TypeScript', 'CSS Grid', 'Playwright'],
+    links: {
+      github: 'https://github.com/yamshy/portfolio'
+    },
+    priority: 'secondary',
+    gridSize: 'medium',
+    status: 'in-progress',
+    cover: {
+      src: '/images/portfolio-preview.jpg',
+      alt: 'Portfolio website homepage with glassmorphism design',
+      placeholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iMzAiIGZpbGw9IiNjY2QiLz4KPC9zdmc+'
+    }
+  },
+  {
+    id: 'data-pipeline',
+    title: 'Bioinformatics Data Pipeline',
+    description: 'Scalable data processing pipeline for genomic analysis workflows with automated quality control and reporting.',
+    technologies: ['Python', 'Apache Airflow', 'PostgreSQL', 'Docker', 'AWS'],
+    links: {
+      github: 'https://github.com/yamshy/bio-pipeline'
+    },
+    priority: 'secondary',
+    gridSize: 'medium',
+    status: 'completed'
+  },
+  {
+    id: 'upcoming-project',
+    title: 'Cloud-Native Monitoring',
+    description: 'Comprehensive monitoring stack for cloud-native applications with custom dashboards and alerting.',
+    technologies: ['Prometheus', 'Grafana', 'Kubernetes', 'Go', 'Terraform'],
+    links: {},
+    priority: 'upcoming',
+    gridSize: 'small',
+    status: 'planned'
+  }
+];
+---
+
+<section id="projects" class:list={["projects-section", className]}>
+  <div class="projects-container">
+    <!-- Section header -->
+    <header class="projects-header">
+      <h2 class="projects-title">
+        Featured <span class="title-accent">Work</span>
+      </h2>
+      <p class="projects-description">
+        Infrastructure projects and technical solutions built with
+        precision and scalability in mind
+      </p>
+    </header>
+
+    <!-- Bento Grid -->
+    <div class="bento-grid" role="region" aria-label="Project showcase">
+      {projects.map((project, index) => (
+        <article 
+          class:list={[
+            "project-card",
+            `grid-${project.gridSize}`,
+            `priority-${project.priority}`,
+            `status-${project.status}`
+          ]}
+          data-project-id={project.id}
+        >
+          {/* Project cover image */}
+          {project.cover && (
+            <div class="project-cover">
+              <img
+                src={project.cover.placeholder}
+                alt={project.cover.alt}
+                class="cover-image"
+                loading={index < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </div>
+          )}
+
+          {/* Project content */}
+          <div class="project-content">
+            <header class="project-header">
+              <h3 class="project-title">{project.title}</h3>
+              
+              {/* Status indicator */}
+              <div class="project-status">
+                <span class="status-badge" aria-label={`Project status: ${project.status}`}>
+                  {project.status === 'in-progress' ? 'In Progress' : 
+                   project.status === 'completed' ? 'Completed' : 'Planned'}
+                </span>
+                {project.featured && (
+                  <span class="featured-badge" aria-label="Featured project">
+                    ⭐ Featured
+                  </span>
+                )}
+              </div>
+            </header>
+
+            <p class="project-description">{project.description}</p>
+
+            {/* Technology tags */}
+            <div class="tech-container">
+              <h4 class="tech-label">Technologies</h4>
+              <ul class="tech-list" role="list">
+                {project.technologies.slice(0, project.gridSize === 'large' ? 6 : 4).map(tech => (
+                  <li class="tech-tag">{tech}</li>
+                ))}
+                {project.technologies.length > (project.gridSize === 'large' ? 6 : 4) && (
+                  <li class="tech-more">
+                    +{project.technologies.length - (project.gridSize === 'large' ? 6 : 4)} more
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            {/* Project links */}
+            <div class="project-links">
+              {project.links.github && (
+                <a 
+                  href={project.links.github}
+                  class="project-link link-github"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title} source code on GitHub`}
+                >
+                  <svg class="link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" fill="currentColor"/>
+                  </svg>
+                  GitHub
+                </a>
+              )}
+              
+              {project.links.demo && (
+                <a 
+                  href={project.links.demo}
+                  class="project-link link-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title} live demo`}
+                >
+                  <svg class="link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Live Demo
+                </a>
+              )}
+
+              {project.links.external && (
+                <a 
+                  href={project.links.external}
+                  class="project-link link-external"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${project.title} website`}
+                >
+                  <svg class="link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Visit Site
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Hover overlay for interaction hint */}
+          <div class="project-overlay" aria-hidden="true">
+            <div class="overlay-content">
+              <span class="overlay-text">View Project</span>
+              <svg class="overlay-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .projects-section {
+      padding: var(--space-section) 0;
+      position: relative;
+    }
+
+    .projects-container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    .projects-header {
+      text-align: center;
+      margin-bottom: var(--space-component);
+    }
+
+    .projects-title {
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-7);
+      line-height: var(--line-height-heading);
+      margin-bottom: var(--size-4);
+    }
+
+    .title-accent {
+      color: var(--brand);
+    }
+
+    .projects-description {
+      font-size: var(--font-size-body-large);
+      color: var(--text-2);
+      max-width: var(--content-width-wide);
+      margin: 0 auto;
+      line-height: var(--line-height-body);
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      gap: var(--size-4);
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(300px, auto);
+      container-type: inline-size;
+      
+      /* Mobile: single column */
+      @media (--mobile-only) {
+        grid-template-columns: 1fr;
+        gap: var(--size-3);
+      }
+      
+      /* Tablet: 6 columns */
+      @media (--tablet-only) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    /* Grid Size Variants */
+    .grid-large {
+      grid-column: span 8;
+      grid-row: span 2;
+      
+      @media (--tablet-only) {
+        grid-column: span 6;
+        grid-row: span 2;
+      }
+      
+      @media (--mobile-only) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+    }
+
+    .grid-medium {
+      grid-column: span 4;
+      grid-row: span 1;
+      
+      @media (--tablet-only) {
+        grid-column: span 3;
+      }
+      
+      @media (--mobile-only) {
+        grid-column: span 1;
+      }
+    }
+
+    .grid-small {
+      grid-column: span 4;
+      grid-row: span 1;
+      
+      @media (--tablet-only) {
+        grid-column: span 6;
+      }
+      
+      @media (--mobile-only) {
+        grid-column: span 1;
+      }
+    }
+
+    /* Container Queries for Responsive Cards */
+    @container (min-width: 400px) {
+      .project-card {
+        .project-content {
+          padding: var(--size-5);
+        }
+        
+        .project-title {
+          font-size: var(--font-size-h3);
+        }
+      }
+    }
+
+    @container (min-width: 600px) {
+      .grid-large {
+        .project-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--size-4);
+          align-items: start;
+        }
+        
+        .project-header,
+        .project-description {
+          grid-column: 1 / -1;
+        }
+      }
+    }
+
+    /* Project Card Styles */
+    .project-card {
+      position: relative;
+      background: var(--glass-bg-primary);
+      border: var(--glass-border);
+      border-radius: var(--radius-glass);
+      backdrop-filter: var(--glass-backdrop-blur);
+      box-shadow: var(--shadow-glass);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: 
+        transform var(--duration-medium) var(--ease-glass),
+        box-shadow var(--duration-medium) var(--ease-glass);
+      
+      &:hover {
+        transform: var(--transform-scale-hover);
+        box-shadow: var(--shadow-glass-hover);
+        
+        .project-overlay {
+          opacity: 1;
+        }
+        
+        .cover-image {
+          transform: scale(1.05);
+        }
+      }
+      
+      &:focus-within {
+        outline: var(--border-focus);
+        outline-offset: 2px;
+      }
+    }
+
+    /* Backdrop-filter fallback */
+    @supports not (backdrop-filter: blur(12px)) {
+      .project-card {
+        background: var(--glass-fallback-primary);
+      }
+    }
+
+    /* Priority-based theming */
+    .priority-featured {
+      border-color: var(--brand);
+      box-shadow: 
+        var(--shadow-glass),
+        0 0 0 1px color-mix(in oklab, var(--brand), transparent 80%);
+    }
+
+    .priority-secondary {
+      border-color: var(--brand-secondary);
+    }
+
+    .priority-upcoming {
+      border-color: var(--surface-accent);
+      opacity: 0.8;
+    }
+
+    /* Project Cover */
+    .project-cover {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: var(--surface-2);
+      
+      .grid-large & {
+        height: 250px;
+      }
+      
+      .grid-small & {
+        height: 150px;
+      }
+    }
+
+    .cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--duration-slow) var(--ease-glass);
+    }
+
+    /* Project Content */
+    .project-content {
+      padding: var(--size-4);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-3);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--size-2);
+    }
+
+    .project-title {
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-6);
+      color: var(--text-1);
+      margin: 0;
+      line-height: var(--line-height-heading);
+      
+      .grid-small & {
+        font-size: var(--font-size-4);
+      }
+    }
+
+    .project-status {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-1);
+      align-items: flex-end;
+    }
+
+    .status-badge {
+      padding: var(--size-1) var(--size-2);
+      border-radius: var(--radius-button);
+      font-size: var(--font-size-00);
+      font-weight: var(--font-weight-6);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+      
+      .status-completed & {
+        background: color-mix(in oklab, var(--green-5), transparent 80%);
+        color: var(--green-9);
+      }
+      
+      .status-in-progress & {
+        background: color-mix(in oklab, var(--brand), transparent 80%);
+        color: var(--brand);
+      }
+      
+      .status-planned & {
+        background: color-mix(in oklab, var(--surface-accent), transparent 80%);
+        color: var(--surface-accent);
+      }
+    }
+
+    .featured-badge {
+      padding: var(--size-1) var(--size-2);
+      background: var(--brand-accent);
+      color: var(--text-primary-dark);
+      border-radius: var(--radius-button);
+      font-size: var(--font-size-00);
+      font-weight: var(--font-weight-6);
+    }
+
+    .project-description {
+      color: var(--text-2);
+      line-height: var(--line-height-body);
+      flex: 1;
+      
+      .grid-small & {
+        font-size: var(--font-size-0);
+      }
+    }
+
+    /* Technology Tags */
+    .tech-container {
+      margin-top: auto;
+    }
+
+    .tech-label {
+      font-size: var(--font-size-00);
+      font-weight: var(--font-weight-6);
+      color: var(--text-2);
+      margin-bottom: var(--size-2);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--size-1);
+    }
+
+    .tech-tag {
+      padding: var(--size-1) var(--size-2);
+      background: var(--surface-2);
+      color: var(--text-1);
+      border-radius: var(--radius-button);
+      font-size: var(--font-size-00);
+      font-weight: var(--font-weight-5);
+      border: 1px solid var(--glass-border);
+    }
+
+    .tech-more {
+      padding: var(--size-1) var(--size-2);
+      background: transparent;
+      color: var(--text-2);
+      border: 1px dashed var(--glass-border);
+      border-radius: var(--radius-button);
+      font-size: var(--font-size-00);
+      font-style: italic;
+    }
+
+    /* Project Links */
+    .project-links {
+      display: flex;
+      gap: var(--size-2);
+      flex-wrap: wrap;
+      margin-top: var(--size-2);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--size-1);
+      padding: var(--size-2) var(--size-3);
+      background: var(--surface-2);
+      color: var(--text-1);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-button);
+      font-size: var(--font-size-0);
+      font-weight: var(--font-weight-5);
+      text-decoration: none;
+      transition: 
+        background-color var(--duration-fast) var(--ease-glass),
+        border-color var(--duration-fast) var(--ease-glass),
+        transform var(--duration-fast) var(--ease-glass);
+      
+      &:hover {
+        background: var(--glass-bg-secondary);
+        border-color: var(--brand);
+        transform: translateY(-2px);
+      }
+      
+      &:focus-visible {
+        outline: var(--border-focus);
+        outline-offset: 2px;
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .link-icon {
+      opacity: 0.8;
+      transition: opacity var(--duration-fast) var(--ease-glass);
+      
+      .project-link:hover & {
+        opacity: 1;
+      }
+    }
+
+    /* Hover Overlay */
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: color-mix(in oklab, var(--brand), transparent 90%);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--duration-medium) var(--ease-glass);
+      pointer-events: none;
+    }
+
+    .overlay-content {
+      display: flex;
+      align-items: center;
+      gap: var(--size-2);
+      color: var(--surface-1);
+      font-weight: var(--font-weight-6);
+      font-size: var(--font-size-3);
+    }
+
+    .overlay-arrow {
+      transition: transform var(--duration-fast) var(--ease-glass);
+      
+      .project-card:hover & {
+        transform: translateX(4px);
+      }
+    }
+
+    /* Reduced Motion */
+    @media (--motionNotOK) {
+      .project-card,
+      .cover-image,
+      .project-link,
+      .project-overlay,
+      .overlay-arrow {
+        transition: none;
+      }
+      
+      .project-card:hover {
+        transform: none;
+        
+        .cover-image {
+          transform: none;
+        }
+      }
+      
+      .project-link:hover {
+        transform: none;
+      }
+    }
+
+    /* High Contrast */
+    @media (--highContrast) {
+      .project-card {
+        background: var(--surface-1);
+        border: 2px solid var(--text-1);
+      }
+      
+      .tech-tag,
+      .project-link {
+        border-color: var(--text-1);
+      }
+      
+      .project-overlay {
+        background: color-mix(in oklab, var(--text-1), transparent 80%);
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .project-overlay {
+        display: none;
+      }
+      
+      .project-card {
+        background: var(--surface-1);
+        border: 1px solid var(--text-1);
+        break-inside: avoid;
+      }
+      
+      .project-links {
+        display: none;
+      }
+    }
+  }
+</style>
