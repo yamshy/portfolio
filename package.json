@@ -14,6 +14,13 @@
     "test:coverage": "vitest --coverage --run",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "check:astro": "astro check",
+    "check:types": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier -c .",
+    "format:write": "prettier -w .",
+    "check:all": "pnpm check:astro && pnpm check:types && pnpm lint && pnpm format:check && pnpm test",
     "release": "semantic-release"
   },
   "dependencies": {
@@ -37,6 +44,13 @@
     "happy-dom": "^18.0.1",
     "lighthouse": "^12.8.2",
     "semantic-release": "^22.0.7",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^0.34.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0"
   }
 }

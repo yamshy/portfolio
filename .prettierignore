@@ -1,0 +1,17 @@
+node_modules
+.dist
+.astro
+dist
+.claude
+.cursor
+.github
+CHANGELOG.md
+CLAUDE.md
+README.md
+astro.config.mjs
+playwright.config.ts
+release.config.js
+svelte.config.js
+todo.md
+vitest.config.ts
+

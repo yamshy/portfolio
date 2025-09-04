@@ -1,17 +1,17 @@
-export type Variant = 'primary' | 'secondary' | 'neutral';
-export type Size = 'small' | 'medium' | 'large';
+export type Variant = "primary" | "secondary" | "neutral";
+export type Size = "small" | "medium" | "large";
 
 export function getGlassmorphicClasses(
-  variant: Variant = 'neutral',
-  size: Size = 'medium',
-  className = ''
+  variant: Variant = "neutral",
+  size: Size = "medium",
+  className = "",
 ): string {
   return [
-    'glassmorphic-container',
+    "glassmorphic-container",
     `glassmorphic-container--${variant}`,
     `glassmorphic-container--${size}`,
-    className
+    className,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 }
