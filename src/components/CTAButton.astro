@@ -1,5 +1,11 @@
 ---
-const { href = "#", children, variant = "primary" } = Astro.props;
+export interface Props {
+  href: string;
+  variant?: string;
+  children: any;
+}
+
+const { href, children, variant = "primary" } = Astro.props;
 ---
 
 <a class={`cta ${variant} u-glass u-glass--yellow u-r-xl u-elevate`} href={href}>

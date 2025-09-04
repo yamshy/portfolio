@@ -3,11 +3,11 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'happy-dom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts}'],
+    include: ['tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts}'],
     exclude: [
       'node_modules/**',
       'dist/**',
-      'tests/**', // Exclude Playwright E2E tests
+      'tests/e2e/**',
       '**/*.e2e.{test,spec}.{js,ts}'
     ],
     coverage: {
@@ -28,6 +28,6 @@ export default defineConfig({
         '**/*.spec.*'
       ]
     },
-    setupFiles: ['./src/test/setup.ts']
+    setupFiles: ['./tests/setup.ts']
   }
 });
