@@ -30,97 +30,174 @@ const {
 
 <style>
   .card { 
-    padding: var(--sp-6); 
-    box-shadow: 0 16px 32px color-mix(in oklab, var(--text-dark) 18%, transparent);
+    padding: var(--size-6); 
+    box-shadow: var(--shadow-4);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-3);
-    min-height: 200px;
+    gap: var(--size-3);
     transition: all 300ms var(--ease-3);
     position: relative;
+    border-radius: var(--radius-3);
+    cursor: pointer;
+    overflow: hidden;
+    animation: card-fade-in 600ms var(--ease-3) both;
   }
   
+  .card.featured {
+    animation: card-fade-in-featured 600ms var(--ease-3) both;
+  }
+  
+  .card:nth-child(1) { animation-delay: 0ms; }
+  .card:nth-child(2) { animation-delay: 100ms; }
+  .card:nth-child(3) { animation-delay: 200ms; }
+  .card:nth-child(4) { animation-delay: 300ms; }
+  .card:nth-child(5) { animation-delay: 400ms; }
+  .card:nth-child(6) { animation-delay: 500ms; }
+  
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px color-mix(in oklab, var(--text-dark) 25%, transparent);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-6);
+  }
+  
+  .card.featured:hover {
+    transform: rotate(1.5deg) translateY(-8px) scale(1.02);
+  }
+  
+  .card:focus-within {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-5);
+    outline: 2px solid var(--accent-yellow);
+    outline-offset: 2px;
+  }
+  
+  .card.featured:focus-within {
+    transform: rotate(1.5deg) translateY(-4px) scale(1.01);
+  }
+  
+  .card:active {
+    transform: translateY(-2px) scale(1.01);
+    transition: all 150ms var(--ease-2);
+  }
+  
+  .card.featured:active {
+    transform: rotate(1.5deg) translateY(-2px) scale(1.01);
   }
   
   .image-container {
     width: 100%;
-    height: 120px;
-    border-radius: var(--r-lg);
+    height: var(--size-12);
+    border-radius: var(--radius-2);
     overflow: hidden;
-    margin-bottom: var(--sp-2);
+    margin-bottom: var(--size-2);
   }
   
   .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 300ms var(--ease-3);
+    transition: all 400ms var(--ease-3);
+    filter: brightness(1) contrast(1);
   }
   
   .card:hover .image-container img {
+    transform: scale(1.08);
+    filter: brightness(1.1) contrast(1.05);
+  }
+  
+  .card:focus-within .image-container img {
     transform: scale(1.05);
+    filter: brightness(1.05) contrast(1.02);
   }
   
   .header h3 { 
-    margin: 0; 
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-    font-weight: 600;
+    margin: 0 0 var(--size-2) 0; 
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-7);
+    line-height: var(--font-lineheight-1);
+    letter-spacing: var(--font-letterspacing-1);
   }
   
   .header a { 
     color: var(--text-dark); 
     text-decoration: none;
-    transition: color 200ms var(--ease-3);
+    transition: all 200ms var(--ease-3);
+    position: relative;
+    display: inline-block;
   }
   
   .header a:hover { 
     color: var(--coral);
-    text-decoration: underline; 
-    text-underline-offset: 0.2em; 
+    transform: translateX(var(--size-1));
+  }
+  
+  .header a:hover::after {
+    content: "→";
+    position: absolute;
+    right: calc(-1 * var(--size-3));
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .header a::after {
+    content: "→";
+    position: absolute;
+    right: calc(-1 * var(--size-3));
+    opacity: 0;
+    transform: translateX(-var(--size-1));
+    transition: all 200ms var(--ease-3);
   }
   
   .header a:focus-visible {
     outline: 2px solid var(--accent-yellow);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: var(--radius-1);
   }
   
   .description { 
-    margin: 0; 
-    max-width: 60ch;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
-    color: color-mix(in oklab, var(--text-dark), transparent 15%);
+    margin: 0 0 var(--size-4) 0; 
+    max-width: var(--size-content-2);
+    line-height: var(--font-lineheight-3);
+    letter-spacing: var(--font-letterspacing-1);
+    color: color-mix(in oklab, var(--text-dark), transparent 20%);
     flex-grow: 1;
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-4);
   }
   
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-2);
+    gap: var(--size-1);
     margin: 0;
     padding: 0;
     list-style: none;
+    max-width: 100%;
   }
   
   .tag {
-    background: color-mix(in oklab, var(--coral) 15%, transparent);
+    background: color-mix(in oklab, var(--coral) 12%, transparent);
     color: var(--coral);
-    padding: var(--sp-1) var(--sp-2);
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    border: 1px solid color-mix(in oklab, var(--coral) 20%, transparent);
+    padding: var(--size-1) var(--size-2);
+    border-radius: var(--radius-1);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-5);
+    border: 1px solid color-mix(in oklab, var(--coral) 15%, transparent);
     transition: all 200ms var(--ease-3);
-    letter-spacing: 0.01em;
+    letter-spacing: var(--font-letterspacing-1);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   
   .tag:hover {
     background: color-mix(in oklab, var(--coral) 25%, transparent);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-2);
+  }
+  
+  .tag:focus-visible {
+    outline: 2px solid var(--accent-yellow);
+    outline-offset: 1px;
+    border-radius: var(--radius-1);
   }
   
   /* Variant-specific styling */
@@ -129,8 +206,27 @@ const {
     border-color: color-mix(in oklab, var(--coral) 30%, transparent);
   }
   
+  .card.featured:hover {
+    background: color-mix(in oklab, var(--glass-coral), var(--accent-yellow) 8%);
+    border-color: color-mix(in oklab, var(--coral) 40%, transparent);
+  }
+  
+  .card.featured .header h3 {
+    font-size: var(--font-size-5);
+    font-weight: var(--font-weight-8);
+  }
+  
+  .card.featured .description {
+    font-size: var(--font-size-3);
+    line-height: var(--font-lineheight-4);
+  }
+  
   .card.standard {
     background: var(--glass-coral);
+  }
+  
+  .card.standard:hover {
+    background: color-mix(in oklab, var(--glass-coral), var(--coral) 5%);
   }
   
   .card.secondary {
@@ -138,32 +234,89 @@ const {
     border-color: color-mix(in oklab, var(--coral) 15%, transparent);
   }
   
-  .card.wide {
-    min-height: 180px;
+  .card.secondary:hover {
+    background: color-mix(in oklab, var(--glass-coral), transparent 10%);
+    border-color: color-mix(in oklab, var(--coral) 25%, transparent);
   }
   
-  .card.tall {
-    min-height: 300px;
+  .card.secondary .header h3 {
+    font-size: var(--font-size-3);
+  }
+  
+  .card.secondary .description {
+    font-size: var(--font-size-1);
+  }
+  
+  /* Card sizing now handled by BentoGrid component */
+  
+  @keyframes card-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes card-fade-in-featured {
+    from {
+      opacity: 0;
+      transform: rotate(1.5deg) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(1.5deg) translateY(0);
+    }
   }
   
   @media (prefers-reduced-motion: reduce) {
-    .card:hover .image-container img {
+    .card {
+      animation: none;
+    }
+    
+    .card,
+    .card:hover,
+    .card:focus-within,
+    .card:active {
+      transform: none;
+      transition: none;
+    }
+    
+    .card.featured {
+      transform: rotate(1.5deg);
+    }
+    
+    .card:hover .image-container img,
+    .card:focus-within .image-container img {
+      transform: none;
+      filter: none;
+    }
+    
+    .tag:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .header a:hover {
+      transform: none;
+    }
+    
+    .header a::after,
+    .header a:hover::after {
+      opacity: 0;
       transform: none;
     }
   }
   
   @media (max-width: 767px) {
     .card {
-      padding: var(--sp-4);
-      min-height: 160px;
+      padding: var(--size-4);
     }
     
     .image-container {
-      height: 100px;
-    }
-    
-    .card.tall {
-      min-height: 200px;
+      height: var(--size-10);
     }
   }
 </style>
