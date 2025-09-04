@@ -37,6 +37,24 @@ All commands are run from the root of the project, from a terminal:
 
 ### Quick Start
 
+#### Option 1: Using VS Code Dev Containers (Recommended)
+
+```bash
+# Open in VS Code and select "Reopen in Container" when prompted
+# Dependencies are automatically installed
+pnpm dev
+```
+
+#### Option 2: Local Development
+
+```bash
+# Install dependencies first
+pnpm install
+pnpm dev
+```
+
+#### Option 3: Test Latest Release
+
 ```bash
 # Test the latest release locally
 docker run -p 8080:8080 ghcr.io/yamshy/portfolio:latest
@@ -58,6 +76,28 @@ docker run -p 8080:8080 ghcr.io/yamshy/portfolio:latest
 | `pnpm format:check`    | Check file formatting                            |
 | `pnpm check`           | Run linting, formatting check, and type-check    |
 | `pnpm release`         | Run semantic-release locally (for testing)       |
+
+## 🐳 Development Containers
+
+This project includes VS Code development container configuration for a consistent development environment.
+
+### Features
+
+- **Node.js 24.7.0** with **pnpm 10.15.0** pre-installed
+- Pre-configured VS Code extensions for Astro, Svelte, TypeScript, and testing
+- Automatic dependency installation on container creation
+- Port forwarding for development servers (4321, 4173, 9323)
+- Playwright browser dependencies for e2e testing
+
+### Getting Started with Dev Containers
+
+1. Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+2. Clone this repository and open it in VS Code
+3. When prompted, click "Reopen in Container" or use Command Palette → "Dev Containers: Reopen in Container"
+4. Wait for the container to build and dependencies to install
+5. Start developing with `pnpm dev`
+
+See [`.devcontainer/README.md`](.devcontainer/README.md) for detailed setup instructions and troubleshooting.
 
 ## 🚀 Automated Releases
 

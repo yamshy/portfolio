@@ -1,0 +1,12 @@
+# Ensure proper line endings for devcontainer files
+.devcontainer/* text eol=lf
+
+# Ensure shell scripts have proper line endings
+*.sh text eol=lf
+
+# Ensure JSON files are treated as text
+*.json text
+
+# Dockerfile should have LF line endings
+Dockerfile text eol=lf
+**/Dockerfile text eol=lf
