@@ -1,19 +1,39 @@
 @layer utilities {
   /* Text & background */
-  .u-text-dark { color: var(--text-dark); }
-  .u-text-coral { color: var(--coral); }
-  .u-text-blue { color: var(--blue); }
-  .u-bg-warm { background: var(--warm-bg); }
+  .u-text-dark {
+    color: var(--text-dark);
+  }
+  .u-text-coral {
+    color: var(--coral);
+  }
+  .u-text-blue {
+    color: var(--blue);
+  }
+  .u-bg-warm {
+    background: var(--warm-bg);
+  }
 
   /* Borders */
-  .u-border-coral-20 { border: 1px solid color-mix(in oklab, var(--coral) 20%, transparent); }
-  .u-border-mocha-20 { border: 1px solid color-mix(in oklab, var(--mocha) 20%, transparent); }
+  .u-border-coral-20 {
+    border: 1px solid color-mix(in oklab, var(--coral) 20%, transparent);
+  }
+  .u-border-mocha-20 {
+    border: 1px solid color-mix(in oklab, var(--mocha) 20%, transparent);
+  }
 
   /* Radius & shadows */
-  .u-r-lg { border-radius: var(--r-lg); }
-  .u-r-xl { border-radius: var(--r-xl); }
-  .u-shadow-lg { box-shadow: var(--shadow-lg); }
-  .u-shadow-xl { box-shadow: var(--shadow-xl); }
+  .u-r-lg {
+    border-radius: var(--r-lg);
+  }
+  .u-r-xl {
+    border-radius: var(--r-xl);
+  }
+  .u-shadow-lg {
+    box-shadow: var(--shadow-lg);
+  }
+  .u-shadow-xl {
+    box-shadow: var(--shadow-xl);
+  }
 
   /* Glass recipes (fallback: semi-opaque bg if no backdrop-filter) */
   .u-glass {
@@ -21,23 +41,45 @@
     -webkit-backdrop-filter: blur(var(--blur-12));
     backdrop-filter: blur(var(--blur-12));
   }
-  .u-glass--coral { background: var(--glass-coral); }
-  .u-glass--mocha { background: var(--glass-mocha); }
-  .u-glass--yellow { background: var(--glass-yellow); }
-  .u-glass--blue { background: var(--glass-blue); }
+  .u-glass--coral {
+    background: var(--glass-coral);
+  }
+  .u-glass--mocha {
+    background: var(--glass-mocha);
+  }
+  .u-glass--yellow {
+    background: var(--glass-yellow);
+  }
+  .u-glass--blue {
+    background: var(--glass-blue);
+  }
 
   /* Elevation hover */
   .u-elevate {
-    transition: transform 300ms var(--ease-3), box-shadow 300ms var(--ease-3);
+    transition:
+      transform 300ms var(--ease-3),
+      box-shadow 300ms var(--ease-3);
   }
-  .u-elevate:hover { transform: translateY(-8px) rotate(1deg); box-shadow: var(--shadow-xl); }
+  .u-elevate:hover {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: var(--shadow-xl);
+  }
 
   /* Layout helpers */
-  .u-stack > * + * { margin-block-start: var(--sp-4); }
-  .u-clamp { max-width: 72ch; }
+  .u-stack > * + * {
+    margin-block-start: var(--sp-4);
+  }
+  .u-clamp {
+    max-width: 72ch;
+  }
 
   /* Motion respect */
   @media (prefers-reduced-motion: reduce) {
-    .u-elevate, .u-animate { transition: none !important; animation: none !important; transform: none !important; }
+    .u-elevate,
+    .u-animate {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+    }
   }
 }

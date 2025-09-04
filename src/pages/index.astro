@@ -11,55 +11,61 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 // Sample project data
 const projects = [
   {
-    title: "BioML Pipeline",
-    description: "Machine learning pipeline for analyzing genomic data with real-time visualization and statistical modeling.",
-    href: "#",
-    variant: "featured",
-    tags: ["Python", "ML", "Genomics", "React"],
-    image: "/src/assets/background.svg"
+    title: 'BioML Pipeline',
+    description:
+      'Machine learning pipeline for analyzing genomic data with real-time visualization and statistical modeling.',
+    href: '#',
+    variant: 'featured',
+    tags: ['Python', 'ML', 'Genomics', 'React'],
+    image: '/src/assets/background.svg',
   },
   {
-    title: "Evolution Simulator",
-    description: "Interactive web application simulating evolutionary processes with customizable parameters and visual feedback.",
-    href: "#",
-    variant: "standard",
-    tags: ["JavaScript", "D3.js", "Biology", "Simulation"]
+    title: 'Evolution Simulator',
+    description:
+      'Interactive web application simulating evolutionary processes with customizable parameters and visual feedback.',
+    href: '#',
+    variant: 'standard',
+    tags: ['JavaScript', 'D3.js', 'Biology', 'Simulation'],
   },
   {
-    title: "Research Dashboard",
-    description: "Data visualization dashboard for tracking research metrics and collaboration patterns across institutions.",
-    href: "#",
-    variant: "standard",
-    tags: ["Vue.js", "D3.js", "Analytics", "Research"]
+    title: 'Research Dashboard',
+    description:
+      'Data visualization dashboard for tracking research metrics and collaboration patterns across institutions.',
+    href: '#',
+    variant: 'standard',
+    tags: ['Vue.js', 'D3.js', 'Analytics', 'Research'],
   },
   {
-    title: "Gene Expression Tool",
-    description: "Web-based tool for analyzing and visualizing gene expression data with statistical significance testing.",
-    href: "#",
-    variant: "secondary",
-    tags: ["R", "Shiny", "Bioinformatics", "Statistics"]
+    title: 'Gene Expression Tool',
+    description:
+      'Web-based tool for analyzing and visualizing gene expression data with statistical significance testing.',
+    href: '#',
+    variant: 'secondary',
+    tags: ['R', 'Shiny', 'Bioinformatics', 'Statistics'],
   },
   {
-    title: "Collaboration Platform",
-    description: "Cross-institutional platform for sharing research data and fostering scientific collaboration.",
-    href: "#",
-    variant: "wide",
-    tags: ["Node.js", "MongoDB", "Collaboration", "Research"]
+    title: 'Collaboration Platform',
+    description:
+      'Cross-institutional platform for sharing research data and fostering scientific collaboration.',
+    href: '#',
+    variant: 'wide',
+    tags: ['Node.js', 'MongoDB', 'Collaboration', 'Research'],
   },
   {
-    title: "Data Visualization Library",
-    description: "Reusable React components for creating interactive biological data visualizations.",
-    href: "#",
-    variant: "secondary",
-    tags: ["React", "TypeScript", "Visualization", "Library"]
-  }
+    title: 'Data Visualization Library',
+    description:
+      'Reusable React components for creating interactive biological data visualizations.',
+    href: '#',
+    variant: 'secondary',
+    tags: ['React', 'TypeScript', 'Visualization', 'Library'],
+  },
 ];
 ---
 
 <BaseLayout title="yamshy - Biology-Inspired Portfolio">
   <OrganicShapes />
   <SidebarNav />
-  
+
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
     <section class="hero" id="about">
@@ -83,9 +89,11 @@ const projects = [
               and <span class="highlight-text">data engineering</span>
             </p>
             <p class="hero-bio-secondary">
-              Starting in molecular biology research, the transition to infrastructure engineering came naturally through 
-              understanding how biological systems work - complex, interconnected, and self-regulating. This systems 
-              thinking translates directly to building reliable infrastructure and data pipelines.
+              Starting in molecular biology research, the transition to
+              infrastructure engineering came naturally through understanding
+              how biological systems work - complex, interconnected, and
+              self-regulating. This systems thinking translates directly to
+              building reliable infrastructure and data pipelines.
             </p>
           </div>
         </div>
@@ -125,9 +133,7 @@ const projects = [
       <div class="work-content">
         <h2 class="section-title">Featured Work</h2>
         <BentoGrid>
-          {projects.map(project => (
-            <ProjectCard {...project} />
-          ))}
+          {projects.map((project) => <ProjectCard {...project} />)}
         </BentoGrid>
       </div>
     </section>
@@ -137,14 +143,24 @@ const projects = [
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-      <GlassmorphicContainer variant="primary" size="large" tag="div" class="contact-content">
+      <GlassmorphicContainer
+        variant="primary"
+        size="large"
+        tag="div"
+        class="contact-content"
+      >
         <h2 class="section-title">Let's Connect</h2>
         <p class="contact-description">
-          Interested in collaborating on projects that bridge biology and technology? 
-          I'm always excited to discuss new opportunities and innovative ideas.
+          Interested in collaborating on projects that bridge biology and
+          technology? I'm always excited to discuss new opportunities and
+          innovative ideas.
         </p>
         <div class="contact-actions">
-          <CTAButton href="mailto:hello@yamshy.dev" variant="primary" class="large">
+          <CTAButton
+            href="mailto:hello@yamshy.dev"
+            variant="primary"
+            class="large"
+          >
             Get In Touch
           </CTAButton>
           <CTAButton href="https://github.com/yamshy" variant="secondary">
@@ -161,14 +177,14 @@ const projects = [
     position: relative;
     z-index: var(--z-fg);
   }
-  
+
   .hero {
     min-height: 100vh;
     position: relative;
     overflow: hidden;
     padding: var(--sp-8) var(--sp-8) var(--sp-12) var(--sp-8);
   }
-  
+
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -180,14 +196,14 @@ const projects = [
     position: relative;
     z-index: var(--z-fg);
   }
-  
+
   @media (min-width: 1024px) {
     .hero-grid {
       grid-template-columns: 2fr 1fr;
       gap: var(--sp-16);
     }
   }
-  
+
   .hero-main {
     display: flex;
     flex-direction: column;
@@ -195,50 +211,50 @@ const projects = [
     position: relative;
     z-index: var(--z-fg);
   }
-  
+
   .hero-title-container {
     margin-bottom: var(--sp-12);
     animation: fade-in-up 1s var(--ease-3) 0.2s both;
   }
-  
+
   @media (min-width: 1024px) {
     .hero-title-container {
       margin-bottom: var(--sp-16);
     }
   }
-  
+
   .hero-title {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 300;
     line-height: 0.8;
     margin: 0;
   }
-  
+
   @media (min-width: 640px) {
     .hero-title {
       font-size: clamp(4rem, 10vw, 7rem);
     }
   }
-  
+
   @media (min-width: 1024px) {
     .hero-title {
       font-size: clamp(5rem, 12vw, 8rem);
     }
   }
-  
+
   @media (min-width: 1280px) {
     .hero-title {
       font-size: clamp(6rem, 14vw, 9rem);
     }
   }
-  
+
   .hero-name-primary {
     display: block;
     color: var(--coral);
     font-weight: 700;
     padding-bottom: var(--sp-4);
   }
-  
+
   .hero-name-secondary {
     display: block;
     color: var(--text-dark);
@@ -247,7 +263,7 @@ const projects = [
     margin-top: var(--sp-2);
     padding-bottom: var(--sp-6);
   }
-  
+
   @media (min-width: 1024px) {
     .hero-name-secondary {
       margin-left: var(--sp-12);
@@ -255,20 +271,20 @@ const projects = [
       padding-bottom: var(--sp-8);
     }
   }
-  
+
   .hero-bio {
     max-width: 600px;
     margin-left: 0;
     animation: fade-in-up 1s var(--ease-3) 0.4s both;
   }
-  
+
   @media (min-width: 1024px) {
     .hero-bio {
       margin-left: var(--sp-8);
       max-width: 700px;
     }
   }
-  
+
   .hero-bio-primary {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
     line-height: 1.6;
@@ -276,25 +292,25 @@ const projects = [
     margin: 0 0 var(--sp-6) 0;
     font-weight: 300;
   }
-  
+
   @media (min-width: 1024px) {
     .hero-bio-primary {
       font-size: clamp(1.3rem, 3.5vw, 1.6rem);
     }
   }
-  
+
   .hero-bio-secondary {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
     line-height: 1.7;
     color: color-mix(in oklab, var(--text-dark), transparent 25%);
     margin: 0;
   }
-  
+
   .highlight-text {
     color: var(--coral);
     font-weight: 500;
   }
-  
+
   .hero-actions-container {
     display: flex;
     flex-direction: column;
@@ -302,13 +318,13 @@ const projects = [
     align-items: center;
     position: relative;
   }
-  
+
   @media (min-width: 1024px) {
     .hero-actions-container {
       align-items: flex-start;
     }
   }
-  
+
   .hero-cta-wrapper {
     display: flex;
     flex-direction: column;
@@ -317,7 +333,7 @@ const projects = [
     max-width: 320px;
     animation: fade-in-up 1s var(--ease-3) 0.6s both;
   }
-  
+
   .cta-primary,
   .cta-secondary {
     display: flex;
@@ -334,44 +350,44 @@ const projects = [
     position: relative;
     overflow: hidden;
   }
-  
+
   .cta-primary {
     background: var(--glass-yellow);
     border-color: color-mix(in oklab, var(--accent-yellow), transparent 70%);
     color: var(--text-dark);
   }
-  
+
   .cta-primary:hover {
     background: var(--accent-yellow);
     box-shadow: var(--shadow-xl);
     transform: scale(1.05);
   }
-  
+
   .cta-secondary {
     background: var(--glass-mocha);
     border-color: color-mix(in oklab, var(--mocha), transparent 70%);
     color: var(--text-dark);
   }
-  
+
   .cta-secondary:hover {
     background: var(--mocha);
     color: var(--warm-bg);
     box-shadow: var(--shadow-xl);
     transform: scale(1.05);
   }
-  
+
   .cta-arrow {
     transition: transform 0.3s var(--ease-3);
   }
-  
+
   .cta-primary:hover .cta-arrow {
     transform: translateY(4px);
   }
-  
+
   .cta-secondary:hover .cta-arrow {
     transform: translateX(4px);
   }
-  
+
   .floating-accent {
     position: absolute;
     top: -60px;
@@ -385,13 +401,13 @@ const projects = [
     animation: organic-float 6s var(--ease-in-out-3) infinite;
     display: none;
   }
-  
+
   @media (min-width: 1024px) {
     .floating-accent {
       display: block;
     }
   }
-  
+
   .scroll-indicator {
     position: absolute;
     bottom: var(--sp-8);
@@ -399,7 +415,7 @@ const projects = [
     transform: translateX(-50%);
     animation: bounce 2s var(--ease-in-out-3) infinite;
   }
-  
+
   .scroll-mouse {
     width: 24px;
     height: 40px;
@@ -409,7 +425,7 @@ const projects = [
     justify-content: center;
     padding-top: 8px;
   }
-  
+
   .scroll-dot {
     width: 4px;
     height: 12px;
@@ -417,7 +433,7 @@ const projects = [
     border-radius: 2px;
     animation: pulse 2s var(--ease-in-out-3) infinite;
   }
-  
+
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -428,18 +444,23 @@ const projects = [
       transform: translateY(0);
     }
   }
-  
+
   @keyframes organic-float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px) rotate(0deg);
     }
     50% {
       transform: translateY(-20px) rotate(180deg);
     }
   }
-  
+
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
       transform: translateX(-50%) translateY(0);
     }
     40% {
@@ -449,16 +470,17 @@ const projects = [
       transform: translateX(-50%) translateY(-5px);
     }
   }
-  
+
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
       opacity: 0.3;
     }
   }
-  
+
   .work-section {
     padding: var(--sp-16) var(--sp-6);
   }
@@ -468,13 +490,12 @@ const projects = [
     margin: 0 auto;
   }
 
-
   .contact {
     padding: var(--sp-8) var(--sp-6);
     text-align: center;
     margin-top: var(--sp-8);
   }
-  
+
   .contact-content {
     max-width: 600px;
     margin: 0 auto;
@@ -483,7 +504,7 @@ const projects = [
     gap: var(--sp-6);
     text-align: center;
   }
-  
+
   .section-title {
     font-size: var(--font-size-fluid-2);
     font-weight: var(--font-weight-7);
@@ -492,7 +513,7 @@ const projects = [
     color: var(--text-dark);
     text-align: center;
   }
-  
+
   .contact-description {
     font-size: 1.1rem;
     line-height: 1.7;
@@ -500,71 +521,70 @@ const projects = [
     color: color-mix(in oklab, var(--text-dark), transparent 15%);
     margin: 0;
   }
-  
+
   .contact-actions {
     display: flex;
     gap: var(--sp-4);
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     .hero-content {
       animation: none;
     }
-    
+
     .highlight::after {
       animation: none;
       transform: scaleX(1);
     }
   }
-  
+
   @media (max-width: 767px) {
     .hero {
       padding: var(--sp-6) var(--sp-6) var(--sp-8) var(--sp-6);
       min-height: 100vh;
     }
-    
+
     .hero-main {
       justify-content: center;
     }
-    
+
     .hero-actions-container {
       justify-content: center;
     }
-    
+
     .hero-grid {
       gap: var(--sp-6);
     }
-    
-    
+
     .hero-bio {
       margin-left: 0;
       max-width: 100%;
     }
-    
+
     .hero-bio-primary {
       margin-bottom: var(--sp-4);
     }
-    
+
     .hero-name-secondary {
       margin-left: var(--sp-3);
       margin-top: var(--sp-1);
     }
-    
+
     .hero-actions-container {
       align-items: center;
     }
-    
+
     .hero-cta-wrapper {
       gap: var(--sp-4);
     }
-    
+
     .contact-actions {
       flex-direction: column;
       align-items: center;
     }
-    
+
     .contact {
       padding: var(--sp-6) var(--sp-4);
     }

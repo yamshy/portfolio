@@ -36,20 +36,28 @@ Inside of your Astro project, you'll see the following folders and files:
 All commands are run from the root of the project, from a terminal:
 
 ### Quick Start
+
 ```bash
 # Test the latest release locally
 docker run -p 8080:8080 ghcr.io/yamshy/portfolio:latest
 ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `pnpm install`         | Installs dependencies                            |
 | `pnpm dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
-| `pnpm release`         | Run semantic-release locally (for testing)      |
+| `pnpm check:astro`     | Run Astro's built-in diagnostics                 |
+| `pnpm type-check`      | Verify TypeScript types                          |
+| `pnpm lint`            | Lint files with ESLint                           |
+| `pnpm lint:fix`        | Fix lint issues automatically                    |
+| `pnpm format`          | Format files with Prettier                       |
+| `pnpm format:check`    | Check file formatting                            |
+| `pnpm check`           | Run linting, formatting check, and type-check    |
+| `pnpm release`         | Run semantic-release locally (for testing)       |
 
 ## 🚀 Automated Releases
 
@@ -65,6 +73,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 - `docs:`, `style:`, `refactor:`, `test:`, `chore:` - No version bump
 
 Examples:
+
 ```
 feat: add new portfolio section
 fix: resolve responsive layout issue
@@ -93,6 +102,7 @@ On each push to `main` with valid Conventional Commits:
 ### Container Images
 
 Images are automatically published to `ghcr.io/<owner>/portfolio:<version>` with:
+
 - Semantic version tags (e.g., `1.2.3`, `2.0.0`)
 - `latest` tag for the most recent release
 - OCI labels for source, revision, creation time, and version

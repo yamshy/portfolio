@@ -4,13 +4,13 @@ export type Size = 'small' | 'medium' | 'large';
 export function getGlassmorphicClasses(
   variant: Variant = 'neutral',
   size: Size = 'medium',
-  className = ''
+  className = '',
 ): string {
   return [
     'glassmorphic-container',
     `glassmorphic-container--${variant}`,
     `glassmorphic-container--${size}`,
-    className
+    className,
   ]
     .filter(Boolean)
     .join(' ');

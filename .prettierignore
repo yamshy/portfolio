@@ -1,0 +1,15 @@
+dist/
+.astro/
+node_modules/
+public/
+coverage/
+.claude/
+.cursor/
+.github/
+AGENTS.md
+CHANGELOG.md
+CLAUDE.md
+astro.config.mjs
+playwright.config.ts
+release.config.js
+todo.md

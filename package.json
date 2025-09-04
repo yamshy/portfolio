@@ -14,7 +14,15 @@
     "test:coverage": "vitest --coverage --run",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "release": "semantic-release"
+    "check:astro": "astro check",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier -w .",
+    "format:check": "prettier -c .",
+    "check": "pnpm check:astro && pnpm type-check && pnpm lint && pnpm format:check",
+    "release": "semantic-release",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -26,17 +34,38 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
+    "@eslint/js": "^9.34.0",
     "@playwright/test": "^1.55.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/npm": "^11.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
     "@vitest/ui": "^3.2.4",
     "axe-core": "^4.10.3",
     "conventional-changelog-conventionalcommits": "^9.1.0",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.3.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "astro-eslint-parser": "^1.0.2",
+    "globals": "^16.3.0",
     "happy-dom": "^18.0.1",
+    "husky": "^9.1.7",
     "lighthouse": "^12.8.2",
+    "lint-staged": "^16.1.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
     "semantic-release": "^22.0.7",
+    "typescript-eslint": "^8.42.0",
     "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,astro}": [
+      "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "*.{json,md,css}": "pnpm exec prettier --write"
   }
 }
