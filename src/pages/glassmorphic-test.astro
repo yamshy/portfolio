@@ -25,13 +25,19 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
         <GlassmorphicContainer variant="primary" size="medium">
           <h3>Medium Primary</h3>
-          <p>Standard content with enhanced coral glassmorphism. Perfect for featured project cards and hero sections.</p>
+          <p>
+            Standard content with enhanced coral glassmorphism. Perfect for
+            featured project cards and hero sections.
+          </p>
           <button class="test-button">Call to Action</button>
         </GlassmorphicContainer>
 
         <GlassmorphicContainer variant="primary" size="large">
           <h3>Large Primary</h3>
-          <p>Generous spacing for major content areas. This variant uses the strongest glassmorphism effect with maximum blur and coral tinting.</p>
+          <p>
+            Generous spacing for major content areas. This variant uses the
+            strongest glassmorphism effect with maximum blur and coral tinting.
+          </p>
           <div class="test-content">
             <ul>
               <li>Enhanced visual prominence</li>
@@ -53,7 +59,10 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
         <GlassmorphicContainer variant="secondary" size="medium">
           <h3>Medium Secondary</h3>
-          <p>Balanced mocha glassmorphism for standard content sections. Ideal for project cards and timeline phases.</p>
+          <p>
+            Balanced mocha glassmorphism for standard content sections. Ideal
+            for project cards and timeline phases.
+          </p>
           <div class="test-tags">
             <span class="tag">React</span>
             <span class="tag">TypeScript</span>
@@ -63,7 +72,10 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
         <GlassmorphicContainer variant="secondary" size="large">
           <h3>Large Secondary</h3>
-          <p>Spacious mocha glass container for detailed content. Perfect for comprehensive project descriptions and detailed sections.</p>
+          <p>
+            Spacious mocha glass container for detailed content. Perfect for
+            comprehensive project descriptions and detailed sections.
+          </p>
           <div class="test-form">
             <input type="text" placeholder="Enter your name" />
             <textarea placeholder="Your message here..."></textarea>
@@ -83,7 +95,10 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
         <GlassmorphicContainer variant="neutral" size="medium">
           <h3>Medium Neutral</h3>
-          <p>Clean, minimal glassmorphism for supporting content. Great for navigation elements and sidebars.</p>
+          <p>
+            Clean, minimal glassmorphism for supporting content. Great for
+            navigation elements and sidebars.
+          </p>
           <nav class="test-nav">
             <a href="#about">About</a>
             <a href="#work">Work</a>
@@ -93,7 +108,10 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
         <GlassmorphicContainer variant="neutral" size="large">
           <h3>Large Neutral</h3>
-          <p>Spacious neutral container for background content. Perfect for navigation panels and supporting information sections.</p>
+          <p>
+            Spacious neutral container for background content. Perfect for
+            navigation panels and supporting information sections.
+          </p>
           <div class="test-stats">
             <div class="stat">
               <span class="stat-number">5+</span>
@@ -117,12 +135,17 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
       <div class="test-grid">
         <GlassmorphicContainer variant="primary" size="medium" tag="article">
           <h3>Article Tag</h3>
-          <p>Using semantic HTML with the article tag for better accessibility and SEO.</p>
+          <p>
+            Using semantic HTML with the article tag for better accessibility
+            and SEO.
+          </p>
         </GlassmorphicContainer>
 
         <GlassmorphicContainer variant="secondary" size="medium" tag="section">
           <h3>Section Tag</h3>
-          <p>Using section tag for content organization and semantic structure.</p>
+          <p>
+            Using section tag for content organization and semantic structure.
+          </p>
         </GlassmorphicContainer>
 
         <GlassmorphicContainer variant="neutral" size="medium" tag="aside">
@@ -136,11 +159,29 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
       <h2>Long Content Test</h2>
       <GlassmorphicContainer variant="primary" size="large">
         <h3>Content Overflow Handling</h3>
-        <p>This container tests how the glassmorphic effect handles longer content and ensures proper overflow behavior.</p>
+        <p>
+          This container tests how the glassmorphic effect handles longer
+          content and ensures proper overflow behavior.
+        </p>
         <div class="long-content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+          <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+          </p>
         </div>
       </GlassmorphicContainer>
     </section>
@@ -152,12 +193,32 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
     min-height: 100vh;
     padding: var(--size-6);
     background: var(--warm-bg);
-    background-image: 
-      radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--mocha) 8%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--coral) 6%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--accent-yellow) 4%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 60% 10%, color-mix(in oklab, var(--blue) 3%, transparent) 0%, transparent 40%),
-      radial-gradient(circle at 10% 60%, color-mix(in oklab, var(--mocha) 5%, transparent) 0%, transparent 60%);
+    background-image:
+      radial-gradient(
+        circle at 20% 80%,
+        color-mix(in oklab, var(--mocha) 8%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        color-mix(in oklab, var(--coral) 6%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 40%,
+        color-mix(in oklab, var(--accent-yellow) 4%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 60% 10%,
+        color-mix(in oklab, var(--blue) 3%, transparent) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 10% 60%,
+        color-mix(in oklab, var(--mocha) 5%, transparent) 0%,
+        transparent 60%
+      );
     position: relative;
   }
 
@@ -168,9 +229,19 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      linear-gradient(45deg, transparent 30%, color-mix(in oklab, var(--coral), transparent 95%) 50%, transparent 70%),
-      linear-gradient(-45deg, transparent 30%, color-mix(in oklab, var(--mocha), transparent 95%) 50%, transparent 70%);
+    background:
+      linear-gradient(
+        45deg,
+        transparent 30%,
+        color-mix(in oklab, var(--coral), transparent 95%) 50%,
+        transparent 70%
+      ),
+      linear-gradient(
+        -45deg,
+        transparent 30%,
+        color-mix(in oklab, var(--mocha), transparent 95%) 50%,
+        transparent 70%
+      );
     pointer-events: none;
     z-index: -1;
   }
@@ -257,7 +328,8 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px) rotate(0deg);
     }
     33% {
@@ -313,7 +385,7 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
   }
 
   .test-content li::before {
-    content: "✓";
+    content: '✓';
     position: absolute;
     left: 0;
     color: var(--coral);

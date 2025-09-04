@@ -1,6 +1,6 @@
-@import "open-props/normalize.min.css";
-@import "open-props/open-props.min.css";
-@import "open-props/colors.min.css";
+@import 'open-props/normalize.min.css';
+@import 'open-props/open-props.min.css';
+@import 'open-props/colors.min.css';
 
 /* Cascade layers */
 @layer reset, base, tokens, utilities, components;
@@ -16,19 +16,19 @@
 /* Project palette - Light theme */
 @layer tokens {
   :root {
-    --warm-bg: #FEFCF8;
-    --coral: #E85A2B;
-    --text-dark: #1A0D08;
-    --accent-yellow: #FFD644;
-    --mocha: #A47864;
-    --blue: #2563EB;
+    --warm-bg: #fefcf8;
+    --coral: #e85a2b;
+    --text-dark: #1a0d08;
+    --accent-yellow: #ffd644;
+    --mocha: #a47864;
+    --blue: #2563eb;
 
     /* Glass tones */
-    --glass-coral: rgba(232, 90, 43, 0.20);
+    --glass-coral: rgba(232, 90, 43, 0.2);
     --glass-mocha: rgba(164, 120, 100, 0.15);
     --glass-yellow: rgba(255, 214, 68, 0.15);
-    --glass-blue: rgba(37, 99, 235, 0.10);
-    --glass-dark: rgba(26, 13, 8, 0.10);
+    --glass-blue: rgba(37, 99, 235, 0.1);
+    --glass-dark: rgba(26, 13, 8, 0.1);
 
     /* Radii | Shadows | Blurs */
     --r-lg: 24px;
@@ -55,33 +55,47 @@
   /* Dark theme */
   @media (prefers-color-scheme: dark) {
     :root {
-      --warm-bg: #FEFCF8;
-      --coral: #E85A2B;
-      --text-dark: #1A0D08;
-      --accent-yellow: #FFD644;
-      --mocha: #A47864;
-      --blue: #2563EB;
+      --warm-bg: #fefcf8;
+      --coral: #e85a2b;
+      --text-dark: #1a0d08;
+      --accent-yellow: #ffd644;
+      --mocha: #a47864;
+      --blue: #2563eb;
 
       /* Glass tones */
-      --glass-coral: rgba(232, 90, 43, 0.20);
+      --glass-coral: rgba(232, 90, 43, 0.2);
       --glass-mocha: rgba(164, 120, 100, 0.15);
       --glass-yellow: rgba(255, 214, 68, 0.15);
-      --glass-blue: rgba(37, 99, 235, 0.10);
-      --glass-dark: rgba(26, 13, 8, 0.10);
+      --glass-blue: rgba(37, 99, 235, 0.1);
+      --glass-dark: rgba(26, 13, 8, 0.1);
     }
   }
-
 }
 
 @layer base {
-  :root { color-scheme: light dark; }
-  html, body { 
-    background: var(--warm-bg); 
+  :root {
+    color-scheme: light dark;
+  }
+  html,
+  body {
+    background: var(--warm-bg);
     color: var(--text-dark);
     /* Subtle paper-like texture */
-    background-image: 
-      radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--mocha) 2%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--coral) 1.5%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--accent-yellow) 1%, transparent) 0%, transparent 50%);
+    background-image:
+      radial-gradient(
+        circle at 20% 80%,
+        color-mix(in oklab, var(--mocha) 2%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        color-mix(in oklab, var(--coral) 1.5%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 40%,
+        color-mix(in oklab, var(--accent-yellow) 1%, transparent) 0%,
+        transparent 50%
+      );
   }
 }
