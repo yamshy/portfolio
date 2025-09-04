@@ -6,6 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
 import CTAButton from '../components/CTAButton.astro';
 import OrganicShapes from '../components/OrganicShapes.astro';
+import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
 // Sample project data
 const projects = [
@@ -136,7 +137,7 @@ const projects = [
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-      <div class="contact-content">
+      <GlassmorphicContainer variant="primary" size="large" tag="div" class="contact-content">
         <h2 class="section-title">Let's Connect</h2>
         <p class="contact-description">
           Interested in collaborating on projects that bridge biology and technology? 
@@ -150,7 +151,7 @@ const projects = [
             View GitHub
           </CTAButton>
         </div>
-      </div>
+      </GlassmorphicContainer>
     </section>
   </main>
 </BaseLayout>
@@ -480,6 +481,7 @@ const projects = [
     display: flex;
     flex-direction: column;
     gap: var(--sp-6);
+    text-align: center;
   }
   
   .section-title {
