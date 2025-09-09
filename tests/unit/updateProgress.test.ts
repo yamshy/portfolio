@@ -64,4 +64,10 @@ describe('updateProgress', () => {
         expect(btn.classList.contains('active')).toBe(false);
       });
   });
+
+  it('returns early without errors when required elements are missing', () => {
+    document.body.innerHTML = '';
+
+    expect(() => updateProgress()).not.toThrow();
+  });
 });
