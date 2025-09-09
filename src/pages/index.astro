@@ -624,6 +624,21 @@ const projects = [
     }
   }
 
+  /* Add breathing room on desktop so content doesn't overlap the fixed sidebar */
+  @media (min-width: 1024px) {
+    .hero {
+      padding-left: calc(var(--sp-8) + 10rem);
+    }
+
+    .work-section {
+      padding-left: calc(var(--sp-16) + 10rem);
+    }
+
+    .timeline-section {
+      padding-left: calc(var(--sp-16) + 10rem);
+    }
+  }
+
   @media (max-width: 767px) {
     .hero {
       padding: var(--sp-6) var(--sp-6) var(--sp-8) var(--sp-6);
