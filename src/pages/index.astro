@@ -69,7 +69,7 @@ const projects = [
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
     <section class="hero" id="about">
-      <GlassmorphicContainer variant="clear" size="medium" class="hero-container">
+      <GlassmorphicContainer variant="clear" size="large" class="hero-container u-container u-container--xl">
         <!-- Asymmetrical grid layout -->
         <div class="hero-grid">
           <!-- Left side - 2/3 width for main content -->
@@ -132,7 +132,7 @@ const projects = [
 
     <!-- Featured Work -->
     <section id="work" class="work-section">
-       <GlassmorphicContainer variant="clear" size="medium" class="work-container">
+       <GlassmorphicContainer variant="clear" size="medium" class="work-container u-container u-container--xl">
         <div class="work-content">
           <h2 class="section-title">Featured Work</h2>
           <BentoGrid>
@@ -143,7 +143,11 @@ const projects = [
     </section>
 
     <!-- Professional Evolution Timeline -->
-    <Timeline />
+    <section id="evolution" class="timeline-section">
+      <GlassmorphicContainer variant="clear" size="medium" class="timeline-container u-container u-container--xl">
+        <Timeline />
+      </GlassmorphicContainer>
+    </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
@@ -196,21 +200,22 @@ const projects = [
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: fit-content;
-    max-width: 100%;
+    /* Additional spacing handled via global override below */
   }
 
+  /* Increase inner spacing of the glass wrapper for hero */
   .hero :global(.glassmorphic-container) {
-    padding: 12rem;
+    padding-inline: clamp(var(--sp-16), 8vw, var(--sp-24));
+    padding-block: clamp(var(--sp-12), 6vw, var(--sp-16));
+    padding-bottom: clamp(var(--sp-14), 8vw, var(--sp-20));
   }
   
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    width: fit-content;
-    max-width: 100%;  
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     position: relative;
     z-index: var(--z-fg);
   }
@@ -218,7 +223,14 @@ const projects = [
   @media (min-width: 1024px) {
     .hero-grid {
       grid-template-columns: 2fr 1fr;
-      gap: var(--sp-16);
+      column-gap: var(--sp-20);
+      row-gap: var(--sp-12);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-grid {
+      column-gap: var(--sp-24);
     }
   }
 
@@ -228,8 +240,7 @@ const projects = [
     justify-content: center;
     position: relative;
     z-index: var(--z-fg);
-    width: fit-content;
-    max-width: 100%;
+    width: 100%;
   }
 
   .hero-title-container {
@@ -432,7 +443,7 @@ const projects = [
 
   .scroll-indicator {
     position: absolute;
-    bottom: var(--sp-8);
+    bottom: var(--sp-4);
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s var(--ease-in-out-3) infinite;
@@ -509,22 +520,32 @@ const projects = [
     justify-content: center;
   }
 
-  .work-container {
-    width: fit-content;
-    max-width: 100%;
+  :global(.work-container) {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
     padding: var(--size-6) !important;
+    overflow: visible;
   }
 
   .work-content {
-    width: fit-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: none;
     margin: 0 auto;
   }
 
   .work-content :global(.bento) {
-    max-width: none;
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
     padding: 0;
   }
+
+  .work-content :global(.bento .grid) {
+    width: 100%;
+  }
+
+  /* No special gutter needed at this width; centered container avoids overlap */
 
   .contact {
     padding: var(--sp-8) var(--sp-6);
@@ -535,13 +556,34 @@ const projects = [
   }
 
   .contact-content {
-    width: fit-content;
-    max-width: 600px;
+    width: 100%;
+    max-width: var(--container-sm);
     display: flex;
     flex-direction: column;
     gap: var(--sp-6);
     text-align: center;
     padding: var(--size-6) !important;
+  }
+
+  /* Timeline wrapper sizing */
+  .timeline-section {
+    padding: var(--sp-16) var(--sp-6);
+    display: flex;
+    justify-content: center;
+  }
+
+  :global(.timeline-container) {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: var(--size-8) !important;
+    overflow: visible; /* allow inner timeline visuals to extend without clipping */
+  }
+
+  /* Give the rightmost timeline card room and avoid clipping from component overflow */
+  :global(.timeline) {
+    padding-inline-end: calc(var(--sp-10) + var(--sp-8)) !important;
+    overflow: visible !important;
   }
 
   .section-title {

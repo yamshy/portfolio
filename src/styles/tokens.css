@@ -45,11 +45,24 @@
     --sp-4: 1rem;
     --sp-6: 1.5rem;
     --sp-8: 2rem;
+    --sp-10: 2.5rem;
+    --sp-12: 3rem;
+    --sp-14: 3.5rem;
+    --sp-16: 4rem;
+    --sp-18: 4.5rem;
+    --sp-20: 5rem;
+    --sp-24: 6rem;
 
     /* Z-index */
     --z-nav: 50;
     --z-fg: 10;
     --z-bg: -1;
+
+    /* Content container widths */
+    --container-sm: 720px;
+    --container-md: 960px;
+    --container-lg: 1200px;
+    --container-xl: 1400px;
   }
 
   /* Dark theme */

@@ -118,24 +118,8 @@
     padding: var(--sp-16) var(--sp-10);
     max-width: 1400px;
     margin: 0 auto;
-    background:
-      radial-gradient(
-        circle at 20% 20%,
-        color-mix(in oklab, var(--coral) 2%, transparent) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 80% 80%,
-        color-mix(in oklab, var(--blue) 1.5%, transparent) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 50% 50%,
-        color-mix(in oklab, var(--mocha) 1%, transparent) 0%,
-        transparent 60%
-      );
-    border-radius: var(--r-xl);
-    overflow: hidden;
+    /* Transparent background to let outer glass container show through */
+    background: transparent;
   }
 
   .section-title {
@@ -147,39 +131,9 @@
     letter-spacing: var(--font-letterspacing-2);
   }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(
-        circle at 10% 10%,
-        color-mix(in oklab, var(--coral) 3%, transparent) 0%,
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 90% 90%,
-        color-mix(in oklab, var(--blue) 2%, transparent) 0%,
-        transparent 40%
-      );
-    pointer-events: none;
-    z-index: var(--z-bg);
-    animation: organicFloat 8s var(--ease-in-out-3) infinite;
-  }
+  .timeline::before { display: none; }
 
-  .timeline::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 70% 30%,
-      color-mix(in oklab, var(--mocha) 2%, transparent) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-    z-index: var(--z-bg);
-    animation: organicFloat 12s var(--ease-in-out-3) infinite reverse;
-  }
+  .timeline::after { display: none; }
 
   .phases {
     display: grid;
