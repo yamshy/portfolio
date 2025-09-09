@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/yamshy/portfolio/compare/v3.1.0...v3.2.0) (2025-09-09)
+
+### Features
+
+* enhance GlassmorphicContainer with clear variant and update styles ([f92fabb](https://github.com/yamshy/portfolio/commit/f92fabb8272bebbcd54e436d13de1455cd65116e))
+* **ui:** standardize containers on index; add container utilities; wrap timeline; widen hero spacing ([51e9179](https://github.com/yamshy/portfolio/commit/51e9179e28dc3289a31b5f1e06d8e22dbac948db))
+
 ## [3.1.0](https://github.com/yamshy/portfolio/compare/v3.0.1...v3.1.0) (2025-09-04)
 
 ### Features
