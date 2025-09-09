@@ -5,6 +5,7 @@ import BentoGrid from '../components/BentoGrid.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
 import CTAButton from '../components/CTAButton.astro';
+import ContactForm from '../components/ContactForm.astro';
 import OrganicShapes from '../components/OrganicShapes.astro';
 import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
@@ -163,18 +164,7 @@ const projects = [
           technology? I'm always excited to discuss new opportunities and
           innovative ideas.
         </p>
-        <div class="contact-actions">
-          <CTAButton
-            href="mailto:hello@yamshy.dev"
-            variant="primary"
-            class="large"
-          >
-            Get In Touch
-          </CTAButton>
-          <CTAButton href="https://github.com/yamshy" variant="secondary">
-            View GitHub
-          </CTAButton>
-        </div>
+        <ContactForm />
       </GlassmorphicContainer>
     </section>
   </main>
