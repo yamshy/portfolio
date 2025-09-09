@@ -4,7 +4,6 @@ import SidebarNav from '../components/SidebarNav.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Timeline from '../components/Timeline.astro';
-import CTAButton from '../components/CTAButton.astro';
 import ContactForm from '../components/ContactForm.astro';
 import OrganicShapes from '../components/OrganicShapes.astro';
 import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
@@ -70,7 +69,11 @@ const projects = [
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
     <section class="hero" id="about">
-      <GlassmorphicContainer variant="clear" size="large" class="hero-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="large"
+        class="hero-container u-container u-container--xl"
+      >
         <!-- Asymmetrical grid layout -->
         <div class="hero-grid">
           <!-- Left side - 2/3 width for main content -->
@@ -87,7 +90,9 @@ const projects = [
             <div class="hero-bio">
               <p class="hero-bio-primary">
                 Infrastructure Engineer specializing in
-                <span class="highlight-text">DevOps, system administration,</span>
+                <span class="highlight-text"
+                  >DevOps, system administration,</span
+                >
                 and <span class="highlight-text">data engineering</span>
               </p>
               <p class="hero-bio-secondary">
@@ -133,7 +138,11 @@ const projects = [
 
     <!-- Featured Work -->
     <section id="work" class="work-section">
-       <GlassmorphicContainer variant="clear" size="medium" class="work-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="medium"
+        class="work-container u-container u-container--xl"
+      >
         <div class="work-content">
           <h2 class="section-title">Featured Work</h2>
           <BentoGrid>
@@ -145,7 +154,11 @@ const projects = [
 
     <!-- Professional Evolution Timeline -->
     <section id="evolution" class="timeline-section">
-      <GlassmorphicContainer variant="clear" size="medium" class="timeline-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="medium"
+        class="timeline-container u-container u-container--xl"
+      >
         <Timeline />
       </GlassmorphicContainer>
     </section>
@@ -199,7 +212,7 @@ const projects = [
     padding-block: clamp(var(--sp-12), 6vw, var(--sp-16));
     padding-bottom: clamp(var(--sp-14), 8vw, var(--sp-20));
   }
-  
+
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;

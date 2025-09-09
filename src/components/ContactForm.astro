@@ -2,135 +2,160 @@
 // No props needed initially; form is standalone
 ---
 
-<form class="contact-form" method="post" netlify>
-	<div class="form-grid">
-		<label class="field">
-			<span class="label">Name</span>
-			<input class="input" type="text" name="name" placeholder="Your name" required />
-		</label>
-		<label class="field">
-			<span class="label">Email</span>
-			<input class="input" type="email" name="email" placeholder="you@example.com" required />
-		</label>
-		<label class="field field--full">
-			<span class="label">Subject</span>
-			<input class="input" type="text" name="subject" placeholder="What would you like to discuss?" />
-		</label>
-		<label class="field field--full">
-			<span class="label">Message</span>
-			<textarea class="textarea" name="message" rows="5" placeholder="Share some details..." required></textarea>
-		</label>
-	</div>
+<form class="contact-form" name="contact" method="post" data-netlify="true">
+  <input type="hidden" name="form-name" value="contact" />
+  <div class="form-grid">
+    <label class="field">
+      <span class="label">Name</span>
+      <input
+        class="input"
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+      />
+    </label>
+    <label class="field">
+      <span class="label">Email</span>
+      <input
+        class="input"
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+      />
+    </label>
+    <label class="field field--full">
+      <span class="label">Subject</span>
+      <input
+        class="input"
+        type="text"
+        name="subject"
+        placeholder="What would you like to discuss?"
+      />
+    </label>
+    <label class="field field--full">
+      <span class="label">Message</span>
+      <textarea
+        class="textarea"
+        name="message"
+        rows="5"
+        placeholder="Share some details..."
+        required></textarea>
+    </label>
+  </div>
 
-	<div class="form-actions">
-		<button type="submit" class="button button--primary">Send Message</button>
-		<a href="mailto:hello@yamshy.dev" class="button button--secondary">Email Instead</a>
-	</div>
+  <div class="form-actions">
+    <button type="submit" class="button button--primary">Send Message</button>
+    <a href="mailto:hello@yamshy.dev" class="button button--secondary"
+      >Email Instead</a
+    >
+  </div>
 </form>
 
 <style>
-	.contact-form {
-		display: grid;
-		gap: var(--sp-6);
-	}
+  .contact-form {
+    display: grid;
+    gap: var(--sp-6);
+  }
 
-	.form-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--sp-4);
-	}
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
 
-	@media (min-width: 768px) {
-		.form-grid {
-			grid-template-columns: 1fr 1fr;
-		}
-		.field--full {
-			grid-column: 1 / -1;
-		}
-	}
+  @media (min-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .field--full {
+      grid-column: 1 / -1;
+    }
+  }
 
-	.field {
-		display: grid;
-		gap: var(--sp-2);
-		text-align: left;
-	}
+  .field {
+    display: grid;
+    gap: var(--sp-2);
+    text-align: left;
+  }
 
-	.label {
-		font-size: 0.95rem;
-		color: color-mix(in oklab, var(--text-dark), transparent 20%);
-	}
+  .label {
+    font-size: 0.95rem;
+    color: color-mix(in oklab, var(--text-dark), transparent 20%);
+  }
 
-	.input,
-	.textarea {
-		appearance: none;
-		width: 100%;
-		padding: var(--sp-3) var(--sp-4);
-		border-radius: var(--r-lg);
-		border: 1px solid color-mix(in oklab, var(--text-dark), transparent 85%);
-		background: color-mix(in oklab, var(--warm-bg), transparent 85%);
-		-webkit-backdrop-filter: blur(var(--blur-12));
-		backdrop-filter: blur(var(--blur-12));
-		box-shadow:
-			inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 70%),
-			inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 90%);
-		color: var(--text-dark);
-	}
+  .input,
+  .textarea {
+    appearance: none;
+    width: 100%;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--r-lg);
+    border: 1px solid color-mix(in oklab, var(--text-dark), transparent 85%);
+    background: color-mix(in oklab, var(--warm-bg), transparent 85%);
+    -webkit-backdrop-filter: blur(var(--blur-12));
+    backdrop-filter: blur(var(--blur-12));
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 70%),
+      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent 90%);
+    color: var(--text-dark);
+  }
 
-	.input:focus,
-	.textarea:focus {
-		outline: 2px solid color-mix(in oklab, var(--coral), transparent 75%);
-		outline-offset: 0;
-		border-color: color-mix(in oklab, var(--coral), transparent 75%);
-		box-shadow: var(--shadow-2);
-	}
+  .input:focus,
+  .textarea:focus {
+    outline: 2px solid color-mix(in oklab, var(--coral), transparent 75%);
+    outline-offset: 0;
+    border-color: color-mix(in oklab, var(--coral), transparent 75%);
+    box-shadow: var(--shadow-2);
+  }
 
-	.textarea {
-		resize: vertical;
-		min-height: 140px;
-	}
+  .textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
 
-	.form-actions {
-		display: flex;
-		gap: var(--sp-4);
-		flex-wrap: wrap;
-		justify-content: center;
-	}
+  .form-actions {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-	.button {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--sp-2);
-		padding: var(--sp-3) var(--sp-6);
-		border-radius: 50px;
-		font-weight: 500;
-		text-decoration: none;
-		transition: all 0.3s var(--ease-3);
-		border: 1px solid transparent;
-	}
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-6);
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-3);
+    border: 1px solid transparent;
+  }
 
-	.button--primary {
-		background: var(--glass-yellow);
-		border-color: color-mix(in oklab, var(--accent-yellow), transparent 70%);
-		color: var(--text-dark);
-	}
+  .button--primary {
+    background: var(--glass-yellow);
+    border-color: color-mix(in oklab, var(--accent-yellow), transparent 70%);
+    color: var(--text-dark);
+  }
 
-	.button--primary:hover {
-		background: var(--accent-yellow);
-		box-shadow: var(--shadow-xl);
-		transform: scale(1.03);
-	}
+  .button--primary:hover {
+    background: var(--accent-yellow);
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.03);
+  }
 
-	.button--secondary {
-		background: var(--glass-mocha);
-		border-color: color-mix(in oklab, var(--mocha), transparent 70%);
-		color: var(--text-dark);
-	}
+  .button--secondary {
+    background: var(--glass-mocha);
+    border-color: color-mix(in oklab, var(--mocha), transparent 70%);
+    color: var(--text-dark);
+  }
 
-	.button--secondary:hover {
-		background: var(--mocha);
-		color: var(--warm-bg);
-		box-shadow: var(--shadow-xl);
-		transform: scale(1.03);
-	}
+  .button--secondary:hover {
+    background: var(--mocha);
+    color: var(--warm-bg);
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.03);
+  }
 </style>
