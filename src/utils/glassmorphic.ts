@@ -1,4 +1,4 @@
-export type Variant = 'primary' | 'secondary' | 'neutral';
+export type Variant = 'primary' | 'secondary' | 'neutral' | 'clear';
 export type Size = 'small' | 'medium' | 'large';
 
 export function getGlassmorphicClasses(

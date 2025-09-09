@@ -131,6 +131,51 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
     </section>
 
     <section class="test-section">
+      <h2>Clear Variant (Pure Glass Effect)</h2>
+      <div class="test-grid">
+        <GlassmorphicContainer variant="clear" size="small">
+          <h3>Small Clear</h3>
+          <p>Pure glass effect with maximum blur and no color tinting.</p>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="clear" size="medium">
+          <h3>Medium Clear</h3>
+          <p>
+            Perfect for overlays and modals where you want maximum background
+            blur without any color influence. Creates that true frosted glass
+            appearance.
+          </p>
+          <div class="test-overlay-content">
+            <div class="overlay-icon">🔍</div>
+            <span>Search Overlay</span>
+          </div>
+        </GlassmorphicContainer>
+
+        <GlassmorphicContainer variant="clear" size="large">
+          <h3>Large Clear</h3>
+          <p>
+            Spacious clear container for major UI elements that need to feel
+            like actual glass. Ideal for navigation panels, sidebars, and
+            floating content areas.
+          </p>
+          <div class="test-modal-content">
+            <div class="modal-header">
+              <h4>Modal Dialog</h4>
+              <button class="close-btn">×</button>
+            </div>
+            <div class="modal-body">
+              <p>This is how a modal would look with the clear variant.</p>
+              <div class="modal-actions">
+                <button class="test-button">Cancel</button>
+                <button class="test-button primary">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </GlassmorphicContainer>
+      </div>
+    </section>
+
+    <section class="test-section">
       <h2>Custom HTML Tags</h2>
       <div class="test-grid">
         <GlassmorphicContainer variant="primary" size="medium" tag="article">
@@ -372,6 +417,15 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
     transform: translateY(-1px);
   }
 
+  .test-button.primary {
+    background: var(--coral);
+    color: var(--warm-bg);
+  }
+
+  .test-button.primary:hover {
+    background: color-mix(in oklab, var(--coral), black 10%);
+  }
+
   .test-content ul {
     list-style: none;
     padding: 0;
@@ -500,6 +554,69 @@ import GlassmorphicContainer from '../components/GlassmorphicContainer.astro';
 
   .long-content::-webkit-scrollbar-thumb:hover {
     background: var(--coral);
+  }
+
+  /* Clear variant specific styles */
+  .test-overlay-content {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+    margin-top: var(--size-3);
+    padding: var(--size-2);
+    background: color-mix(in oklab, var(--warm-bg), transparent 90%);
+    border-radius: var(--radius-2);
+    border: 1px solid color-mix(in oklab, var(--text-dark), transparent 95%);
+  }
+
+  .overlay-icon {
+    font-size: var(--font-size-3);
+    opacity: 0.7;
+  }
+
+  .test-modal-content {
+    margin-top: var(--size-3);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--size-3);
+    padding-bottom: var(--size-2);
+    border-bottom: 1px solid color-mix(in oklab, var(--text-dark), transparent 90%);
+  }
+
+  .modal-header h4 {
+    margin: 0;
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-6);
+    color: var(--text-dark);
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: var(--font-size-4);
+    color: color-mix(in oklab, var(--text-dark), transparent 40%);
+    cursor: pointer;
+    padding: var(--size-1);
+    border-radius: var(--radius-1);
+    transition: all var(--ease-3) 200ms;
+  }
+
+  .close-btn:hover {
+    background: color-mix(in oklab, var(--text-dark), transparent 90%);
+    color: var(--text-dark);
+  }
+
+  .modal-body {
+    margin-bottom: var(--size-4);
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: var(--size-2);
+    justify-content: flex-end;
   }
 
   /* Responsive adjustments */

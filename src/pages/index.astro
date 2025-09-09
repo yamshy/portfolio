@@ -69,73 +69,77 @@ const projects = [
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
     <section class="hero" id="about">
-      <!-- Asymmetrical grid layout -->
-      <div class="hero-grid">
-        <!-- Left side - 2/3 width for main content -->
-        <div class="hero-main">
-          <!-- Main heading with asymmetrical positioning -->
-          <div class="hero-title-container">
-            <h1 class="hero-title">
-              <span class="hero-name-primary">Shyam</span>
-              <span class="hero-name-secondary">Ajudia</span>
-            </h1>
+      <GlassmorphicContainer variant="clear" size="medium" class="hero-container">
+        <!-- Asymmetrical grid layout -->
+        <div class="hero-grid">
+          <!-- Left side - 2/3 width for main content -->
+          <div class="hero-main">
+            <!-- Main heading with asymmetrical positioning -->
+            <div class="hero-title-container">
+              <h1 class="hero-title">
+                <span class="hero-name-primary">Shyam</span>
+                <span class="hero-name-secondary">Ajudia</span>
+              </h1>
+            </div>
+
+            <!-- Bio text positioned asymmetrically -->
+            <div class="hero-bio">
+              <p class="hero-bio-primary">
+                Infrastructure Engineer specializing in
+                <span class="highlight-text">DevOps, system administration,</span>
+                and <span class="highlight-text">data engineering</span>
+              </p>
+              <p class="hero-bio-secondary">
+                Starting in molecular biology research, the transition to
+                infrastructure engineering came naturally through understanding
+                how biological systems work - complex, interconnected, and
+                self-regulating. This systems thinking translates directly to
+                building reliable infrastructure and data pipelines.
+              </p>
+            </div>
           </div>
 
-          <!-- Bio text positioned asymmetrically -->
-          <div class="hero-bio">
-            <p class="hero-bio-primary">
-              Infrastructure Engineer specializing in
-              <span class="highlight-text">DevOps, system administration,</span>
-              and <span class="highlight-text">data engineering</span>
-            </p>
-            <p class="hero-bio-secondary">
-              Starting in molecular biology research, the transition to
-              infrastructure engineering came naturally through understanding
-              how biological systems work - complex, interconnected, and
-              self-regulating. This systems thinking translates directly to
-              building reliable infrastructure and data pipelines.
-            </p>
+          <!-- Right side - 1/3 width for CTAs and floating elements -->
+          <div class="hero-actions-container">
+            <!-- Glassmorphism CTA container -->
+            <div class="hero-cta-wrapper">
+              <!-- Primary CTA with glassmorphism -->
+              <a href="#work" class="cta-primary">
+                Learn More
+                <span class="cta-arrow">↓</span>
+              </a>
+
+              <!-- Secondary CTA with glassmorphism -->
+              <a href="mailto:sajudia@proton.me" class="cta-secondary">
+                Get In Touch
+                <span class="cta-arrow">→</span>
+              </a>
+            </div>
+
+            <!-- Floating accent shape -->
+            <div class="floating-accent"></div>
           </div>
         </div>
 
-        <!-- Right side - 1/3 width for CTAs and floating elements -->
-        <div class="hero-actions-container">
-          <!-- Glassmorphism CTA container -->
-          <div class="hero-cta-wrapper">
-            <!-- Primary CTA with glassmorphism -->
-            <a href="#work" class="cta-primary">
-              Learn More
-              <span class="cta-arrow">↓</span>
-            </a>
-
-            <!-- Secondary CTA with glassmorphism -->
-            <a href="mailto:sajudia@proton.me" class="cta-secondary">
-              Get In Touch
-              <span class="cta-arrow">→</span>
-            </a>
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-dot"></div>
           </div>
-
-          <!-- Floating accent shape -->
-          <div class="floating-accent"></div>
         </div>
-      </div>
-
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator">
-        <div class="scroll-mouse">
-          <div class="scroll-dot"></div>
-        </div>
-      </div>
+      </GlassmorphicContainer>
     </section>
 
     <!-- Featured Work -->
     <section id="work" class="work-section">
-      <div class="work-content">
-        <h2 class="section-title">Featured Work</h2>
-        <BentoGrid>
-          {projects.map((project) => <ProjectCard {...project} />)}
-        </BentoGrid>
-      </div>
+       <GlassmorphicContainer variant="clear" size="medium" class="work-container">
+        <div class="work-content">
+          <h2 class="section-title">Featured Work</h2>
+          <BentoGrid>
+            {projects.map((project) => <ProjectCard {...project} />)}
+          </BentoGrid>
+        </div>
+      </GlassmorphicContainer>
     </section>
 
     <!-- Professional Evolution Timeline -->
@@ -144,8 +148,8 @@ const projects = [
     <!-- Contact Section -->
     <section class="contact" id="contact">
       <GlassmorphicContainer
-        variant="primary"
-        size="large"
+        variant="clear"
+        size="medium"
         tag="div"
         class="contact-content"
       >
@@ -183,16 +187,30 @@ const projects = [
     position: relative;
     overflow: hidden;
     padding: var(--sp-8) var(--sp-8) var(--sp-12) var(--sp-8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .hero :global(.glassmorphic-container) {
+    padding: 12rem;
+  }
+  
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    min-height: 100vh;
-    max-width: 1400px;
+    width: fit-content;
+    max-width: 100%;  
     margin: 0 auto;
-    width: 100%;
     position: relative;
     z-index: var(--z-fg);
   }
@@ -210,6 +228,8 @@ const projects = [
     justify-content: center;
     position: relative;
     z-index: var(--z-fg);
+    width: fit-content;
+    max-width: 100%;
   }
 
   .hero-title-container {
@@ -317,6 +337,8 @@ const projects = [
     justify-content: center;
     align-items: center;
     position: relative;
+    width: fit-content;
+    max-width: 100%;
   }
 
   @media (min-width: 1024px) {
@@ -483,26 +505,43 @@ const projects = [
 
   .work-section {
     padding: var(--sp-16) var(--sp-6);
+    display: flex;
+    justify-content: center;
+  }
+
+  .work-container {
+    width: fit-content;
+    max-width: 100%;
+    padding: var(--size-6) !important;
   }
 
   .work-content {
-    max-width: 1400px;
+    width: fit-content;
+    max-width: 100%;
     margin: 0 auto;
+  }
+
+  .work-content :global(.bento) {
+    max-width: none;
+    padding: 0;
   }
 
   .contact {
     padding: var(--sp-8) var(--sp-6);
     text-align: center;
     margin-top: var(--sp-8);
+    display: flex;
+    justify-content: center;
   }
 
   .contact-content {
+    width: fit-content;
     max-width: 600px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: var(--sp-6);
     text-align: center;
+    padding: var(--size-6) !important;
   }
 
   .section-title {
