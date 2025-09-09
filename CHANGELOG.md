@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0](https://github.com/yamshy/portfolio/compare/v3.2.0...v3.3.0) (2025-09-09)
+
+### Features
+
+* Create styled contact form component ([#28](https://github.com/yamshy/portfolio/issues/28)) ([11b40d2](https://github.com/yamshy/portfolio/commit/11b40d2b88430d8436736fae8b26aae705097c58))
+
 ## [3.2.0](https://github.com/yamshy/portfolio/compare/v3.1.0...v3.2.0) (2025-09-09)
 
 ### Features
