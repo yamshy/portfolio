@@ -176,6 +176,7 @@
           begin,
           flyDur,
           cycleDur,
+          onVisible,
         ) {
           if (mqlReduce.matches) return null;
           const hot = document.createElementNS(
@@ -214,6 +215,75 @@
           animOpacity.setAttribute('repeatCount', 'indefinite');
           animOpacity.setAttribute('begin', begin);
           hot.appendChild(animOpacity);
+
+          // Tie blob ping to the same cycle timing as the visible window
+          const cycleSec = parseFloat(cycleDur);
+          const scheduleFromEvent = () => {
+            if (!onVisible || isNaN(cycleSec)) return;
+            const t = setTimeout(
+              onVisible,
+              Math.max(0, cycleSec * 0.92 * 1000),
+            );
+            _pingTimers.push(t);
+          };
+          animOpacity.addEventListener('beginEvent', scheduleFromEvent);
+          animOpacity.addEventListener('repeatEvent', scheduleFromEvent);
+          return hot;
+        }
+
+        // One-shot initial hot segment to avoid empty startup
+        function createInitialHotSegment(
+          d,
+          paint,
+          width,
+          length,
+          segLen,
+          flyDur,
+          startDelaySec,
+        ) {
+          if (mqlReduce.matches) return null;
+          const hot = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          hot.setAttribute('d', d);
+          hot.setAttribute('fill', 'none');
+          hot.setAttribute('stroke', paint);
+          hot.setAttribute('stroke-width', width);
+          hot.setAttribute('stroke-linecap', 'round');
+          hot.classList.add('link-hot');
+          hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
+          hot.setAttribute('stroke-dashoffset', `${length + segLen}`);
+          // Keep hidden until animation begins to avoid pre-start rectangle
+          hot.setAttribute('opacity', '0');
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          anim.setAttribute('attributeName', 'stroke-dashoffset');
+          anim.setAttribute('from', `${length + segLen}`);
+          anim.setAttribute('to', `${-segLen}`);
+          anim.setAttribute('dur', flyDur);
+          anim.setAttribute('repeatCount', '1');
+          anim.setAttribute(
+            'begin',
+            `${Math.max(0, startDelaySec).toFixed(2)}s`,
+          );
+          hot.appendChild(anim);
+          const fade = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          fade.setAttribute('attributeName', 'opacity');
+          fade.setAttribute('values', '0;1;1;0');
+          fade.setAttribute('keyTimes', '0;0.01;0.8;1');
+          fade.setAttribute('dur', flyDur);
+          fade.setAttribute(
+            'begin',
+            `${Math.max(0, startDelaySec).toFixed(2)}s`,
+          );
+          fade.setAttribute('fill', 'remove');
+          hot.appendChild(fade);
           return hot;
         }
         const cssVar = (name) =>
@@ -264,6 +334,32 @@
           dynamicGradients.appendChild(g);
           return `url(#${id})`;
         }
+
+        // Timers for scheduling blob pings (jelly pulse)
+        let _pingTimers = [];
+        function clearPingTimers() {
+          _pingTimers.forEach((id) => {
+            clearTimeout(id);
+            clearInterval(id);
+          });
+          _pingTimers = [];
+        }
+        // Schedule blob ping based on cycle timing
+        function scheduleBlobPing(el, beginSec, cycleSec) {
+          if (!el || isNaN(beginSec) || isNaN(cycleSec)) return;
+          const firstDelay = Math.max(0, (beginSec + cycleSec * 0.92) * 1000);
+          const doPing = () => {
+            el.classList.add('ping');
+            const t = setTimeout(() => el.classList.remove('ping'), 280);
+            _pingTimers.push(t);
+          };
+          const t0 = setTimeout(() => {
+            doPing();
+            const it = setInterval(doPing, cycleSec * 1000);
+            _pingTimers.push(it);
+          }, firstDelay);
+          _pingTimers.push(t0);
+        }
         function buildPairs(isMobile) {
           const P = (a, b) => [a, b];
           const desktop = [
@@ -285,6 +381,7 @@
           const isMobile = vw < 900;
           clearLinks();
           clearDynamicGradients();
+          clearPingTimers();
           const avoid = getHeroRect();
           const nodeMap = new Map();
           blobSelectors.forEach((sel) => {
@@ -292,6 +389,12 @@
             if (el) nodeMap.set(sel, centerOf(el));
           });
           const pairs = buildPairs(isMobile);
+          // Choose a small random subset of connections to fire shortly after load
+          const immediateCount = Math.min(pairs.length, isMobile ? 3 : 5);
+          const initialPulseIndices = new Set();
+          while (initialPulseIndices.size < immediateCount) {
+            initialPulseIndices.add(Math.floor(Math.random() * pairs.length));
+          }
           let idx = 0;
           for (const [sa, sb] of pairs) {
             const a = nodeMap.get(sa),
@@ -321,14 +424,18 @@
             const segLen = Math.max(24, Math.min(90, length * 0.08));
             const bursts = 1; // one burst train per path
             for (let i = 0; i < bursts; i++) {
-              const begin = `${(Math.random() * 4).toFixed(2)}s`;
+              // Compute a cycle length and choose a random phase within it
+              const cycleSecNum = isMobile
+                ? 10 + Math.random() * 6
+                : 8 + Math.random() * 6;
+              const beginSec = +(Math.random() * cycleSecNum).toFixed(2);
+              const begin = `${beginSec}s`;
               // Fast fly-through, long cycle visibility window for rarity
               const flyDur = isMobile
                 ? `${(0.8 + Math.random() * 0.3).toFixed(2)}s`
                 : `${(0.6 + Math.random() * 0.3).toFixed(2)}s`;
-              const cycleDur = isMobile
-                ? `${(10 + Math.random() * 6).toFixed(2)}s`
-                : `${(8 + Math.random() * 6).toFixed(2)}s`;
+              const cycleDur = `${cycleSecNum.toFixed(2)}s`;
+              const startEl = container.querySelector(sa);
               const hot = createHotSegment(
                 path.getAttribute('d'),
                 paint,
@@ -338,10 +445,45 @@
                 begin,
                 flyDur,
                 cycleDur,
+                () => {
+                  if (!startEl) return;
+                  startEl.classList.add('ping');
+                  const t = setTimeout(
+                    () => startEl.classList.remove('ping'),
+                    280,
+                  );
+                  _pingTimers.push(t);
+                },
               );
               if (hot) linksGroup.appendChild(hot);
 
-              // Keep base lines at steady low opacity (no trail cycle)
+              // Fire an initial one-shot pulse on a small random subset at load
+              if (initialPulseIndices.has(idx)) {
+                const delaySec = Math.random() * (isMobile ? 3 : 6); // spread kickoff pulses over first few seconds
+                const initHot = createInitialHotSegment(
+                  path.getAttribute('d'),
+                  paint,
+                  (isMobile ? 1.6 : 2.4) * 1.9,
+                  length,
+                  segLen,
+                  flyDur,
+                  delaySec,
+                );
+                if (initHot) linksGroup.appendChild(initHot);
+                if (startEl) {
+                  const t = setTimeout(() => {
+                    startEl.classList.add('ping');
+                    const t2 = setTimeout(
+                      () => startEl.classList.remove('ping'),
+                      280,
+                    );
+                    _pingTimers.push(t2);
+                  }, delaySec * 1000);
+                  _pingTimers.push(t);
+                }
+              }
+
+              // Base lines remain steady low opacity
             }
           }
         }
@@ -399,6 +541,21 @@
     animation: organic-float 12s ease-in-out infinite;
     /* Add subtle organic variation */
     transform-origin: center;
+  }
+
+  /* Inner core used for ping scaling without affecting float transforms */
+  .blob::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    transform-origin: center;
+    will-change: transform, filter;
+  }
+
+  .blob.ping::before {
+    animation: blob-ping 280ms cubic-bezier(0.22, 0.61, 0.2, 1);
   }
 
   /* Very large, faint background shape for scale variation */
@@ -643,6 +800,19 @@
     }
     50% {
       transform: translateY(-20px) scale(1.1);
+    }
+  }
+
+  /* Jelly-like ping for blobs */
+  @keyframes blob-ping {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.015);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 
