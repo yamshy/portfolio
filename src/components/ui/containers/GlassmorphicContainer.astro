@@ -14,7 +14,7 @@ const {
   tag = 'div',
 } = Astro.props;
 
-import { getGlassmorphicClasses } from '../utils/glassmorphic';
+import { getGlassmorphicClasses } from '../../../utils/glassmorphic';
 
 const allowedTags = {
   div: 'div',
@@ -39,8 +39,10 @@ const classes = getGlassmorphicClasses(variant, size, className);
   :root {
     --glass-border-width: 1px;
     --glass-border-radius: var(--radius-3);
-    --glass-transition: transform var(--ease-3) 300ms, box-shadow var(--ease-3) 300ms, border-color var(--ease-3) 300ms;
-    
+    --glass-transition:
+      transform var(--ease-3) 300ms, box-shadow var(--ease-3) 300ms,
+      border-color var(--ease-3) 300ms;
+
     /* Transparency levels */
     --glass-border-subtle: 90%;
     --glass-border-visible: 85%;
@@ -48,7 +50,7 @@ const classes = getGlassmorphicClasses(variant, size, className);
     --glass-glow-subtle: 98%;
     --glass-glow-visible: 95%;
     --glass-glow-hover: 90%;
-    
+
     /* Inset shadow transparency */
     --glass-inset-light: 60%;
     --glass-inset-dark: 85%;
@@ -61,12 +63,27 @@ const classes = getGlassmorphicClasses(variant, size, className);
     background: var(--glass-dark);
     backdrop-filter: blur(var(--blur-12));
     -webkit-backdrop-filter: blur(var(--blur-12));
-    border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent var(--glass-border-subtle));
+    border: var(--glass-border-width) solid
+      color-mix(
+        in oklab,
+        var(--text-dark),
+        transparent var(--glass-border-subtle)
+      );
     border-radius: var(--glass-border-radius);
     box-shadow:
       var(--shadow-2),
-      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent var(--glass-inset-light)),
-      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent var(--glass-inset-dark));
+      inset 0 1px 0
+        color-mix(
+          in oklab,
+          var(--warm-bg),
+          transparent var(--glass-inset-light)
+        ),
+      inset 0 -1px 0
+        color-mix(
+          in oklab,
+          var(--text-dark),
+          transparent var(--glass-inset-dark)
+        );
 
     /* Layout and spacing */
     position: relative;
@@ -85,42 +102,66 @@ const classes = getGlassmorphicClasses(variant, size, className);
     background: color-mix(in oklab, var(--coral), transparent 85%);
     backdrop-filter: blur(var(--blur-20));
     -webkit-backdrop-filter: blur(var(--blur-20));
-    border: var(--glass-border-width) solid color-mix(in oklab, var(--coral), transparent 92%);
+    border: var(--glass-border-width) solid
+      color-mix(in oklab, var(--coral), transparent 92%);
     box-shadow:
       var(--shadow-3),
-      inset 0 1px 0 color-mix(in oklab, var(--coral), transparent var(--glass-inset-light)),
-      inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent var(--glass-inset-dark)),
-      0 0 0 0.5px color-mix(in oklab, var(--coral), transparent var(--glass-glow-subtle));
+      inset 0 1px 0
+        color-mix(in oklab, var(--coral), transparent var(--glass-inset-light)),
+      inset 0 -1px 0
+        color-mix(in oklab, var(--coral), transparent var(--glass-inset-dark)),
+      0 0 0 0.5px
+        color-mix(in oklab, var(--coral), transparent var(--glass-glow-subtle));
   }
 
   .glassmorphic-container--secondary {
     background: color-mix(in oklab, var(--mocha), transparent 88%);
     backdrop-filter: blur(var(--blur-16));
     -webkit-backdrop-filter: blur(var(--blur-16));
-    border: var(--glass-border-width) solid color-mix(in oklab, var(--mocha), transparent var(--glass-border-subtle));
+    border: var(--glass-border-width) solid
+      color-mix(in oklab, var(--mocha), transparent var(--glass-border-subtle));
     box-shadow:
       var(--shadow-2),
-      inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent var(--glass-inset-light)),
-      inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent var(--glass-inset-dark)),
-      0 0 0 0.5px color-mix(in oklab, var(--mocha), transparent var(--glass-glow-subtle));
+      inset 0 1px 0
+        color-mix(in oklab, var(--mocha), transparent var(--glass-inset-light)),
+      inset 0 -1px 0
+        color-mix(in oklab, var(--mocha), transparent var(--glass-inset-dark)),
+      0 0 0 0.5px
+        color-mix(in oklab, var(--mocha), transparent var(--glass-glow-subtle));
   }
 
   .glassmorphic-container--neutral {
     background: color-mix(in oklab, var(--warm-bg), transparent 75%);
     backdrop-filter: blur(var(--blur-12));
     -webkit-backdrop-filter: blur(var(--blur-12));
-    border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent var(--glass-border-subtle));
+    border: var(--glass-border-width) solid
+      color-mix(
+        in oklab,
+        var(--text-dark),
+        transparent var(--glass-border-subtle)
+      );
     box-shadow:
       var(--shadow-1),
-      inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent var(--glass-inset-hover)),
-      inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent var(--glass-inset-dark));
+      inset 0 1px 0
+        color-mix(
+          in oklab,
+          var(--warm-bg),
+          transparent var(--glass-inset-hover)
+        ),
+      inset 0 -1px 0
+        color-mix(
+          in oklab,
+          var(--text-dark),
+          transparent var(--glass-inset-dark)
+        );
   }
 
   .glassmorphic-container--clear {
     background: color-mix(in oklab, var(--warm-bg), transparent 95%);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(24px);
-    border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent 95%);
+    border: var(--glass-border-width) solid
+      color-mix(in oklab, var(--text-dark), transparent 95%);
     box-shadow:
       var(--shadow-1),
       inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 80%),
@@ -152,7 +193,12 @@ const classes = getGlassmorphicClasses(variant, size, className);
     outline-offset: var(--glass-border-width);
     box-shadow:
       var(--shadow-3),
-      0 0 0 2px color-mix(in oklab, var(--coral), transparent var(--glass-border-visible));
+      0 0 0 2px
+        color-mix(
+          in oklab,
+          var(--coral),
+          transparent var(--glass-border-visible)
+        );
   }
 
   /* Reduced motion support */
@@ -190,45 +236,104 @@ const classes = getGlassmorphicClasses(variant, size, className);
   @supports not (backdrop-filter: blur(1px)) {
     .glassmorphic-container {
       background: color-mix(in oklab, var(--warm-bg), transparent 90%);
-      border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent var(--glass-border-subtle));
+      border: var(--glass-border-width) solid
+        color-mix(
+          in oklab,
+          var(--text-dark),
+          transparent var(--glass-border-subtle)
+        );
       box-shadow:
         var(--shadow-2),
-        inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent var(--glass-inset-hover)),
-        inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent var(--glass-inset-dark));
+        inset 0 1px 0
+          color-mix(
+            in oklab,
+            var(--warm-bg),
+            transparent var(--glass-inset-hover)
+          ),
+        inset 0 -1px 0
+          color-mix(
+            in oklab,
+            var(--text-dark),
+            transparent var(--glass-inset-dark)
+          );
     }
 
     .glassmorphic-container--primary {
       background: color-mix(in oklab, var(--coral), transparent 90%);
-      border: var(--glass-border-width) solid color-mix(in oklab, var(--coral), transparent 92%);
+      border: var(--glass-border-width) solid
+        color-mix(in oklab, var(--coral), transparent 92%);
       box-shadow:
         var(--shadow-3),
-        inset 0 1px 0 color-mix(in oklab, var(--coral), transparent var(--glass-inset-light)),
-        inset 0 -1px 0 color-mix(in oklab, var(--coral), transparent var(--glass-inset-dark)),
-        0 0 0 0.5px color-mix(in oklab, var(--coral), transparent var(--glass-glow-subtle));
+        inset 0 1px 0
+          color-mix(
+            in oklab,
+            var(--coral),
+            transparent var(--glass-inset-light)
+          ),
+        inset 0 -1px 0
+          color-mix(in oklab, var(--coral), transparent var(--glass-inset-dark)),
+        0 0 0 0.5px
+          color-mix(
+            in oklab,
+            var(--coral),
+            transparent var(--glass-glow-subtle)
+          );
     }
 
     .glassmorphic-container--secondary {
       background: color-mix(in oklab, var(--mocha), transparent 92%);
-      border: var(--glass-border-width) solid color-mix(in oklab, var(--mocha), transparent var(--glass-border-subtle));
+      border: var(--glass-border-width) solid
+        color-mix(
+          in oklab,
+          var(--mocha),
+          transparent var(--glass-border-subtle)
+        );
       box-shadow:
         var(--shadow-2),
-        inset 0 1px 0 color-mix(in oklab, var(--mocha), transparent var(--glass-inset-light)),
-        inset 0 -1px 0 color-mix(in oklab, var(--mocha), transparent var(--glass-inset-dark)),
-        0 0 0 0.5px color-mix(in oklab, var(--mocha), transparent var(--glass-glow-subtle));
+        inset 0 1px 0
+          color-mix(
+            in oklab,
+            var(--mocha),
+            transparent var(--glass-inset-light)
+          ),
+        inset 0 -1px 0
+          color-mix(in oklab, var(--mocha), transparent var(--glass-inset-dark)),
+        0 0 0 0.5px
+          color-mix(
+            in oklab,
+            var(--mocha),
+            transparent var(--glass-glow-subtle)
+          );
     }
 
     .glassmorphic-container--neutral {
       background: color-mix(in oklab, var(--warm-bg), transparent 90%);
-      border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent var(--glass-border-subtle));
+      border: var(--glass-border-width) solid
+        color-mix(
+          in oklab,
+          var(--text-dark),
+          transparent var(--glass-border-subtle)
+        );
       box-shadow:
         var(--shadow-1),
-        inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent var(--glass-inset-hover)),
-        inset 0 -1px 0 color-mix(in oklab, var(--text-dark), transparent var(--glass-inset-dark));
+        inset 0 1px 0
+          color-mix(
+            in oklab,
+            var(--warm-bg),
+            transparent var(--glass-inset-hover)
+          ),
+        inset 0 -1px 0
+          color-mix(
+            in oklab,
+            var(--text-dark),
+            transparent var(--glass-inset-dark)
+          );
     }
 
     .glassmorphic-container--clear {
       background: color-mix(in oklab, var(--warm-bg), transparent 98%);
-      border: var(--glass-border-width) solid color-mix(in oklab, var(--text-dark), transparent 95%);
+      border: var(--glass-border-width) solid
+        color-mix(in oklab, var(--text-dark), transparent 95%);
       box-shadow:
         var(--shadow-1),
         inset 0 1px 0 color-mix(in oklab, var(--warm-bg), transparent 80%),
@@ -280,12 +385,20 @@ const classes = getGlassmorphicClasses(variant, size, className);
   /* Dark mode adjustments */
   @media (prefers-color-scheme: dark) {
     .glassmorphic-container {
-      border-color: color-mix(in oklab, var(--warm-bg), transparent var(--glass-border-subtle));
+      border-color: color-mix(
+        in oklab,
+        var(--warm-bg),
+        transparent var(--glass-border-subtle)
+      );
     }
 
     .glassmorphic-container--neutral {
       background: color-mix(in oklab, var(--text-dark), transparent 90%);
-      border-color: color-mix(in oklab, var(--warm-bg), transparent var(--glass-border-subtle));
+      border-color: color-mix(
+        in oklab,
+        var(--warm-bg),
+        transparent var(--glass-border-subtle)
+      );
     }
 
     .glassmorphic-container--clear {
