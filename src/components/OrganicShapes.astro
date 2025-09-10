@@ -1,47 +1,557 @@
 <div class="organic-shapes" aria-hidden="true">
-  <!-- Large background blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="blob blob-4"></div>
-  <div class="blob blob-5"></div>
+  <!-- New, evenly distributed background blobs -->
+  <div class="blob b0"></div>
+  <!-- subtle huge backdrop -->
+  <div class="blob b1"></div>
+  <!-- top-left -->
+  <div class="blob b2"></div>
+  <!-- top-right -->
+  <div class="blob b3"></div>
+  <!-- center-left (behind hero) -->
+  <div class="blob b4"></div>
+  <!-- center-right -->
+  <div class="blob b5"></div>
+  <!-- bottom-left -->
+  <div class="blob b6"></div>
+  <!-- bottom-center -->
+  <div class="blob b7"></div>
+  <!-- bottom-right -->
+  <div class="blob b8"></div>
+  <!-- upper-center -->
+  <div class="blob b9"></div>
+  <!-- behind main heading -->
+  <div class="blob b10"></div>
+  <!-- tiny accent -->
+  <div class="blob b11"></div>
+  <!-- micro accent (center-left) -->
+  <div class="blob b12"></div>
+  <!-- micro accent (center) -->
 
-  <!-- Subtle floating elements -->
-  <div class="floating-element element-1"></div>
-  <div class="floating-element element-2"></div>
-  <div class="floating-element element-3"></div>
-
-  <!-- Organic connection lines -->
-  <svg class="connections" viewBox="0 0 1000 600" width="100%" height="100%">
+  <!-- Organic connection lines (dynamically generated) -->
+  <svg
+    class="connections"
+    width="100%"
+    height="100%"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
     <defs>
       <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:var(--coral);stop-opacity:0.15"
+        <stop offset="0%" style="stop-color:var(--coral);stop-opacity:0.18"
         ></stop>
-        <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:0.2"
+        <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:0.18"
         ></stop>
-        <stop offset="100%" style="stop-color:var(--blue);stop-opacity:0.15"
+        <stop offset="100%" style="stop-color:var(--blue);stop-opacity:0.18"
         ></stop>
       </linearGradient>
+      <g id="dynamic-gradients"></g>
     </defs>
-    <path
-      class="connection-line line-1"
-      d="M50,150 Q200,100 400,120 T800,140"
-      stroke="url(#lineGradient)"
-      stroke-width="1.5"
-      fill="none"></path>
-    <path
-      class="connection-line line-2"
-      d="M100,300 Q300,250 500,270 T900,290"
-      stroke="url(#lineGradient)"
-      stroke-width="1"
-      fill="none"></path>
-    <path
-      class="connection-line line-3"
-      d="M0,450 Q250,400 450,420 T850,440"
-      stroke="url(#lineGradient)"
-      stroke-width="1.2"
-      fill="none"></path>
+    <g class="links" aria-hidden="true"></g>
   </svg>
+
+  <script>
+    (function () {
+      function init() {
+        const container = document.querySelector('.organic-shapes');
+        if (!container) return;
+        const svg = container.querySelector('svg.connections');
+        if (!svg) return;
+        const linksGroup = svg.querySelector('g.links');
+        if (!linksGroup) return;
+        const dynamicGradients = svg.querySelector('#dynamic-gradients');
+        if (!dynamicGradients) return;
+        const mqlReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        const blobSelectors = [
+          '.b0',
+          '.b1',
+          '.b2',
+          '.b3',
+          '.b4',
+          '.b5',
+          '.b6',
+          '.b7',
+          '.b8',
+          '.b9',
+          '.b10',
+          '.b11',
+          '.b12',
+        ];
+
+        function centerOf(el: Element) {
+          const r = el.getBoundingClientRect();
+          return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }
+        function getHeroRect() {
+          const hero = document.querySelector('.hero-container');
+          return hero ? hero.getBoundingClientRect() : null;
+        }
+        function magnitude(vx: number, vy: number) {
+          return Math.sqrt(vx * vx + vy * vy) || 1;
+        }
+        function computeControl(
+          a: { x: number; y: number },
+          b: { x: number; y: number },
+          avoidRect: DOMRect | null,
+          bend = 80,
+        ) {
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const len = magnitude(dx, dy);
+          const nx = -dy / len;
+          const ny = dx / len; // perpendicular
+          let sign = 1;
+          if (avoidRect) {
+            const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+            const rectCx = avoidRect.left + avoidRect.width / 2;
+            const rectCy = avoidRect.top + avoidRect.height / 2;
+            const distPlus = Math.hypot(
+              mid.x + nx * bend - rectCx,
+              mid.y + ny * bend - rectCy,
+            );
+            const distMinus = Math.hypot(
+              mid.x - nx * bend - rectCx,
+              mid.y - ny * bend - rectCy,
+            );
+            sign = distPlus > distMinus ? 1 : -1;
+          }
+          const cx = (a.x + b.x) / 2 + nx * bend * sign;
+          const cy = (a.y + b.y) / 2 + ny * bend * sign;
+          return { cx, cy };
+        }
+        function clearLinks() {
+          while (linksGroup && linksGroup.firstChild)
+            linksGroup.removeChild(linksGroup.firstChild);
+        }
+        function clearDynamicGradients() {
+          if (!dynamicGradients) return;
+          while (dynamicGradients.firstChild)
+            dynamicGradients.removeChild(dynamicGradients.firstChild);
+        }
+        function createPath(
+          id: string,
+          a: { x: number; y: number },
+          b: { x: number; y: number },
+          avoidRect: DOMRect | null,
+          opts: {
+            bend?: number;
+            strokeWidth?: number;
+            strokePaint?: string;
+            baseOpacity?: number;
+          },
+        ) {
+          const { cx, cy } = computeControl(a, b, avoidRect, opts.bend);
+          const d = `M ${a.x},${a.y} Q ${cx},${cy} ${b.x},${b.y}`;
+          const path = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          path.setAttribute('id', id);
+          path.setAttribute('d', d);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', opts.strokePaint || 'url(#lineGradient)');
+          path.setAttribute('stroke-width', String(opts.strokeWidth || 1.2));
+          path.setAttribute('stroke-opacity', String(opts.baseOpacity ?? 0.08));
+          path.classList.add('link-path');
+          return path;
+        }
+        function createPulse(
+          pathId: string,
+          r: number,
+          begin: string,
+          dur: string,
+          fill?: string,
+        ) {
+          const circ = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle',
+          );
+          circ.setAttribute('r', String(r));
+          circ.setAttribute('class', 'pulse');
+          if (fill) circ.setAttribute('fill', fill);
+          if (mqlReduce.matches) return null; // skip pulses in reduced motion
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animateMotion',
+          );
+          anim.setAttribute('dur', dur);
+          anim.setAttribute('repeatCount', 'indefinite');
+          anim.setAttribute('rotate', 'auto');
+          anim.setAttribute('begin', begin);
+          const mpath = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'mpath',
+          );
+          mpath.setAttributeNS(
+            'http://www.w3.org/1999/xlink',
+            'xlink:href',
+            `#${pathId}`,
+          );
+          anim.appendChild(mpath);
+          circ.appendChild(anim);
+          return circ;
+        }
+        function createHotSegment(
+          d: string | null,
+          paint: string,
+          width: number,
+          length: number,
+          segLen: number,
+          begin: string,
+          flyDur: string,
+          cycleDur: string,
+          onVisible?: () => void,
+        ) {
+          if (mqlReduce.matches) return null;
+          const hot = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          hot.setAttribute('d', d || '');
+          hot.setAttribute('fill', 'none');
+          hot.setAttribute('stroke', paint);
+          hot.setAttribute('stroke-width', String(width));
+          hot.setAttribute('stroke-linecap', 'round');
+          hot.classList.add('link-hot');
+          hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
+          hot.setAttribute('stroke-dashoffset', `${length + segLen}`);
+          hot.setAttribute('opacity', '0');
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          anim.setAttribute('attributeName', 'stroke-dashoffset');
+          anim.setAttribute('from', `${length + segLen}`);
+          anim.setAttribute('to', `${-segLen}`);
+          anim.setAttribute('dur', flyDur);
+          anim.setAttribute('repeatCount', 'indefinite');
+          anim.setAttribute('begin', begin);
+          hot.appendChild(anim);
+          // Show the hot segment only briefly within each long cycle
+          const animOpacity = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          animOpacity.setAttribute('attributeName', 'opacity');
+          animOpacity.setAttribute('values', '0;0;1;0');
+          animOpacity.setAttribute('keyTimes', '0;0.92;0.93;1');
+          animOpacity.setAttribute('dur', cycleDur);
+          animOpacity.setAttribute('repeatCount', 'indefinite');
+          animOpacity.setAttribute('begin', begin);
+          hot.appendChild(animOpacity);
+
+          // Tie blob ping to the same cycle timing as the visible window
+          const cycleSec = parseFloat(cycleDur);
+          const scheduleFromEvent = () => {
+            if (!onVisible || isNaN(cycleSec)) return;
+            const t = setTimeout(
+              onVisible,
+              Math.max(0, cycleSec * 0.92 * 1000),
+            );
+            _pingTimers.push(t);
+          };
+          animOpacity.addEventListener('beginEvent', scheduleFromEvent);
+          animOpacity.addEventListener('repeatEvent', scheduleFromEvent);
+          return hot;
+        }
+
+        // One-shot initial hot segment to avoid empty startup
+        function createInitialHotSegment(
+          d: string | null,
+          paint: string,
+          width: number,
+          length: number,
+          segLen: number,
+          flyDur: string,
+          startDelaySec: number,
+        ) {
+          if (mqlReduce.matches) return null;
+          const hot = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          hot.setAttribute('d', d || '');
+          hot.setAttribute('fill', 'none');
+          hot.setAttribute('stroke', paint);
+          hot.setAttribute('stroke-width', String(width));
+          hot.setAttribute('stroke-linecap', 'round');
+          hot.classList.add('link-hot');
+          hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
+          hot.setAttribute('stroke-dashoffset', `${length + segLen}`);
+          // Keep hidden until animation begins to avoid pre-start rectangle
+          hot.setAttribute('opacity', '0');
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          anim.setAttribute('attributeName', 'stroke-dashoffset');
+          anim.setAttribute('from', `${length + segLen}`);
+          anim.setAttribute('to', `${-segLen}`);
+          anim.setAttribute('dur', flyDur);
+          anim.setAttribute('repeatCount', '1');
+          anim.setAttribute(
+            'begin',
+            `${Math.max(0, startDelaySec).toFixed(2)}s`,
+          );
+          hot.appendChild(anim);
+          const fade = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          fade.setAttribute('attributeName', 'opacity');
+          fade.setAttribute('values', '0;1;1;0');
+          fade.setAttribute('keyTimes', '0;0.01;0.8;1');
+          fade.setAttribute('dur', flyDur);
+          fade.setAttribute(
+            'begin',
+            `${Math.max(0, startDelaySec).toFixed(2)}s`,
+          );
+          fade.setAttribute('fill', 'remove');
+          hot.appendChild(fade);
+          return hot;
+        }
+        const cssVar = (name: string) =>
+          getComputedStyle(document.documentElement)
+            .getPropertyValue(name)
+            .trim();
+        const blobColorVar = new Map([
+          ['.b0', '--mocha'],
+          ['.b1', '--coral'],
+          ['.b2', '--mocha'],
+          ['.b3', '--accent-yellow'],
+          ['.b4', '--blue'],
+          ['.b5', '--mocha'],
+          ['.b6', '--coral'],
+          ['.b7', '--blue'],
+          ['.b8', '--coral'],
+          ['.b9', '--coral'],
+          ['.b10', '--accent-yellow'],
+          ['.b11', '--blue'],
+          ['.b12', '--accent-yellow'],
+        ]);
+        function createGradient(id: string, colA: string, colB: string) {
+          const g = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'linearGradient',
+          );
+          g.setAttribute('id', id);
+          g.setAttribute('x1', '0%');
+          g.setAttribute('y1', '0%');
+          g.setAttribute('x2', '100%');
+          g.setAttribute('y2', '0%');
+          const s1 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'stop',
+          );
+          s1.setAttribute('offset', '0%');
+          s1.setAttribute('stop-color', colA);
+          s1.setAttribute('stop-opacity', '0.9');
+          const s2 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'stop',
+          );
+          s2.setAttribute('offset', '100%');
+          s2.setAttribute('stop-color', colB);
+          s2.setAttribute('stop-opacity', '0.9');
+          g.appendChild(s1);
+          g.appendChild(s2);
+          if (dynamicGradients) dynamicGradients.appendChild(g);
+          return `url(#${id})`;
+        }
+
+        // Timers for scheduling blob pings (jelly pulse)
+        let _pingTimers: (number | NodeJS.Timeout)[] = [];
+        function clearPingTimers() {
+          _pingTimers.forEach((id) => {
+            clearTimeout(id);
+            clearInterval(id);
+          });
+          _pingTimers = [];
+        }
+        // Schedule blob ping based on cycle timing
+        function scheduleBlobPing(
+          el: Element,
+          beginSec: number,
+          cycleSec: number,
+        ) {
+          if (!el || isNaN(beginSec) || isNaN(cycleSec)) return;
+          const firstDelay = Math.max(0, (beginSec + cycleSec * 0.92) * 1000);
+          const doPing = () => {
+            el.classList.add('ping');
+            const t = setTimeout(() => el.classList.remove('ping'), 280);
+            _pingTimers.push(t);
+          };
+          const t0 = setTimeout(() => {
+            doPing();
+            const it = setInterval(doPing, cycleSec * 1000);
+            _pingTimers.push(it);
+          }, firstDelay);
+          _pingTimers.push(t0);
+        }
+        function buildPairs(isMobile: boolean) {
+          const P = (a: string, b: string) => [a, b];
+          const desktop = [
+            P('.b1', '.b3'),
+            P('.b3', '.b9'),
+            P('.b1', '.b5'),
+            P('.b2', '.b4'),
+            P('.b4', '.b7'),
+            P('.b2', '.b8'),
+            P('.b5', '.b6'),
+            P('.b6', '.b7'),
+            P('.b0', '.b7'),
+          ];
+          const mobile = [P('.b1', '.b3'), P('.b2', '.b4'), P('.b5', '.b6')];
+          return isMobile ? mobile : desktop;
+        }
+        function rebuild() {
+          const vw = window.innerWidth;
+          const isMobile = vw < 900;
+          clearLinks();
+          clearDynamicGradients();
+          clearPingTimers();
+          const avoid = getHeroRect();
+          const nodeMap = new Map();
+          blobSelectors.forEach((sel) => {
+            const el = container?.querySelector(sel);
+            if (el) nodeMap.set(sel, centerOf(el));
+          });
+          const pairs = buildPairs(isMobile);
+          // Choose a small random subset of connections to fire shortly after load
+          const immediateCount = Math.min(pairs.length, isMobile ? 3 : 5);
+          const initialPulseIndices = new Set();
+          while (initialPulseIndices.size < immediateCount) {
+            initialPulseIndices.add(Math.floor(Math.random() * pairs.length));
+          }
+          let idx = 0;
+          for (const [sa, sb] of pairs) {
+            const a = nodeMap.get(sa),
+              b = nodeMap.get(sb);
+            if (!a || !b) continue;
+            const id = `conn-${idx++}`;
+            // Build gradient matching the blobs' colors
+            const va = blobColorVar.get(sa);
+            const vb = blobColorVar.get(sb);
+            const ca = va ? cssVar(va) : null;
+            const cb = vb ? cssVar(vb) : null;
+            const paint =
+              ca && cb
+                ? createGradient(`grad-${id}`, ca, cb)
+                : 'url(#lineGradient)';
+            const baseOpacity = 0.06;
+            // const peakOpacity = 0.45; // unused variable
+            const path = createPath(id, a, b, avoid, {
+              bend: isMobile ? 60 : 100,
+              strokeWidth: isMobile ? 1.6 : 2.4,
+              strokePaint: paint,
+              baseOpacity,
+            });
+            if (linksGroup) linksGroup.appendChild(path);
+            // Hot segments (neuron-like bulge) moving along the path
+            const length = path.getTotalLength ? path.getTotalLength() : 600;
+            const segLen = Math.max(24, Math.min(90, length * 0.08));
+            const bursts = 1; // one burst train per path
+            for (let i = 0; i < bursts; i++) {
+              // Compute a cycle length and choose a random phase within it
+              const cycleSecNum = isMobile
+                ? 10 + Math.random() * 6
+                : 8 + Math.random() * 6;
+              const beginSec = +(Math.random() * cycleSecNum).toFixed(2);
+              const begin = `${beginSec}s`;
+              // Fast fly-through, long cycle visibility window for rarity
+              const flyDur = isMobile
+                ? `${(0.8 + Math.random() * 0.3).toFixed(2)}s`
+                : `${(0.6 + Math.random() * 0.3).toFixed(2)}s`;
+              const cycleDur = `${cycleSecNum.toFixed(2)}s`;
+              const startEl = container?.querySelector(sa);
+              const hot = createHotSegment(
+                path.getAttribute('d'),
+                paint,
+                (isMobile ? 1.6 : 2.4) * 1.9,
+                length,
+                segLen,
+                begin,
+                flyDur,
+                cycleDur,
+                () => {
+                  if (!startEl) return;
+                  startEl.classList.add('ping');
+                  const t = setTimeout(
+                    () => startEl.classList.remove('ping'),
+                    280,
+                  );
+                  _pingTimers.push(t);
+                },
+              );
+              if (hot && linksGroup) linksGroup.appendChild(hot);
+
+              // Fire an initial one-shot pulse on a small random subset at load
+              if (initialPulseIndices.has(idx)) {
+                const delaySec = Math.random() * (isMobile ? 3 : 6); // spread kickoff pulses over first few seconds
+                const initHot = createInitialHotSegment(
+                  path.getAttribute('d'),
+                  paint,
+                  (isMobile ? 1.6 : 2.4) * 1.9,
+                  length,
+                  segLen,
+                  flyDur,
+                  delaySec,
+                );
+                if (initHot && linksGroup) linksGroup.appendChild(initHot);
+                if (startEl) {
+                  const t = setTimeout(() => {
+                    startEl.classList.add('ping');
+                    const t2 = setTimeout(
+                      () => startEl.classList.remove('ping'),
+                      280,
+                    );
+                    _pingTimers.push(t2);
+                  }, delaySec * 1000);
+                  _pingTimers.push(t);
+                }
+              }
+
+              // Base lines remain steady low opacity
+            }
+          }
+        }
+        const debounced = (fn: (...args: any[]) => void, ms = 150) => {
+          let t: number | NodeJS.Timeout;
+          return (...args: any[]) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), ms);
+          };
+        };
+        rebuild();
+        window.addEventListener('resize', debounced(rebuild, 150));
+
+        // If the user toggles reduced motion in OS settings at runtime
+        if (mqlReduce.addEventListener) {
+          mqlReduce.addEventListener('change', () => rebuild());
+        } else if ('addListener' in mqlReduce) {
+          // @ts-ignore - deprecated but still supported in older browsers
+          mqlReduce.addListener(() => rebuild());
+        }
+
+        // Pause animations when offscreen to save cycles
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (svg instanceof HTMLElement) {
+                svg.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
+              }
+            }
+          },
+          { threshold: 0 },
+        );
+        io.observe(container);
+      }
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', init);
+      else init();
+    })();
+  </script>
 </div>
 
 <style>
@@ -52,103 +562,184 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: 0; /* above page background, below content */
     overflow: hidden;
   }
 
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(25px);
-    opacity: 0.05;
+    opacity: 0.16;
     animation: organic-float 12s ease-in-out infinite;
     /* Add subtle organic variation */
     transform-origin: center;
   }
 
-  .blob-1 {
-    width: 300px;
-    height: 300px;
-    background: var(--coral);
-    top: 5%;
-    left: -8%;
-    animation-delay: 0s;
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  /* Inner core used for ping scaling without affecting float transforms */
+  .blob::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    transform-origin: center;
+    will-change: transform, filter;
   }
 
-  .blob-2 {
+  .blob.ping::before {
+    animation: blob-ping 280ms cubic-bezier(0.22, 0.61, 0.2, 1);
+  }
+
+  /* Very large, faint background shape for scale variation */
+  .b0 {
+    width: 520px;
+    height: 460px;
+    background: var(--mocha);
+    top: 52%;
+    left: 58%;
+    transform: translate(-50%, -50%);
+    opacity: 0.08;
+    animation: organic-float-slow 28s ease-in-out infinite;
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  }
+
+  /* New set layout */
+  .b1 {
+    width: 340px;
+    height: 340px;
+    background: var(--coral);
+    top: 8%;
+    left: 4%;
+    opacity: 0.16;
+    animation-delay: 0.2s;
+    border-radius: 58% 42% 40% 60% / 60% 40% 60% 40%;
+  }
+
+  .b2 {
     width: 200px;
     height: 200px;
     background: var(--mocha);
-    top: 15%;
-    right: -6%;
-    animation-delay: 3s;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  }
-
-  .blob-3 {
-    width: 250px;
-    height: 250px;
-    background: var(--accent-yellow);
-    bottom: 10%;
-    left: -5%;
-    animation-delay: 6s;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  }
-
-  .blob-4 {
-    width: 180px;
-    height: 180px;
-    background: var(--blue);
-    top: 70%;
-    right: -4%;
-    animation-delay: 9s;
-    border-radius: 40% 60% 60% 40% / 70% 30% 30% 70%;
-  }
-
-  .blob-5 {
-    width: 220px;
-    height: 220px;
-    background: var(--coral);
-    bottom: 5%;
-    right: -3%;
+    top: 10%;
+    right: 6%;
+    opacity: 0.14;
+    animation: organic-float-slow 16s ease-in-out infinite;
     animation-delay: 1.5s;
-    border-radius: 70% 30% 30% 70% / 40% 60% 60% 40%;
+    border-radius: 42% 58% 58% 42% / 40% 60% 40% 60%;
   }
 
-  .floating-element {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.08;
-    animation: gentle-float 8s ease-in-out infinite;
+  .b3 {
+    width: 150px;
+    height: 150px;
+    background: var(--accent-yellow);
+    top: 34%;
+    left: 27%;
+    opacity: 0.15;
+    animation: organic-breathe 12s ease-in-out infinite;
+    border-radius: 50% 52% 48% 50% / 55% 45% 55% 45%;
   }
 
-  .element-1 {
-    width: 60px;
-    height: 60px;
+  .b4 {
+    width: 240px;
+    height: 240px;
+    background: var(--blue);
+    top: 40%;
+    right: 18%;
+    opacity: 0.14;
+    animation: organic-drift 18s ease-in-out infinite;
+    border-radius: 45% 55% 55% 45% / 55% 45% 55% 45%;
+  }
+
+  .b5 {
+    width: 360px;
+    height: 360px;
     background: var(--mocha);
-    top: 25%;
-    left: 15%;
-    animation-delay: 2s;
+    bottom: 8%;
+    left: 10%;
+    opacity: 0.14;
+    animation: organic-float-slow 20s ease-in-out infinite;
+    border-radius: 48% 52% 60% 40% / 50% 60% 40% 50%;
   }
 
-  .element-2 {
+  .b6 {
+    width: 120px;
+    height: 120px;
+    background: var(--coral);
+    bottom: 6%;
+    left: 46%;
+    opacity: 0.14;
+    animation: organic-float-fast 10s ease-in-out infinite;
+    animation-delay: 0.8s;
+    border-radius: 60% 40% 50% 50% / 55% 45% 55% 45%;
+  }
+
+  .b7 {
+    width: 300px;
+    height: 300px;
+    background: var(--blue);
+    bottom: 10%;
+    right: 8%;
+    opacity: 0.14;
+    animation-delay: 2s;
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  }
+
+  .b8 {
+    width: 64px;
+    height: 64px;
+    background: var(--coral);
+    top: 22%;
+    left: 54%;
+    opacity: 0.18;
+    animation: organic-float-fast 12s ease-in-out infinite;
+    border-radius: 50% 50% 55% 45% / 45% 55% 45% 55%;
+  }
+
+  .b9 {
+    width: 260px;
+    height: 180px;
+    background: var(--coral);
+    top: 18%;
+    left: 32%;
+    opacity: 0.18;
+    animation: organic-drift 16s ease-in-out infinite;
+    animation-delay: 0.6s;
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  }
+
+  .b10 {
     width: 40px;
     height: 40px;
     background: var(--accent-yellow);
-    top: 70%;
-    right: 25%;
-    animation-delay: 5s;
+    bottom: 26%;
+    right: 35%;
+    opacity: 0.18;
+    animation: organic-float-fast 8s ease-in-out infinite;
+    border-radius: 50%;
   }
 
-  .element-3 {
-    width: 80px;
-    height: 80px;
+  .b11 {
+    width: 28px;
+    height: 28px;
     background: var(--blue);
-    bottom: 30%;
-    left: 70%;
-    animation-delay: 7s;
+    top: 37%;
+    left: 22%;
+    opacity: 0.2;
+    animation: organic-float-fast 9s ease-in-out infinite;
+    border-radius: 50%;
   }
+
+  .b12 {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-yellow);
+    top: 38%;
+    left: 56%;
+    opacity: 0.2;
+    animation: organic-breathe 11s ease-in-out infinite;
+    border-radius: 50%;
+  }
+
+  /* Removed previous floating elements for a cleaner set */
 
   .connections {
     position: absolute;
@@ -156,13 +747,54 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.15;
+    opacity: 0.45; /* stronger visibility for bigger connections */
   }
 
   .connection-line {
     stroke-dasharray: 20 10;
     stroke-dashoffset: 0;
     animation: line-flow 6s ease-in-out infinite;
+  }
+
+  /* Style for generated links and pulses */
+  .link-path {
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    filter: drop-shadow(
+      0 0 8px color-mix(in oklab, var(--mocha), transparent 85%)
+    );
+    stroke-dasharray: 18 12;
+    animation: line-flow 7s ease-in-out infinite;
+  }
+  .link-hot {
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    filter: drop-shadow(
+      0 0 10px color-mix(in oklab, var(--coral), transparent 70%)
+    );
+    mix-blend-mode: screen;
+    opacity: 0; /* hidden until animated */
+  }
+  .pulse {
+    fill: color-mix(in oklab, var(--coral), transparent 70%);
+    opacity: 0.85;
+  }
+  .pulse > animateMotion + animate,
+  .pulse > animate {
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .connections {
+      opacity: 0.22;
+    }
+    .link-path {
+      animation: none;
+    }
+    .pulse,
+    .link-hot {
+      display: none;
+    }
   }
 
   .line-1 {
@@ -203,6 +835,69 @@
     }
   }
 
+  /* Jelly-like ping for blobs */
+  @keyframes blob-ping {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.015);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Additional motion profiles for variety */
+  @keyframes organic-float-slow {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateY(-25px) translateX(8px) rotate(0.5deg) scale(1.03);
+    }
+    50% {
+      transform: translateY(-12px) translateX(-6px) rotate(-0.5deg) scale(0.99);
+    }
+    75% {
+      transform: translateY(-20px) translateX(4px) rotate(0.25deg) scale(1.01);
+    }
+  }
+
+  @keyframes organic-float-fast {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translateY(-14px) translateX(6px) rotate(0.4deg) scale(1.02);
+    }
+  }
+
+  @keyframes organic-drift {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    33% {
+      transform: translateY(-18px) translateX(20px) rotate(0.6deg) scale(1.01);
+    }
+    66% {
+      transform: translateY(-10px) translateX(-14px) rotate(-0.6deg) scale(1.02);
+    }
+  }
+
+  @keyframes organic-breathe {
+    0%,
+    100% {
+      transform: scale(1) translateZ(0);
+    }
+    50% {
+      transform: scale(1.12) translateZ(0);
+    }
+  }
+
   @keyframes line-flow {
     0%,
     100% {
@@ -225,6 +920,101 @@
     .connection-line {
       animation: none;
       opacity: 0.1;
+    }
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .b0 {
+      width: 360px;
+      height: 300px;
+      top: 54%;
+      left: 52%;
+      opacity: 0.08;
+    }
+    .b1 {
+      top: 6%;
+      left: 2%;
+      width: 220px;
+      height: 220px;
+      opacity: 0.12;
+    }
+    .b2 {
+      top: 8%;
+      right: 2%;
+      width: 150px;
+      height: 150px;
+      opacity: 0.12;
+    }
+    .b3 {
+      top: 28%;
+      left: 16%;
+      width: 120px;
+      height: 120px;
+      opacity: 0.13;
+    }
+    .b4 {
+      top: 46%;
+      right: 8%;
+      width: 160px;
+      height: 160px;
+      opacity: 0.12;
+    }
+    .b5 {
+      bottom: 10%;
+      left: 6%;
+      width: 220px;
+      height: 220px;
+      opacity: 0.12;
+    }
+    .b6 {
+      bottom: 8%;
+      left: 44%;
+      width: 100px;
+      height: 100px;
+      opacity: 0.12;
+    }
+    .b7 {
+      bottom: 12%;
+      right: 4%;
+      width: 200px;
+      height: 200px;
+      opacity: 0.12;
+    }
+    .b8 {
+      top: 26%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      opacity: 0.12;
+    }
+    .b9 {
+      top: 24%;
+      left: 30%;
+      width: 200px;
+      height: 140px;
+      opacity: 0.14;
+    }
+    .b10 {
+      bottom: 24%;
+      right: 30%;
+      width: 32px;
+      height: 32px;
+      opacity: 0.12;
+    }
+    .b11 {
+      top: 34%;
+      left: 20%;
+      width: 22px;
+      height: 22px;
+      opacity: 0.12;
+    }
+    .b12 {
+      top: 40%;
+      left: 54%;
+      width: 28px;
+      height: 28px;
+      opacity: 0.12;
     }
   }
 
