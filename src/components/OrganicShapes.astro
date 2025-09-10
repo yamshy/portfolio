@@ -190,6 +190,7 @@
           hot.classList.add('link-hot');
           hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
           hot.setAttribute('stroke-dashoffset', `${length + segLen}`);
+          hot.setAttribute('opacity', '0');
           const anim = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'animate',
@@ -583,7 +584,7 @@
       0 0 10px color-mix(in oklab, var(--coral), transparent 70%)
     );
     mix-blend-mode: screen;
-    opacity: 0.95;
+    opacity: 0; /* hidden until animated */
   }
   .pulse {
     fill: color-mix(in oklab, var(--coral), transparent 70%);
