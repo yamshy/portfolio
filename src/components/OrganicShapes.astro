@@ -1,15 +1,31 @@
 <div class="organic-shapes" aria-hidden="true">
-  <!-- Large background blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="blob blob-4"></div>
-  <div class="blob blob-5"></div>
-
-  <!-- Subtle floating elements -->
-  <div class="floating-element element-1"></div>
-  <div class="floating-element element-2"></div>
-  <div class="floating-element element-3"></div>
+  <!-- New, evenly distributed background blobs -->
+  <div class="blob b0"></div>
+  <!-- subtle huge backdrop -->
+  <div class="blob b1"></div>
+  <!-- top-left -->
+  <div class="blob b2"></div>
+  <!-- top-right -->
+  <div class="blob b3"></div>
+  <!-- center-left (behind hero) -->
+  <div class="blob b4"></div>
+  <!-- center-right -->
+  <div class="blob b5"></div>
+  <!-- bottom-left -->
+  <div class="blob b6"></div>
+  <!-- bottom-center -->
+  <div class="blob b7"></div>
+  <!-- bottom-right -->
+  <div class="blob b8"></div>
+  <!-- upper-center -->
+  <div class="blob b9"></div>
+  <!-- behind main heading -->
+  <div class="blob b10"></div>
+  <!-- tiny accent -->
+  <div class="blob b11"></div>
+  <!-- micro accent (center-left) -->
+  <div class="blob b12"></div>
+  <!-- micro accent (center) -->
 
   <!-- Organic connection lines -->
   <svg class="connections" viewBox="0 0 1000 600" width="100%" height="100%">
@@ -52,103 +68,169 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: 0; /* above page background, below content */
     overflow: hidden;
   }
 
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(25px);
-    opacity: 0.05;
+    opacity: 0.16;
     animation: organic-float 12s ease-in-out infinite;
     /* Add subtle organic variation */
     transform-origin: center;
   }
 
-  .blob-1 {
-    width: 300px;
-    height: 300px;
-    background: var(--coral);
-    top: 5%;
-    left: -8%;
-    animation-delay: 0s;
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  /* Very large, faint background shape for scale variation */
+  .b0 {
+    width: 520px;
+    height: 460px;
+    background: var(--mocha);
+    top: 52%;
+    left: 58%;
+    transform: translate(-50%, -50%);
+    opacity: 0.08;
+    animation: organic-float-slow 28s ease-in-out infinite;
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
   }
 
-  .blob-2 {
+  /* New set layout */
+  .b1 {
+    width: 340px;
+    height: 340px;
+    background: var(--coral);
+    top: 8%;
+    left: 4%;
+    opacity: 0.16;
+    animation-delay: 0.2s;
+    border-radius: 58% 42% 40% 60% / 60% 40% 60% 40%;
+  }
+
+  .b2 {
     width: 200px;
     height: 200px;
     background: var(--mocha);
-    top: 15%;
-    right: -6%;
-    animation-delay: 3s;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  }
-
-  .blob-3 {
-    width: 250px;
-    height: 250px;
-    background: var(--accent-yellow);
-    bottom: 10%;
-    left: -5%;
-    animation-delay: 6s;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  }
-
-  .blob-4 {
-    width: 180px;
-    height: 180px;
-    background: var(--blue);
-    top: 70%;
-    right: -4%;
-    animation-delay: 9s;
-    border-radius: 40% 60% 60% 40% / 70% 30% 30% 70%;
-  }
-
-  .blob-5 {
-    width: 220px;
-    height: 220px;
-    background: var(--coral);
-    bottom: 5%;
-    right: -3%;
+    top: 10%;
+    right: 6%;
+    opacity: 0.14;
+    animation: organic-float-slow 16s ease-in-out infinite;
     animation-delay: 1.5s;
-    border-radius: 70% 30% 30% 70% / 40% 60% 60% 40%;
+    border-radius: 42% 58% 58% 42% / 40% 60% 40% 60%;
   }
 
-  .floating-element {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.08;
-    animation: gentle-float 8s ease-in-out infinite;
+  .b3 {
+    width: 150px;
+    height: 150px;
+    background: var(--accent-yellow);
+    top: 34%;
+    left: 27%;
+    opacity: 0.15;
+    animation: organic-breathe 12s ease-in-out infinite;
+    border-radius: 50% 52% 48% 50% / 55% 45% 55% 45%;
   }
 
-  .element-1 {
-    width: 60px;
-    height: 60px;
+  .b4 {
+    width: 240px;
+    height: 240px;
+    background: var(--blue);
+    top: 40%;
+    right: 18%;
+    opacity: 0.14;
+    animation: organic-drift 18s ease-in-out infinite;
+    border-radius: 45% 55% 55% 45% / 55% 45% 55% 45%;
+  }
+
+  .b5 {
+    width: 360px;
+    height: 360px;
     background: var(--mocha);
-    top: 25%;
-    left: 15%;
-    animation-delay: 2s;
+    bottom: 8%;
+    left: 10%;
+    opacity: 0.14;
+    animation: organic-float-slow 20s ease-in-out infinite;
+    border-radius: 48% 52% 60% 40% / 50% 60% 40% 50%;
   }
 
-  .element-2 {
+  .b6 {
+    width: 120px;
+    height: 120px;
+    background: var(--coral);
+    bottom: 6%;
+    left: 46%;
+    opacity: 0.14;
+    animation: organic-float-fast 10s ease-in-out infinite;
+    animation-delay: 0.8s;
+    border-radius: 60% 40% 50% 50% / 55% 45% 55% 45%;
+  }
+
+  .b7 {
+    width: 300px;
+    height: 300px;
+    background: var(--blue);
+    bottom: 10%;
+    right: 8%;
+    opacity: 0.14;
+    animation-delay: 2s;
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  }
+
+  .b8 {
+    width: 64px;
+    height: 64px;
+    background: var(--coral);
+    top: 22%;
+    left: 54%;
+    opacity: 0.18;
+    animation: organic-float-fast 12s ease-in-out infinite;
+    border-radius: 50% 50% 55% 45% / 45% 55% 45% 55%;
+  }
+
+  .b9 {
+    width: 260px;
+    height: 180px;
+    background: var(--coral);
+    top: 18%;
+    left: 32%;
+    opacity: 0.18;
+    animation: organic-drift 16s ease-in-out infinite;
+    animation-delay: 0.6s;
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  }
+
+  .b10 {
     width: 40px;
     height: 40px;
     background: var(--accent-yellow);
-    top: 70%;
-    right: 25%;
-    animation-delay: 5s;
+    bottom: 26%;
+    right: 35%;
+    opacity: 0.18;
+    animation: organic-float-fast 8s ease-in-out infinite;
+    border-radius: 50%;
   }
 
-  .element-3 {
-    width: 80px;
-    height: 80px;
+  .b11 {
+    width: 28px;
+    height: 28px;
     background: var(--blue);
-    bottom: 30%;
-    left: 70%;
-    animation-delay: 7s;
+    top: 37%;
+    left: 22%;
+    opacity: 0.2;
+    animation: organic-float-fast 9s ease-in-out infinite;
+    border-radius: 50%;
   }
+
+  .b12 {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-yellow);
+    top: 38%;
+    left: 56%;
+    opacity: 0.2;
+    animation: organic-breathe 11s ease-in-out infinite;
+    border-radius: 50%;
+  }
+
+  /* Removed previous floating elements for a cleaner set */
 
   .connections {
     position: absolute;
@@ -203,6 +285,56 @@
     }
   }
 
+  /* Additional motion profiles for variety */
+  @keyframes organic-float-slow {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateY(-25px) translateX(8px) rotate(0.5deg) scale(1.03);
+    }
+    50% {
+      transform: translateY(-12px) translateX(-6px) rotate(-0.5deg) scale(0.99);
+    }
+    75% {
+      transform: translateY(-20px) translateX(4px) rotate(0.25deg) scale(1.01);
+    }
+  }
+
+  @keyframes organic-float-fast {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translateY(-14px) translateX(6px) rotate(0.4deg) scale(1.02);
+    }
+  }
+
+  @keyframes organic-drift {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    33% {
+      transform: translateY(-18px) translateX(20px) rotate(0.6deg) scale(1.01);
+    }
+    66% {
+      transform: translateY(-10px) translateX(-14px) rotate(-0.6deg) scale(1.02);
+    }
+  }
+
+  @keyframes organic-breathe {
+    0%,
+    100% {
+      transform: scale(1) translateZ(0);
+    }
+    50% {
+      transform: scale(1.12) translateZ(0);
+    }
+  }
+
   @keyframes line-flow {
     0%,
     100% {
@@ -225,6 +357,101 @@
     .connection-line {
       animation: none;
       opacity: 0.1;
+    }
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .b0 {
+      width: 360px;
+      height: 300px;
+      top: 54%;
+      left: 52%;
+      opacity: 0.08;
+    }
+    .b1 {
+      top: 6%;
+      left: 2%;
+      width: 220px;
+      height: 220px;
+      opacity: 0.12;
+    }
+    .b2 {
+      top: 8%;
+      right: 2%;
+      width: 150px;
+      height: 150px;
+      opacity: 0.12;
+    }
+    .b3 {
+      top: 28%;
+      left: 16%;
+      width: 120px;
+      height: 120px;
+      opacity: 0.13;
+    }
+    .b4 {
+      top: 46%;
+      right: 8%;
+      width: 160px;
+      height: 160px;
+      opacity: 0.12;
+    }
+    .b5 {
+      bottom: 10%;
+      left: 6%;
+      width: 220px;
+      height: 220px;
+      opacity: 0.12;
+    }
+    .b6 {
+      bottom: 8%;
+      left: 44%;
+      width: 100px;
+      height: 100px;
+      opacity: 0.12;
+    }
+    .b7 {
+      bottom: 12%;
+      right: 4%;
+      width: 200px;
+      height: 200px;
+      opacity: 0.12;
+    }
+    .b8 {
+      top: 26%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      opacity: 0.12;
+    }
+    .b9 {
+      top: 24%;
+      left: 30%;
+      width: 200px;
+      height: 140px;
+      opacity: 0.14;
+    }
+    .b10 {
+      bottom: 24%;
+      right: 30%;
+      width: 32px;
+      height: 32px;
+      opacity: 0.12;
+    }
+    .b11 {
+      top: 34%;
+      left: 20%;
+      width: 22px;
+      height: 22px;
+      opacity: 0.12;
+    }
+    .b12 {
+      top: 40%;
+      left: 54%;
+      width: 28px;
+      height: 28px;
+      opacity: 0.12;
     }
   }
 

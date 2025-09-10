@@ -69,7 +69,11 @@ const projects = [
   <main>
     <!-- Hero Section with Asymmetrical Layout -->
     <section class="hero" id="about">
-      <GlassmorphicContainer variant="clear" size="large" class="hero-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="large"
+        class="hero-container u-container u-container--xl"
+      >
         <!-- Asymmetrical grid layout -->
         <div class="hero-grid">
           <!-- Left side - 2/3 width for main content -->
@@ -86,7 +90,9 @@ const projects = [
             <div class="hero-bio">
               <p class="hero-bio-primary">
                 Infrastructure Engineer specializing in
-                <span class="highlight-text">DevOps, system administration,</span>
+                <span class="highlight-text"
+                  >DevOps, system administration,</span
+                >
                 and <span class="highlight-text">data engineering</span>
               </p>
               <p class="hero-bio-secondary">
@@ -99,7 +105,7 @@ const projects = [
             </div>
           </div>
 
-          <!-- Right side - 1/3 width for CTAs and floating elements -->
+          <!-- Right side - 1/3 width for CTAs -->
           <div class="hero-actions-container">
             <!-- Glassmorphism CTA container -->
             <div class="hero-cta-wrapper">
@@ -115,9 +121,6 @@ const projects = [
                 <span class="cta-arrow">→</span>
               </a>
             </div>
-
-            <!-- Floating accent shape -->
-            <div class="floating-accent"></div>
           </div>
         </div>
 
@@ -132,7 +135,11 @@ const projects = [
 
     <!-- Featured Work -->
     <section id="work" class="work-section">
-       <GlassmorphicContainer variant="clear" size="medium" class="work-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="medium"
+        class="work-container u-container u-container--xl"
+      >
         <div class="work-content">
           <h2 class="section-title">Featured Work</h2>
           <BentoGrid>
@@ -144,7 +151,11 @@ const projects = [
 
     <!-- Professional Evolution Timeline -->
     <section id="evolution" class="timeline-section">
-      <GlassmorphicContainer variant="clear" size="medium" class="timeline-container u-container u-container--xl">
+      <GlassmorphicContainer
+        variant="clear"
+        size="medium"
+        class="timeline-container u-container u-container--xl"
+      >
         <Timeline />
       </GlassmorphicContainer>
     </section>
@@ -209,7 +220,7 @@ const projects = [
     padding-block: clamp(var(--sp-12), 6vw, var(--sp-16));
     padding-bottom: clamp(var(--sp-14), 8vw, var(--sp-20));
   }
-  
+
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -421,25 +432,7 @@ const projects = [
     transform: translateX(4px);
   }
 
-  .floating-accent {
-    position: absolute;
-    top: -60px;
-    right: -20px;
-    width: 120px;
-    height: 120px;
-    background: var(--glass-coral);
-    border-radius: 50%;
-    filter: blur(var(--blur-20));
-    opacity: 0.3;
-    animation: organic-float 6s var(--ease-in-out-3) infinite;
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .floating-accent {
-      display: block;
-    }
-  }
+  /* Removed hero-specific floating accent blob to keep only global blobs */
 
   .scroll-indicator {
     position: absolute;
