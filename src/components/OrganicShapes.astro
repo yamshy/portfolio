@@ -27,37 +27,285 @@
   <div class="blob b12"></div>
   <!-- micro accent (center) -->
 
-  <!-- Organic connection lines -->
-  <svg class="connections" viewBox="0 0 1000 600" width="100%" height="100%">
+  <!-- Organic connection lines (dynamically generated) -->
+  <svg
+    class="connections"
+    width="100%"
+    height="100%"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
     <defs>
       <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:var(--coral);stop-opacity:0.15"
+        <stop offset="0%" style="stop-color:var(--coral);stop-opacity:0.18"
         ></stop>
-        <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:0.2"
+        <stop offset="50%" style="stop-color:var(--mocha);stop-opacity:0.18"
         ></stop>
-        <stop offset="100%" style="stop-color:var(--blue);stop-opacity:0.15"
+        <stop offset="100%" style="stop-color:var(--blue);stop-opacity:0.18"
         ></stop>
       </linearGradient>
+      <g id="dynamic-gradients"></g>
     </defs>
-    <path
-      class="connection-line line-1"
-      d="M50,150 Q200,100 400,120 T800,140"
-      stroke="url(#lineGradient)"
-      stroke-width="1.5"
-      fill="none"></path>
-    <path
-      class="connection-line line-2"
-      d="M100,300 Q300,250 500,270 T900,290"
-      stroke="url(#lineGradient)"
-      stroke-width="1"
-      fill="none"></path>
-    <path
-      class="connection-line line-3"
-      d="M0,450 Q250,400 450,420 T850,440"
-      stroke="url(#lineGradient)"
-      stroke-width="1.2"
-      fill="none"></path>
+    <g class="links" aria-hidden="true"></g>
   </svg>
+
+  <script>
+    (function () {
+      function init() {
+        const container = document.querySelector('.organic-shapes');
+        if (!container) return;
+        const svg = container.querySelector('svg.connections');
+        const linksGroup = svg.querySelector('g.links');
+        const dynamicGradients = svg.querySelector('#dynamic-gradients');
+        const mqlReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        const blobSelectors = [
+          '.b0',
+          '.b1',
+          '.b2',
+          '.b3',
+          '.b4',
+          '.b5',
+          '.b6',
+          '.b7',
+          '.b8',
+          '.b9',
+          '.b10',
+          '.b11',
+          '.b12',
+        ];
+
+        function centerOf(el) {
+          const r = el.getBoundingClientRect();
+          return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }
+        function getHeroRect() {
+          const hero = document.querySelector('.hero-container');
+          return hero ? hero.getBoundingClientRect() : null;
+        }
+        function magnitude(vx, vy) {
+          return Math.sqrt(vx * vx + vy * vy) || 1;
+        }
+        function computeControl(a, b, avoidRect, bend = 80) {
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const len = magnitude(dx, dy);
+          const nx = -dy / len;
+          const ny = dx / len; // perpendicular
+          let sign = 1;
+          if (avoidRect) {
+            const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+            const rectCx = avoidRect.left + avoidRect.width / 2;
+            const rectCy = avoidRect.top + avoidRect.height / 2;
+            const distPlus = Math.hypot(
+              mid.x + nx * bend - rectCx,
+              mid.y + ny * bend - rectCy,
+            );
+            const distMinus = Math.hypot(
+              mid.x - nx * bend - rectCx,
+              mid.y - ny * bend - rectCy,
+            );
+            sign = distPlus > distMinus ? 1 : -1;
+          }
+          const cx = (a.x + b.x) / 2 + nx * bend * sign;
+          const cy = (a.y + b.y) / 2 + ny * bend * sign;
+          return { cx, cy };
+        }
+        function clearLinks() {
+          while (linksGroup.firstChild)
+            linksGroup.removeChild(linksGroup.firstChild);
+        }
+        function clearDynamicGradients() {
+          if (!dynamicGradients) return;
+          while (dynamicGradients.firstChild)
+            dynamicGradients.removeChild(dynamicGradients.firstChild);
+        }
+        function createPath(id, a, b, avoidRect, opts) {
+          const { cx, cy } = computeControl(a, b, avoidRect, opts.bend);
+          const d = `M ${a.x},${a.y} Q ${cx},${cy} ${b.x},${b.y}`;
+          const path = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          path.setAttribute('id', id);
+          path.setAttribute('d', d);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', opts.strokePaint || 'url(#lineGradient)');
+          path.setAttribute('stroke-width', opts.strokeWidth || 1.2);
+          path.classList.add('link-path');
+          return path;
+        }
+        function createPulse(pathId, r, begin, dur, fill) {
+          const circ = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle',
+          );
+          circ.setAttribute('r', r);
+          circ.setAttribute('class', 'pulse');
+          if (fill) circ.setAttribute('fill', fill);
+          if (mqlReduce.matches) return null; // skip pulses in reduced motion
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animateMotion',
+          );
+          anim.setAttribute('dur', dur);
+          anim.setAttribute('repeatCount', 'indefinite');
+          anim.setAttribute('rotate', 'auto');
+          anim.setAttribute('begin', begin);
+          const mpath = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'mpath',
+          );
+          mpath.setAttributeNS(
+            'http://www.w3.org/1999/xlink',
+            'xlink:href',
+            `#${pathId}`,
+          );
+          anim.appendChild(mpath);
+          circ.appendChild(anim);
+          return circ;
+        }
+        const cssVar = (name) =>
+          getComputedStyle(document.documentElement)
+            .getPropertyValue(name)
+            .trim();
+        const blobColorVar = new Map([
+          ['.b0', '--mocha'],
+          ['.b1', '--coral'],
+          ['.b2', '--mocha'],
+          ['.b3', '--accent-yellow'],
+          ['.b4', '--blue'],
+          ['.b5', '--mocha'],
+          ['.b6', '--coral'],
+          ['.b7', '--blue'],
+          ['.b8', '--coral'],
+          ['.b9', '--coral'],
+          ['.b10', '--accent-yellow'],
+          ['.b11', '--blue'],
+          ['.b12', '--accent-yellow'],
+        ]);
+        function createGradient(id, colA, colB) {
+          const g = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'linearGradient',
+          );
+          g.setAttribute('id', id);
+          g.setAttribute('x1', '0%');
+          g.setAttribute('y1', '0%');
+          g.setAttribute('x2', '100%');
+          g.setAttribute('y2', '0%');
+          const s1 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'stop',
+          );
+          s1.setAttribute('offset', '0%');
+          s1.setAttribute('stop-color', colA);
+          s1.setAttribute('stop-opacity', '0.9');
+          const s2 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'stop',
+          );
+          s2.setAttribute('offset', '100%');
+          s2.setAttribute('stop-color', colB);
+          s2.setAttribute('stop-opacity', '0.9');
+          g.appendChild(s1);
+          g.appendChild(s2);
+          dynamicGradients.appendChild(g);
+          return `url(#${id})`;
+        }
+        function buildPairs(isMobile) {
+          const P = (a, b) => [a, b];
+          const desktop = [
+            P('.b1', '.b3'),
+            P('.b3', '.b9'),
+            P('.b1', '.b5'),
+            P('.b2', '.b4'),
+            P('.b4', '.b7'),
+            P('.b2', '.b8'),
+            P('.b5', '.b6'),
+            P('.b6', '.b7'),
+            P('.b0', '.b7'),
+          ];
+          const mobile = [P('.b1', '.b3'), P('.b2', '.b4'), P('.b5', '.b6')];
+          return isMobile ? mobile : desktop;
+        }
+        function rebuild() {
+          const vw = window.innerWidth;
+          const isMobile = vw < 900;
+          clearLinks();
+          clearDynamicGradients();
+          const avoid = getHeroRect();
+          const nodeMap = new Map();
+          blobSelectors.forEach((sel) => {
+            const el = container.querySelector(sel);
+            if (el) nodeMap.set(sel, centerOf(el));
+          });
+          const pairs = buildPairs(isMobile);
+          let idx = 0;
+          for (const [sa, sb] of pairs) {
+            const a = nodeMap.get(sa),
+              b = nodeMap.get(sb);
+            if (!a || !b) continue;
+            const id = `conn-${idx++}`;
+            // Build gradient matching the blobs' colors
+            const va = blobColorVar.get(sa);
+            const vb = blobColorVar.get(sb);
+            const ca = va ? cssVar(va) : null;
+            const cb = vb ? cssVar(vb) : null;
+            const paint =
+              ca && cb
+                ? createGradient(`grad-${id}`, ca, cb)
+                : 'url(#lineGradient)';
+            const path = createPath(id, a, b, avoid, {
+              bend: isMobile ? 60 : 100,
+              strokeWidth: isMobile ? 1.6 : 2.4,
+              strokePaint: paint,
+            });
+            linksGroup.appendChild(path);
+            const pulseCount = isMobile ? 1 : 2;
+            for (let i = 0; i < pulseCount; i++) {
+              const r = isMobile ? 2.5 : 3;
+              const begin = `${i * 2 + (Math.random() * 1).toFixed(2)}s`;
+              const dur = `${(6 + Math.random() * 4).toFixed(2)}s`;
+              const p = createPulse(id, r, begin, dur, ca || null);
+              if (p) linksGroup.appendChild(p);
+            }
+          }
+        }
+        const debounced = (fn, ms = 150) => {
+          let t;
+          return (...args) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), ms);
+          };
+        };
+        rebuild();
+        window.addEventListener('resize', debounced(rebuild, 150));
+
+        // If the user toggles reduced motion in OS settings at runtime
+        if (mqlReduce.addEventListener) {
+          mqlReduce.addEventListener('change', () => rebuild());
+        } else if (mqlReduce.addListener) {
+          mqlReduce.addListener(() => rebuild());
+        }
+
+        // Pause animations when offscreen to save cycles
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              svg.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
+            }
+          },
+          { threshold: 0 },
+        );
+        io.observe(container);
+      }
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', init);
+      else init();
+    })();
+  </script>
 </div>
 
 <style>
@@ -238,13 +486,44 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.15;
+    opacity: 0.45; /* stronger visibility for bigger connections */
   }
 
   .connection-line {
     stroke-dasharray: 20 10;
     stroke-dashoffset: 0;
     animation: line-flow 6s ease-in-out infinite;
+  }
+
+  /* Style for generated links and pulses */
+  .link-path {
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    filter: drop-shadow(
+      0 0 8px color-mix(in oklab, var(--mocha), transparent 85%)
+    );
+    stroke-dasharray: 18 12;
+    animation: line-flow 7s ease-in-out infinite;
+  }
+  .pulse {
+    fill: color-mix(in oklab, var(--coral), transparent 70%);
+    opacity: 0.85;
+  }
+  .pulse > animateMotion + animate,
+  .pulse > animate {
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .connections {
+      opacity: 0.22;
+    }
+    .link-path {
+      animation: none;
+    }
+    .pulse {
+      display: none;
+    }
   }
 
   .line-1 {
