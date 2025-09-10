@@ -114,7 +114,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 
 Examples:
 
-```
+```bash
 feat: add new portfolio section
 fix: resolve responsive layout issue
 docs: update README with new features
