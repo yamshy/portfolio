@@ -133,6 +133,7 @@
           path.setAttribute('fill', 'none');
           path.setAttribute('stroke', opts.strokePaint || 'url(#lineGradient)');
           path.setAttribute('stroke-width', opts.strokeWidth || 1.2);
+          path.setAttribute('stroke-opacity', String(opts.baseOpacity ?? 0.08));
           path.classList.add('link-path');
           return path;
         }
@@ -165,6 +166,54 @@
           anim.appendChild(mpath);
           circ.appendChild(anim);
           return circ;
+        }
+        function createHotSegment(
+          d,
+          paint,
+          width,
+          length,
+          segLen,
+          begin,
+          flyDur,
+          cycleDur,
+        ) {
+          if (mqlReduce.matches) return null;
+          const hot = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path',
+          );
+          hot.setAttribute('d', d);
+          hot.setAttribute('fill', 'none');
+          hot.setAttribute('stroke', paint);
+          hot.setAttribute('stroke-width', width);
+          hot.setAttribute('stroke-linecap', 'round');
+          hot.classList.add('link-hot');
+          hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
+          hot.setAttribute('stroke-dashoffset', `${length + segLen}`);
+          const anim = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          anim.setAttribute('attributeName', 'stroke-dashoffset');
+          anim.setAttribute('from', `${length + segLen}`);
+          anim.setAttribute('to', `${-segLen}`);
+          anim.setAttribute('dur', flyDur);
+          anim.setAttribute('repeatCount', 'indefinite');
+          anim.setAttribute('begin', begin);
+          hot.appendChild(anim);
+          // Show the hot segment only briefly within each long cycle
+          const animOpacity = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'animate',
+          );
+          animOpacity.setAttribute('attributeName', 'opacity');
+          animOpacity.setAttribute('values', '0;0;1;0');
+          animOpacity.setAttribute('keyTimes', '0;0.92;0.93;1');
+          animOpacity.setAttribute('dur', cycleDur);
+          animOpacity.setAttribute('repeatCount', 'indefinite');
+          animOpacity.setAttribute('begin', begin);
+          hot.appendChild(animOpacity);
+          return hot;
         }
         const cssVar = (name) =>
           getComputedStyle(document.documentElement)
@@ -257,19 +306,41 @@
               ca && cb
                 ? createGradient(`grad-${id}`, ca, cb)
                 : 'url(#lineGradient)';
+            const baseOpacity = 0.06;
+            const peakOpacity = 0.45;
             const path = createPath(id, a, b, avoid, {
               bend: isMobile ? 60 : 100,
               strokeWidth: isMobile ? 1.6 : 2.4,
               strokePaint: paint,
+              baseOpacity,
             });
             linksGroup.appendChild(path);
-            const pulseCount = isMobile ? 1 : 2;
-            for (let i = 0; i < pulseCount; i++) {
-              const r = isMobile ? 2.5 : 3;
-              const begin = `${i * 2 + (Math.random() * 1).toFixed(2)}s`;
-              const dur = `${(6 + Math.random() * 4).toFixed(2)}s`;
-              const p = createPulse(id, r, begin, dur, ca || null);
-              if (p) linksGroup.appendChild(p);
+            // Hot segments (neuron-like bulge) moving along the path
+            const length = path.getTotalLength ? path.getTotalLength() : 600;
+            const segLen = Math.max(24, Math.min(90, length * 0.08));
+            const bursts = 1; // one burst train per path
+            for (let i = 0; i < bursts; i++) {
+              const begin = `${(Math.random() * 4).toFixed(2)}s`;
+              // Fast fly-through, long cycle visibility window for rarity
+              const flyDur = isMobile
+                ? `${(0.8 + Math.random() * 0.3).toFixed(2)}s`
+                : `${(0.6 + Math.random() * 0.3).toFixed(2)}s`;
+              const cycleDur = isMobile
+                ? `${(10 + Math.random() * 6).toFixed(2)}s`
+                : `${(8 + Math.random() * 6).toFixed(2)}s`;
+              const hot = createHotSegment(
+                path.getAttribute('d'),
+                paint,
+                (isMobile ? 1.6 : 2.4) * 1.9,
+                length,
+                segLen,
+                begin,
+                flyDur,
+                cycleDur,
+              );
+              if (hot) linksGroup.appendChild(hot);
+
+              // Keep base lines at steady low opacity (no trail cycle)
             }
           }
         }
@@ -505,6 +576,15 @@
     stroke-dasharray: 18 12;
     animation: line-flow 7s ease-in-out infinite;
   }
+  .link-hot {
+    vector-effect: non-scaling-stroke;
+    stroke-linecap: round;
+    filter: drop-shadow(
+      0 0 10px color-mix(in oklab, var(--coral), transparent 70%)
+    );
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
   .pulse {
     fill: color-mix(in oklab, var(--coral), transparent 70%);
     opacity: 0.85;
@@ -521,7 +601,8 @@
     .link-path {
       animation: none;
     }
-    .pulse {
+    .pulse,
+    .link-hot {
       display: none;
     }
   }
