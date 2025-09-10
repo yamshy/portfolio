@@ -56,8 +56,11 @@
         const container = document.querySelector('.organic-shapes');
         if (!container) return;
         const svg = container.querySelector('svg.connections');
+        if (!svg) return;
         const linksGroup = svg.querySelector('g.links');
+        if (!linksGroup) return;
         const dynamicGradients = svg.querySelector('#dynamic-gradients');
+        if (!dynamicGradients) return;
         const mqlReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         const blobSelectors = [
@@ -76,7 +79,7 @@
           '.b12',
         ];
 
-        function centerOf(el) {
+        function centerOf(el: Element) {
           const r = el.getBoundingClientRect();
           return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
         }
@@ -84,10 +87,15 @@
           const hero = document.querySelector('.hero-container');
           return hero ? hero.getBoundingClientRect() : null;
         }
-        function magnitude(vx, vy) {
+        function magnitude(vx: number, vy: number) {
           return Math.sqrt(vx * vx + vy * vy) || 1;
         }
-        function computeControl(a, b, avoidRect, bend = 80) {
+        function computeControl(
+          a: { x: number; y: number },
+          b: { x: number; y: number },
+          avoidRect: DOMRect | null,
+          bend = 80,
+        ) {
           const dx = b.x - a.x;
           const dy = b.y - a.y;
           const len = magnitude(dx, dy);
@@ -113,7 +121,7 @@
           return { cx, cy };
         }
         function clearLinks() {
-          while (linksGroup.firstChild)
+          while (linksGroup && linksGroup.firstChild)
             linksGroup.removeChild(linksGroup.firstChild);
         }
         function clearDynamicGradients() {
@@ -121,7 +129,18 @@
           while (dynamicGradients.firstChild)
             dynamicGradients.removeChild(dynamicGradients.firstChild);
         }
-        function createPath(id, a, b, avoidRect, opts) {
+        function createPath(
+          id: string,
+          a: { x: number; y: number },
+          b: { x: number; y: number },
+          avoidRect: DOMRect | null,
+          opts: {
+            bend?: number;
+            strokeWidth?: number;
+            strokePaint?: string;
+            baseOpacity?: number;
+          },
+        ) {
           const { cx, cy } = computeControl(a, b, avoidRect, opts.bend);
           const d = `M ${a.x},${a.y} Q ${cx},${cy} ${b.x},${b.y}`;
           const path = document.createElementNS(
@@ -132,17 +151,23 @@
           path.setAttribute('d', d);
           path.setAttribute('fill', 'none');
           path.setAttribute('stroke', opts.strokePaint || 'url(#lineGradient)');
-          path.setAttribute('stroke-width', opts.strokeWidth || 1.2);
+          path.setAttribute('stroke-width', String(opts.strokeWidth || 1.2));
           path.setAttribute('stroke-opacity', String(opts.baseOpacity ?? 0.08));
           path.classList.add('link-path');
           return path;
         }
-        function createPulse(pathId, r, begin, dur, fill) {
+        function createPulse(
+          pathId: string,
+          r: number,
+          begin: string,
+          dur: string,
+          fill?: string,
+        ) {
           const circ = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'circle',
           );
-          circ.setAttribute('r', r);
+          circ.setAttribute('r', String(r));
           circ.setAttribute('class', 'pulse');
           if (fill) circ.setAttribute('fill', fill);
           if (mqlReduce.matches) return null; // skip pulses in reduced motion
@@ -168,25 +193,25 @@
           return circ;
         }
         function createHotSegment(
-          d,
-          paint,
-          width,
-          length,
-          segLen,
-          begin,
-          flyDur,
-          cycleDur,
-          onVisible,
+          d: string | null,
+          paint: string,
+          width: number,
+          length: number,
+          segLen: number,
+          begin: string,
+          flyDur: string,
+          cycleDur: string,
+          onVisible?: () => void,
         ) {
           if (mqlReduce.matches) return null;
           const hot = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'path',
           );
-          hot.setAttribute('d', d);
+          hot.setAttribute('d', d || '');
           hot.setAttribute('fill', 'none');
           hot.setAttribute('stroke', paint);
-          hot.setAttribute('stroke-width', width);
+          hot.setAttribute('stroke-width', String(width));
           hot.setAttribute('stroke-linecap', 'round');
           hot.classList.add('link-hot');
           hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
@@ -233,23 +258,23 @@
 
         // One-shot initial hot segment to avoid empty startup
         function createInitialHotSegment(
-          d,
-          paint,
-          width,
-          length,
-          segLen,
-          flyDur,
-          startDelaySec,
+          d: string | null,
+          paint: string,
+          width: number,
+          length: number,
+          segLen: number,
+          flyDur: string,
+          startDelaySec: number,
         ) {
           if (mqlReduce.matches) return null;
           const hot = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'path',
           );
-          hot.setAttribute('d', d);
+          hot.setAttribute('d', d || '');
           hot.setAttribute('fill', 'none');
           hot.setAttribute('stroke', paint);
-          hot.setAttribute('stroke-width', width);
+          hot.setAttribute('stroke-width', String(width));
           hot.setAttribute('stroke-linecap', 'round');
           hot.classList.add('link-hot');
           hot.setAttribute('stroke-dasharray', `${segLen} ${length}`);
@@ -286,7 +311,7 @@
           hot.appendChild(fade);
           return hot;
         }
-        const cssVar = (name) =>
+        const cssVar = (name: string) =>
           getComputedStyle(document.documentElement)
             .getPropertyValue(name)
             .trim();
@@ -305,7 +330,7 @@
           ['.b11', '--blue'],
           ['.b12', '--accent-yellow'],
         ]);
-        function createGradient(id, colA, colB) {
+        function createGradient(id: string, colA: string, colB: string) {
           const g = document.createElementNS(
             'http://www.w3.org/2000/svg',
             'linearGradient',
@@ -331,12 +356,12 @@
           s2.setAttribute('stop-opacity', '0.9');
           g.appendChild(s1);
           g.appendChild(s2);
-          dynamicGradients.appendChild(g);
+          if (dynamicGradients) dynamicGradients.appendChild(g);
           return `url(#${id})`;
         }
 
         // Timers for scheduling blob pings (jelly pulse)
-        let _pingTimers = [];
+        let _pingTimers: (number | NodeJS.Timeout)[] = [];
         function clearPingTimers() {
           _pingTimers.forEach((id) => {
             clearTimeout(id);
@@ -345,7 +370,11 @@
           _pingTimers = [];
         }
         // Schedule blob ping based on cycle timing
-        function scheduleBlobPing(el, beginSec, cycleSec) {
+        function scheduleBlobPing(
+          el: Element,
+          beginSec: number,
+          cycleSec: number,
+        ) {
           if (!el || isNaN(beginSec) || isNaN(cycleSec)) return;
           const firstDelay = Math.max(0, (beginSec + cycleSec * 0.92) * 1000);
           const doPing = () => {
@@ -360,8 +389,8 @@
           }, firstDelay);
           _pingTimers.push(t0);
         }
-        function buildPairs(isMobile) {
-          const P = (a, b) => [a, b];
+        function buildPairs(isMobile: boolean) {
+          const P = (a: string, b: string) => [a, b];
           const desktop = [
             P('.b1', '.b3'),
             P('.b3', '.b9'),
@@ -385,7 +414,7 @@
           const avoid = getHeroRect();
           const nodeMap = new Map();
           blobSelectors.forEach((sel) => {
-            const el = container.querySelector(sel);
+            const el = container?.querySelector(sel);
             if (el) nodeMap.set(sel, centerOf(el));
           });
           const pairs = buildPairs(isMobile);
@@ -411,14 +440,14 @@
                 ? createGradient(`grad-${id}`, ca, cb)
                 : 'url(#lineGradient)';
             const baseOpacity = 0.06;
-            const peakOpacity = 0.45;
+            // const peakOpacity = 0.45; // unused variable
             const path = createPath(id, a, b, avoid, {
               bend: isMobile ? 60 : 100,
               strokeWidth: isMobile ? 1.6 : 2.4,
               strokePaint: paint,
               baseOpacity,
             });
-            linksGroup.appendChild(path);
+            if (linksGroup) linksGroup.appendChild(path);
             // Hot segments (neuron-like bulge) moving along the path
             const length = path.getTotalLength ? path.getTotalLength() : 600;
             const segLen = Math.max(24, Math.min(90, length * 0.08));
@@ -435,7 +464,7 @@
                 ? `${(0.8 + Math.random() * 0.3).toFixed(2)}s`
                 : `${(0.6 + Math.random() * 0.3).toFixed(2)}s`;
               const cycleDur = `${cycleSecNum.toFixed(2)}s`;
-              const startEl = container.querySelector(sa);
+              const startEl = container?.querySelector(sa);
               const hot = createHotSegment(
                 path.getAttribute('d'),
                 paint,
@@ -455,7 +484,7 @@
                   _pingTimers.push(t);
                 },
               );
-              if (hot) linksGroup.appendChild(hot);
+              if (hot && linksGroup) linksGroup.appendChild(hot);
 
               // Fire an initial one-shot pulse on a small random subset at load
               if (initialPulseIndices.has(idx)) {
@@ -469,7 +498,7 @@
                   flyDur,
                   delaySec,
                 );
-                if (initHot) linksGroup.appendChild(initHot);
+                if (initHot && linksGroup) linksGroup.appendChild(initHot);
                 if (startEl) {
                   const t = setTimeout(() => {
                     startEl.classList.add('ping');
@@ -487,9 +516,9 @@
             }
           }
         }
-        const debounced = (fn, ms = 150) => {
-          let t;
-          return (...args) => {
+        const debounced = (fn: (...args: any[]) => void, ms = 150) => {
+          let t: number | NodeJS.Timeout;
+          return (...args: any[]) => {
             clearTimeout(t);
             t = setTimeout(() => fn(...args), ms);
           };
@@ -500,7 +529,8 @@
         // If the user toggles reduced motion in OS settings at runtime
         if (mqlReduce.addEventListener) {
           mqlReduce.addEventListener('change', () => rebuild());
-        } else if (mqlReduce.addListener) {
+        } else if ('addListener' in mqlReduce) {
+          // @ts-ignore - deprecated but still supported in older browsers
           mqlReduce.addListener(() => rebuild());
         }
 
@@ -508,7 +538,9 @@
         const io = new IntersectionObserver(
           (entries) => {
             for (const e of entries) {
-              svg.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
+              if (svg instanceof HTMLElement) {
+                svg.style.visibility = e.isIntersecting ? 'visible' : 'hidden';
+              }
             }
           },
           { threshold: 0 },
