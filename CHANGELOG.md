@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/yamshy/portfolio/compare/v3.3.0...v4.0.0) (2025-09-10)
+
+### ⚠ BREAKING CHANGES
+
+* Component import paths have changed due to directory restructure
+
+* chore: add commitlint for enforcing conventional commit format
+
+### Reverts
+
+* OrganicShapes experiments; restore baseline ([#34](https://github.com/yamshy/portfolio/issues/34)) ([2f27dce](https://github.com/yamshy/portfolio/commit/2f27dce3d759b5f36c21c14e277060e278f2a486))
+
+### Code Refactoring
+
+* decompose monolithic OrganicShapes component ([#35](https://github.com/yamshy/portfolio/issues/35)) ([a2cee0e](https://github.com/yamshy/portfolio/commit/a2cee0e3a5c50d5e4f75279a4fbb9b813f342319))
+
 ## [3.3.0](https://github.com/yamshy/portfolio/compare/v3.2.0...v3.3.0) (2025-09-09)
 
 ### Features
