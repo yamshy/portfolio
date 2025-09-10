@@ -1,0 +1,400 @@
+---
+// Animation controller for organic shapes system
+---
+
+<script>
+  import {
+    blobSelectors,
+    blobColorMap,
+    buildConnectionPairs,
+    getCSSVar,
+  } from '../../../utils/organic/blob-config';
+  import {
+    centerOf,
+    getHeroRect,
+    computeControlPoint,
+    createPathData,
+  } from '../../../utils/organic/connection-algorithms';
+  import {
+    generateAnimationTiming,
+    debounce,
+    prefersReducedMotion,
+    isMobileViewport,
+    TimerManager,
+  } from '../../../utils/organic/animation-helpers';
+
+  (function () {
+    function init() {
+      const container = document.querySelector('.organic-shapes');
+      if (!container) return;
+
+      const svg = container.querySelector('svg.connections');
+      if (!svg) return;
+
+      const linksGroup = svg.querySelector('g.links');
+      if (!linksGroup) return;
+
+      const dynamicGradients = svg.querySelector('#dynamic-gradients');
+      if (!dynamicGradients) return;
+
+      const timerManager = new TimerManager();
+
+      // DOM manipulation utilities
+      function clearLinks() {
+        while (linksGroup && linksGroup.firstChild) {
+          linksGroup.removeChild(linksGroup.firstChild);
+        }
+      }
+
+      function clearDynamicGradients() {
+        if (!dynamicGradients) return;
+        while (dynamicGradients.firstChild) {
+          dynamicGradients.removeChild(dynamicGradients.firstChild);
+        }
+      }
+
+      // SVG element creation utilities
+      function createPath(
+        id: string,
+        pointA: { x: number; y: number },
+        pointB: { x: number; y: number },
+        avoidRect: DOMRect | null,
+        opts: {
+          bend?: number;
+          strokeWidth?: number;
+          strokePaint?: string;
+          baseOpacity?: number;
+        },
+      ) {
+        const controlPoint = computeControlPoint(
+          pointA,
+          pointB,
+          avoidRect,
+          opts.bend,
+        );
+        const pathData = createPathData(pointA, pointB, controlPoint);
+
+        const path = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'path',
+        );
+        path.setAttribute('id', id);
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', opts.strokePaint || 'url(#lineGradient)');
+        path.setAttribute('stroke-width', String(opts.strokeWidth || 1.2));
+        path.setAttribute('stroke-opacity', String(opts.baseOpacity ?? 0.08));
+        path.classList.add('link-path');
+
+        return path;
+      }
+
+      // Note: createPulse function removed as it's not currently used
+      // but could be re-added later for additional pulse effects
+
+      function createHotSegment(
+        pathData: string | null,
+        paint: string,
+        width: number,
+        length: number,
+        segmentLength: number,
+        begin: string,
+        flyDuration: string,
+        cycleDuration: string,
+        onVisible?: () => void,
+      ) {
+        if (prefersReducedMotion()) return null;
+
+        const hot = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'path',
+        );
+        hot.setAttribute('d', pathData || '');
+        hot.setAttribute('fill', 'none');
+        hot.setAttribute('stroke', paint);
+        hot.setAttribute('stroke-width', String(width));
+        hot.setAttribute('stroke-linecap', 'round');
+        hot.classList.add('link-hot');
+        hot.setAttribute('stroke-dasharray', `${segmentLength} ${length}`);
+        hot.setAttribute('stroke-dashoffset', `${length + segmentLength}`);
+        hot.setAttribute('opacity', '0');
+
+        // Movement animation
+        const moveAnimation = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'animate',
+        );
+        moveAnimation.setAttribute('attributeName', 'stroke-dashoffset');
+        moveAnimation.setAttribute('from', `${length + segmentLength}`);
+        moveAnimation.setAttribute('to', `${-segmentLength}`);
+        moveAnimation.setAttribute('dur', flyDuration);
+        moveAnimation.setAttribute('repeatCount', 'indefinite');
+        moveAnimation.setAttribute('begin', begin);
+        hot.appendChild(moveAnimation);
+
+        // Opacity animation for visibility window
+        const opacityAnimation = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'animate',
+        );
+        opacityAnimation.setAttribute('attributeName', 'opacity');
+        opacityAnimation.setAttribute('values', '0;0;1;0');
+        opacityAnimation.setAttribute('keyTimes', '0;0.92;0.93;1');
+        opacityAnimation.setAttribute('dur', cycleDuration);
+        opacityAnimation.setAttribute('repeatCount', 'indefinite');
+        opacityAnimation.setAttribute('begin', begin);
+        hot.appendChild(opacityAnimation);
+
+        // Schedule blob ping with animation
+        const cycleSec = parseFloat(cycleDuration);
+        const scheduleFromEvent = () => {
+          if (!onVisible || isNaN(cycleSec)) return;
+          const timer = setTimeout(
+            onVisible,
+            Math.max(0, cycleSec * 0.92 * 1000),
+          );
+          timerManager.addTimer(timer);
+        };
+
+        opacityAnimation.addEventListener('beginEvent', scheduleFromEvent);
+        opacityAnimation.addEventListener('repeatEvent', scheduleFromEvent);
+
+        return hot;
+      }
+
+      function createInitialHotSegment(
+        pathData: string | null,
+        paint: string,
+        width: number,
+        length: number,
+        segmentLength: number,
+        flyDuration: string,
+        startDelaySec: number,
+      ) {
+        if (prefersReducedMotion()) return null;
+
+        const hot = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'path',
+        );
+        hot.setAttribute('d', pathData || '');
+        hot.setAttribute('fill', 'none');
+        hot.setAttribute('stroke', paint);
+        hot.setAttribute('stroke-width', String(width));
+        hot.setAttribute('stroke-linecap', 'round');
+        hot.classList.add('link-hot');
+        hot.setAttribute('stroke-dasharray', `${segmentLength} ${length}`);
+        hot.setAttribute('stroke-dashoffset', `${length + segmentLength}`);
+        hot.setAttribute('opacity', '0');
+
+        const animation = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'animate',
+        );
+        animation.setAttribute('attributeName', 'stroke-dashoffset');
+        animation.setAttribute('from', `${length + segmentLength}`);
+        animation.setAttribute('to', `${-segmentLength}`);
+        animation.setAttribute('dur', flyDuration);
+        animation.setAttribute('repeatCount', '1');
+        animation.setAttribute(
+          'begin',
+          `${Math.max(0, startDelaySec).toFixed(2)}s`,
+        );
+        hot.appendChild(animation);
+
+        const fade = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'animate',
+        );
+        fade.setAttribute('attributeName', 'opacity');
+        fade.setAttribute('values', '0;1;1;0');
+        fade.setAttribute('keyTimes', '0;0.01;0.8;1');
+        fade.setAttribute('dur', flyDuration);
+        fade.setAttribute('begin', `${Math.max(0, startDelaySec).toFixed(2)}s`);
+        fade.setAttribute('fill', 'remove');
+        hot.appendChild(fade);
+
+        return hot;
+      }
+
+      function createGradient(id: string, colorA: string, colorB: string) {
+        const gradient = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'linearGradient',
+        );
+        gradient.setAttribute('id', id);
+        gradient.setAttribute('x1', '0%');
+        gradient.setAttribute('y1', '0%');
+        gradient.setAttribute('x2', '100%');
+        gradient.setAttribute('y2', '0%');
+
+        const stop1 = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'stop',
+        );
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', colorA);
+        stop1.setAttribute('stop-opacity', '0.9');
+
+        const stop2 = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'stop',
+        );
+        stop2.setAttribute('offset', '100%');
+        stop2.setAttribute('stop-color', colorB);
+        stop2.setAttribute('stop-opacity', '0.9');
+
+        gradient.appendChild(stop1);
+        gradient.appendChild(stop2);
+
+        if (dynamicGradients) dynamicGradients.appendChild(gradient);
+        return `url(#${id})`;
+      }
+
+      // Main rebuild function
+      function rebuild() {
+        const isMobile = isMobileViewport();
+
+        clearLinks();
+        clearDynamicGradients();
+        timerManager.clearAll();
+
+        const avoidRect = getHeroRect();
+        const nodeMap = new Map();
+
+        // Map blob positions
+        blobSelectors.forEach((selector) => {
+          const element = container?.querySelector(selector);
+          if (element) nodeMap.set(selector, centerOf(element));
+        });
+
+        const pairs = buildConnectionPairs(isMobile);
+
+        // Choose random subset for initial pulses
+        const immediateCount = Math.min(pairs.length, isMobile ? 3 : 5);
+        const initialPulseIndices = new Set();
+        while (initialPulseIndices.size < immediateCount) {
+          initialPulseIndices.add(Math.floor(Math.random() * pairs.length));
+        }
+
+        let index = 0;
+        for (const { from, to } of pairs) {
+          const pointA = nodeMap.get(from);
+          const pointB = nodeMap.get(to);
+          if (!pointA || !pointB) continue;
+
+          const pathId = `conn-${index++}`;
+
+          // Create gradient for this connection
+          const colorVarA = blobColorMap.get(from);
+          const colorVarB = blobColorMap.get(to);
+          const colorA = colorVarA ? getCSSVar(colorVarA) : null;
+          const colorB = colorVarB ? getCSSVar(colorVarB) : null;
+          const paint =
+            colorA && colorB
+              ? createGradient(`grad-${pathId}`, colorA, colorB)
+              : 'url(#lineGradient)';
+
+          // Create base path
+          const path = createPath(pathId, pointA, pointB, avoidRect, {
+            bend: isMobile ? 60 : 100,
+            strokeWidth: isMobile ? 1.6 : 2.4,
+            strokePaint: paint,
+            baseOpacity: 0.06,
+          });
+
+          if (linksGroup) linksGroup.appendChild(path);
+
+          // Add animated hot segments
+          const length = path.getTotalLength ? path.getTotalLength() : 600;
+          const segmentLength = Math.max(24, Math.min(90, length * 0.08));
+
+          const timing = generateAnimationTiming(isMobile);
+          const startElement = container?.querySelector(from);
+
+          const hot = createHotSegment(
+            path.getAttribute('d'),
+            paint,
+            (isMobile ? 1.6 : 2.4) * 1.9,
+            length,
+            segmentLength,
+            `${timing.beginSec}s`,
+            timing.flyDur,
+            timing.cycleDur,
+            () => {
+              if (!startElement) return;
+              startElement.classList.add('ping');
+              const timer = setTimeout(
+                () => startElement.classList.remove('ping'),
+                280,
+              );
+              timerManager.addTimer(timer);
+            },
+          );
+
+          if (hot && linksGroup) linksGroup.appendChild(hot);
+
+          // Add initial pulse for selected connections
+          if (initialPulseIndices.has(index)) {
+            const delaySec = Math.random() * (isMobile ? 3 : 6);
+            const initialHot = createInitialHotSegment(
+              path.getAttribute('d'),
+              paint,
+              (isMobile ? 1.6 : 2.4) * 1.9,
+              length,
+              segmentLength,
+              timing.flyDur,
+              delaySec,
+            );
+
+            if (initialHot && linksGroup) linksGroup.appendChild(initialHot);
+
+            if (startElement) {
+              const timer = setTimeout(() => {
+                startElement.classList.add('ping');
+                const timer2 = setTimeout(
+                  () => startElement.classList.remove('ping'),
+                  280,
+                );
+                timerManager.addTimer(timer2);
+              }, delaySec * 1000);
+              timerManager.addTimer(timer);
+            }
+          }
+        }
+      }
+
+      // Initialize and set up event listeners
+      rebuild();
+      window.addEventListener('resize', debounce(rebuild, 150));
+
+      // Handle reduced motion changes
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', () => rebuild());
+      }
+
+      // Pause animations when offscreen
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (svg instanceof HTMLElement) {
+              svg.style.visibility = entry.isIntersecting
+                ? 'visible'
+                : 'hidden';
+            }
+          }
+        },
+        { threshold: 0 },
+      );
+      observer.observe(container);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

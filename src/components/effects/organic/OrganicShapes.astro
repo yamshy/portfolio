@@ -1,0 +1,39 @@
+---
+// Main organic shapes orchestrator component
+import OrganicBlobs from './OrganicBlobs.astro';
+import OrganicConnections from './OrganicConnections.astro';
+import OrganicAnimations from './OrganicAnimations.astro';
+---
+
+<div class="organic-shapes" aria-hidden="true">
+  <OrganicBlobs />
+  <OrganicConnections />
+  <OrganicAnimations />
+</div>
+
+<style>
+  .organic-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0; /* above page background, below content */
+    overflow: hidden;
+  }
+
+  /* Hide on very small screens to avoid clutter */
+  @media (max-width: 480px) {
+    .organic-shapes {
+      display: none;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .organic-shapes {
+      display: none;
+    }
+  }
+</style>
