@@ -42,6 +42,16 @@
 - PRs: clear description, link issues, include screenshots for UI changes.
 - CI mirrors these checks and runs a Docker smoke test on PRs; releases are automated via `semantic-release` on `main`.
 
+## Existing GitHub Workflows
+
+- `pr-checks.yml` (pull_request → main)
+  - Node.js Checks: install deps (pnpm), `tsc --noEmit`, `astro check`, `pnpm test`, and `astro build`.
+  - Conventional Commits: validates PR titles against the configured types and subject casing.
+  - Container Smoke Test: builds the Docker image and confirms the container serves 200 OK on `http://localhost:8080/`.
+
+- `release.yml` (release on main)
+  - Runs `semantic-release` to version, generate changelog, create GitHub release, and publish as configured.
+
 ## Security & Configuration Tips
 
 - Node ≥20 (repo uses `mise`; run `mise trust` if prompted). No secrets or `.env` files committed.
