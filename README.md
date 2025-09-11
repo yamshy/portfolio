@@ -4,31 +4,52 @@ A modern portfolio website built with Astro, featuring automated releases and co
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside this Astro project, you'll see the following folders and files:
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   ├── BentoGrid.astro
-│   │   ├── CTAButton.astro
-│   │   ├── GlassmorphicContainer.astro
-│   │   ├── OrganicShapes.astro
-│   │   ├── ProjectCard.astro
-│   │   ├── SidebarNav.astro
-│   │   └── Timeline.astro
-│   ├── layouts
-│   │   └── BaseLayout.astro
-│   └── pages
-│       └── index.astro
+│   ├── favicon.svg
+│   └── fonts/
+│       └── rst-thermal/*
+├── src/
+│   ├── assets/
+│   │   ├── astro.svg
+│   │   └── background.svg
+│   ├── components/
+│   │   ├── content/
+│   │   │   ├── forms/ContactForm.astro
+│   │   │   ├── grids/BentoGrid.astro
+│   │   │   ├── hero/Welcome.astro
+│   │   │   └── timeline/Timeline.astro
+│   │   ├── effects/
+│   │   │   └── organic/*
+│   │   ├── navigation/
+│   │   │   ├── NavGlass.astro
+│   │   │   └── SidebarNav.astro
+│   │   └── ui/
+│   │       ├── buttons/CTAButton.astro
+│   │       └── containers/GlassmorphicContainer.astro
+│   ├── layouts/BaseLayout.astro
+│   ├── pages/index.astro
+│   ├── styles/{tokens.css,utilities.css}
+│   └── utils/
+│       ├── glassmorphic.ts
+│       ├── updateProgress.ts
+│       └── organic/*
+├── tests/
+│   ├── e2e/*
+│   └── unit/*
+├── astro.config.mjs
+├── playwright.config.ts
+├── vitest.config.ts
+├── eslint.config.js
+├── tsconfig.json
+├── Dockerfile
 ├── package.json
 ├── release.config.js
-├── Dockerfile
-└── .github/workflows/release.yml
+├── commitlint.config.js
+└── CHANGELOG.md
 ```
 
 ## 🧞 Commands
@@ -37,15 +58,7 @@ All commands are run from the root of the project, from a terminal:
 
 ### Quick Start
 
-#### Option 1: Using VS Code Dev Containers (Recommended)
-
-```bash
-# Open in VS Code and select "Reopen in Container" when prompted
-# Dependencies are automatically installed
-pnpm dev
-```
-
-#### Option 2: Local Development
+#### Option 1: Local Development
 
 ```bash
 # Install dependencies first
@@ -53,7 +66,7 @@ pnpm install
 pnpm dev
 ```
 
-#### Option 3: Test Latest Release
+#### Option 2: Test Latest Release
 
 ```bash
 # Test the latest release locally
@@ -77,27 +90,15 @@ docker run -p 8080:8080 ghcr.io/yamshy/portfolio:latest
 | `pnpm check`           | Run linting, formatting check, and type-check    |
 | `pnpm release`         | Run semantic-release locally (for testing)       |
 
-## 🐳 Development Containers
+## 🧪 Testing
 
-This project includes VS Code development container configuration for a consistent development environment.
+This repository includes unit tests (Vitest) and end-to-end tests (Playwright):
 
-### Features
-
-- **Node.js 24.7.0** with **pnpm 10.15.0** pre-installed
-- Pre-configured VS Code extensions for Astro, Svelte, TypeScript, and testing
-- Automatic dependency installation on container creation
-- Port forwarding for development servers (4321, 4173, 9323)
-- Playwright browser dependencies for e2e testing
-
-### Getting Started with Dev Containers
-
-1. Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-2. Clone this repository and open it in VS Code
-3. When prompted, click "Reopen in Container" or use Command Palette → "Dev Containers: Reopen in Container"
-4. Wait for the container to build and dependencies to install
-5. Start developing with `pnpm dev`
-
-See [`.devcontainer/README.md`](.devcontainer/README.md) for detailed setup instructions and troubleshooting.
+- Run all unit tests: `pnpm test`
+- Watch tests during development: `pnpm test:watch`
+- Open the Vitest UI: `pnpm test:ui`
+- Coverage report: `pnpm test:coverage`
+- Playwright e2e tests: `pnpm test:e2e`
 
 ## 🚀 Automated Releases
 
