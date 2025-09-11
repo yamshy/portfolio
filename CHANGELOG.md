@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.1](https://github.com/yamshy/portfolio/compare/v4.0.0...v4.0.1) (2025-09-11)
+
+### Bug Fixes
+
+* **ci,docs:** remove extra CI, document workflows, improve Playwright reporter ([#37](https://github.com/yamshy/portfolio/issues/37)) ([fbd7b7b](https://github.com/yamshy/portfolio/commit/fbd7b7b772a0567730259492e5a394567e7890ff))
+
 ## [4.0.0](https://github.com/yamshy/portfolio/compare/v3.3.0...v4.0.0) (2025-09-10)
 
 ### ⚠ BREAKING CHANGES
