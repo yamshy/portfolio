@@ -221,16 +221,22 @@
     }
   }
 
-  /* Jelly-like ping for blobs */
+  /* Jelly-like ping with subtle jiggle to sync with signal send */
   @keyframes blob-ping {
     0% {
-      transform: scale(1);
+      transform: scale(1) rotate(0deg) translate(0px, 0px);
     }
-    40% {
-      transform: scale(1.015);
+    20% {
+      transform: scale(1.06) rotate(0.6deg) translate(0.6px, -0.6px);
+    }
+    45% {
+      transform: scale(1.02) rotate(-0.4deg) translate(-0.6px, 0.8px);
+    }
+    70% {
+      transform: scale(1.01) rotate(0.2deg) translate(0.3px, -0.3px);
     }
     100% {
-      transform: scale(1);
+      transform: scale(1) rotate(0deg) translate(0px, 0px);
     }
   }
 
