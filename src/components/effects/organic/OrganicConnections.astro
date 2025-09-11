@@ -32,7 +32,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.45; /* stronger visibility for bigger connections */
+    opacity: 0.6; /* faintly visible connections */
   }
 
   /* Style for generated links and pulses */
@@ -42,7 +42,6 @@
     filter: drop-shadow(
       0 0 8px color-mix(in oklab, var(--mocha), transparent 85%)
     );
-    stroke-dasharray: 18 12;
     animation: line-flow 7s ease-in-out infinite;
   }
 
@@ -69,12 +68,10 @@
   @keyframes line-flow {
     0%,
     100% {
-      stroke-dashoffset: 0;
       opacity: 0.3;
     }
     50% {
-      stroke-dashoffset: -30;
-      opacity: 0.5;
+      opacity: 0.6;
     }
   }
 
