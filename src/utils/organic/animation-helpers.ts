@@ -7,8 +7,8 @@ export function generateAnimationTiming(isMobile: boolean): AnimationConfig {
   const beginSec = +(Math.random() * cycleSecNum).toFixed(2);
 
   const flyDur = isMobile
-    ? `${(0.8 + Math.random() * 0.3).toFixed(2)}s`
-    : `${(0.6 + Math.random() * 0.3).toFixed(2)}s`;
+    ? `${(0.5 + Math.random() * 0.2).toFixed(2)}s`
+    : `${(0.35 + Math.random() * 0.15).toFixed(2)}s`;
 
   const cycleDur = `${cycleSecNum.toFixed(2)}s`;
 
