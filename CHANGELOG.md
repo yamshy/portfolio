@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.0](https://github.com/yamshy/portfolio/compare/v4.0.1...v4.1.0) (2025-09-11)
+
+### Features
+
+* **ui:** improve organic connection line visibility ([#41](https://github.com/yamshy/portfolio/issues/41)) ([1c9a19f](https://github.com/yamshy/portfolio/commit/1c9a19f7ecdf5b7a519c3624b0e6a145d970d43c))
+
 ## [4.0.1](https://github.com/yamshy/portfolio/compare/v4.0.0...v4.0.1) (2025-09-11)
 
 ### Bug Fixes
