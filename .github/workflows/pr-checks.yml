@@ -52,39 +52,6 @@ jobs:
       - name: Build
         run: pnpm -s astro build
 
-  conventional-commits:
-    name: Conventional Commits
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate PR title
-        uses: amannn/action-semantic-pull-request@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          # Match the types from commitlint.config.js
-          types: |
-            feat
-            fix
-            docs
-            style
-            refactor
-            perf
-            test
-            build
-            ci
-            chore
-            revert
-          # Require lowercase subject (matching commitlint config)
-          subjectPattern: ^[a-z].*$
-          subjectPatternError: |
-            The subject "{subject}" found in the pull request title "{title}"
-            didn't match the configured pattern. Please ensure that the subject
-            starts with a lowercase letter and follows conventional commit format.
-          # Allow optional scopes
-          requireScope: false
-          # Validate the entire title format
-          validateSingleCommit: false
-
   container-smoke-test:
     name: Container Smoke Test
     runs-on: ubuntu-latest
