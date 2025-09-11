@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.1](https://github.com/yamshy/portfolio/compare/v4.1.0...v4.1.1) (2025-09-11)
+
+### Bug Fixes
+
+* enhance blob ping animation with rotation and translation effects ([014731b](https://github.com/yamshy/portfolio/commit/014731b57832a0bd846a0d3d235632dc115f8dac))
+
 ## [4.1.0](https://github.com/yamshy/portfolio/compare/v4.0.1...v4.1.0) (2025-09-11)
 
 ### Features
