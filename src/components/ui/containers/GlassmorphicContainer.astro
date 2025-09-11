@@ -1,8 +1,8 @@
 ---
 // Component props interface
 export interface Props {
-  variant?: 'primary' | 'secondary' | 'neutral' | 'clear';
-  size?: 'small' | 'medium' | 'large';
+  variant?: Variant;
+  size?: Size;
   class?: string;
   tag?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer';
 }
@@ -14,7 +14,7 @@ const {
   tag = 'div',
 } = Astro.props;
 
-import { getGlassmorphicClasses } from '../../../utils/glassmorphic';
+import { getGlassmorphicClasses, type Variant, type Size } from '../../../utils/glassmorphic';
 
 const allowedTags = {
   div: 'div',
