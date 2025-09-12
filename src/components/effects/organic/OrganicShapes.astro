@@ -23,10 +23,10 @@ import OrganicAnimations from './OrganicAnimations.astro';
     overflow: hidden;
   }
 
-  /* Hide on very small screens to avoid clutter */
+  /* Subtle presentation on very small screens instead of hiding */
   @media (max-width: 480px) {
     .organic-shapes {
-      display: none;
+      opacity: 0.7;
     }
   }
 
