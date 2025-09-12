@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.0](https://github.com/yamshy/portfolio/compare/v4.1.3...v4.2.0) (2025-09-12)
+
+### Features
+
+* **timeline:** redesign mobile timeline with alternating layout, per‑phase themed dots/arms/spine segments, and subtle hover polish ([1916376](https://github.com/yamshy/portfolio/commit/1916376daa5c500f7bcb8abbfad280276f9ca6bd))
+
 ## [4.1.3](https://github.com/yamshy/portfolio/compare/v4.1.2...v4.1.3) (2025-09-12)
 
 ### Bug Fixes
