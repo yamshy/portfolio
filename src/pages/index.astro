@@ -427,7 +427,7 @@ const projects = [
 
   .scroll-indicator {
     position: absolute;
-    bottom: var(--sp-4);
+    bottom: var(--sp-6);
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s var(--ease-in-out-3) infinite;
@@ -485,6 +485,23 @@ const projects = [
     }
     60% {
       transform: translateX(-50%) translateY(-5px);
+    }
+  }
+
+  /* Mobile-friendly vertical-only bounce for static positioning */
+  @keyframes bounce-y {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
     }
   }
 
@@ -660,6 +677,28 @@ const projects = [
       gap: var(--sp-4);
     }
 
+    /* Mobile: move scroll indicator below CTAs and center it */
+    .scroll-indicator {
+      position: static;
+      left: auto;
+      bottom: auto;
+      transform: none;
+      margin: var(--sp-6) auto 0 auto; /* breathing room below CTA stack */
+      animation-name: bounce-y; /* vertical-only bounce for static positioning */
+    }
+
+    /* Slightly smaller, subtler indicator on mobile */
+    .scroll-mouse {
+      width: 20px;
+      height: 34px;
+      border-radius: 10px;
+      padding-top: 6px;
+    }
+
+    .scroll-dot {
+      height: 10px;
+    }
+
     .contact-actions {
       flex-direction: column;
       align-items: center;
@@ -667,6 +706,13 @@ const projects = [
 
     .contact {
       padding: var(--sp-6) var(--sp-4);
+    }
+  }
+
+  /* Hide scroll indicator on very tight vertical spaces on mobile */
+  @media (max-width: 767px) and (max-height: 600px) {
+    .scroll-indicator {
+      display: none;
     }
   }
 </style>
