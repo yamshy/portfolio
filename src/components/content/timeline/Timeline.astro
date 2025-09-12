@@ -563,25 +563,25 @@
       padding: var(--sp-5) var(--sp-4);
     }
 
-    /* Vertical stacked timeline */
+    /* Vertical stacked timeline with centered spine and alternating sides */
     .phases {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--sp-6);
+      gap: var(--sp-7);
       list-style: none;
       padding: 0;
       margin: 0;
       position: relative;
-      padding-left: var(--sp-8);
       overflow: visible;
       scroll-snap-type: none;
     }
 
-    /* Vertical line */
+    /* Center vertical line */
     .phases::before {
       content: '';
       position: absolute;
-      left: calc(var(--sp-4));
+      left: 50%;
+      transform: translateX(-50%);
       top: 0;
       bottom: 0;
       width: 2px;
@@ -597,15 +597,16 @@
 
     .node {
       position: relative;
+      display: grid;
       transform: none;
       animation: fadeInUp 0.5s var(--ease-3) forwards;
     }
 
-    /* Node dot */
+    /* Center dot */
     .node::before {
       content: '';
       position: absolute;
-      left: calc(var(--sp-4) - 5px);
+      left: calc(50% - 5px);
       top: 0.9rem;
       width: 10px;
       height: 10px;
@@ -617,6 +618,25 @@
         transparent 70%
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
+      z-index: var(--z-fg);
+    }
+
+    /* Connector arms from center line to cards */
+    .node::after {
+      content: '';
+      position: absolute;
+      top: 1.1rem;
+      height: 2px;
+      background: color-mix(in oklab, var(--text-dark), transparent 70%);
+      opacity: 0.6;
+    }
+    .node:nth-child(odd)::after {
+      left: calc(50% - var(--sp-6));
+      width: var(--sp-6);
+    }
+    .node:nth-child(even)::after {
+      left: 50%;
+      width: var(--sp-6);
     }
 
     .phase-a,
@@ -632,8 +652,21 @@
       align-self: start;
     }
 
+    /* Alternating widths and alignment */
+    .node:nth-child(odd) .card,
+    .node:nth-child(odd) .badge {
+      width: min(420px, calc(50% - var(--sp-8)));
+      margin-right: auto;
+      margin-left: 0;
+    }
+    .node:nth-child(even) .card,
+    .node:nth-child(even) .badge {
+      width: min(420px, calc(50% - var(--sp-8)));
+      margin-left: auto;
+      margin-right: 0;
+    }
+
     .card {
-      width: 100%;
       padding: var(--sp-5);
     }
 
@@ -656,7 +689,7 @@
       padding: var(--sp-4) var(--sp-3);
     }
 
-    /* Vertical stacked timeline (compact) */
+    /* Vertical stacked timeline with centered spine and alternating sides (compact) */
     .phases {
       display: grid;
       grid-template-columns: 1fr;
@@ -665,16 +698,16 @@
       padding: 0;
       margin: 0;
       position: relative;
-      padding-left: var(--sp-7);
       overflow: visible;
       scroll-snap-type: none;
     }
 
-    /* Vertical line (compact) */
+    /* Center vertical line (compact) */
     .phases::before {
       content: '';
       position: absolute;
-      left: calc(var(--sp-4));
+      left: 50%;
+      transform: translateX(-50%);
       top: 0;
       bottom: 0;
       width: 2px;
@@ -690,15 +723,16 @@
 
     .node {
       position: relative;
+      display: grid;
       transform: none;
       animation: fadeInUp 0.5s var(--ease-3) forwards;
     }
 
-    /* Node dot (compact alignment) */
+    /* Center dot (compact) */
     .node::before {
       content: '';
       position: absolute;
-      left: calc(var(--sp-4) - 5px);
+      left: calc(50% - 5px);
       top: 0.8rem;
       width: 10px;
       height: 10px;
@@ -710,6 +744,25 @@
         transparent 70%
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
+      z-index: var(--z-fg);
+    }
+
+    /* Connector arms (compact) */
+    .node::after {
+      content: '';
+      position: absolute;
+      top: 1.0rem;
+      height: 2px;
+      background: color-mix(in oklab, var(--text-dark), transparent 70%);
+      opacity: 0.6;
+    }
+    .node:nth-child(odd)::after {
+      left: calc(50% - var(--sp-5));
+      width: var(--sp-5);
+    }
+    .node:nth-child(even)::after {
+      left: 50%;
+      width: var(--sp-5);
     }
 
     .phase-a,
@@ -726,8 +779,19 @@
       align-self: start;
     }
 
+    /* Alternating widths and alignment (compact) */
+    .node:nth-child(odd) .card,
+    .node:nth-child(odd) .badge {
+      width: calc(50% - var(--sp-6));
+      margin-right: auto;
+    }
+    .node:nth-child(even) .card,
+    .node:nth-child(even) .badge {
+      width: calc(50% - var(--sp-6));
+      margin-left: auto;
+    }
+
     .card {
-      width: 100%;
       padding: var(--sp-4);
       min-height: auto;
     }
