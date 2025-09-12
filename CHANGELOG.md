@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.3](https://github.com/yamshy/portfolio/compare/v4.1.2...v4.1.3) (2025-09-12)
+
+### Bug Fixes
+
+* hide organic shapes on very small screens to avoid clutter ([d0f6202](https://github.com/yamshy/portfolio/commit/d0f6202b8cc75714c2aa52fb6fa8b5fd985ce581))
+
 ## [4.1.2](https://github.com/yamshy/portfolio/compare/v4.1.1...v4.1.2) (2025-09-12)
 
 ### Bug Fixes
