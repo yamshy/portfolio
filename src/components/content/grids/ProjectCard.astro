@@ -220,21 +220,29 @@ const {
 
   /* Variant-specific styling */
   .card.featured {
-    background: color-mix(
-      in oklab,
-      var(--glass-coral),
-      var(--accent-yellow) 5%
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 14%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 22%, var(--warm-bg)) 100%
     );
-    border-color: color-mix(in oklab, var(--coral) 30%, transparent);
+    border-color: color-mix(in oklab, var(--coral) 45%, transparent);
+    box-shadow:
+      0 4px 20px color-mix(in oklab, var(--coral) 22%, transparent),
+      0 1px 3px color-mix(in oklab, var(--coral) 14%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 28%, transparent);
   }
 
   .card.featured:hover {
-    background: color-mix(
-      in oklab,
-      var(--glass-coral),
-      var(--accent-yellow) 8%
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 18%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 28%, var(--warm-bg)) 100%
     );
-    border-color: color-mix(in oklab, var(--coral) 40%, transparent);
+    border-color: color-mix(in oklab, var(--coral) 55%, transparent);
+    box-shadow:
+      0 6px 25px color-mix(in oklab, var(--coral) 28%, transparent),
+      0 2px 5px color-mix(in oklab, var(--coral) 18%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 35%, transparent);
   }
 
   .card.featured .header h3 {
@@ -248,21 +256,56 @@ const {
   }
 
   .card.standard {
-    background: var(--glass-coral);
+    /* Make less transparent, closer to timeline cards */
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 12%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 18%, var(--warm-bg)) 100%
+    );
+    border-color: color-mix(in oklab, var(--coral) 40%, transparent);
+    box-shadow:
+      0 4px 20px color-mix(in oklab, var(--coral) 20%, transparent),
+      0 1px 3px color-mix(in oklab, var(--coral) 12%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 22%, transparent);
   }
 
   .card.standard:hover {
-    background: color-mix(in oklab, var(--glass-coral), var(--coral) 5%);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 16%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 26%, var(--warm-bg)) 100%
+    );
+    border-color: color-mix(in oklab, var(--coral) 50%, transparent);
+    box-shadow:
+      0 6px 24px color-mix(in oklab, var(--coral) 26%, transparent),
+      0 2px 4px color-mix(in oklab, var(--coral) 16%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 30%, transparent);
   }
 
   .card.secondary {
-    background: color-mix(in oklab, var(--glass-coral), transparent 20%);
-    border-color: color-mix(in oklab, var(--coral) 15%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 10%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 14%, var(--warm-bg)) 100%
+    );
+    border-color: color-mix(in oklab, var(--coral) 30%, transparent);
+    box-shadow:
+      0 3px 16px color-mix(in oklab, var(--coral) 16%, transparent),
+      0 1px 2px color-mix(in oklab, var(--coral) 10%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 18%, transparent);
   }
 
   .card.secondary:hover {
-    background: color-mix(in oklab, var(--glass-coral), transparent 10%);
-    border-color: color-mix(in oklab, var(--coral) 25%, transparent);
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--coral) 14%, var(--warm-bg)) 0%,
+      color-mix(in oklab, var(--coral) 20%, var(--warm-bg)) 100%
+    );
+    border-color: color-mix(in oklab, var(--coral) 42%, transparent);
+    box-shadow:
+      0 5px 20px color-mix(in oklab, var(--coral) 22%, transparent),
+      0 2px 4px color-mix(in oklab, var(--coral) 14%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--coral) 26%, transparent);
   }
 
   .card.secondary .header h3 {
