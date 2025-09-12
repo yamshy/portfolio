@@ -619,6 +619,7 @@
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
       z-index: var(--z-fg);
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
     }
 
     /* Per-phase dot color overrides */
@@ -647,7 +648,7 @@
         color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 30%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
     }
     .phase-d::before {
       background: radial-gradient(
@@ -656,7 +657,7 @@
         color-mix(in oklab, var(--blue) 35%, transparent) 60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, var(--blue) 30%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, var(--blue) 35%, transparent);
     }
 
     /* Connector arms from center line to cards */
@@ -667,6 +668,7 @@
       height: 2px;
       background: color-mix(in oklab, var(--text-dark), transparent 70%);
       opacity: 0.6;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
     }
     .node:nth-child(odd)::after {
       left: calc(50% - var(--sp-6));
@@ -689,6 +691,30 @@
     }
     .phase-d::after {
       background: color-mix(in oklab, var(--blue), transparent 60%);
+    }
+
+    /* Hover/focus affordances */
+    .node:hover::before,
+    .node:focus-within::before {
+      box-shadow: 0 0 8px color-mix(in oklab, var(--coral) 35%, transparent);
+      opacity: 0.95;
+    }
+    .node:hover::after,
+    .node:focus-within::after {
+      opacity: 0.8;
+    }
+    /* Phase-specific hover shadow tweaks */
+    .phase-b:hover::before,
+    .phase-b:focus-within::before {
+      box-shadow: 0 0 8px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%, transparent);
+    }
+    .phase-c:hover::before,
+    .phase-c:focus-within::before {
+      box-shadow: 0 0 9px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%, transparent);
+    }
+    .phase-d:hover::before,
+    .phase-d:focus-within::before {
+      box-shadow: 0 0 9px color-mix(in oklab, var(--blue) 40%, transparent);
     }
 
     .phase-a,
@@ -720,6 +746,60 @@
 
     .card {
       padding: var(--sp-5);
+    }
+
+    /* Spine color segments behind each dot (meet the spine at arm end) */
+    .node:nth-child(odd) .card,
+    .node:nth-child(even) .card {
+      position: relative;
+    }
+    .node:nth-child(odd) .card::before {
+      content: '';
+      position: absolute;
+      right: calc(-1 * var(--sp-6));
+      top: 0.7rem;
+      width: 2px;
+      height: 24px;
+      border-radius: 1px;
+      opacity: 0.8;
+      z-index: 2;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+    }
+    .node:nth-child(even) .card::before {
+      content: '';
+      position: absolute;
+      left: var(--sp-6);
+      top: 0.7rem;
+      width: 2px;
+      height: 24px;
+      border-radius: 1px;
+      opacity: 0.8;
+      z-index: 2;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+    }
+
+    /* Per-phase colors for the spine segments */
+    .phase-a .card::before {
+      background: color-mix(in oklab, var(--coral) 80%, transparent);
+      box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
+    }
+    .phase-b .card::before {
+      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%, transparent);
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+    }
+    .phase-c .card::before {
+      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+    }
+    .phase-d .card::before {
+      background: color-mix(in oklab, var(--blue) 80%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, var(--blue) 35%, transparent);
+    }
+
+    /* Hover/focus for spine segments */
+    .node:hover .card::before,
+    .node:focus-within .card::before {
+      opacity: 0.95;
     }
 
     .card h3 {
@@ -797,6 +877,7 @@
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
       z-index: var(--z-fg);
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
     }
 
     /* Per-phase dot color overrides (compact) */
@@ -825,7 +906,7 @@
         color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 30%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
     }
     .phase-d::before {
       background: radial-gradient(
@@ -834,7 +915,7 @@
         color-mix(in oklab, var(--blue) 35%, transparent) 60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, var(--blue) 30%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, var(--blue) 35%, transparent);
     }
 
     /* Connector arms (compact) */
@@ -845,6 +926,7 @@
       height: 2px;
       background: color-mix(in oklab, var(--text-dark), transparent 70%);
       opacity: 0.6;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
     }
     .node:nth-child(odd)::after {
       left: calc(50% - var(--sp-5));
@@ -867,6 +949,29 @@
     }
     .phase-d::after {
       background: color-mix(in oklab, var(--blue), transparent 60%);
+    }
+
+    /* Hover/focus affordances (compact) */
+    .node:hover::before,
+    .node:focus-within::before {
+      box-shadow: 0 0 8px color-mix(in oklab, var(--coral) 35%, transparent);
+      opacity: 0.95;
+    }
+    .node:hover::after,
+    .node:focus-within::after {
+      opacity: 0.8;
+    }
+    .phase-b:hover::before,
+    .phase-b:focus-within::before {
+      box-shadow: 0 0 8px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%, transparent);
+    }
+    .phase-c:hover::before,
+    .phase-c:focus-within::before {
+      box-shadow: 0 0 9px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%, transparent);
+    }
+    .phase-d:hover::before,
+    .phase-d:focus-within::before {
+      box-shadow: 0 0 9px color-mix(in oklab, var(--blue) 40%, transparent);
     }
 
     .phase-a,
@@ -898,6 +1003,57 @@
     .card {
       padding: var(--sp-4);
       min-height: auto;
+      position: relative;
+    }
+
+    /* Spine color segments behind each dot (compact) */
+    .node:nth-child(odd) .card::before {
+      content: '';
+      position: absolute;
+      right: calc(-1 * var(--sp-5));
+      top: 0.6rem;
+      width: 2px;
+      height: 20px;
+      border-radius: 1px;
+      opacity: 0.8;
+      z-index: 2;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+    }
+    .node:nth-child(even) .card::before {
+      content: '';
+      position: absolute;
+      left: var(--sp-5);
+      top: 0.6rem;
+      width: 2px;
+      height: 20px;
+      border-radius: 1px;
+      opacity: 0.8;
+      z-index: 2;
+      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+    }
+
+    /* Per-phase colors for the spine segments (compact) */
+    .phase-a .card::before {
+      background: color-mix(in oklab, var(--coral) 80%, transparent);
+      box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
+    }
+    .phase-b .card::before {
+      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%, transparent);
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+    }
+    .phase-c .card::before {
+      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+    }
+    .phase-d .card::before {
+      background: color-mix(in oklab, var(--blue) 80%, transparent);
+      box-shadow: 0 0 7px color-mix(in oklab, var(--blue) 35%, transparent);
+    }
+
+    /* Hover/focus for spine segments (compact) */
+    .node:hover .card::before,
+    .node:focus-within .card::before {
+      opacity: 0.95;
     }
 
     .card h3 {
