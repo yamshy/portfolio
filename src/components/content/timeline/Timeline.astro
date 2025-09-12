@@ -732,14 +732,18 @@
 
     /* Alternating widths and alignment */
     .node:nth-child(odd) .card,
+    .node:nth-child(odd) .badge,
+    .node:nth-child(even) .card,
+    .node:nth-child(even) .badge {
+      width: min(560px, calc(100% - var(--sp-8)));
+    }
+    .node:nth-child(odd) .card,
     .node:nth-child(odd) .badge {
-      width: min(420px, calc(50% - var(--sp-8)));
       margin-right: auto;
       margin-left: 0;
     }
     .node:nth-child(even) .card,
     .node:nth-child(even) .badge {
-      width: min(420px, calc(50% - var(--sp-8)));
       margin-left: auto;
       margin-right: 0;
     }
@@ -990,13 +994,17 @@
 
     /* Alternating widths and alignment (compact) */
     .node:nth-child(odd) .card,
+    .node:nth-child(odd) .badge,
+    .node:nth-child(even) .card,
+    .node:nth-child(even) .badge {
+      width: 100%;
+    }
+    .node:nth-child(odd) .card,
     .node:nth-child(odd) .badge {
-      width: calc(50% - var(--sp-6));
       margin-right: auto;
     }
     .node:nth-child(even) .card,
     .node:nth-child(even) .badge {
-      width: calc(50% - var(--sp-6));
       margin-left: auto;
     }
 
