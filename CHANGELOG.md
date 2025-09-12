@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.2](https://github.com/yamshy/portfolio/compare/v4.1.1...v4.1.2) (2025-09-12)
+
+### Bug Fixes
+
+* update scroll indicator positioning and add mobile bounce animation ([#56](https://github.com/yamshy/portfolio/issues/56)) ([7c2e12b](https://github.com/yamshy/portfolio/commit/7c2e12bc662b63656598402701bc82432e0f41b2))
+
 ## [4.1.1](https://github.com/yamshy/portfolio/compare/v4.1.0...v4.1.1) (2025-09-11)
 
 ### Bug Fixes
