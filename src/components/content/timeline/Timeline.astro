@@ -621,6 +621,44 @@
       z-index: var(--z-fg);
     }
 
+    /* Per-phase dot color overrides */
+    .phase-a::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, var(--coral) 80%, transparent) 0%,
+        color-mix(in oklab, var(--coral) 35%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
+    }
+    .phase-b::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%, transparent) 0%,
+        color-mix(in oklab, color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+    }
+    .phase-c::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%, transparent) 0%,
+        color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 30%, transparent);
+    }
+    .phase-d::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, var(--blue) 80%, transparent) 0%,
+        color-mix(in oklab, var(--blue) 35%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, var(--blue) 30%, transparent);
+    }
+
     /* Connector arms from center line to cards */
     .node::after {
       content: '';
@@ -637,6 +675,20 @@
     .node:nth-child(even)::after {
       left: 50%;
       width: var(--sp-6);
+    }
+
+    /* Per-phase connector arm color overrides */
+    .phase-a::after {
+      background: color-mix(in oklab, var(--coral), transparent 60%);
+    }
+    .phase-b::after {
+      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%), transparent 60%);
+    }
+    .phase-c::after {
+      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%), transparent 60%);
+    }
+    .phase-d::after {
+      background: color-mix(in oklab, var(--blue), transparent 60%);
     }
 
     .phase-a,
@@ -747,6 +799,44 @@
       z-index: var(--z-fg);
     }
 
+    /* Per-phase dot color overrides (compact) */
+    .phase-a::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, var(--coral) 80%, transparent) 0%,
+        color-mix(in oklab, var(--coral) 35%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
+    }
+    .phase-b::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%, transparent) 0%,
+        color-mix(in oklab, color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+    }
+    .phase-c::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%, transparent) 0%,
+        color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 30%, transparent);
+    }
+    .phase-d::before {
+      background: radial-gradient(
+        circle,
+        color-mix(in oklab, var(--blue) 80%, transparent) 0%,
+        color-mix(in oklab, var(--blue) 35%, transparent) 60%,
+        transparent 70%
+      );
+      box-shadow: 0 0 6px color-mix(in oklab, var(--blue) 30%, transparent);
+    }
+
     /* Connector arms (compact) */
     .node::after {
       content: '';
@@ -763,6 +853,20 @@
     .node:nth-child(even)::after {
       left: 50%;
       width: var(--sp-5);
+    }
+
+    /* Per-phase connector arm color overrides (compact) */
+    .phase-a::after {
+      background: color-mix(in oklab, var(--coral), transparent 60%);
+    }
+    .phase-b::after {
+      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%), transparent 60%);
+    }
+    .phase-c::after {
+      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%), transparent 60%);
+    }
+    .phase-d::after {
+      background: color-mix(in oklab, var(--blue), transparent 60%);
     }
 
     .phase-a,
