@@ -1,5 +1,5 @@
 # Development container for Astro portfolio site
-FROM node:24.7.0-bullseye
+FROM node:24.8.0-bullseye
 
 # Install additional system dependencies
 RUN apt-get update && apt-get install -y \
