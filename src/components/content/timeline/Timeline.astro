@@ -747,6 +747,12 @@
       margin-top: var(--sp-2);
     }
 
+    /* Remove timeline dots on mobile */
+    .node::before {
+      display: none !important;
+      content: none !important;
+    }
+
     /* Ensure SVG path is hidden on mobile */
     .path {
       display: none !important;
@@ -942,6 +948,12 @@
 
     .card p:first-child {
       margin-top: var(--sp-2);
+    }
+
+    /* Remove timeline dots on mobile (compact) */
+    .node::before {
+      display: none !important;
+      content: none !important;
     }
 
     /* Ensure SVG path is hidden on mobile */
