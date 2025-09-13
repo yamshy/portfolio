@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.2.3](https://github.com/yamshy/portfolio/compare/v4.2.2...v4.2.3) (2025-09-13)
+
+### Bug Fixes
+
+* **ci:** add missing pnpm setup step to release workflow ([#70](https://github.com/yamshy/portfolio/issues/70)) ([318044f](https://github.com/yamshy/portfolio/commit/318044fdfce7b94de656d053de06668dd7b70868))
+* **ci:** correct pnpm cache configuration in release workflow ([64581e3](https://github.com/yamshy/portfolio/commit/64581e30daf5e16e9914dced3587a6c07104cc99))
+* **ci:** remove duplicate pnpm/action-setup step ([1b82f59](https://github.com/yamshy/portfolio/commit/1b82f599a6d6099a23d7b2af941c67bb47ff7c29))
+* **ci:** remove pnpm version specification to avoid conflict ([f340632](https://github.com/yamshy/portfolio/commit/f340632e07426784f64a172ab1bb5fb8e20c2595))
+* **ci:** reorder steps to install pnpm before Node.js caching ([dcea5e5](https://github.com/yamshy/portfolio/commit/dcea5e5cd7c5f948b8cccebd364412b31749b90e))
+* restore semantic-release action ([#69](https://github.com/yamshy/portfolio/issues/69)) ([1784b63](https://github.com/yamshy/portfolio/commit/1784b63e627feb742d90fce081e9e94d33704318))
+* **timeline:** timeline section layout - expand cards to full width on mobile ([#64](https://github.com/yamshy/portfolio/issues/64)) ([f9a1a98](https://github.com/yamshy/portfolio/commit/f9a1a9823d9e4c090fa5924c5405916f6eefb7e0))
+* **ui:** improve mobile timeline card spacing and readability ([#66](https://github.com/yamshy/portfolio/issues/66)) ([58d9373](https://github.com/yamshy/portfolio/commit/58d9373f17dd53e78058721ee8baf4ec337d32ef))
+
 ## [4.2.2](https://github.com/yamshy/portfolio/compare/v4.2.1...v4.2.2) (2025-09-13)
 
 ### Bug Fixes
