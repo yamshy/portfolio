@@ -560,7 +560,8 @@
 
   @media (max-width: 767px) and (min-width: 480px) {
     .timeline {
-      padding: var(--sp-8) var(--sp-6);
+      padding: var(--sp-5) var(--sp-2);
+      max-width: 100%;
     }
 
     /* Vertical stacked timeline with centered spine and alternating sides */
@@ -791,7 +792,7 @@
     .node:nth-child(odd) .badge,
     .node:nth-child(even) .card,
     .node:nth-child(even) .badge {
-      width: min(560px, calc(100% - var(--sp-8)));
+      width: 100%;
     }
     .node:nth-child(odd) .card,
     .node:nth-child(odd) .badge {
@@ -903,7 +904,8 @@
 
   @media (max-width: 479px) {
     .timeline {
-      padding: var(--sp-6) var(--sp-4);
+      padding: var(--sp-4) var(--sp-2);
+      max-width: 100%;
     }
 
     /* Vertical stacked timeline with centered spine and alternating sides (compact) */
