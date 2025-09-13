@@ -577,13 +577,13 @@ const projects = [
     width: 100%;
     max-width: var(--container-xl);
     margin: 0 auto;
-    padding: var(--size-6) var(--size-4) !important;
+    padding: var(--size-8) !important;
     overflow: visible; /* allow inner timeline visuals to extend without clipping */
   }
 
   /* Give the rightmost timeline card room and avoid clipping from component overflow */
   :global(.timeline) {
-    padding-inline-end: var(--sp-6) !important;
+    padding-inline-end: calc(var(--sp-10) + var(--sp-8)) !important;
     overflow: visible !important;
   }
 
