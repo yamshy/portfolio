@@ -581,6 +581,12 @@ const projects = [
     overflow: visible; /* allow inner timeline visuals to extend without clipping */
   }
 
+  @media (max-width: 767px) {
+    :global(.timeline-container) {
+      padding: var(--sp-4) var(--sp-2) !important;
+    }
+  }
+
   /* Give the rightmost timeline card room and avoid clipping from component overflow */
   :global(.timeline) {
     padding-inline-end: calc(var(--sp-10) + var(--sp-8)) !important;
