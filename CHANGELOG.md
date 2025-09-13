@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.3.0](https://github.com/yamshy/portfolio/compare/v4.2.3...v4.3.0) (2025-09-13)
+
+### Features
+
+* **timeline:** enhance connectors and phases with alternating styles and hover effects ([ee1cdb2](https://github.com/yamshy/portfolio/commit/ee1cdb2f33a58aac7718b2ed6f85cd6ca63fe1e4))
+
 ## [4.2.3](https://github.com/yamshy/portfolio/compare/v4.2.2...v4.2.3) (2025-09-13)
 
 ### Bug Fixes
