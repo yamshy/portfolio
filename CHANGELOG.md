@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.2](https://github.com/yamshy/portfolio/compare/v4.2.1...v4.2.2) (2025-09-13)
+
+### Bug Fixes
+
+* **deps:** update astro monorepo ([#44](https://github.com/yamshy/portfolio/issues/44)) ([ef9a754](https://github.com/yamshy/portfolio/commit/ef9a7547cc6b40f2e1aa0ccddeb2a39b41176796))
+
 ## [4.2.1](https://github.com/yamshy/portfolio/compare/v4.2.0...v4.2.1) (2025-09-13)
 
 ### Bug Fixes
