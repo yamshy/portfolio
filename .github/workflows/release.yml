@@ -23,10 +23,10 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+          cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
       
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
