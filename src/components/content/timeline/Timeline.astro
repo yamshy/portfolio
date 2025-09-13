@@ -115,11 +115,12 @@
 <style>
   .timeline {
     position: relative;
-    padding: var(--sp-16) var(--sp-10);
-    max-width: 1400px;
+    padding: var(--sp-16) var(--sp-6);
+    max-width: 1600px;
     margin: 0 auto;
     /* Transparent background to let outer glass container show through */
     background: transparent;
+    width: 100%;
   }
 
   .section-title {
@@ -142,13 +143,14 @@
   .phases {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--sp-8);
+    gap: var(--sp-6);
     list-style: none;
     padding: 0;
     margin: 0;
     position: relative;
     z-index: var(--z-fg);
     align-items: start;
+    width: 100%;
   }
 
   .node {
@@ -216,13 +218,18 @@
     background: var(--glass-dark);
     backdrop-filter: blur(var(--blur-20));
     border-radius: var(--r-lg);
-    padding: var(--sp-6);
+    padding: var(--sp-7);
     border: 1px solid color-mix(in oklab, var(--coral) 18%, transparent);
     transition:
       transform 300ms var(--ease-3),
       box-shadow 300ms var(--ease-3);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .card:hover {
@@ -522,12 +529,14 @@
 
   @media (max-width: 1023px) and (min-width: 768px) {
     .timeline {
-      padding: var(--sp-6) var(--sp-4);
+      padding: var(--sp-6) var(--sp-3);
+      max-width: 100%;
     }
 
     .phases {
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-4);
+      gap: var(--sp-5);
+      width: 100%;
     }
 
     .phase-a,
@@ -542,7 +551,9 @@
     }
 
     .card {
-      padding: var(--sp-3);
+      padding: var(--sp-5);
+      min-height: 160px;
+      width: 100%;
     }
 
     .card h3 {
@@ -560,7 +571,8 @@
 
   @media (max-width: 767px) and (min-width: 480px) {
     .timeline {
-      padding: var(--sp-5) var(--sp-4);
+      padding: var(--sp-5) var(--sp-3);
+      max-width: 100%;
     }
 
     /* Vertical stacked timeline with centered spine and alternating sides */
@@ -574,6 +586,7 @@
       position: relative;
       overflow: visible;
       scroll-snap-type: none;
+      width: 100%;
     }
 
     /* Center vertical line */
@@ -591,7 +604,9 @@
         color-mix(in oklab, var(--blue) 60%, transparent)
       );
       opacity: 0.35;
-      filter: drop-shadow(0 0 3px color-mix(in oklab, var(--coral) 20%, transparent));
+      filter: drop-shadow(
+        0 0 3px color-mix(in oklab, var(--coral) 20%, transparent)
+      );
       z-index: var(--z-bg);
     }
 
@@ -619,7 +634,10 @@
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
       z-index: var(--z-fg);
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
 
     /* Per-phase dot color overrides */
@@ -635,20 +653,50 @@
     .phase-b::before {
       background: radial-gradient(
         circle,
-        color-mix(in oklab, color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%, transparent) 0%,
-        color-mix(in oklab, color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%, transparent) 60%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%,
+            transparent
+          )
+          0%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%,
+            transparent
+          )
+          60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+      box-shadow: 0 0 6px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%,
+          transparent
+        );
     }
     .phase-c::before {
       background: radial-gradient(
         circle,
-        color-mix(in oklab, color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%, transparent) 0%,
-        color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%,
+            transparent
+          )
+          0%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%,
+            transparent
+          )
+          60%,
         transparent 70%
       );
-      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+      box-shadow: 0 0 7px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%,
+          transparent
+        );
     }
     .phase-d::before {
       background: radial-gradient(
@@ -668,7 +716,10 @@
       height: 2px;
       background: color-mix(in oklab, var(--text-dark), transparent 70%);
       opacity: 0.6;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
     .node:nth-child(odd)::after {
       left: calc(50% - var(--sp-6));
@@ -684,10 +735,18 @@
       background: color-mix(in oklab, var(--coral), transparent 60%);
     }
     .phase-b::after {
-      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%), transparent 60%);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%),
+        transparent 60%
+      );
     }
     .phase-c::after {
-      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%), transparent 60%);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%),
+        transparent 60%
+      );
     }
     .phase-d::after {
       background: color-mix(in oklab, var(--blue), transparent 60%);
@@ -706,11 +765,21 @@
     /* Phase-specific hover shadow tweaks */
     .phase-b:hover::before,
     .phase-b:focus-within::before {
-      box-shadow: 0 0 8px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%, transparent);
+      box-shadow: 0 0 8px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%,
+          transparent
+        );
     }
     .phase-c:hover::before,
     .phase-c:focus-within::before {
-      box-shadow: 0 0 9px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%, transparent);
+      box-shadow: 0 0 9px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%,
+          transparent
+        );
     }
     .phase-d:hover::before,
     .phase-d:focus-within::before {
@@ -767,7 +836,10 @@
       border-radius: 1px;
       opacity: 0.8;
       z-index: 2;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
     .node:nth-child(even) .card::before {
       content: '';
@@ -779,7 +851,10 @@
       border-radius: 1px;
       opacity: 0.8;
       z-index: 2;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
 
     /* Per-phase colors for the spine segments */
@@ -788,12 +863,30 @@
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
     }
     .phase-b .card::before {
-      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%, transparent);
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%,
+        transparent
+      );
+      box-shadow: 0 0 6px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%,
+          transparent
+        );
     }
     .phase-c .card::before {
-      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%, transparent);
-      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%,
+        transparent
+      );
+      box-shadow: 0 0 7px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%,
+          transparent
+        );
     }
     .phase-d .card::before {
       background: color-mix(in oklab, var(--blue) 80%, transparent);
@@ -822,7 +915,8 @@
 
   @media (max-width: 479px) {
     .timeline {
-      padding: var(--sp-4) var(--sp-3);
+      padding: var(--sp-4) var(--sp-2);
+      max-width: 100%;
     }
 
     /* Vertical stacked timeline with centered spine and alternating sides (compact) */
@@ -830,6 +924,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--sp-5);
+      width: 100%;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -853,7 +948,9 @@
         color-mix(in oklab, var(--blue) 60%, transparent)
       );
       opacity: 0.35;
-      filter: drop-shadow(0 0 3px color-mix(in oklab, var(--coral) 20%, transparent));
+      filter: drop-shadow(
+        0 0 3px color-mix(in oklab, var(--coral) 20%, transparent)
+      );
       z-index: var(--z-bg);
     }
 
@@ -881,7 +978,10 @@
       );
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 25%, transparent);
       z-index: var(--z-fg);
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
 
     /* Per-phase dot color overrides (compact) */
@@ -897,20 +997,50 @@
     .phase-b::before {
       background: radial-gradient(
         circle,
-        color-mix(in oklab, color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%, transparent) 0%,
-        color-mix(in oklab, color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%, transparent) 60%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--coral) 60%, var(--mocha) 40%) 80%,
+            transparent
+          )
+          0%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--coral) 30%, var(--mocha) 70%) 50%,
+            transparent
+          )
+          60%,
         transparent 70%
       );
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+      box-shadow: 0 0 6px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%,
+          transparent
+        );
     }
     .phase-c::before {
       background: radial-gradient(
         circle,
-        color-mix(in oklab, color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%, transparent) 0%,
-        color-mix(in oklab, color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%, transparent) 60%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--mocha) 60%, var(--blue) 40%) 80%,
+            transparent
+          )
+          0%,
+        color-mix(
+            in oklab,
+            color-mix(in oklab, var(--mocha) 30%, var(--blue) 70%) 50%,
+            transparent
+          )
+          60%,
         transparent 70%
       );
-      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+      box-shadow: 0 0 7px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%,
+          transparent
+        );
     }
     .phase-d::before {
       background: radial-gradient(
@@ -926,11 +1056,14 @@
     .node::after {
       content: '';
       position: absolute;
-      top: 1.0rem;
+      top: 1rem;
       height: 2px;
       background: color-mix(in oklab, var(--text-dark), transparent 70%);
       opacity: 0.6;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
     .node:nth-child(odd)::after {
       left: calc(50% - var(--sp-5));
@@ -946,10 +1079,18 @@
       background: color-mix(in oklab, var(--coral), transparent 60%);
     }
     .phase-b::after {
-      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%), transparent 60%);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%),
+        transparent 60%
+      );
     }
     .phase-c::after {
-      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%), transparent 60%);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%),
+        transparent 60%
+      );
     }
     .phase-d::after {
       background: color-mix(in oklab, var(--blue), transparent 60%);
@@ -967,11 +1108,21 @@
     }
     .phase-b:hover::before,
     .phase-b:focus-within::before {
-      box-shadow: 0 0 8px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%, transparent);
+      box-shadow: 0 0 8px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 35%,
+          transparent
+        );
     }
     .phase-c:hover::before,
     .phase-c:focus-within::before {
-      box-shadow: 0 0 9px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%, transparent);
+      box-shadow: 0 0 9px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 40%,
+          transparent
+        );
     }
     .phase-d:hover::before,
     .phase-d:focus-within::before {
@@ -1025,7 +1176,10 @@
       border-radius: 1px;
       opacity: 0.8;
       z-index: 2;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
     .node:nth-child(even) .card::before {
       content: '';
@@ -1037,7 +1191,10 @@
       border-radius: 1px;
       opacity: 0.8;
       z-index: 2;
-      transition: opacity 180ms var(--ease-2), box-shadow 200ms var(--ease-2), background-color 180ms var(--ease-2);
+      transition:
+        opacity 180ms var(--ease-2),
+        box-shadow 200ms var(--ease-2),
+        background-color 180ms var(--ease-2);
     }
 
     /* Per-phase colors for the spine segments (compact) */
@@ -1046,12 +1203,30 @@
       box-shadow: 0 0 6px color-mix(in oklab, var(--coral) 30%, transparent);
     }
     .phase-b .card::before {
-      background: color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%, transparent);
-      box-shadow: 0 0 6px color-mix(in oklab, color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%, transparent);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 80%,
+        transparent
+      );
+      box-shadow: 0 0 6px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--coral) 50%, var(--mocha) 50%) 30%,
+          transparent
+        );
     }
     .phase-c .card::before {
-      background: color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%, transparent);
-      box-shadow: 0 0 7px color-mix(in oklab, color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%, transparent);
+      background: color-mix(
+        in oklab,
+        color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 80%,
+        transparent
+      );
+      box-shadow: 0 0 7px
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--mocha) 50%, var(--blue) 50%) 35%,
+          transparent
+        );
     }
     .phase-d .card::before {
       background: color-mix(in oklab, var(--blue) 80%, transparent);
