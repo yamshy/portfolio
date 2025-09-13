@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.2.1](https://github.com/yamshy/portfolio/compare/v4.2.0...v4.2.1) (2025-09-13)
+
+### Bug Fixes
+
+* **timeline:** improve mobile card spacing and padding ([#62](https://github.com/yamshy/portfolio/issues/62)) ([fcff5ce](https://github.com/yamshy/portfolio/commit/fcff5ce103866c3f95974d6a330d1455833c72cd))
+
 ## [4.2.0](https://github.com/yamshy/portfolio/compare/v4.1.3...v4.2.0) (2025-09-12)
 
 ### Features
