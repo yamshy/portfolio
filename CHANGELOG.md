@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.4.0](https://github.com/yamshy/portfolio/compare/v4.3.0...v4.4.0) (2025-09-14)
+
+### Features
+
+* **timeline:** hide timeline dots on mobile ([c708e22](https://github.com/yamshy/portfolio/commit/c708e227370c7f0f6b84a2e425f460970157bcd8))
+
 ## [4.3.0](https://github.com/yamshy/portfolio/compare/v4.2.3...v4.3.0) (2025-09-13)
 
 ### Features
