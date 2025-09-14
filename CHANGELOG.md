@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.4.1](https://github.com/yamshy/portfolio/compare/v4.4.0...v4.4.1) (2025-09-14)
+
+### Bug Fixes
+
+* update backdrop filter blur values for glassmorphic container ([d508ba0](https://github.com/yamshy/portfolio/commit/d508ba0b0002c311e0e05639f9f051018d0621e1))
+
 ## [4.4.0](https://github.com/yamshy/portfolio/compare/v4.3.0...v4.4.0) (2025-09-14)
 
 ### Features
