@@ -158,8 +158,8 @@ const classes = getGlassmorphicClasses(variant, size, className);
 
   .glassmorphic-container--clear {
     background: color-mix(in oklab, var(--warm-bg), transparent 95%);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(var(--blur-16));
+    -webkit-backdrop-filter: blur(var(--blur-16));
     border: var(--glass-border-width) solid
       color-mix(in oklab, var(--text-dark), transparent 95%);
     box-shadow:
@@ -346,21 +346,31 @@ const classes = getGlassmorphicClasses(variant, size, className);
   @media (max-width: 768px) {
     .glassmorphic-container {
       /* Reduce blur on mobile for better performance */
+      transform: none;
+      will-change: auto;
+      background-clip: padding-box; /* helps ensure the semi-transparent background interacts with the backdrop */
       backdrop-filter: blur(var(--blur-8));
       -webkit-backdrop-filter: blur(var(--blur-8));
     }
 
     .glassmorphic-container--primary {
+      background: color-mix(in oklab, var(--coral), transparent 80%);
       backdrop-filter: blur(var(--blur-12));
       -webkit-backdrop-filter: blur(var(--blur-12));
     }
 
     .glassmorphic-container--secondary {
+      background: color-mix(in oklab, var(--mocha), transparent 84%);
       backdrop-filter: blur(var(--blur-10));
       -webkit-backdrop-filter: blur(var(--blur-10));
     }
 
+    .glassmorphic-container--neutral {
+      background: color-mix(in oklab, var(--warm-bg), transparent 70%);
+    }
+
     .glassmorphic-container--clear {
+      background: color-mix(in oklab, var(--warm-bg), transparent 92%);
       backdrop-filter: blur(var(--blur-16));
       -webkit-backdrop-filter: blur(var(--blur-16));
     }
