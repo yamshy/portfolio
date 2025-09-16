@@ -577,25 +577,10 @@
       scroll-snap-type: none;
     }
 
-    /* Center vertical line */
+    /* Remove center vertical line on mobile */
     .phases::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--coral) 60%, transparent),
-        color-mix(in oklab, var(--blue) 60%, transparent)
-      );
-      opacity: 0.35;
-      filter: drop-shadow(
-        0 0 3px color-mix(in oklab, var(--coral) 20%, transparent)
-      );
-      z-index: var(--z-bg);
+      display: none !important;
+      content: none !important;
     }
 
     .node {
@@ -713,16 +698,17 @@
     .badge {
       display: block;
       margin: 0 auto var(--sp-3);
+      text-align: center;
     }
 
     /* Centered card; remove alternating alignment */
     .card {
       text-align: center;
-      width: min(100%, var(--container, 100%));
-      max-width: 46rem;
+      width: 92%;
+      max-width: 28rem;
       margin-left: auto;
       margin-right: auto;
-      padding: var(--sp-7) var(--sp-6);
+      padding: var(--sp-6) var(--sp-5);
       min-height: 140px;
     }
 
@@ -778,25 +764,10 @@
       scroll-snap-type: none;
     }
 
-    /* Center vertical line (compact) */
+    /* Remove center vertical line on compact mobile */
     .phases::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--coral) 60%, transparent),
-        color-mix(in oklab, var(--blue) 60%, transparent)
-      );
-      opacity: 0.35;
-      filter: drop-shadow(
-        0 0 3px color-mix(in oklab, var(--coral) 20%, transparent)
-      );
-      z-index: var(--z-bg);
+      display: none !important;
+      content: none !important;
     }
 
     .node {
@@ -915,16 +886,17 @@
       font-size: 0.8rem;
       display: block;
       margin: 0 auto var(--sp-3);
+      text-align: center;
     }
 
     /* Centered card; remove alternating alignment (compact) */
     .card {
       text-align: center;
-      width: min(100%, var(--container, 100%));
-      max-width: 40rem;
+      width: 92%;
+      max-width: 24rem;
       margin-left: auto;
       margin-right: auto;
-      padding: var(--sp-6) var(--sp-5);
+      padding: var(--sp-5) var(--sp-4);
       min-height: 120px;
       position: relative;
     }
