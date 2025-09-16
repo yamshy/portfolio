@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.5.0](https://github.com/yamshy/portfolio/compare/v4.4.1...v4.5.0) (2025-09-16)
+
+### Features
+
+* update timeline styles with centered vertical line on mobile and adjust card dimensions ([b273bbe](https://github.com/yamshy/portfolio/commit/b273bbe32441029e6f5cee7c9c5ef4f1bef8efce))
+
 ## [4.4.1](https://github.com/yamshy/portfolio/compare/v4.4.0...v4.4.1) (2025-09-14)
 
 ### Bug Fixes
