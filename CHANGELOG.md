@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.5.1](https://github.com/yamshy/portfolio/compare/v4.5.0...v4.5.1) (2025-09-19)
+
+### Bug Fixes
+
+* improve mobile timeline spacing ([#78](https://github.com/yamshy/portfolio/issues/78)) ([c50235f](https://github.com/yamshy/portfolio/commit/c50235f762a3bd9b6a6c73405bf5ebfabc36343c))
+
 ## [4.5.0](https://github.com/yamshy/portfolio/compare/v4.4.1...v4.5.0) (2025-09-16)
 
 ### Features
