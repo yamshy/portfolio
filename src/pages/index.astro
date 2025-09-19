@@ -689,7 +689,8 @@ const projects = [
       left: auto;
       bottom: auto;
       transform: none;
-      margin: var(--sp-6) auto 0 auto; /* breathing room below CTA stack */
+      margin: clamp(var(--sp-8), 8vw, var(--sp-12)) auto 0 auto; /* extra breathing room below CTA stack */
+      align-self: center; /* ensure indicator stays centered within flex column */
       animation-name: bounce-y; /* vertical-only bounce for static positioning */
     }
 
