@@ -579,11 +579,13 @@ const projects = [
     margin: 0 auto;
     padding: var(--size-8) !important;
     overflow: visible; /* allow inner timeline visuals to extend without clipping */
+    display: flex;
+    justify-content: center;
   }
 
   @media (max-width: 767px) {
     :global(.timeline-container) {
-      padding: var(--sp-4) var(--sp-2) !important;
+      padding: var(--sp-7) var(--sp-3) !important;
     }
   }
 
@@ -591,6 +593,20 @@ const projects = [
   :global(.timeline) {
     padding-inline-end: calc(var(--sp-10) + var(--sp-8)) !important;
     overflow: visible !important;
+  }
+
+  @media (max-width: 767px) {
+    .timeline-section {
+      padding: var(--sp-10) var(--sp-4);
+    }
+
+    :global(.timeline) {
+      padding-inline: var(--sp-3) !important;
+      padding-inline-end: var(--sp-3) !important;
+      padding-inline-start: var(--sp-3) !important;
+      margin-inline: auto;
+      max-width: 28rem;
+    }
   }
 
   .section-title {
