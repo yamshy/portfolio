@@ -52,16 +52,16 @@
       id: 'data-engineering',
       title: 'Data Engineering',
       narrative:
-        'Turning lab instrumentation exhaust into governed, queryable knowledge graphs that feed decision support tools for clinicians and bench scientists alike.',
+        'Turning laboratory instrumentation output into automated, queryable data pipelines that feed analytical dashboards and decision support tools for research teams.',
       highlights: [
-        'Unified LIMS, ELN, and sequencing metadata into Delta Lake for FDA-ready traceability',
-        'Implemented streaming ingestion from Illumina X instruments with schema evolution under 30s',
-        'Materialised FHIR-compatible APIs enabling near real-time cohort stratification dashboards',
+        'Built ETL pipelines integrating SciNote LIMS data with automated processing workflows via REST APIs',
+        'Implemented automated data ingestion from Illumina sequencers (iSeq100, NextSeq500) to cloud storage and analysis',
+        'Developed Python frameworks processing 384-well plate assays into validated PostgreSQL databases with automated reporting',
       ],
       stack: [
-        { label: 'Pipelines', detail: 'dbt, Dagster, Apache Beam' },
-        { label: 'Messaging', detail: 'Kafka, Redpanda, EventBridge' },
-        { label: 'Governance', detail: 'Great Expectations, data contracts, Evidently AI' },
+        { label: 'Pipelines', detail: 'Python ETL, Nextflow, REST API integration, automated validation' },
+        { label: 'Data Stores', detail: 'PostgreSQL, Azure databases, Excel automation, structured experimental data' },
+        { label: 'Analytics', detail: 'Power BI dashboards, Plotly visualizations, automated PDF/Excel reports' },
       ],
     },
     {
