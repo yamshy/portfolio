@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.10.0](https://github.com/yamshy/portfolio/compare/v4.9.0...v4.10.0) (2025-09-20)
+
+### Features
+
+* align infrastructure skill copy with real experience ([#95](https://github.com/yamshy/portfolio/issues/95)) ([49c12b8](https://github.com/yamshy/portfolio/commit/49c12b84c03b3379fe231d3f4637f56c4fc964c5))
+
 ## [4.9.0](https://github.com/yamshy/portfolio/compare/v4.8.0...v4.9.0) (2025-09-20)
 
 ### Features
