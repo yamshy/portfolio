@@ -68,16 +68,16 @@
       id: 'collaboration',
       title: 'Translational Collaboration',
       narrative:
-        'Translating between lab scientists, clinical ops, and platform teams. Every dashboard, pipeline, and interface is validated with downstream decision-makers.',
+        'Bridging laboratory scientists and computational teams. Every pipeline, analysis tool, and automated workflow validated with end users to ensure practical adoption and reliable results.',
       highlights: [
-        'Led IRB-compliant data rooms for oncology partners with reproducible compute manifests',
-        'Ran blameless retros with computational biologists → 32% reduction in escalation time',
-        'Co-authored peer-reviewed publications on scalable single-cell RNAseq infrastructure',
+        'Led molecular biology technical operations, mentoring 4+ graduate scientists in NGS and laboratory automation',
+        'Translated client research requirements into automated analysis pipelines → 50% reduction in turnaround time',
+        'Built interactive dashboards and reports that made complex genomic data accessible to non-computational scientists',
       ],
       stack: [
-        { label: 'Practices', detail: 'Remote tabletop drills, runbooks, RFC rituals' },
-        { label: 'Compliance', detail: '21 CFR Part 11, HIPAA, SOC2' },
-        { label: 'Enablement', detail: 'Design research, technical storytelling, facilitation' },
+        { label: 'Practices', detail: 'Requirements gathering, user training, technical documentation, cross-functional coordination' },
+        { label: 'Quality Standards', detail: 'GLP practices, CLIA/CAP familiarity, validated workflows, reproducible analysis' },
+        { label: 'Enablement', detail: 'Technical mentoring, workflow automation, data visualization, client-focused tool development' },
       ],
     },
   ];
