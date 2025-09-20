@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.1](https://github.com/yamshy/portfolio/compare/v4.11.0...v4.11.1) (2025-09-20)
+
+### Bug Fixes
+
+* clarify allcare role as part-time ([#99](https://github.com/yamshy/portfolio/issues/99)) ([7699357](https://github.com/yamshy/portfolio/commit/7699357e445b5ba70d6435c22a395d1d856fb8a7))
+
 ## [4.11.0](https://github.com/yamshy/portfolio/compare/v4.10.0...v4.11.0) (2025-09-20)
 
 ### Features
