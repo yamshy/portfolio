@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.6.0](https://github.com/yamshy/portfolio/compare/v4.5.6...v4.6.0) (2025-09-20)
+
+### Features
+
+* highlight science to devops transition ([#91](https://github.com/yamshy/portfolio/issues/91)) ([8beb8d7](https://github.com/yamshy/portfolio/commit/8beb8d78b8e464c1cee7b21856a58055a3a9ae66))
+
 ## [4.5.6](https://github.com/yamshy/portfolio/compare/v4.5.5...v4.5.6) (2025-09-20)
 
 ### Bug Fixes
