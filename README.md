@@ -17,21 +17,20 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 
 ## 🧱 Architecture & Stack
 
-| Layer      | Details                                                                                                                    |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Framework  | [Astro 5](https://astro.build/) with View Transitions, incremental hydration, and Markdown-friendly content authoring.     |
-| Islands    | Svelte 5 components provide telemetry, visualizations, and navigation micro-interactions only where needed.                |
-| Styling    | Vanilla CSS tokens/utility layers (`src/styles/tokens.css`, `utilities.css`, `animations.css`) plus Open Props primitives. |
-| Fonts      | Cormorant Garamond for headers and IBM Plex Sans for body copy (loaded in `BaseLayout.astro`).                             |
-| Deployment | Static build served via Caddy in the provided Docker image (`Dockerfile`) with semantic-release automation.                |
+| Layer      | Details                                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework  | [Astro 5](https://astro.build/) with View Transitions, incremental hydration, and Markdown-friendly content authoring.                             |
+| Islands    | Svelte 5 components provide telemetry, visualizations, and navigation micro-interactions only where needed.                                        |
+| Styling    | Vanilla CSS tokens/utility layers (`src/styles/tokens.css`, `utilities.css`, `animations.css`) plus Open Props primitives.                         |
+| Fonts      | Cormorant Garamond for headers and IBM Plex Sans for body copy, streamed from Google Fonts in `BaseLayout.astro` (no bundled font files required). |
+| Deployment | Static build served via Caddy in the provided Docker image (`Dockerfile`) with semantic-release automation.                                        |
 
 ## 🗂️ Project Structure
 
 ```text
 /
 ├── public/
-│   ├── favicon.svg
-│   └── fonts/rst-thermal/*
+│   └── favicon.svg
 ├── src/
 │   ├── assets/
 │   ├── components/
