@@ -36,16 +36,25 @@
       id: 'infrastructure',
       title: 'Infrastructure Engineering',
       narrative:
-        'Designing resilient, auditable compute fabrics spanning on-prem sequencers and regulated clouds. Reliability work measured in reduced reruns and faster approvals.',
+        'Hybrid cloud infrastructure connecting laboratory sequencers to computational pipelines. Reliability through systematic automation and containerization, reducing manual operations by 50%.',
       highlights: [
-        'Cut pipeline SLO breaches by 74% through GitOps-driven ArgoCD and policy-as-code',
-        'Reduced cluster spend 28% by orchestrating GPU pooling with Karpenter and Spot parity models',
-        'Containerised wet-lab analysis stack for FDA submissions with reproducible build provenance',
+        'Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization',
+        'Built CI/CD pipelines with GitHub Actions for containerized deployments across dev/staging/prod',
+        'Automated NGS data flow from Illumina sequencers to AWS Batch compute clusters via Nextflow Tower',
       ],
       stack: [
-        { label: 'Cloud', detail: 'AWS Batch, GKE Autopilot, Nomad' },
-        { label: 'Orchestration', detail: 'Kubernetes, ArgoCD, Terraform, Pulumi' },
-        { label: 'Observability', detail: 'Grafana, Loki, Tempo, OpenTelemetry' },
+        {
+          label: 'CLOUD',
+          detail: 'Azure Container Apps, AWS Batch (via Nextflow Tower), PostgreSQL databases',
+        },
+        {
+          label: 'ORCHESTRATION',
+          detail: 'Docker, GitHub Actions, Python automation, Bash scripting',
+        },
+        {
+          label: 'INFRASTRUCTURE',
+          detail: 'Linux administration, Proxmox hypervisor, Omada networking, backup systems',
+        },
       ],
     },
     {
