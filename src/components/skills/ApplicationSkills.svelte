@@ -14,16 +14,22 @@
       id: 'scientific-computing',
       title: 'Scientific Computing',
       narrative:
-        'GPU-accelerated analytics tuned for wet-lab cadence. Built to validate hypotheses on terabyte-scale omics data without blocking discovery timelines.',
+        'High-performance compute pipelines translating raw sequencer output into audit-ready biology. Automations keep terabyte-scale studies reproducible while matching the tempo of translational teams.',
       highlights: [
-        'Scaled distributed Snakemake → Argo Workflows handling 38k samples/week',
-        'Implemented columnar genomics store (Apache Arrow + DuckDB) with 11x faster cohort queries',
-        'Automated QC heuristics using probabilistic programming (PyMC) for variant confidence bands',
+        'Orchestrated RNA/DNA-seq and variant calling through Nextflow Tower on AWS Batch from Illumina ingest to biological readouts',
+        'Automated IC50, dose-response, and kinase inhibition analyses with Python/R pipelines enforcing statistical validation gates',
+        'Trained scikit-learn models across experimental datasets to classify responder phenotypes and predict compound efficacy',
       ],
       stack: [
-        { label: 'Core', detail: 'Python, Rust, CUDA, Nextflow, Snakemake' },
-        { label: 'Data', detail: 'Apache Arrow, DuckDB, Parquet, Zarr' },
-        { label: 'ML', detail: 'JAX, PyTorch, scVI, Optuna' },
+        { label: 'Core', detail: 'Python, R, SQL, Nextflow, Bash, statistical modeling' },
+        {
+          label: 'HPC & Pipelines',
+          detail: 'AWS Batch, Nextflow Tower, nf-core, Galaxy, Conda environments, Docker',
+        },
+        {
+          label: 'Analysis & Viz',
+          detail: 'GraphPad Prism, JMP, Plotly, Power BI, automated report generation, fragment analysis',
+        },
       ],
     },
     {
