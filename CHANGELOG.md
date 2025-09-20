@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.4](https://github.com/yamshy/portfolio/compare/v4.11.3...v4.11.4) (2025-09-20)
+
+### Bug Fixes
+
+* align hero layout ([#109](https://github.com/yamshy/portfolio/issues/109)) ([fc53284](https://github.com/yamshy/portfolio/commit/fc53284c1cd087bc0441cc77d5c9c4596b3f38a9))
+
 ## [4.11.3](https://github.com/yamshy/portfolio/compare/v4.11.2...v4.11.3) (2025-09-20)
 
 ### Bug Fixes
