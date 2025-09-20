@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.8.0](https://github.com/yamshy/portfolio/compare/v4.7.0...v4.8.0) (2025-09-20)
+
+### Features
+
+* refresh scientific computing skills narrative ([#93](https://github.com/yamshy/portfolio/issues/93)) ([25eb196](https://github.com/yamshy/portfolio/commit/25eb196881a28fb104fc076bc54924b61f791353))
+
 ## [4.7.0](https://github.com/yamshy/portfolio/compare/v4.6.0...v4.7.0) (2025-09-20)
 
 ### Features
