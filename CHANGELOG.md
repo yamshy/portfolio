@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.3](https://github.com/yamshy/portfolio/compare/v4.11.2...v4.11.3) (2025-09-20)
+
+### Bug Fixes
+
+* reveal content without scroll activation ([#101](https://github.com/yamshy/portfolio/issues/101)) ([963a55b](https://github.com/yamshy/portfolio/commit/963a55bca5aa34564bd876fcb0935f9bf3b6b6ca))
+
 ## [4.11.2](https://github.com/yamshy/portfolio/compare/v4.11.1...v4.11.2) (2025-09-20)
 
 ### Bug Fixes
