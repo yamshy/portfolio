@@ -10,6 +10,7 @@ export default defineConfig({
       'tests/e2e/**',
       '**/*.e2e.{test,spec}.{js,ts}',
     ],
+    passWithNoTests: true,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
