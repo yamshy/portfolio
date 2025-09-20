@@ -1,114 +1,205 @@
-@import 'open-props/normalize.min.css';
-@import 'open-props/open-props.min.css';
-@import 'open-props/colors.min.css';
-
-/* Cascade layers */
 @layer reset, base, tokens, utilities, components;
 
-/* Media queries */
-@layer tokens {
-  @custom-media --sm (width >= 480px);
-  @custom-media --md (width >= 768px);
-  @custom-media --lg (width >= 1024px);
-  @custom-media --xl (width >= 1280px);
-}
-
-/* Project palette - Light theme */
 @layer tokens {
   :root {
-    --warm-bg: #fefcf8;
-    --coral: #e85a2b;
-    --text-dark: #1a0d08;
-    --accent-yellow: #ffd644;
-    --mocha: #a47864;
-    --blue: #2563eb;
+    color-scheme: light dark;
+    font-family: var(--font-sans);
 
-    /* Glass tones */
-    --glass-coral: rgba(232, 90, 43, 0.2);
-    --glass-mocha: rgba(164, 120, 100, 0.15);
-    --glass-yellow: rgba(255, 214, 68, 0.15);
-    --glass-blue: rgba(37, 99, 235, 0.1);
-    --glass-dark: rgba(26, 13, 8, 0.1);
+    /* Typography */
+    --font-serif:
+      'Cormorant Garamond', 'Iowan Old Style', 'Times New Roman', serif;
+    --font-sans:
+      'IBM Plex Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', sans-serif;
+    --heading-display: clamp(4.5rem, 6vw + 2rem, 7.5rem);
+    --heading-xl: clamp(2.75rem, 1.5vw + 2.25rem, 3.5rem);
+    --heading-lg: clamp(2rem, 1vw + 1.75rem, 2.75rem);
+    --heading-md: clamp(1.5rem, 0.8vw + 1.3rem, 2rem);
+    --text-lg: clamp(1.125rem, 0.4vw + 1rem, 1.35rem);
+    --text-md: 1rem;
+    --text-sm: 0.875rem;
 
-    /* Radii | Shadows | Blurs */
-    --r-lg: 24px;
-    --r-xl: 32px;
-    --shadow-lg: var(--shadow-4); /* from Open Props */
-    --shadow-xl: var(--shadow-5);
-    --blur-12: 12px;
-    --blur-20: 20px;
+    /* Sizing & spacing */
+    --size-max-width: 1240px;
+    --size-readable: 68ch;
+    --space-2xs: 0.375rem;
+    --space-xs: 0.625rem;
+    --space-sm: 0.875rem;
+    --space-md: 1.25rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4.5rem;
+    --space-3xl: 6rem;
 
-    /* Spacing scale */
-    --sp-1: 0.25rem;
-    --sp-2: 0.5rem;
-    --sp-3: 0.75rem;
-    --sp-4: 1rem;
-    --sp-6: 1.5rem;
-    --sp-8: 2rem;
-    --sp-10: 2.5rem;
-    --sp-12: 3rem;
-    --sp-14: 3.5rem;
-    --sp-16: 4rem;
-    --sp-18: 4.5rem;
-    --sp-20: 5rem;
-    --sp-24: 6rem;
+    /* Radii & shadows */
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 26px;
+    --shadow-sm: 0 6px 12px -8px rgba(10, 7, 5, 0.25);
+    --shadow-md: 0 20px 40px -30px rgba(10, 7, 5, 0.6);
+    --shadow-lg: 0 40px 70px -45px rgba(0, 0, 0, 0.75);
 
-    /* Z-index */
-    --z-nav: 50;
-    --z-fg: 10;
-    --z-bg: -1;
-
-    /* Content container widths */
-    --container-sm: 720px;
-    --container-md: 960px;
-    --container-lg: 1200px;
-    --container-xl: 1400px;
+    /* Motion */
+    --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+    --ease-emphatic: cubic-bezier(0.7, 0, 0.2, 1);
+    --duration-fast: 180ms;
+    --duration-base: 280ms;
+    --duration-slow: 420ms;
   }
 
-  /* Dark theme */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --warm-bg: #fefcf8;
-      --coral: #e85a2b;
-      --text-dark: #1a0d08;
-      --accent-yellow: #ffd644;
-      --mocha: #a47864;
-      --blue: #2563eb;
+  :root,
+  :root[data-theme='light'] {
+    --color-bg: #f7f1ec;
+    --color-surface: #fbf7f4;
+    --color-surface-strong: #efe1d9;
+    --color-surface-muted: #e4d4c9;
+    --color-primary: #a47764; /* Mocha Mousse */
+    --color-primary-strong: #7d5545;
+    --color-primary-soft: #c6a296;
+    --color-text: #231612;
+    --color-text-muted: #4a3b33;
+    --color-text-subtle: #6e5c54;
+    --color-border: #d6c3b7;
+    --color-science-green: #297b66;
+    --color-science-purple: #5c4b88;
+    --color-science-amber: #d7893c;
+    --color-success: #1f7a6a;
+    --color-danger: #9d3c40;
+    --color-code-bg: #1f120f;
+    --color-code-text: #f6ede8;
+    --gradient-backdrop:
+      radial-gradient(
+        120% 120% at 10% 10%,
+        rgba(89, 68, 115, 0.15) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        110% 110% at 90% 20%,
+        rgba(41, 123, 102, 0.16) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        120% 120% at 50% 80%,
+        rgba(167, 119, 100, 0.22) 0%,
+        transparent 75%
+      );
+  }
 
-      /* Glass tones */
-      --glass-coral: rgba(232, 90, 43, 0.2);
-      --glass-mocha: rgba(164, 120, 100, 0.15);
-      --glass-yellow: rgba(255, 214, 68, 0.15);
-      --glass-blue: rgba(37, 99, 235, 0.1);
-      --glass-dark: rgba(26, 13, 8, 0.1);
-    }
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+    --color-bg: #100b09;
+    --color-surface: #1b1310;
+    --color-surface-strong: #2a1d18;
+    --color-surface-muted: #3b2c26;
+    --color-primary: #c69a86;
+    --color-primary-strong: #e6c5b7;
+    --color-primary-soft: rgba(198, 154, 134, 0.28);
+    --color-text: #f5ebe5;
+    --color-text-muted: #d5c7bf;
+    --color-text-subtle: #a8968d;
+    --color-border: #4a362f;
+    --color-science-green: #4bd3b2;
+    --color-science-purple: #9f8cd4;
+    --color-science-amber: #f1c078;
+    --color-success: #4bd3b2;
+    --color-danger: #f16f74;
+    --color-code-bg: #0b0605;
+    --color-code-text: #f9efe8;
+    --gradient-backdrop:
+      radial-gradient(
+        100% 120% at 15% 25%,
+        rgba(88, 57, 126, 0.3) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        80% 90% at 80% 15%,
+        rgba(45, 122, 106, 0.3) 0%,
+        transparent 75%
+      ),
+      radial-gradient(
+        140% 120% at 50% 90%,
+        rgba(167, 119, 100, 0.35) 0%,
+        transparent 80%
+      );
   }
 }
 
 @layer base {
-  :root {
-    color-scheme: light dark;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
-  html,
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background: var(--warm-bg);
-    color: var(--text-dark);
-    /* Subtle paper-like texture */
-    background-image:
-      radial-gradient(
-        circle at 20% 80%,
-        color-mix(in oklab, var(--mocha) 2%, transparent) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 80% 20%,
-        color-mix(in oklab, var(--coral) 1.5%, transparent) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 40% 40%,
-        color-mix(in oklab, var(--accent-yellow) 1%, transparent) 0%,
-        transparent 50%
-      );
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    line-height: 1.6;
+    background: var(--color-bg);
+    color: var(--color-text);
+    background-image: var(--gradient-backdrop);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 80%, black 5%);
+    color: var(--color-code-text);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  code,
+  pre {
+    font-family:
+      'Berkeley Mono', 'IBM Plex Mono', 'Fira Code', ui-monospace,
+      SFMono-Regular, SFMono, Menlo, Monaco, Consolas, 'Liberation Mono',
+      'Courier New', monospace;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  strong {
+    color: var(--color-text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

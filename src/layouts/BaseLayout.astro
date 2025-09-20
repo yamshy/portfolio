@@ -1,24 +1,49 @@
 ---
 import '../styles/tokens.css';
 import '../styles/utilities.css';
-const { title = 'yamshy' } = Astro.props;
+import '../styles/animations.css';
+import { ViewTransitions } from 'astro:transitions';
+const {
+  title = 'Dr. Mira Ramanathan | Computational Bio Platform Engineer',
+  description = 'Portfolio highlighting the intersection of molecular biology, large-scale data, and resilient infrastructure.',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta
-      name="description"
-      content="Biology-inspired portfolio showcasing professional evolution and technical expertise"
-    />
+    <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      try {
+        const storedTheme = localStorage.getItem('portfolio-theme');
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+        const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.setProperty(
+          'color-scheme',
+          theme === 'dark' ? 'dark' : 'light',
+        );
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+        document.documentElement.style.setProperty('color-scheme', 'light');
+      }
+    </script>
   </head>
-  <body class="u-bg-warm u-text-dark">
+  <body>
+    <ViewTransitions />
     <slot />
   </body>
 </html>

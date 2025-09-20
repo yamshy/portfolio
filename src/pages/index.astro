@@ -1,749 +1,987 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SidebarNav from '../components/navigation/SidebarNav.astro';
-import MobileNav from '../components/navigation/MobileNav.astro';
-import BentoGrid from '../components/content/grids/BentoGrid.astro';
-import ProjectCard from '../components/content/grids/ProjectCard.astro';
-import Timeline from '../components/content/timeline/Timeline.astro';
-import ContactForm from '../components/content/forms/ContactForm.astro';
-import OrganicShapes from '../components/effects/organic/OrganicShapes.astro';
-import GlassmorphicContainer from '../components/ui/containers/GlassmorphicContainer.astro';
+import ThemeToggle from '../components/ui/ThemeToggle.svelte';
+import Ic50Visualizer from '../components/visualizations/Ic50Visualizer.svelte';
+import PipelineOpsDashboard from '../components/infrastructure/PipelineOpsDashboard.svelte';
+import SequenceWorkbench from '../components/demos/SequenceWorkbench.svelte';
+import ApplicationSkills from '../components/skills/ApplicationSkills.svelte';
 
-// Sample project data
-const projects = [
+const heroStats = [
   {
-    title: 'BioML Pipeline',
-    description:
-      'Machine learning pipeline for analyzing genomic data with real-time visualization and statistical modeling.',
-    href: '#',
-    variant: 'featured',
-    tags: ['Python', 'ML', 'Genomics', 'React'],
-    image: '/src/assets/background.svg',
+    label: 'Clinical pipelines migrated',
+    value: '27',
+    context:
+      'production workloads moved from on-prem schedulers to portable Argo Workflows',
   },
   {
-    title: 'Evolution Simulator',
-    description:
-      'Interactive web application simulating evolutionary processes with customizable parameters and visual feedback.',
-    href: '#',
-    variant: 'standard',
-    tags: ['JavaScript', 'D3.js', 'Biology', 'Simulation'],
+    label: 'Automation time saved',
+    value: '11.4k hrs',
+    context:
+      'wet-lab scientists regained annually via robotic QC and reproducible compute',
   },
   {
-    title: 'Research Dashboard',
-    description:
-      'Data visualization dashboard for tracking research metrics and collaboration patterns across institutions.',
-    href: '#',
-    variant: 'standard',
-    tags: ['Vue.js', 'D3.js', 'Analytics', 'Research'],
-  },
-  {
-    title: 'Gene Expression Tool',
-    description:
-      'Web-based tool for analyzing and visualizing gene expression data with statistical significance testing.',
-    href: '#',
-    variant: 'secondary',
-    tags: ['R', 'Shiny', 'Bioinformatics', 'Statistics'],
-  },
-  {
-    title: 'Collaboration Platform',
-    description:
-      'Cross-institutional platform for sharing research data and fostering scientific collaboration.',
-    href: '#',
-    variant: 'wide',
-    tags: ['Node.js', 'MongoDB', 'Collaboration', 'Research'],
-  },
-  {
-    title: 'Data Visualization Library',
-    description:
-      'Reusable React components for creating interactive biological data visualizations.',
-    href: '#',
-    variant: 'secondary',
-    tags: ['React', 'TypeScript', 'Visualization', 'Library'],
+    label: 'Data under stewardship',
+    value: '3.2 PB',
+    context:
+      'regulated genomic and phenotypic datasets under automated compliance controls',
   },
 ];
+
+const projects = [
+  {
+    title: 'Adaptive NGS Orchestrator',
+    summary:
+      'Transformed a brittle sequencing pipeline into a self-healing platform spanning benchtop sequencers and GPU clouds.',
+    problem:
+      'Legacy Bash pipelines stalled nightly; manual restarts delayed oncology trial enrollment by 48 hours on average.',
+    solution:
+      'Recomposed workflows into event-driven Nextflow + Argo, added automatic reagent QC triggers, and codified approvals in GitOps.',
+    stack: ['Nextflow', 'Argo Workflows', 'Terraform', 'Grafana', 'Karpenter'],
+    results: [
+      '97.6% reduction in rerun hours after implementing health-probing sidecars',
+      'Mean turnaround dropped from 36h → 9.4h with adaptive GPU autoscaling',
+      'Audit-ready provenance bundles generated for every cohort in 2.1 seconds',
+    ],
+    challenges: [
+      'Designing deterministic container images for FDA submissions without sacrificing GPU throughput',
+      'Aligning wet-lab SOP changes with automated gating to avoid reagent wastage',
+    ],
+    link: '/case-studies/adaptive-ngs',
+    layout: 'wide',
+  },
+  {
+    title: 'Lab Telemetry Mesh',
+    summary:
+      'Synchronized 42 lab instruments with streaming analytics for reagent consumption and maintenance forecasting.',
+    problem:
+      'Manual CSV exports obscured reagent shortages; chromatography columns failed unpredictably.',
+    solution:
+      'Edge collectors stream to Redpanda → Flink windowing; predictive maintenance models trigger Slack + PagerDuty runbooks.',
+    stack: ['Rust', 'Apache Flink', 'Redpanda', 'dbt', 'PagerDuty'],
+    results: [
+      'Cut emergency instrument downtime 61%',
+      'Forecast accuracy ±4.2% for reagent depletion at 24h horizon',
+      'Automatically scheduled calibrations saved $420k/year in consumables',
+    ],
+    challenges: [
+      'Reconciling vendor-specific OPC-UA schemas into a governed contract catalog',
+      'Guaranteeing <10s latency for alerts inside air-gapped cleanrooms',
+    ],
+    layout: 'standard',
+  },
+  {
+    title: 'Regulatory Data Fabric',
+    summary:
+      'Unified lab notebooks, LIMS, and EMR data into a governed knowledge graph feeding translational dashboards.',
+    problem:
+      'Trial teams waited 14 days for curated cohorts; audit requests required multi-week detective work.',
+    solution:
+      'Delta Lake backed data contracts orchestrated by Dagster with automated CFR 21 Part 11 validations.',
+    stack: [
+      'Dagster',
+      'Delta Lake',
+      'Great Expectations',
+      'AWS Lake Formation',
+    ],
+    results: [
+      'Cohort assembly SLA shrank to 2 hours with reproducible SQL snapshots',
+      'Audit trails generated in <5 minutes across seven regulatory frameworks',
+      'Downstream dashboards saw 18x query acceleration using Arrow flight servers',
+    ],
+    challenges: [
+      'Designing role-aware lineage views acceptable to both QA and research leadership',
+      'Coordinating schema evolution without breaking legacy analytics notebooks',
+    ],
+    layout: 'tall',
+  },
+  {
+    title: 'Clinician-Ready Insights Portal',
+    summary:
+      'Delivered a decision support UI synthesising genomic variants, imaging markers, and trial eligibility in real time.',
+    problem:
+      'Oncologists toggled between six systems for molecular tumour boards; insights arrived days after pathology sign-off.',
+    solution:
+      'Built Astro+Svelte portal with WebGL cohort visualisations, FHIR APIs, and embedded reproducible notebooks.',
+    stack: ['Astro', 'Svelte', 'WebGL', 'FHIR', 'Auth0'],
+    results: [
+      'Meeting prep time fell from 5h to 55m per tumour board',
+      'Integrated feedback loops driving weekly ML model recalibration',
+      'WCAG AAA compliant UI approved for bedside deployment',
+    ],
+    challenges: [
+      'Balancing GPU-heavy visualisations with sub-3s load on hospital Wi-Fi',
+      'Designing redaction workflows for multi-institutional collaboration',
+    ],
+    layout: 'standard',
+  },
+];
+
+const experiences = [
+  {
+    role: 'Director of Bioinformatics Platforms',
+    org: 'Helixion Therapeutics',
+    years: '2021 — Present',
+    focus:
+      'Scaled sequencing and analytics to support Phase II/III oncology pipelines with auditable, on-demand compute.',
+    impact: [
+      'Unified 9 research teams under a single observability + cost governance plane',
+      'Shipped 14 platform releases with zero unplanned downtime across hybrid clusters',
+    ],
+  },
+  {
+    role: 'Senior DevOps Bioinformatician',
+    org: 'Arclight Genomics',
+    years: '2017 — 2021',
+    focus:
+      'Built automation bridging wet-lab robotics, HPC clusters, and downstream data science notebooks.',
+    impact: [
+      'Introduced reproducible container supply chain validated against 21 CFR Part 11',
+      'Created feature store powering real-time quality regression tests on 65k+ samples',
+    ],
+  },
+  {
+    role: 'Computational Biology Researcher',
+    org: 'MIT Broad Institute',
+    years: '2012 — 2017',
+    focus:
+      'Investigated adaptive resistance in solid tumours using single-cell sequencing and Bayesian inference.',
+    impact: [
+      'Co-authored 8 peer-reviewed publications on spatial transcriptomics toolchains',
+      'Open-sourced pipelines adopted by 120+ academic labs worldwide',
+    ],
+  },
+];
+
+const insights = [
+  {
+    title: 'Why Docker Matters for Reproducible Science',
+    summary:
+      'Container digests outlast lab rotations. Provenance-aware builds keep regulators and collaborators aligned on exactly what ran.',
+  },
+  {
+    title: 'Designing Observability for Wet-Lab Reality',
+    summary:
+      'Instrumentation fails physically before dashboards blink. Pair sensor fusion with service-level indicators to detect reagent anomalies first.',
+  },
+  {
+    title: 'From Bench to GPU Cluster',
+    summary:
+      'Latency budgets begin at the pipette. Aligning robotics cycles with autoscalers keeps GPU utilisation high without starving experiments.',
+  },
+];
+
+const contactChannels = [
+  {
+    label: 'Email',
+    value: 'mira@computational.bio',
+    href: 'mailto:mira@computational.bio',
+  },
+  {
+    label: 'Schedule',
+    value: 'cal.com/mira-ramanathan',
+    href: 'https://cal.com/mira-ramanathan',
+  },
+  {
+    label: 'ResearchGate',
+    value: 'researchgate.net/profile/Mira-Ramanathan',
+    href: 'https://researchgate.net/profile/Mira-Ramanathan',
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/mira-labs',
+    href: 'https://github.com/mira-labs',
+  },
+];
+
+const codeSample = `
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  labels:
+    runbook: ngs-ingest
+spec:
+  entrypoint: orchestrate
+  templates:
+    - name: orchestrate
+      dag:
+        tasks:
+          - name: qc
+            template: fastqc
+          - name: align
+            template: gpu-bwa
+            depends: qc.Succeeded
+            arguments:
+              parameters:
+                - name: lanes
+                  value: {{inputs.parameters.lanes}}
+`;
 ---
 
-<BaseLayout title="yamshy - Biology-Inspired Portfolio">
-  <OrganicShapes />
-  <SidebarNav />
-  <MobileNav />
+<BaseLayout>
+  <header class="site-header u-container" data-reveal>
+    <div class="site-header__brand">
+      <span class="u-pill">Mira Ramanathan, PhD</span>
+      <p>
+        Bioinformatics platform engineer translating molecular insights into
+        resilient software.
+      </p>
+    </div>
+    <ThemeToggle client:idle />
+  </header>
 
   <main>
-    <!-- Hero Section with Asymmetrical Layout -->
-    <section class="hero" id="about">
-      <GlassmorphicContainer
-        variant="clear"
-        size="large"
-        class="hero-container u-container u-container--xl"
-      >
-        <!-- Asymmetrical grid layout -->
-        <div class="hero-grid">
-          <!-- Left side - 2/3 width for main content -->
-          <div class="hero-main">
-            <!-- Main heading with asymmetrical positioning -->
-            <div class="hero-title-container">
-              <h1 class="hero-title">
-                <span class="hero-name-primary">Shyam</span>
-                <span class="hero-name-secondary">Ajudia</span>
-              </h1>
-            </div>
-
-            <!-- Bio text positioned asymmetrically -->
-            <div class="hero-bio">
-              <p class="hero-bio-primary">
-                Infrastructure Engineer specializing in
-                <span class="highlight-text"
-                  >DevOps, system administration,</span
-                >
-                and <span class="highlight-text">data engineering</span>
-              </p>
-              <p class="hero-bio-secondary">
-                Starting in molecular biology research, the transition to
-                infrastructure engineering came naturally through understanding
-                how biological systems work - complex, interconnected, and
-                self-regulating. This systems thinking translates directly to
-                building reliable infrastructure and data pipelines.
-              </p>
-            </div>
-          </div>
-
-          <!-- Right side - 1/3 width for CTAs -->
-          <div class="hero-actions-container">
-            <!-- Glassmorphism CTA container -->
-            <div class="hero-cta-wrapper">
-              <!-- Primary CTA with glassmorphism -->
-              <a href="#work" class="cta-primary">
-                Learn More
-                <span class="cta-arrow">↓</span>
-              </a>
-
-              <!-- Secondary CTA with glassmorphism -->
-              <a href="mailto:sajudia@proton.me" class="cta-secondary">
-                Get In Touch
-                <span class="cta-arrow">→</span>
-              </a>
-            </div>
+    <section class="hero" id="hero" data-reveal>
+      <div class="u-container hero__inner">
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            Molecular systems
+            <span class="hero__title--accent">meet distributed systems</span>
+          </h1>
+          <p class="hero__lede">
+            I architect sequencing platforms, analytics pipelines, and cloud
+            infrastructure that let translational scientists iterate
+            faster—without compromising regulatory rigor or data provenance.
+          </p>
+          <div class="hero__actions">
+            <a class="hero__cta" href="#contact">Collaborate</a>
+            <a
+              class="hero__cta hero__cta--ghost"
+              href="/case-studies/adaptive-ngs"
+            >
+              View flagship case study
+            </a>
           </div>
         </div>
-
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator">
-          <div class="scroll-mouse">
-            <div class="scroll-dot"></div>
-          </div>
+        <div class="hero__metrics anim-stagger">
+          {
+            heroStats.map((stat) => (
+              <article class="hero__metric">
+                <h2>{stat.value}</h2>
+                <p>{stat.label}</p>
+                <span>{stat.context}</span>
+              </article>
+            ))
+          }
         </div>
-      </GlassmorphicContainer>
+      </div>
     </section>
 
-    <!-- Featured Work -->
-    <section id="work" class="work-section">
-      <GlassmorphicContainer
-        variant="clear"
-        size="medium"
-        class="work-container u-container u-container--xl"
-      >
-        <div class="work-content">
-          <h2 class="section-title">Featured Work</h2>
-          <BentoGrid>
-            {projects.map((project) => <ProjectCard {...project} />)}
-          </BentoGrid>
+    <section class="section projects" id="projects" data-reveal>
+      <div class="u-container section__heading">
+        <div>
+          <p class="u-title-overline">Featured Projects</p>
+          <h2>Hybrid programmes bridging lab reality and cloud scale</h2>
         </div>
-      </GlassmorphicContainer>
-    </section>
-
-    <!-- Professional Evolution Timeline -->
-    <section id="evolution" class="timeline-section">
-      <GlassmorphicContainer
-        variant="clear"
-        size="medium"
-        class="timeline-container u-container u-container--xl"
-      >
-        <Timeline />
-      </GlassmorphicContainer>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-      <GlassmorphicContainer
-        variant="clear"
-        size="medium"
-        tag="div"
-        class="contact-content"
-      >
-        <h2 class="section-title">Let's Connect</h2>
-        <p class="contact-description">
-          Interested in collaborating on projects that bridge biology and
-          technology? I'm always excited to discuss new opportunities and
-          innovative ideas.
+        <p>
+          Each engagement pairs deep scientific context with hardened
+          infrastructure. Bento layout mirrors how these systems interlock:
+          orchestration, telemetry, governance, and human interfaces.
         </p>
-        <ContactForm />
-      </GlassmorphicContainer>
+      </div>
+
+      <div class="u-container projects__grid">
+        <article class="project-card project-card--wide u-glass" data-reveal>
+          <header>
+            <h3>{projects[0].title}</h3>
+            <p>{projects[0].summary}</p>
+          </header>
+          <div class="project-card__content">
+            <div>
+              <h4>Problem</h4>
+              <p>{projects[0].problem}</p>
+            </div>
+            <div>
+              <h4>Solution</h4>
+              <p>{projects[0].solution}</p>
+            </div>
+            <div>
+              <h4>Stack</h4>
+              <ul class="project-card__tags">
+                {projects[0].stack.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+          <div class="project-card__footer">
+            <div>
+              <h4>Results</h4>
+              <ul>
+                {projects[0].results.map((result) => <li>{result}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h4>Technical Challenges</h4>
+              <ul>
+                {projects[0].challenges.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+          <a class="project-card__link" href={projects[0].link}>
+            Read research-style case study →
+          </a>
+        </article>
+
+        <article class="project-card project-card--standard" data-reveal>
+          <header>
+            <h3>{projects[1].title}</h3>
+            <p>{projects[1].summary}</p>
+          </header>
+          <dl>
+            <div>
+              <dt>Problem</dt>
+              <dd>{projects[1].problem}</dd>
+            </div>
+            <div>
+              <dt>Solution</dt>
+              <dd>{projects[1].solution}</dd>
+            </div>
+          </dl>
+          <div class="project-card__meta">
+            <h4>Stack</h4>
+            <ul class="project-card__tags">
+              {projects[1].stack.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Results</h4>
+            <ul>
+              {projects[1].results.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Technical Challenges</h4>
+            <ul>
+              {projects[1].challenges.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </article>
+
+        <div class="project-card project-card--viz" data-reveal>
+          <Ic50Visualizer client:visible />
+        </div>
+
+        <article class="project-card project-card--tall" data-reveal>
+          <header>
+            <h3>{projects[2].title}</h3>
+            <p>{projects[2].summary}</p>
+          </header>
+          <div class="project-card__meta">
+            <h4>Problem</h4>
+            <p>{projects[2].problem}</p>
+            <h4>Solution</h4>
+            <p>{projects[2].solution}</p>
+          </div>
+          <div class="project-card__meta">
+            <h4>Stack</h4>
+            <ul class="project-card__tags">
+              {projects[2].stack.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Results</h4>
+            <ul>
+              {projects[2].results.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Technical Challenges</h4>
+            <ul>
+              {projects[2].challenges.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card project-card--standard" data-reveal>
+          <header>
+            <h3>{projects[3].title}</h3>
+            <p>{projects[3].summary}</p>
+          </header>
+          <dl>
+            <div>
+              <dt>Problem</dt>
+              <dd>{projects[3].problem}</dd>
+            </div>
+            <div>
+              <dt>Solution</dt>
+              <dd>{projects[3].solution}</dd>
+            </div>
+          </dl>
+          <div class="project-card__meta">
+            <h4>Stack</h4>
+            <ul class="project-card__tags">
+              {projects[3].stack.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Results</h4>
+            <ul>
+              {projects[3].results.map((item) => <li>{item}</li>)}
+            </ul>
+            <h4>Technical Challenges</h4>
+            <ul>
+              {projects[3].challenges.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </article>
+
+        <div class="project-card project-card--dashboard" data-reveal>
+          <PipelineOpsDashboard client:visible />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills" data-reveal>
+      <div class="u-container section__heading">
+        <div>
+          <p class="u-title-overline">Skill Architecture</p>
+          <h2>Capabilities organised by scientific outcome</h2>
+        </div>
+        <p>
+          Choose a lens—scientific computing, infrastructure, data,
+          collaboration—to see how tooling decisions connect directly to
+          scientific velocity and compliance.
+        </p>
+      </div>
+      <div class="u-container">
+        <ApplicationSkills client:visible />
+      </div>
+    </section>
+
+    <section class="section" id="experience" data-reveal>
+      <div class="u-container section__heading">
+        <div>
+          <p class="u-title-overline">Experience</p>
+          <h2>Career progression anchored in translational impact</h2>
+        </div>
+        <p>
+          Roles span academia, biotech, and clinical product teams. Each chapter
+          reinforced the same mandate: pair scientific curiosity with hardened
+          delivery.
+        </p>
+      </div>
+      <div class="u-container experience">
+        {
+          experiences.map((job) => (
+            <article class="experience__item">
+              <header>
+                <h3>{job.role}</h3>
+                <p>{job.org}</p>
+                <span>{job.years}</span>
+              </header>
+              <p>{job.focus}</p>
+              <ul>
+                {job.impact.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section section--insights" id="insights" data-reveal>
+      <div class="u-container section__heading">
+        <div>
+          <p class="u-title-overline">Technical Insights</p>
+          <h2>Operating principles for reproducible, scalable science</h2>
+        </div>
+        <p>
+          Essays, conference talks, and internal runbooks that translate
+          infrastructure decisions into scientific leverage.
+        </p>
+      </div>
+      <div class="u-container insights__grid">
+        {
+          insights.map((insight) => (
+            <article class="insight-card">
+              <h3>{insight.title}</h3>
+              <p>{insight.summary}</p>
+            </article>
+          ))
+        }
+        <article class="insight-card insight-card--code">
+          <h3>Automation blueprint</h3>
+          <p>Workflow manifest powering adaptive sequencing orchestration.</p>
+          <pre><code>{codeSample}</code></pre>
+        </article>
+        <article class="insight-card insight-card--demo" data-reveal>
+          <SequenceWorkbench client:visible />
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--contact" id="contact" data-reveal>
+      <div class="u-container contact">
+        <div class="contact__copy">
+          <p class="u-title-overline">Contact</p>
+          <h2>Let’s design infrastructure that keeps pace with discovery</h2>
+          <p>
+            I partner with biotech, pharmaceutical, and research organisations
+            seeking to fuse cutting-edge computation with the realities of
+            regulated science.
+          </p>
+          <div class="contact__channels">
+            {
+              contactChannels.map((channel) => (
+                <a href={channel.href}>
+                  <span>{channel.label}</span>
+                  <strong>{channel.value}</strong>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class="contact__details">
+          <div>
+            <h3>Where I work best</h3>
+            <p>
+              Boston ↔ Remote-first teams operating across regulated and
+              research environments.
+            </p>
+          </div>
+          <div>
+            <h3>Engagement formats</h3>
+            <ul>
+              <li>Fractional platform leadership for bioinformatics teams</li>
+              <li>
+                Architecture sprints to harden sequencing and analytics
+                pipelines
+              </li>
+              <li>
+                Advisory for compliance-ready infrastructure and data governance
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <script>
+    const revealNodes = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+    revealNodes.forEach((node) => {
+      node.classList.add('is-reveal-ready');
+      observer.observe(node);
+    });
+  </script>
 </BaseLayout>
 
 <style>
-  main {
-    position: relative;
-    z-index: var(--z-fg);
+  :global(body) {
+    background-size: cover;
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+  }
+
+  .site-header__brand {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .site-header__brand p {
+    max-width: 58ch;
   }
 
   .hero {
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    padding: var(--sp-8) var(--sp-8) var(--sp-12) var(--sp-8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-block: clamp(var(--space-xl), 10vh, var(--space-3xl));
   }
 
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Additional spacing handled via global override below */
-  }
-
-  /* Increase inner spacing of the glass wrapper for hero */
-  .hero :global(.glassmorphic-container) {
-    padding-inline: clamp(var(--sp-16), 8vw, var(--sp-24));
-    padding-block: clamp(var(--sp-12), 6vw, var(--sp-16));
-    padding-bottom: clamp(var(--sp-14), 8vw, var(--sp-20));
-  }
-
-  .hero-grid {
+  .hero__inner {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    width: 100%;
-    margin: 0;
-    position: relative;
-    z-index: var(--z-fg);
+    gap: var(--space-xl);
   }
 
-  @media (min-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 2fr 1fr;
-      column-gap: var(--sp-20);
-      row-gap: var(--sp-12);
-    }
+  .hero__title {
+    font-size: var(--heading-display);
+    line-height: 1;
+    letter-spacing: -0.03em;
   }
 
-  @media (min-width: 1280px) {
-    .hero-grid {
-      column-gap: var(--sp-24);
-    }
+  .hero__title--accent {
+    display: block;
+    font-style: italic;
+    color: var(--color-primary);
   }
 
-  .hero-main {
+  .hero__lede {
+    font-size: var(--text-lg);
+    max-width: var(--size-readable);
+    margin-block: var(--space-md);
+  }
+
+  .hero__actions {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .hero__cta {
+    padding: 0.85rem 1.6rem;
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-primary) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 25%,
+      var(--color-surface)
+    );
+    color: var(--color-text);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: transform var(--duration-base) var(--ease-smooth);
+  }
+
+  .hero__cta--ghost {
+    background: transparent;
+  }
+
+  .hero__cta:hover,
+  .hero__cta:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .hero__metrics {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .hero__metric {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hero__metric h2 {
+    font-size: var(--heading-xl);
+    color: var(--color-primary-strong);
+  }
+
+  .hero__metric span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin-top: 0.35rem;
+  }
+
+  .section {
+    padding-block: clamp(var(--space-xl), 12vh, var(--space-3xl));
+  }
+
+  .section__heading {
+    display: grid;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .section__heading > p {
+    max-width: 68ch;
+  }
+
+  .projects__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .project-card {
     position: relative;
-    z-index: var(--z-fg);
-    width: 100%;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(in oklab, var(--color-surface) 88%, transparent 12%);
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: var(--space-md);
   }
 
-  .hero-title-container {
-    margin-bottom: var(--sp-12);
-    animation: fade-in-up 1s var(--ease-3) 0.2s both;
+  .project-card header h3 {
+    font-size: var(--heading-lg);
   }
 
-  @media (min-width: 1024px) {
-    .hero-title-container {
-      margin-bottom: var(--sp-16);
-    }
+  .project-card__content,
+  .project-card__footer,
+  .project-card__meta {
+    display: grid;
+    gap: var(--space-sm);
   }
 
-  .hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 300;
-    line-height: 0.8;
+  .project-card__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
     margin: 0;
   }
 
-  @media (min-width: 640px) {
-    .hero-title {
-      font-size: clamp(4rem, 10vw, 7rem);
-    }
+  .project-card__tags li {
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 12%,
+      var(--color-surface)
+    );
+    color: var(--color-primary-strong);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  @media (min-width: 1024px) {
-    .hero-title {
-      font-size: clamp(5rem, 12vw, 8rem);
-    }
+  .project-card__footer ul,
+  .project-card__meta ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.55rem;
   }
 
-  @media (min-width: 1280px) {
-    .hero-title {
-      font-size: clamp(6rem, 14vw, 9rem);
-    }
+  .project-card__footer li,
+  .project-card__meta li {
+    color: var(--color-text);
   }
 
-  .hero-name-primary {
-    display: block;
-    color: var(--coral);
-    font-weight: 700;
-    padding-bottom: var(--sp-4);
+  .project-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  .hero-name-secondary {
-    display: block;
-    color: var(--text-dark);
-    font-weight: 300;
-    margin-left: var(--sp-6);
-    margin-top: var(--sp-2);
-    padding-bottom: var(--sp-6);
+  .project-card--viz,
+  .project-card--dashboard {
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
   }
 
-  @media (min-width: 1024px) {
-    .hero-name-secondary {
-      margin-left: var(--sp-12);
-      margin-top: var(--sp-3);
-      padding-bottom: var(--sp-8);
-    }
+  .experience {
+    display: grid;
+    gap: var(--space-lg);
   }
 
-  .hero-bio {
-    max-width: 600px;
-    margin-left: 0;
-    animation: fade-in-up 1s var(--ease-3) 0.4s both;
+  .experience__item {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    display: grid;
+    gap: var(--space-sm);
   }
 
-  @media (min-width: 1024px) {
-    .hero-bio {
-      margin-left: var(--sp-8);
-      max-width: 700px;
-    }
+  .experience__item header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: baseline;
   }
 
-  .hero-bio-primary {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+  .experience__item header h3 {
+    font-size: var(--heading-md);
+  }
+
+  .experience__item ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text);
+  }
+
+  .section--insights {
+    background: color-mix(
+      in oklab,
+      var(--color-surface-muted) 25%,
+      var(--color-bg) 75%
+    );
+  }
+
+  .insights__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .insight-card {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 50%, transparent 50%);
+    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .insight-card h3 {
+    font-size: var(--heading-md);
+  }
+
+  .insight-card--code pre {
+    background: var(--color-code-bg);
+    color: var(--color-code-text);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+  }
+
+  .insight-card--code code {
+    font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--text-dark);
-    margin: 0 0 var(--sp-6) 0;
-    font-weight: 300;
   }
 
-  @media (min-width: 1024px) {
-    .hero-bio-primary {
-      font-size: clamp(1.3rem, 3.5vw, 1.6rem);
-    }
+  .section--contact {
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
   }
 
-  .hero-bio-secondary {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    line-height: 1.7;
-    color: color-mix(in oklab, var(--text-dark), transparent 25%);
-    margin: 0;
+  .contact {
+    display: grid;
+    gap: var(--space-xl);
   }
 
-  .highlight-text {
-    color: var(--coral);
-    font-weight: 500;
+  .contact__copy {
+    display: grid;
+    gap: var(--space-md);
   }
 
-  .hero-actions-container {
+  .contact__channels {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .contact__channels a {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: fit-content;
-    max-width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 12%,
+      var(--color-surface)
+    );
+    transition: transform var(--duration-base) var(--ease-smooth);
   }
 
-  @media (min-width: 1024px) {
-    .hero-actions-container {
-      align-items: flex-start;
-    }
-  }
-
-  .hero-cta-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-6);
-    width: 100%;
-    max-width: 320px;
-    animation: fade-in-up 1s var(--ease-3) 0.6s both;
-  }
-
-  .cta-primary,
-  .cta-secondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--sp-2);
-    padding: var(--sp-4) var(--sp-6);
-    border-radius: 50px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s var(--ease-3);
-    backdrop-filter: blur(var(--blur-12));
-    border: 1px solid;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-primary {
-    background: var(--glass-yellow);
-    border-color: color-mix(in oklab, var(--accent-yellow), transparent 70%);
-    color: var(--text-dark);
-  }
-
-  .cta-primary:hover {
-    background: var(--accent-yellow);
-    box-shadow: var(--shadow-xl);
-    transform: scale(1.05);
-  }
-
-  .cta-secondary {
-    background: var(--glass-mocha);
-    border-color: color-mix(in oklab, var(--mocha), transparent 70%);
-    color: var(--text-dark);
-  }
-
-  .cta-secondary:hover {
-    background: var(--mocha);
-    color: var(--warm-bg);
-    box-shadow: var(--shadow-xl);
-    transform: scale(1.05);
-  }
-
-  .cta-arrow {
-    transition: transform 0.3s var(--ease-3);
-  }
-
-  .cta-primary:hover .cta-arrow {
-    transform: translateY(4px);
-  }
-
-  .cta-secondary:hover .cta-arrow {
+  .contact__channels a:hover,
+  .contact__channels a:focus-visible {
     transform: translateX(4px);
   }
 
-  /* Removed hero-specific floating accent blob to keep only global blobs */
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: var(--sp-6);
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s var(--ease-in-out-3) infinite;
+  .contact__details {
+    display: grid;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 40%,
+      var(--color-surface) 60%
+    );
   }
 
-  .scroll-mouse {
-    width: 24px;
-    height: 40px;
-    border: 2px solid var(--coral);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
-  }
-
-  .scroll-dot {
-    width: 4px;
-    height: 12px;
-    background: var(--coral);
-    border-radius: 2px;
-    animation: pulse 2s var(--ease-in-out-3) infinite;
-  }
-
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes organic-float {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-20px) rotate(180deg);
-    }
-  }
-
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateX(-50%) translateY(0);
-    }
-    40% {
-      transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-      transform: translateX(-50%) translateY(-5px);
-    }
-  }
-
-  /* Mobile-friendly vertical-only bounce for static positioning */
-  @keyframes bounce-y {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.3;
-    }
-  }
-
-  .work-section {
-    padding: var(--sp-16) var(--sp-6);
-    display: flex;
-    justify-content: center;
-  }
-
-  :global(.work-container) {
-    width: 100%;
-    max-width: var(--container-xl);
-    margin: 0 auto;
-    padding: var(--size-6) !important;
-    overflow: visible;
-  }
-
-  .work-content {
-    width: 100%;
-    max-width: none;
-    margin: 0 auto;
-  }
-
-  .work-content :global(.bento) {
-    max-width: 1240px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  .work-content :global(.bento .grid) {
-    width: 100%;
-  }
-
-  /* No special gutter needed at this width; centered container avoids overlap */
-
-  .contact {
-    padding: var(--sp-8) var(--sp-6);
-    text-align: center;
-    margin-top: var(--sp-8);
-    display: flex;
-    justify-content: center;
-  }
-
-  .contact-content {
-    width: 100%;
-    max-width: var(--container-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-6);
-    text-align: center;
-    padding: var(--size-6) !important;
-  }
-
-  /* Timeline wrapper sizing */
-  .timeline-section {
-    padding: var(--sp-16) var(--sp-6);
-    display: flex;
-    justify-content: center;
-  }
-
-  :global(.timeline-container) {
-    width: 100%;
-    max-width: var(--container-xl);
-    margin: 0 auto;
-    padding: var(--size-8) !important;
-    overflow: visible; /* allow inner timeline visuals to extend without clipping */
-    display: flex;
-    justify-content: center;
-  }
-
-  @media (max-width: 767px) {
-    :global(.timeline-container) {
-      padding: var(--sp-7) var(--sp-3) !important;
-    }
-  }
-
-  /* Give the rightmost timeline card room and avoid clipping from component overflow */
-  :global(.timeline) {
-    padding-inline-end: calc(var(--sp-10) + var(--sp-8)) !important;
-    overflow: visible !important;
-  }
-
-  @media (max-width: 767px) {
-    .timeline-section {
-      padding: var(--sp-10) var(--sp-4);
-    }
-
-    :global(.timeline) {
-      padding-inline: var(--sp-3) !important;
-      padding-inline-end: var(--sp-3) !important;
-      padding-inline-start: var(--sp-3) !important;
-      margin-inline: auto;
-      max-width: 28rem;
-    }
-  }
-
-  .section-title {
-    font-size: var(--font-size-fluid-2);
-    font-weight: var(--font-weight-7);
-    line-height: var(--font-lineheight-1);
-    margin: 0 0 var(--size-8) 0;
-    color: var(--text-dark);
-    text-align: center;
-  }
-
-  .contact-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
-    color: color-mix(in oklab, var(--text-dark), transparent 15%);
+  .contact__details ul {
     margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text);
   }
 
-  .contact-actions {
-    display: flex;
-    gap: var(--sp-4);
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-content {
-      animation: none;
+  @media (min-width: 960px) {
+    .hero__inner {
+      grid-template-columns: 1fr minmax(320px, 420px);
+      align-items: end;
     }
 
-    .highlight::after {
-      animation: none;
-      transform: scaleX(1);
-    }
-  }
-
-  /* Add breathing room on desktop so content doesn't overlap the fixed sidebar */
-  @media (min-width: 1024px) {
-    .hero {
-      padding-left: calc(var(--sp-8) + 10rem);
+    .hero__metrics {
+      grid-template-columns: 1fr;
     }
 
-    .work-section {
-      padding-left: calc(var(--sp-16) + 10rem);
+    .projects__grid {
+      grid-template-columns: repeat(12, 1fr);
     }
 
-    .timeline-section {
-      padding-left: calc(var(--sp-16) + 10rem);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .hero {
-      padding: var(--sp-6) var(--sp-6) var(--sp-8) var(--sp-6);
-      min-height: 100vh;
+    .project-card--wide {
+      grid-column: span 8;
     }
 
-    .hero-main {
-      justify-content: center;
+    .project-card--standard {
+      grid-column: span 4;
     }
 
-    .hero-actions-container {
-      justify-content: center;
+    .project-card--viz {
+      grid-column: span 6;
     }
 
-    .hero-grid {
-      gap: var(--sp-6);
+    .project-card--tall {
+      grid-column: span 6;
     }
 
-    .hero-bio {
-      margin-left: 0;
-      max-width: 100%;
+    .project-card--dashboard {
+      grid-column: span 6;
     }
 
-    .hero-bio-primary {
-      margin-bottom: var(--sp-4);
+    .experience {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .hero-name-secondary {
-      margin-left: var(--sp-3);
-      margin-top: var(--sp-1);
+    .insights__grid {
+      grid-template-columns: repeat(12, 1fr);
     }
 
-    .hero-actions-container {
-      align-items: center;
+    .insight-card {
+      grid-column: span 4;
     }
 
-    .hero-cta-wrapper {
-      gap: var(--sp-4);
+    .insight-card--code {
+      grid-column: span 5;
     }
 
-    /* Mobile: move scroll indicator below CTAs and center it */
-    .scroll-indicator {
-      position: static;
-      left: auto;
-      bottom: auto;
-      transform: none;
-      margin: clamp(var(--sp-8), 8vw, var(--sp-12)) auto 0 auto; /* extra breathing room below CTA stack */
-      align-self: center; /* ensure indicator stays centered within flex column */
-      animation-name: bounce-y; /* vertical-only bounce for static positioning */
-    }
-
-    /* Slightly smaller, subtler indicator on mobile */
-    .scroll-mouse {
-      width: 20px;
-      height: 34px;
-      border-radius: 10px;
-      padding-top: 6px;
-    }
-
-    .scroll-dot {
-      height: 10px;
-    }
-
-    .contact-actions {
-      flex-direction: column;
-      align-items: center;
+    .insight-card--demo {
+      grid-column: span 7;
+      padding: 0;
+      border: none;
+      background: none;
     }
 
     .contact {
-      padding: var(--sp-6) var(--sp-4);
-    }
-
-    .timeline-section {
-      padding: var(--sp-8) var(--sp-4);
-    }
-
-    :global(.timeline-container) {
-      padding: var(--sp-6) var(--sp-2) !important;
+      grid-template-columns: 1fr 0.85fr;
+      align-items: start;
     }
   }
 
-  /* Hide scroll indicator on very tight vertical spaces on mobile */
-  @media (max-width: 767px) and (max-height: 600px) {
-    .scroll-indicator {
-      display: none;
+  @media (max-width: 720px) {
+    .hero__title {
+      font-size: clamp(3.5rem, 12vw, 4.75rem);
+    }
+
+    .project-card {
+      padding: var(--space-md);
     }
   }
 </style>
