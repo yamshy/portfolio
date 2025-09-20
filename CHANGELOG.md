@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.7.0](https://github.com/yamshy/portfolio/compare/v4.6.0...v4.7.0) (2025-09-20)
+
+### Features
+
+* emphasize reliability scale efficiency metrics ([#92](https://github.com/yamshy/portfolio/issues/92)) ([7937664](https://github.com/yamshy/portfolio/commit/79376643685ade0e13ff7ec6abdd571addac7324))
+
 ## [4.6.0](https://github.com/yamshy/portfolio/compare/v4.5.6...v4.6.0) (2025-09-20)
 
 ### Features
