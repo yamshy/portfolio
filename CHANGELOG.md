@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.5.5](https://github.com/yamshy/portfolio/compare/v4.5.4...v4.5.5) (2025-09-20)
+
+### Bug Fixes
+
+* remove phd honorific from header ([#88](https://github.com/yamshy/portfolio/issues/88)) ([e5cbcfe](https://github.com/yamshy/portfolio/commit/e5cbcfe16c707f32bae5bea28c96c2c40fbf5dcd))
+
 ## [4.5.4](https://github.com/yamshy/portfolio/compare/v4.5.3...v4.5.4) (2025-09-20)
 
 ### Bug Fixes
