@@ -13,14 +13,14 @@ A ground-up Astro redesign that communicates how computational biology, scientif
   - `SequenceWorkbench.svelte` offers in-browser sequence manipulation, k-mer searches, and quality highlighting for demos and workshops.
   - `ApplicationSkills.svelte` clusters competencies by Scientific Computing, Data Engineering, and Infrastructure.
 - **Adaptive theming** with AAA-compliant light/dark palettes (`src/styles/tokens.css`) anchored on Pantone 2025 Mocha Mousse, genomic greens, and protein-structure purples.
-- **View-transitions-ready navigation** via `BaseLayout.astro`, ensuring smooth section changes without sacrificing performance targets (<3s load, 100 Lighthouse aim).
+- **View-transitions-ready layout shell** via `BaseLayout.astro`, ensuring smooth section changes without sacrificing performance targets (<3s load, 100 Lighthouse aim).
 
 ## 🧱 Architecture & Stack
 
 | Layer      | Details                                                                                                                                            |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Framework  | [Astro 5](https://astro.build/) with View Transitions, incremental hydration, and Markdown-friendly content authoring.                             |
-| Islands    | Svelte 5 components provide telemetry, visualizations, and navigation micro-interactions only where needed.                                        |
+| Islands    | Svelte 5 components provide telemetry, visualizations, and focused micro-interactions only where needed.                                           |
 | Styling    | Vanilla CSS tokens/utility layers (`src/styles/tokens.css`, `utilities.css`, `animations.css`) plus Open Props primitives.                         |
 | Fonts      | Cormorant Garamond for headers and IBM Plex Sans for body copy, streamed from Google Fonts in `BaseLayout.astro` (no bundled font files required). |
 | Deployment | Static build served via Caddy in the provided Docker image (`Dockerfile`) with semantic-release automation.                                        |
@@ -35,9 +35,7 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 │   ├── assets/
 │   ├── components/
 │   │   ├── demos/SequenceWorkbench.svelte
-│   │   ├── effects/*
 │   │   ├── infrastructure/PipelineOpsDashboard.svelte
-│   │   ├── navigation/*
 │   │   ├── skills/ApplicationSkills.svelte
 │   │   ├── ui/ThemeToggle.svelte
 │   │   └── visualizations/Ic50Visualizer.svelte
@@ -47,8 +45,7 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 │   ├── pages/
 │   │   ├── index.astro
 │   │   └── case-studies/adaptive-ngs.astro
-│   ├── styles/{tokens.css,utilities.css,animations.css}
-│   └── utils/*
+│   └── styles/{tokens.css,utilities.css,animations.css}
 ├── tests/
 │   ├── e2e/*
 │   └── unit/*
