@@ -1,0 +1,416 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import PipelineOpsDashboard from '../../components/infrastructure/PipelineOpsDashboard.svelte';
+import Ic50Visualizer from '../../components/visualizations/Ic50Visualizer.svelte';
+
+const metrics = [
+  { label: 'Turnaround time', value: '36h → 9.4h' },
+  { label: 'Pipeline reliability', value: '99.82% success' },
+  { label: 'Regulatory readiness', value: 'Audit bundle in 2.1s' },
+];
+
+const phases = [
+  {
+    title: 'Assessment',
+    focus:
+      'Mapped failure modes across Bash, PBS, and notebook-driven workflows. Interviewed wet-lab scientists to quantify retry pain.',
+    output:
+      'Defined service-level objectives tied to reagent freshness and trial milestones.',
+  },
+  {
+    title: 'Platform design',
+    focus:
+      'Modeled Nextflow DAGs and data contracts. Codified GitOps policies aligning QA, bioinformatics, and compliance.',
+    output:
+      'Blueprint aligning container build provenance with regulatory attestations.',
+  },
+  {
+    title: 'Rollout & validation',
+    focus:
+      'Launched incremental cohorts behind feature flags; executed shadow runs with automated observability drills.',
+    output:
+      'Signed-off by QA after 30-day pilot with zero failed patient reports.',
+  },
+];
+
+const riskMitigations = [
+  {
+    label: 'Instrument drift',
+    detail:
+      'Edge agents streamed calibration metadata to Kafka; anomaly detection triggered auto-quarantine workflows before contaminating batches.',
+  },
+  {
+    label: 'Container provenance',
+    detail:
+      'SLSA Level 3 build pipeline enforced; attestations stored with cohort metadata enabling regulator replay.',
+  },
+  {
+    label: 'Human override',
+    detail:
+      'On-call scientists could pause DAG execution with Slack approvals while preserving stateful checkpoints.',
+  },
+];
+---
+
+<CaseStudyLayout
+  title="Adaptive NGS Orchestrator"
+  subtitle="A research-to-production pipeline that balances reagent shelf-life, GPU utilisation, and regulatory evidence."
+  tags={['NGS', 'Argo Workflows', 'Regulated Cloud', 'Observability']}
+  metrics={metrics}
+>
+  <section class="section" id="abstract" data-reveal>
+    <h2>Abstract</h2>
+    <p>
+      Helixion Therapeutics needed to move a critical sequencing pipeline off
+      fragile Bash scripts and onto resilient infrastructure before Phase II
+      trials. Nightly drops of reagent quality and GPU starvation forced
+      scientists into manual restarts, delaying enrolment. We reimagined the
+      pipeline as an adaptive system: event-driven orchestration,
+      compliance-aware artefact storage, and observability rooted in wet-lab
+      context.
+    </p>
+  </section>
+
+  <section class="section" id="methods" data-reveal>
+    <h2>Methods</h2>
+    <div class="two-column">
+      <article>
+        <h3>Workflow architecture</h3>
+        <p>
+          Sequencing stages were decomposed into <span class="u-code-inline"
+            >Nextflow</span
+          > modules deployed onto
+          <span class="u-code-inline">Argo Workflows</span> via GitOps. Each module
+          writes signed provenance bundles to <span class="u-code-inline"
+            >MinIO</span
+          >, while compute is scheduled across GPU and CPU node pools
+          orchestrated by <span class="u-code-inline">Karpenter</span>.
+        </p>
+        <ul>
+          <li>
+            Data contracts validate FASTQ, metadata, and reagent manifests at
+            ingest.
+          </li>
+          <li>
+            GPU queue depth signals autoscaling before robotics batches exit
+            incubators.
+          </li>
+          <li>
+            Secrets managed via Vault; short-lived tokens bound to workflow
+            run-time.
+          </li>
+        </ul>
+      </article>
+      <article>
+        <h3>Validation protocol</h3>
+        <p>
+          Every DAG change shipped through a controlled validation harness.
+          Synthetic runs compared variant calls against a gold-standard truth
+          set; 50th and 95th percentile deviations had to stay within 2%.
+          Observability drills replayed historical outages to ensure alert
+          coverage.
+        </p>
+        <ul>
+          <li>24h soak tests under simulated reagent degradation.</li>
+          <li>Shadow deployments mirrored production cohorts for 30 days.</li>
+          <li>
+            Compliance captured reviewers’ annotations directly in pull
+            requests.
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--results" id="results" data-reveal>
+    <h2>Results</h2>
+    <div class="results-grid">
+      <article>
+        <h3>Performance uplift</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Before</th>
+              <th>After</th>
+              <th>Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pipeline success</td>
+              <td>87.5%</td>
+              <td>99.82%</td>
+              <td>+12.32 pts</td>
+            </tr>
+            <tr>
+              <td>Mean turnaround</td>
+              <td>36h</td>
+              <td>9.4h</td>
+              <td>-73.9%</td>
+            </tr>
+            <tr>
+              <td>Rerun labour</td>
+              <td>1,120 hrs/mo</td>
+              <td>26 hrs/mo</td>
+              <td>-97.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article>
+        <h3>Scientific fidelity</h3>
+        <p>
+          Adaptive QC prevented reagent drift from corrupting downstream
+          analyses. The interactive dose-response view below shows how the
+          platform surfaced potency shifts early enough for biologists to
+          intervene.
+        </p>
+        <div class="results-grid__viz">
+          <Ic50Visualizer client:visible />
+        </div>
+      </article>
+      <article>
+        <h3>Regulatory operations</h3>
+        <ul>
+          <li>
+            Automated creation of CFR 21 Part 11 audit bundles in 2.1 seconds.
+          </li>
+          <li>
+            Immutable manifest linking sequencing data, container digests, and
+            reviewer sign-off.
+          </li>
+          <li>Zero critical findings during FDA pre-submission review.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="operations" data-reveal>
+    <h2>Operational telemetry</h2>
+    <p>
+      The control plane surfaces throughput, latency, and workflow reliability
+      to scientists—not just platform teams. Weekly operations reviews pair this
+      dashboard with reagent QC data to prioritise optimisation work.
+    </p>
+    <div class="operations">
+      <PipelineOpsDashboard client:visible />
+    </div>
+  </section>
+
+  <section class="section" id="risk" data-reveal>
+    <h2>Risk mitigations</h2>
+    <div class="mitigations">
+      {
+        riskMitigations.map((item) => (
+          <article>
+            <h3>{item.label}</h3>
+            <p>{item.detail}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" id="phases" data-reveal>
+    <h2>Implementation timeline</h2>
+    <ol class="phases">
+      {
+        phases.map((phase) => (
+          <li>
+            <h3>{phase.title}</h3>
+            <p>{phase.focus}</p>
+            <span>{phase.output}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section" id="next" data-reveal>
+    <h2>Next steps</h2>
+    <p>
+      Ongoing work focuses on adaptive resource management and clinical
+      integration. GPU scheduling is moving toward reinforcement learning
+      policies, while clinicians are piloting bedside review of sequencing
+      quality metrics via FHIR subscriptions.
+    </p>
+    <p>
+      Interested in replicating a similar platform? <a
+        href="mailto:mira@computational.bio">Let’s map the infrastructure</a
+      > together.
+    </p>
+  </section>
+</CaseStudyLayout>
+
+<style>
+  .section {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .section h2 {
+    font-size: var(--heading-lg);
+  }
+
+  .two-column {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .two-column article {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .two-column ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text);
+  }
+
+  .section--results {
+    background: color-mix(
+      in oklab,
+      var(--color-surface-muted) 20%,
+      var(--color-surface) 80%
+    );
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+  }
+
+  .results-grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .results-grid article {
+    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    text-align: left;
+    border-bottom: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  th {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+  }
+
+  .results-grid__viz {
+    padding: var(--space-md);
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+  }
+
+  .operations {
+    margin-top: var(--space-md);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+    padding: var(--space-md);
+  }
+
+  .mitigations {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .mitigations article {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+  }
+
+  .phases {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .phases li {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .phases span {
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+  }
+
+  @media (min-width: 900px) {
+    .two-column {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .results-grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .results-grid article:first-child {
+      grid-column: span 5;
+    }
+
+    .results-grid article:nth-child(2) {
+      grid-column: span 7;
+    }
+
+    .results-grid article:nth-child(3) {
+      grid-column: span 12;
+    }
+
+    .mitigations {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .phases {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

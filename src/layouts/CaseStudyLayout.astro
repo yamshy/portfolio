@@ -1,0 +1,171 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+type Metric = { label: string; value: string };
+type LayoutProps = {
+  title: string;
+  subtitle?: string;
+  metrics?: Metric[];
+  tags?: string[];
+  description?: string;
+};
+
+const {
+  title,
+  subtitle,
+  metrics = [],
+  tags = [],
+  description = 'Scientific case study detailing infrastructure, methods, and results.',
+} = Astro.props as LayoutProps;
+---
+
+<BaseLayout title={`${title} | Case Study`} description={description}>
+  <main class="case-study">
+    <header class="case-study__hero u-container" data-reveal>
+      <div>
+        <p class="u-title-overline">Research Case Study</p>
+        <h1>{title}</h1>
+        {subtitle && <p class="case-study__subtitle">{subtitle}</p>}
+        {
+          tags.length > 0 && (
+            <ul class="case-study__tags">
+              {tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+      {
+        metrics.length > 0 && (
+          <dl class="case-study__metrics">
+            {metrics.map((metric) => (
+              <div>
+                <dt>{metric.label}</dt>
+                <dd>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </header>
+
+    <div class="case-study__body">
+      <slot />
+    </div>
+  </main>
+  <script>
+    const revealNodes = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+    revealNodes.forEach((node) => {
+      node.classList.add('is-reveal-ready');
+      observer.observe(node);
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .case-study {
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+    min-height: 100vh;
+  }
+
+  .case-study__hero {
+    display: grid;
+    gap: var(--space-lg);
+    padding-block: clamp(var(--space-xl), 10vh, var(--space-3xl));
+  }
+
+  .case-study__hero h1 {
+    font-size: clamp(3.5rem, 4vw + 2rem, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .case-study__subtitle {
+    max-width: 68ch;
+    font-size: var(--text-lg);
+    margin-top: var(--space-sm);
+  }
+
+  .case-study__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: var(--space-sm) 0 0;
+  }
+
+  .case-study__tags li {
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 15%,
+      var(--color-surface)
+    );
+    color: var(--color-primary-strong);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .case-study__metrics {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 45%,
+      var(--color-surface) 55%
+    );
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .case-study__metrics div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .case-study__metrics dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-subtle);
+  }
+
+  .case-study__metrics dd {
+    margin: 0;
+    font-size: var(--heading-md);
+    color: var(--color-text);
+  }
+
+  .case-study__body {
+    width: min(100%, 920px);
+    margin-inline: auto;
+    padding: 0 clamp(var(--space-md), 6vw, var(--space-xl)) var(--space-3xl);
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 960px) {
+    .case-study__hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: end;
+    }
+  }
+</style>
