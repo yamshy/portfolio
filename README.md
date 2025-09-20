@@ -13,14 +13,14 @@ A ground-up Astro redesign that communicates how computational biology, scientif
   - `SequenceWorkbench.svelte` offers in-browser sequence manipulation, k-mer searches, and quality highlighting for demos and workshops.
   - `ApplicationSkills.svelte` clusters competencies by Scientific Computing, Data Engineering, and Infrastructure.
 - **Adaptive theming** with AAA-compliant light/dark palettes (`src/styles/tokens.css`) anchored on Pantone 2025 Mocha Mousse, genomic greens, and protein-structure purples.
-- **View-transitions-ready navigation** via `BaseLayout.astro`, ensuring smooth section changes without sacrificing performance targets (<3s load, 100 Lighthouse aim).
+- **View-transitions-ready layout** via `BaseLayout.astro`, ensuring smooth section changes without sacrificing performance targets (<3s load, 100 Lighthouse aim).
 
 ## 🧱 Architecture & Stack
 
 | Layer      | Details                                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Framework  | [Astro 5](https://astro.build/) with View Transitions, incremental hydration, and Markdown-friendly content authoring.     |
-| Islands    | Svelte 5 components provide telemetry, visualizations, and navigation micro-interactions only where needed.                |
+| Islands    | Svelte 5 components provide telemetry and visualization micro-interactions only where needed.                              |
 | Styling    | Vanilla CSS tokens/utility layers (`src/styles/tokens.css`, `utilities.css`, `animations.css`) plus Open Props primitives. |
 | Fonts      | Cormorant Garamond for headers and IBM Plex Sans for body copy (loaded in `BaseLayout.astro`).                             |
 | Deployment | Static build served via Caddy in the provided Docker image (`Dockerfile`) with semantic-release automation.                |
@@ -43,7 +43,6 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 │   │   │   ├── ThemeToggle.svelte
 │   │   │   ├── buttons/CTAButton.astro
 │   │   │   └── containers/GlassmorphicContainer.astro
-│   │   └── navigation/*
 │   ├── layouts/
 │   │   ├── BaseLayout.astro
 │   │   └── CaseStudyLayout.astro
@@ -105,7 +104,7 @@ CI replicates these checks and builds the Docker container for smoke validation 
 
 - Light/dark palettes maintain WCAG AAA contrast ratios and automatically honor `prefers-color-scheme` and `prefers-reduced-motion`.
 - Hydration is scoped to interactive islands only, keeping bundle sizes small and maintaining sub-3s load goals even on hospital Wi-Fi.
-- View Transitions and focus-visible states ensure smooth yet accessible navigation for keyboard and screen reader users.
+- View Transitions and focus-visible states ensure smooth yet accessible focus management for keyboard and screen reader users.
 
 ## 🤝 Contributing
 
