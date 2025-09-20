@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.5](https://github.com/yamshy/portfolio/compare/v4.11.4...v4.11.5) (2025-09-20)
+
+### Bug Fixes
+
+* reveal sections faster on mobile ([#110](https://github.com/yamshy/portfolio/issues/110)) ([b7a9ea0](https://github.com/yamshy/portfolio/commit/b7a9ea0938d74acc70a7bc8c2fd4b26ff47fdc38))
+
 ## [4.11.4](https://github.com/yamshy/portfolio/compare/v4.11.3...v4.11.4) (2025-09-20)
 
 ### Bug Fixes
