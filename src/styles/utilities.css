@@ -104,7 +104,7 @@
     border: 0;
   }
 
-  .is-reveal-ready {
+  :root[data-reveal-state='active'] [data-reveal] {
     opacity: 0;
     transform: translateY(40px);
     transition:
@@ -112,9 +112,15 @@
       transform var(--duration-slow) var(--ease-emphatic);
   }
 
-  .is-revealed {
+  :root[data-reveal-state='active'] [data-reveal].is-revealed {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .is-reveal-instant {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none !important;
   }
 
   @media (min-width: 72rem) {
