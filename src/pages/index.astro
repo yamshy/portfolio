@@ -573,7 +573,12 @@ spec:
               }
             });
           },
-          { threshold: 0.1, rootMargin: '0px 0px -10% 0px' },
+          {
+            // Lower threshold prevents tall sections (like Projects) from
+            // staying invisible for too long on mobile before the reveal runs.
+            threshold: 0,
+            rootMargin: '0px 0px -6% 0px',
+          },
         );
 
         const revealIfVisible = (node: Element) => {
