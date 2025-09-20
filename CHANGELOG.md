@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.5.4](https://github.com/yamshy/portfolio/compare/v4.5.3...v4.5.4) (2025-09-20)
+
+### Bug Fixes
+
+* reduce gap below hero ([#85](https://github.com/yamshy/portfolio/issues/85)) ([583ddc5](https://github.com/yamshy/portfolio/commit/583ddc5ec3cf2a1a74699232c10b411ad7f5fc55))
+
 ## [4.5.3](https://github.com/yamshy/portfolio/compare/v4.5.2...v4.5.3) (2025-09-20)
 
 ### Bug Fixes
