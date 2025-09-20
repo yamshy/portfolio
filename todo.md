@@ -8,7 +8,7 @@
   - [x] Professional tagline or value proposition
   - [x] Brief summary of expertise and focus areas
   - [x] Call-to-action or next steps for visitors
-- [x] Add About section with professional background and skills (via Professional Evolution Timeline)
+- [x] Add About section with professional background and skills (experience narrative)
   - [x] Professional background and experience
   - [x] Technical skills and technologies
   - [x] Soft skills and approach to work
@@ -37,11 +37,11 @@
   - [ ] Create blog post templates and styling
   - [ ] Add RSS feed and social sharing
   - [ ] Or remove blog navigation if not needed
-- [x] Add contact form with proper validation and email handling
-  - [x] Form validation (client-side and server-side)
-  - [ ] **HIGH PRIORITY**: Email service integration (Netlify Forms, Formspree, etc.)
-  - [x] Success/error message handling
-  - [ ] Spam protection (reCAPTCHA or similar)
+- [x] Build contact section with curated outreach channels
+  - [x] Surface direct email and scheduling links
+  - [x] Highlight professional communities (ResearchGate, GitHub)
+  - [ ] Evaluate asynchronous intake tooling (Formspree, Netlify, etc.)
+  - [ ] Add spam mitigation if interactive forms return
 
 ## 🚀 Technical Enhancements
 
@@ -62,7 +62,7 @@
   - [ ] Set up conversion tracking for contact form
 
 ### User Experience
-- [ ] **Project Card Modals**: Create popup/modal overlays for project cards with detailed descriptions instead of direct GitHub links
+- [ ] **Featured project overlays**: Create popup/modal overlays for case studies with detailed descriptions instead of direct GitHub links
   - [ ] Detailed project description with full context and goals
   - [ ] Complete list of technologies used with explanations
   - [ ] Key features and functionality highlights
@@ -84,42 +84,42 @@
 
 ### Development & Testing
 - [ ] Add unit tests and integration tests for components
-  - [ ] Test ProjectCard component functionality
+  - [ ] Validate featured project layout functionality
   - [ ] Test modal interactions and accessibility
   - [ ] Test responsive design across breakpoints
-  - [x] Test form validation and submission
+  - [x] Verify contact channel links and accessibility
   - [x] Set up CI/CD pipeline with automated testing
 
 ## 📋 Current Status
 
 **Completed:**
 - ✅ Basic Astro + Tailwind CSS setup
-- ✅ Component architecture (Header, ProjectCard, BaseLayout)
+- ✅ Component architecture (Header, BaseLayout, ThemeToggle)
 - ✅ Automated deployment with Docker and semantic-release
 - ✅ Responsive design foundation
 - ✅ Two sample projects with descriptions
 - ✅ **Codebase refactoring and architecture improvements**
   - ✅ Comprehensive TypeScript type definitions
-  - ✅ Reusable component library (GlassCard, FormInput)
+  - ✅ Reusable component library (ThemeToggle, organic visual effects)
   - ✅ Enhanced accessibility (skip links, ARIA labels, semantic HTML)
   - ✅ Optimized CSS and performance (16% bundle size reduction)
-  - ✅ Form validation with proper TypeScript types
+  - ✅ Structured content arrays for projects, experience, and insights
   - ✅ Tailwind configuration optimization
   - ✅ Color architecture using @theme directive
 - ✅ **Content and branding updates**
   - ✅ Authentic hero section with professional introduction
   - ✅ Professional tagline and value proposition
   - ✅ Biology to infrastructure engineering story
-  - ✅ Professional Evolution Timeline with accurate career progression
-  - ✅ Contact form with comprehensive validation and UI
+  - ✅ Experience storyline with accurate career progression
+  - ✅ Contact section with curated outreach channels and UI
 
 **In Progress:**
-- 🔄 Email service integration for contact form
+- 🔄 Email service integration for inbound requests
 
 **Next Steps (Priority Order):**
-1. **HIGH PRIORITY**: Add email service integration (Netlify Forms, Formspree, etc.) - Form currently only simulates submission
+1. **HIGH PRIORITY**: Add email service integration (Netlify, Formspree, etc.) to automate inbound requests — contact section currently directs to external links
 2. Create or source project thumbnail images
-3. Implement project card modals with detailed descriptions
+3. Implement featured project overlays with detailed descriptions
 4. Create dedicated resume/CV page with downloadable PDF
 5. Implement SEO meta tags and structured data
 6. Decide on blog functionality or remove placeholder

@@ -5,7 +5,7 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 ## 🔬 Feature Highlights
 
 - **Journal-inspired hero** with 96px serif typography, quantified impact metrics, and instant access to contact actions for clinical stakeholders.
-- **Bento project grid** detailing 4 hybrid case studies with problem/solution/stack/results/challenges narratives tailored to wet-lab and infrastructure leaders.
+- **Research-grade project section** presenting four hybrid case studies with problem/solution/stack/results/challenges narratives tailored to wet-lab and infrastructure leaders.
 - **Research-grade case study layout** (`src/layouts/CaseStudyLayout.astro`) supporting abstract → methods → results storytelling and live operational overlays.
 - **Interactive scientific islands**:
   - `Ic50Visualizer.svelte` renders on-the-fly dose–response curves with annotated IC₅₀ calculations.
@@ -36,14 +36,12 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 │   ├── assets/
 │   ├── components/
 │   │   ├── demos/SequenceWorkbench.svelte
+│   │   ├── effects/*
 │   │   ├── infrastructure/PipelineOpsDashboard.svelte
+│   │   ├── navigation/*
 │   │   ├── skills/ApplicationSkills.svelte
-│   │   ├── visualizations/Ic50Visualizer.svelte
-│   │   ├── ui/
-│   │   │   ├── ThemeToggle.svelte
-│   │   │   ├── buttons/CTAButton.astro
-│   │   │   └── containers/GlassmorphicContainer.astro
-│   │   └── navigation/*
+│   │   ├── ui/ThemeToggle.svelte
+│   │   └── visualizations/Ic50Visualizer.svelte
 │   ├── layouts/
 │   │   ├── BaseLayout.astro
 │   │   └── CaseStudyLayout.astro
