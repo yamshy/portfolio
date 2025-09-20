@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.0](https://github.com/yamshy/portfolio/compare/v4.10.0...v4.11.0) (2025-09-20)
+
+### Features
+
+* highlight university research experience ([#97](https://github.com/yamshy/portfolio/issues/97)) ([053c77d](https://github.com/yamshy/portfolio/commit/053c77df4e1c65b09270a43fc56499b115cf02da))
+
 ## [4.10.0](https://github.com/yamshy/portfolio/compare/v4.9.0...v4.10.0) (2025-09-20)
 
 ### Features
