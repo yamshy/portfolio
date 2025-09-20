@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.9.0](https://github.com/yamshy/portfolio/compare/v4.8.0...v4.9.0) (2025-09-20)
+
+### Features
+
+* align data engineering skills with real experience ([#94](https://github.com/yamshy/portfolio/issues/94)) ([8750ac5](https://github.com/yamshy/portfolio/commit/8750ac5bbf49a0340c439d2e3fcfa07a92886087))
+
 ## [4.8.0](https://github.com/yamshy/portfolio/compare/v4.7.0...v4.8.0) (2025-09-20)
 
 ### Features
