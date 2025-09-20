@@ -549,21 +549,34 @@ spec:
 
   <script>
     const revealNodes = document.querySelectorAll('[data-reveal]');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.25 },
-    );
-    revealNodes.forEach((node) => {
-      node.classList.add('is-reveal-ready');
-      observer.observe(node);
-    });
+    const reduceMotionQuery =
+      'matchMedia' in window
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : null;
+
+    if (reduceMotionQuery?.matches || !('IntersectionObserver' in window)) {
+      revealNodes.forEach((node) => {
+        node.classList.remove('is-reveal-ready');
+        node.classList.add('is-revealed');
+      });
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0 },
+      );
+
+      revealNodes.forEach((node) => {
+        node.classList.add('is-reveal-ready');
+        observer.observe(node);
+      });
+    }
   </script>
 </BaseLayout>
 
