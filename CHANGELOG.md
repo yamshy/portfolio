@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.5.3](https://github.com/yamshy/portfolio/compare/v4.5.2...v4.5.3) (2025-09-20)
+
+### Bug Fixes
+
+* align contact email link with contact details ([#84](https://github.com/yamshy/portfolio/issues/84)) ([0a4c01f](https://github.com/yamshy/portfolio/commit/0a4c01f8f482771099354f62f4f1d7f384a63714))
+
 ## [4.5.2](https://github.com/yamshy/portfolio/compare/v4.5.1...v4.5.2) (2025-09-19)
 
 ### Bug Fixes
