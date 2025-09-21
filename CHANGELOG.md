@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.12.1](https://github.com/yamshy/portfolio/compare/v4.12.0...v4.12.1) (2025-09-21)
+
+### Bug Fixes
+
+* restore original hero copy ([#117](https://github.com/yamshy/portfolio/issues/117)) ([8c5207d](https://github.com/yamshy/portfolio/commit/8c5207d122e0410f082fc949be6fb399757da0bf))
+
 ## [4.12.0](https://github.com/yamshy/portfolio/compare/v4.11.6...v4.12.0) (2025-09-21)
 
 ### Features
