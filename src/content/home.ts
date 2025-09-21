@@ -208,16 +208,6 @@ export const contactChannels: ContactChannel[] = [
     href: 'mailto:sajudia@proton.me',
   },
   {
-    label: 'Schedule',
-    value: 'cal.com/shyam-ajudia',
-    href: 'https://cal.com/shyam-ajudia',
-  },
-  {
-    label: 'ResearchGate',
-    value: 'researchgate.net/profile/Shyam-Ajudia',
-    href: 'https://researchgate.net/profile/Shyam-Ajudia',
-  },
-  {
     label: 'GitHub',
     value: 'github.com/yamshy',
     href: 'https://github.com/yamshy',
