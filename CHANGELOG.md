@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.13.0](https://github.com/yamshy/portfolio/compare/v4.12.1...v4.13.0) (2025-09-21)
+
+### Features
+
+* improve mobile navigation layout ([#118](https://github.com/yamshy/portfolio/issues/118)) ([0c4a174](https://github.com/yamshy/portfolio/commit/0c4a1746f57f4ee813d2bb863cb8abadcdd4da97))
+
 ## [4.12.1](https://github.com/yamshy/portfolio/compare/v4.12.0...v4.12.1) (2025-09-21)
 
 ### Bug Fixes
