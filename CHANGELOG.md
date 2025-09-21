@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.13.2](https://github.com/yamshy/portfolio/compare/v4.13.1...v4.13.2) (2025-09-21)
+
+### Bug Fixes
+
+* balance projects grid spacing ([#129](https://github.com/yamshy/portfolio/issues/129)) ([28f1e69](https://github.com/yamshy/portfolio/commit/28f1e69705a140af2ea1d3817432f4ba31ac355d))
+
 ## [4.13.1](https://github.com/yamshy/portfolio/compare/v4.13.0...v4.13.1) (2025-09-21)
 
 ### Bug Fixes
