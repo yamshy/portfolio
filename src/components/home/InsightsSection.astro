@@ -1,0 +1,109 @@
+---
+import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
+import type { Insight } from '../../content/home';
+
+interface Props {
+  insights: Insight[];
+  codeSample: string;
+}
+
+const { insights, codeSample } = Astro.props as Props;
+---
+
+<section class="section section--insights" id="insights" data-reveal>
+  <div class="u-container section__heading">
+    <div>
+      <p class="u-title-overline">Technical Insights</p>
+      <h2>Operating principles for reproducible, scalable science</h2>
+    </div>
+    <p>
+      Essays, conference talks, and internal runbooks that translate
+      infrastructure decisions into scientific leverage.
+    </p>
+  </div>
+  <div class="u-container insights__grid">
+    {
+      insights.map((insight) => (
+        <article class="insight-card">
+          <h3>{insight.title}</h3>
+          <p>{insight.summary}</p>
+        </article>
+      ))
+    }
+    <article class="insight-card insight-card--code">
+      <h3>Automation blueprint</h3>
+      <p>Workflow manifest powering adaptive sequencing orchestration.</p>
+      <pre><code>{codeSample}</code></pre>
+    </article>
+    <article class="insight-card insight-card--demo" data-reveal>
+      <SequenceWorkbench client:visible />
+    </article>
+  </div>
+</section>
+
+<style>
+  .section--insights {
+    background: color-mix(
+      in oklab,
+      var(--color-surface-muted) 25%,
+      var(--color-bg) 75%
+    );
+  }
+
+  .insights__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .insight-card {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 50%, transparent 50%);
+    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .insight-card h3 {
+    font-size: var(--heading-md);
+  }
+
+  .insight-card--code pre {
+    background: var(--color-code-bg);
+    color: var(--color-code-text);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+  }
+
+  .insight-card--code code {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .insight-card--demo {
+    padding: 0;
+    border: none;
+    background: none;
+  }
+
+  @media (min-width: 960px) {
+    .insights__grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .insight-card {
+      grid-column: span 4;
+    }
+
+    .insight-card--code {
+      grid-column: span 5;
+    }
+
+    .insight-card--demo {
+      grid-column: span 7;
+    }
+  }
+</style>

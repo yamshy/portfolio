@@ -1,0 +1,17 @@
+:global(body) {
+  background-size: cover;
+}
+
+.section {
+  padding-block: clamp(var(--space-lg), 8vh, var(--space-2xl));
+}
+
+.section__heading {
+  display: grid;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.section__heading > p {
+  max-width: 68ch;
+}
