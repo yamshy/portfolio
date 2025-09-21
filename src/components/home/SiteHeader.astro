@@ -1,0 +1,37 @@
+---
+import ThemeToggle from '../ui/ThemeToggle.svelte';
+---
+
+<header class="site-header u-container" data-reveal>
+  <div class="site-header__brand">
+    <span class="u-pill">Shyam Ajudia</span>
+    <p>
+      Scientist-turned DevOps engineer translating bench workflows into
+      resilient cloud systems
+    </p>
+  </div>
+  <ThemeToggle client:idle />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+  }
+
+  .site-header__brand {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .site-header__brand > .u-pill {
+    justify-self: center;
+  }
+
+  .site-header__brand p {
+    max-width: 58ch;
+  }
+</style>

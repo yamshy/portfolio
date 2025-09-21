@@ -1,0 +1,88 @@
+---
+import type { Experience } from '../../content/home';
+
+interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props as Props;
+---
+
+<section class="section experience-section" id="experience" data-reveal>
+  <div class="u-container section__heading">
+    <div>
+      <p class="u-title-overline">Experience</p>
+      <h2>
+        Career progression from research to technical operations leadership
+      </h2>
+    </div>
+    <p>
+      Roles span academic research, biotechnology, and healthcare IT. Each
+      position strengthened the bridge between scientific discovery and scalable
+      technical implementation.
+    </p>
+  </div>
+  <div class="u-container experience">
+    {
+      experiences.map((job) => (
+        <article class="experience__item">
+          <header>
+            <h3>{job.role}</h3>
+            <p>{job.org}</p>
+            <span>{job.years}</span>
+          </header>
+          <p>{job.focus}</p>
+          <ul>
+            {job.impact.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .experience {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .experience__item {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .experience__item header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .experience__item header h3 {
+    font-size: var(--heading-md);
+  }
+
+  .experience__item ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text);
+  }
+
+  @media (min-width: 960px) {
+    .experience {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
