@@ -31,11 +31,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      include: [
-        'src/components/demos/**/*.svelte',
-        'src/components/ui/**/*.svelte',
-        'src/components/visualizations/**/*.svelte',
-      ],
+      include: ['src/components/**/*.svelte'],
       thresholds: {
         statements: 85,
         branches: 85,
