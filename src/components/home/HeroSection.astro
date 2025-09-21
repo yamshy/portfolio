@@ -1,0 +1,156 @@
+---
+import type { HeroStat } from '../../content/home';
+
+interface Props {
+  stats: HeroStat[];
+}
+
+const { stats } = Astro.props as Props;
+---
+
+<section class="hero" id="hero" data-reveal>
+  <div class="u-container hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">
+        From lab bench rigor
+        <span class="hero__title--accent">to production-grade reliability</span>
+      </h1>
+      <p class="hero__lede">
+        I moved from sequencing experiments to engineering the DevOps backbones
+        that keep them running. I design CI/CD pipelines, containerized
+        deployments, and infrastructure automation that preserve the
+        reproducibility I demanded at the bench while delivering the reliability
+        leaders expect in production. Recent work implementing GitHub Actions
+        workflows, managing Azure Container Apps, and developing Python
+        automation that cut processing time by 50% shows how I migrate
+        scientific teams onto scalable, observable cloud platforms.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="#contact">Collaborate</a>
+        <a class="hero__cta hero__cta--ghost" href="/case-studies/adaptive-ngs"
+          >View flagship case study</a
+        >
+      </div>
+    </div>
+    <div class="hero__metrics anim-stagger">
+      {
+        stats.map((stat) => (
+          <article class="hero__metric">
+            <h2>{stat.value}</h2>
+            <p>{stat.label}</p>
+            <span>{stat.context}</span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block-start: clamp(var(--space-xl), 10vh, var(--space-3xl));
+    padding-block-end: clamp(var(--space-lg), 6vh, var(--space-2xl));
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .hero__title {
+    font-size: var(--heading-display);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero__title--accent {
+    display: block;
+    font-style: italic;
+    color: var(--color-primary);
+  }
+
+  .hero__lede {
+    font-size: var(--text-lg);
+    max-width: var(--size-readable);
+    margin-block: var(--space-md);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .hero__cta {
+    padding: 0.85rem 1.6rem;
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-primary) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 25%,
+      var(--color-surface)
+    );
+    color: var(--color-text);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: transform var(--duration-base) var(--ease-smooth);
+  }
+
+  .hero__cta--ghost {
+    background: transparent;
+  }
+
+  .hero__cta:hover,
+  .hero__cta:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .hero__metrics {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .hero__metric {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hero__metric h2 {
+    font-size: var(--heading-xl);
+    color: var(--color-primary-strong);
+  }
+
+  .hero__metric span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin-top: 0.35rem;
+  }
+
+  @media (min-width: 960px) {
+    .hero__inner {
+      grid-template-columns: 1fr minmax(320px, 420px);
+      align-items: start;
+    }
+
+    .hero__metrics {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .hero__title {
+      font-size: clamp(3.5rem, 12vw, 4.75rem);
+    }
+  }
+</style>

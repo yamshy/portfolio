@@ -1,0 +1,82 @@
+---
+import type { ContactChannel } from '../../content/home';
+
+interface Props {
+  channels: ContactChannel[];
+}
+
+const { channels } = Astro.props as Props;
+---
+
+<section class="section section--contact" id="contact" data-reveal>
+  <div class="u-container contact">
+    <div class="contact__copy">
+      <p class="u-title-overline">Contact</p>
+      <h2>Let’s design infrastructure that keeps pace with discovery</h2>
+      <p>
+        I partner with biotech, pharmaceutical, and research organisations
+        seeking to fuse cutting-edge computation with the realities of regulated
+        science.
+      </p>
+      <div class="contact__channels">
+        {
+          channels.map((channel) => (
+            <a href={channel.href}>
+              <span>{channel.label}</span>
+              <strong>{channel.value}</strong>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section--contact {
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+  }
+
+  .contact {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .contact__copy {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .contact__channels {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .contact__channels a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 12%,
+      var(--color-surface)
+    );
+    transition: transform var(--duration-base) var(--ease-smooth);
+  }
+
+  .contact__channels a:hover,
+  .contact__channels a:focus-visible {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 960px) {
+    .contact {
+      grid-template-columns: 1fr 0.85fr;
+      align-items: start;
+    }
+  }
+</style>

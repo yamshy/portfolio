@@ -1,0 +1,285 @@
+---
+import Ic50Visualizer from '../visualizations/Ic50Visualizer.svelte';
+import PipelineOpsDashboard from '../infrastructure/PipelineOpsDashboard.svelte';
+import type { Project } from '../../content/home';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props as Props;
+---
+
+<section class="section projects" id="projects" data-reveal>
+  <div class="u-container section__heading">
+    <div>
+      <p class="u-title-overline">Featured Projects</p>
+      <h2>Hybrid programmes bridging lab reality and cloud scale</h2>
+    </div>
+    <p>
+      Each engagement pairs deep scientific context with hardened
+      infrastructure. Bento layout mirrors how these systems interlock:
+      orchestration, telemetry, governance, and human interfaces.
+    </p>
+  </div>
+
+  <div class="u-container projects__grid">
+    <article class="project-card project-card--wide u-glass" data-reveal>
+      <header>
+        <h3>{projects[0].title}</h3>
+        <p>{projects[0].summary}</p>
+      </header>
+      <div class="project-card__content">
+        <div>
+          <h4>Problem</h4>
+          <p>{projects[0].problem}</p>
+        </div>
+        <div>
+          <h4>Solution</h4>
+          <p>{projects[0].solution}</p>
+        </div>
+        <div>
+          <h4>Stack</h4>
+          <ul class="project-card__tags">
+            {projects[0].stack.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="project-card__footer">
+        <div>
+          <h4>Results</h4>
+          <ul>
+            {projects[0].results.map((result) => <li>{result}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>Technical Challenges</h4>
+          <ul>
+            {projects[0].challenges.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      {
+        projects[0].link && (
+          <a class="project-card__link" href={projects[0].link}>
+            Read research-style case study →
+          </a>
+        )
+      }
+    </article>
+
+    <article class="project-card project-card--standard" data-reveal>
+      <header>
+        <h3>{projects[1].title}</h3>
+        <p>{projects[1].summary}</p>
+      </header>
+      <dl>
+        <div>
+          <dt>Problem</dt>
+          <dd>{projects[1].problem}</dd>
+        </div>
+        <div>
+          <dt>Solution</dt>
+          <dd>{projects[1].solution}</dd>
+        </div>
+      </dl>
+      <div class="project-card__meta">
+        <h4>Stack</h4>
+        <ul class="project-card__tags">
+          {projects[1].stack.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Results</h4>
+        <ul>
+          {projects[1].results.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Technical Challenges</h4>
+        <ul>
+          {projects[1].challenges.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </article>
+
+    <div class="project-card project-card--viz" data-reveal>
+      <Ic50Visualizer client:visible />
+    </div>
+
+    <article class="project-card project-card--tall" data-reveal>
+      <header>
+        <h3>{projects[2].title}</h3>
+        <p>{projects[2].summary}</p>
+      </header>
+      <div class="project-card__meta">
+        <h4>Problem</h4>
+        <p>{projects[2].problem}</p>
+        <h4>Solution</h4>
+        <p>{projects[2].solution}</p>
+      </div>
+      <div class="project-card__meta">
+        <h4>Stack</h4>
+        <ul class="project-card__tags">
+          {projects[2].stack.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Results</h4>
+        <ul>
+          {projects[2].results.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Technical Challenges</h4>
+        <ul>
+          {projects[2].challenges.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </article>
+
+    <article class="project-card project-card--standard" data-reveal>
+      <header>
+        <h3>{projects[3].title}</h3>
+        <p>{projects[3].summary}</p>
+      </header>
+      <dl>
+        <div>
+          <dt>Problem</dt>
+          <dd>{projects[3].problem}</dd>
+        </div>
+        <div>
+          <dt>Solution</dt>
+          <dd>{projects[3].solution}</dd>
+        </div>
+      </dl>
+      <div class="project-card__meta">
+        <h4>Stack</h4>
+        <ul class="project-card__tags">
+          {projects[3].stack.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Results</h4>
+        <ul>
+          {projects[3].results.map((item) => <li>{item}</li>)}
+        </ul>
+        <h4>Technical Challenges</h4>
+        <ul>
+          {projects[3].challenges.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </article>
+
+    <div class="project-card project-card--dashboard" data-reveal>
+      <PipelineOpsDashboard client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .project-card {
+    position: relative;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: color-mix(in oklab, var(--color-surface) 88%, transparent 12%);
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .project-card header h3 {
+    font-size: var(--heading-lg);
+  }
+
+  .project-card__content,
+  .project-card__footer,
+  .project-card__meta {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .project-card__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project-card__tags li {
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 12%,
+      var(--color-surface)
+    );
+    color: var(--color-primary-strong);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-card__footer ul,
+  .project-card__meta ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .project-card__footer li,
+  .project-card__meta li {
+    color: var(--color-text);
+  }
+
+  .project-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-card--viz,
+  .project-card--dashboard {
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  @media (min-width: 960px) {
+    .projects__grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .project-card--wide {
+      grid-column: span 8;
+    }
+
+    .project-card--standard {
+      grid-column: span 4;
+    }
+
+    .project-card--viz {
+      grid-column: span 6;
+    }
+
+    .project-card--tall {
+      grid-column: span 6;
+    }
+
+    .project-card--dashboard {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .project-card {
+      padding: var(--space-md);
+    }
+  }
+</style>
