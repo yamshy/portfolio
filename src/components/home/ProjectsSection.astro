@@ -51,7 +51,7 @@ const { projects } = Astro.props as Props;
     gap: var(--space-lg);
   }
 
-  .project-card {
+  :global(.project-card) {
     position: relative;
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
@@ -61,20 +61,26 @@ const { projects } = Astro.props as Props;
     box-shadow: var(--shadow-sm);
     display: grid;
     gap: var(--space-md);
+    align-content: start;
   }
 
-  .project-card header h3 {
+  :global(.project-card header) {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  :global(.project-card header h3) {
     font-size: var(--heading-lg);
   }
 
-  .project-card__content,
-  .project-card__footer,
-  .project-card__meta {
+  :global(.project-card__content),
+  :global(.project-card__footer),
+  :global(.project-card__meta) {
     display: grid;
     gap: var(--space-sm);
   }
 
-  .project-card__tags {
+  :global(.project-card__tags) {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +89,7 @@ const { projects } = Astro.props as Props;
     margin: 0;
   }
 
-  .project-card__tags li {
+  :global(.project-card__tags li) {
     padding: 0.35rem 0.75rem;
     border-radius: var(--radius-sm);
     background: color-mix(
@@ -97,8 +103,8 @@ const { projects } = Astro.props as Props;
     text-transform: uppercase;
   }
 
-  .project-card__footer ul,
-  .project-card__meta ul {
+  :global(.project-card__footer ul),
+  :global(.project-card__meta ul) {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -106,12 +112,12 @@ const { projects } = Astro.props as Props;
     gap: 0.55rem;
   }
 
-  .project-card__footer li,
-  .project-card__meta li {
+  :global(.project-card__footer li),
+  :global(.project-card__meta li) {
     color: var(--color-text);
   }
 
-  .project-card__link {
+  :global(.project-card__link) {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -129,24 +135,61 @@ const { projects } = Astro.props as Props;
     box-shadow: none;
   }
 
+  :global(.project-card--wide) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(var(--space-md), 2.6vw, var(--space-xl));
+  }
+
+  :global(.project-card--wide > *) {
+    grid-column: span 12;
+  }
+
+  :global(.project-card--wide .project-card__content),
+  :global(.project-card--wide .project-card__footer) {
+    gap: clamp(var(--space-sm), 1.8vw, var(--space-lg));
+    align-content: start;
+  }
+
+  :global(.project-card--wide .project-card__content > *),
+  :global(.project-card--wide .project-card__footer > *) {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
   @media (min-width: 960px) {
     .projects__grid {
       grid-template-columns: repeat(12, 1fr);
     }
 
-    .project-card--wide {
+    :global(.project-card--wide) {
       grid-column: span 8;
+      align-items: start;
     }
 
-    .project-card--standard {
+    :global(.project-card--standard) {
       grid-column: span 4;
+    }
+
+    :global(.project-card--wide .project-card__content) {
+      grid-column: span 7;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    :global(.project-card--wide .project-card__footer) {
+      grid-column: span 5;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    :global(.project-card--wide .project-card__link) {
+      grid-column: span 12;
+      justify-self: start;
     }
 
     .project-card--viz {
       grid-column: span 6;
     }
 
-    .project-card--tall {
+    :global(.project-card--tall) {
       grid-column: span 6;
     }
 
@@ -156,7 +199,7 @@ const { projects } = Astro.props as Props;
   }
 
   @media (max-width: 720px) {
-    .project-card {
+    :global(.project-card) {
       padding: var(--space-md);
     }
   }
