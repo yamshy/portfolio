@@ -20,7 +20,7 @@
     --text-sm: 0.875rem;
 
     /* Sizing & spacing */
-    --size-max-width: 1240px;
+    --size-max-width: clamp(1240px, 92vw, 2400px);
     --size-readable: 68ch;
     --space-2xs: 0.375rem;
     --space-xs: 0.625rem;
