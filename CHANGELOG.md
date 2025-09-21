@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.13.1](https://github.com/yamshy/portfolio/compare/v4.13.0...v4.13.1) (2025-09-21)
+
+### Bug Fixes
+
+* define mobile nav shadow token ([#126](https://github.com/yamshy/portfolio/issues/126)) ([d4e2c9c](https://github.com/yamshy/portfolio/commit/d4e2c9c7084dc5bd866293f428ae0c8477c476bd))
+
 ## [4.13.0](https://github.com/yamshy/portfolio/compare/v4.12.1...v4.13.0) (2025-09-21)
 
 ### Features
