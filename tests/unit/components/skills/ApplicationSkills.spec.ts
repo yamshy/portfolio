@@ -4,40 +4,41 @@ import { describe, expect, it } from 'vitest';
 import ApplicationSkills from '../../../../src/components/skills/ApplicationSkills.svelte';
 
 describe('ApplicationSkills', () => {
-  it('shows the default category and switches details when selecting another', async () => {
+  it('shows the default category details and updates when selecting another category', async () => {
     render(ApplicationSkills);
 
-    const defaultButton = screen.getByRole('button', {
-      name: 'Scientific Computing',
+    const scientificButton = screen.getByRole('button', {
+      name: /scientific computing/i,
     });
-    expect(defaultButton).toHaveClass('selected');
-    expect(
-      screen.getByRole('heading', { level: 4, name: 'Scientific Computing' }),
-    ).toBeInTheDocument();
 
-    const infrastructureButton = screen.getByRole('button', {
-      name: 'Infrastructure Engineering',
-    });
-    expect(infrastructureButton).not.toHaveClass('selected');
-
-    await fireEvent.click(infrastructureButton);
-
-    expect(infrastructureButton).toHaveClass('selected');
-    expect(defaultButton).not.toHaveClass('selected');
-    expect(
-      screen.getByRole('heading', {
-        level: 4,
-        name: 'Infrastructure Engineering',
-      }),
-    ).toBeInTheDocument();
+    expect(scientificButton).toHaveClass('selected');
     expect(
       screen.getByText(
-        'Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization',
+        /High-performance compute pipelines translating raw sequencer output into audit-ready biology/i,
       ),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Docker, GitHub Actions, Python automation, Bash scripting',
+        /Orchestrated RNA\/DNA-seq and variant calling through Nextflow Tower on AWS Batch/i,
+      ),
+    ).toBeInTheDocument();
+
+    const infrastructureButton = screen.getByRole('button', {
+      name: /infrastructure engineering/i,
+    });
+
+    await fireEvent.click(infrastructureButton);
+
+    expect(infrastructureButton).toHaveClass('selected');
+    expect(scientificButton).not.toHaveClass('selected');
+    expect(
+      screen.getByText(
+        /Hybrid cloud infrastructure connecting laboratory sequencers to computational pipelines/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization/i,
       ),
     ).toBeInTheDocument();
   });
