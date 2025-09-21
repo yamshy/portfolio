@@ -207,7 +207,11 @@ const navLinks = [
       border: 1px solid
         color-mix(in oklab, var(--color-border) 78%, transparent 22%);
       box-shadow: 0 24px 36px -22px
-        color-mix(in oklab, var(--color-shadow) 45%, transparent 55%);
+        color-mix(
+          in oklab,
+          var(--color-shadow, rgba(32, 22, 17, 0.65)) 45%,
+          transparent 55%
+        );
       opacity: 1;
       visibility: visible;
       pointer-events: auto;

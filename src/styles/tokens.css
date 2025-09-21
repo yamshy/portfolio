@@ -38,6 +38,7 @@
     --shadow-sm: 0 6px 12px -8px rgba(10, 7, 5, 0.25);
     --shadow-md: 0 20px 40px -30px rgba(10, 7, 5, 0.6);
     --shadow-lg: 0 40px 70px -45px rgba(0, 0, 0, 0.75);
+    --color-shadow: rgba(32, 22, 17, 0.65);
 
     /* Motion */
     --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
@@ -60,6 +61,7 @@
     --color-text-muted: #4a3b33;
     --color-text-subtle: #6e5c54;
     --color-border: #d6c3b7;
+    --color-shadow: rgba(32, 22, 17, 0.65);
     --color-science-green: #297b66;
     --color-science-purple: #5c4b88;
     --color-science-amber: #d7893c;
@@ -98,6 +100,7 @@
     --color-text-muted: #d5c7bf;
     --color-text-subtle: #a8968d;
     --color-border: #4a362f;
+    --color-shadow: rgba(5, 3, 2, 0.85);
     --color-science-green: #4bd3b2;
     --color-science-purple: #9f8cd4;
     --color-science-amber: #f1c078;
