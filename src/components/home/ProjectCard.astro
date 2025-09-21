@@ -1,0 +1,142 @@
+---
+import type { Project } from '../../content/home';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props as Props;
+---
+
+{
+  (() => {
+    switch (project.layout) {
+      case 'wide':
+        return (
+          <article class="project-card project-card--wide u-glass" data-reveal>
+            <header>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+            </header>
+            <div class="project-card__content">
+              <div>
+                <h4>Problem</h4>
+                <p>{project.problem}</p>
+              </div>
+              <div>
+                <h4>Solution</h4>
+                <p>{project.solution}</p>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <ul class="project-card__tags">
+                  {project.stack.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div class="project-card__footer">
+              <div>
+                <h4>Results</h4>
+                <ul>
+                  {project.results.map((result) => (
+                    <li>{result}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4>Technical Challenges</h4>
+                <ul>
+                  {project.challenges.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            {project.link && (
+              <a class="project-card__link" href={project.link}>
+                Read research-style case study →
+              </a>
+            )}
+          </article>
+        );
+      case 'standard':
+        return (
+          <article class="project-card project-card--standard" data-reveal>
+            <header>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+            </header>
+            <dl>
+              <div>
+                <dt>Problem</dt>
+                <dd>{project.problem}</dd>
+              </div>
+              <div>
+                <dt>Solution</dt>
+                <dd>{project.solution}</dd>
+              </div>
+            </dl>
+            <div class="project-card__meta">
+              <h4>Stack</h4>
+              <ul class="project-card__tags">
+                {project.stack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <h4>Results</h4>
+              <ul>
+                {project.results.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <h4>Technical Challenges</h4>
+              <ul>
+                {project.challenges.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        );
+      case 'tall':
+        return (
+          <article class="project-card project-card--tall" data-reveal>
+            <header>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+            </header>
+            <div class="project-card__meta">
+              <h4>Problem</h4>
+              <p>{project.problem}</p>
+              <h4>Solution</h4>
+              <p>{project.solution}</p>
+            </div>
+            <div class="project-card__meta">
+              <h4>Stack</h4>
+              <ul class="project-card__tags">
+                {project.stack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <h4>Results</h4>
+              <ul>
+                {project.results.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <h4>Technical Challenges</h4>
+              <ul>
+                {project.challenges.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        );
+      default:
+        return null;
+    }
+  })()
+}
