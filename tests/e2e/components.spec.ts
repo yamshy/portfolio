@@ -21,6 +21,32 @@ test.describe('Home page experience', () => {
     await expect(page.locator('.hero__metric')).toHaveCount(3);
   });
 
+  test('supports toggling primary navigation on small screens', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 480, height: 900 });
+    await page.reload();
+
+    const toggle = page.getByRole('button', { name: /navigation menu/i });
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    const navigation = page.getByRole('navigation', {
+      name: 'Primary navigation',
+    });
+    await expect(navigation).not.toBeVisible();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(toggle).toHaveAccessibleName(/close navigation menu/i);
+    await expect(navigation).toBeVisible();
+
+    await page.getByRole('link', { name: 'Projects' }).click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(toggle).toHaveAccessibleName(/open navigation menu/i);
+    await expect(navigation).not.toBeVisible();
+  });
+
   test('displays featured projects and interactive modules', async ({
     page,
   }) => {

@@ -1,16 +1,49 @@
 ---
 import ThemeToggle from '../ui/ThemeToggle.svelte';
+
+const navLinks = [
+  { label: 'Overview', href: '#hero' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Insights', href: '#insights' },
+  { label: 'Contact', href: '#contact' },
+];
 ---
 
-<header class="site-header" data-reveal>
+<header class="site-header" data-reveal data-js="site-header">
   <div class="site-header__inner u-container">
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="site-nav__link" href="#hero">Overview</a>
-      <a class="site-nav__link" href="#projects">Projects</a>
-      <a class="site-nav__link" href="#skills">Skills</a>
-      <a class="site-nav__link" href="#experience">Experience</a>
-      <a class="site-nav__link" href="#insights">Insights</a>
-      <a class="site-nav__link" href="#contact">Contact</a>
+    <button
+      class="site-nav__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation menu"
+      data-js="nav-toggle"
+      data-state="closed"
+    >
+      <span class="site-nav__toggle-icon" aria-hidden="true">
+        <span class="site-nav__toggle-line"></span>
+        <span class="site-nav__toggle-line"></span>
+        <span class="site-nav__toggle-line"></span>
+      </span>
+      <span class="site-nav__toggle-label" data-js="nav-toggle-label">Menu</span
+      >
+    </button>
+    <nav
+      id="primary-navigation"
+      class="site-nav"
+      aria-label="Primary navigation"
+      data-js="primary-navigation"
+      data-state="open"
+    >
+      {
+        navLinks.map((link) => (
+          <a class="site-nav__link" href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
     <ThemeToggle client:idle />
   </div>
@@ -24,6 +57,8 @@ import ThemeToggle from '../ui/ThemeToggle.svelte';
       var(--color-surface) 65%
     );
     border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: 10;
   }
 
   .site-header__inner {
@@ -33,6 +68,7 @@ import ThemeToggle from '../ui/ThemeToggle.svelte';
     gap: var(--space-md);
     padding-block: clamp(var(--space-2xs), 1.2vw, var(--space-sm));
     flex-wrap: wrap;
+    position: relative;
   }
 
   .site-nav {
@@ -66,4 +102,283 @@ import ThemeToggle from '../ui/ThemeToggle.svelte';
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
   }
+
+  .site-nav__toggle {
+    display: none;
+  }
+
+  .site-nav__toggle-icon {
+    display: inline-flex;
+    position: relative;
+    width: 1.25rem;
+    height: 1rem;
+    margin-inline-end: 0.35rem;
+  }
+
+  .site-nav__toggle-line {
+    position: absolute;
+    inset-inline: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      transform var(--duration-base) var(--ease-smooth),
+      opacity var(--duration-base) var(--ease-smooth);
+  }
+
+  .site-nav__toggle-line:nth-child(1) {
+    top: 0;
+  }
+
+  .site-nav__toggle-line:nth-child(2) {
+    top: calc(50% - 1px);
+  }
+
+  .site-nav__toggle-line:nth-child(3) {
+    bottom: 0;
+  }
+
+  .site-nav__toggle[data-state='open'] .site-nav__toggle-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-nav__toggle[data-state='open'] .site-nav__toggle-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-nav__toggle[data-state='open'] .site-nav__toggle-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .site-nav__toggle-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  :global(body.has-mobile-nav-open) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 48rem) {
+    .site-header__inner {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .site-nav {
+      position: absolute;
+      top: calc(100% + var(--space-xs));
+      right: 0;
+      left: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: clamp(var(--space-2xs), 2.6vw, var(--space-sm));
+      padding: clamp(var(--space-sm), 4vw, var(--space-lg));
+      border-radius: var(--radius-md);
+      background: color-mix(
+        in oklab,
+        var(--color-surface-strong) 92%,
+        var(--color-surface) 8%
+      );
+      border: 1px solid
+        color-mix(in oklab, var(--color-border) 78%, transparent 22%);
+      box-shadow: 0 24px 36px -22px
+        color-mix(in oklab, var(--color-shadow) 45%, transparent 55%);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition:
+        opacity var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth),
+        visibility 0s linear;
+      z-index: 5;
+    }
+
+    .site-nav[data-state='closed'] {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-0.5rem);
+      transition:
+        opacity var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth),
+        visibility 0s linear var(--duration-base);
+    }
+
+    .site-nav__link {
+      width: 100%;
+      font-size: clamp(var(--text-md), 4.2vw, var(--text-lg));
+      justify-content: space-between;
+    }
+
+    .site-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3xs);
+      border: 1px solid
+        color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+      border-radius: var(--radius-sm);
+      padding-inline: clamp(var(--space-xs), 3vw, var(--space-sm));
+      padding-block: 0.4rem;
+      background: color-mix(
+        in oklab,
+        var(--color-surface-strong) 65%,
+        var(--color-surface) 35%
+      );
+      color: var(--color-text);
+      cursor: pointer;
+      transition:
+        background var(--duration-base) var(--ease-smooth),
+        transform var(--duration-base) var(--ease-smooth);
+    }
+
+    .site-nav__toggle:hover,
+    .site-nav__toggle:focus-visible {
+      background: color-mix(
+        in oklab,
+        var(--color-surface-strong) 75%,
+        var(--color-surface) 25%
+      );
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav,
+    .site-nav[data-state='closed'],
+    .site-nav__toggle-line,
+    .site-nav__toggle {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
 </style>
+
+<script is:inline>
+  const DESKTOP_BREAKPOINT = '(min-width: 48rem)';
+
+  const setupMobileNav = () => {
+    const header = document.querySelector('[data-js="site-header"]');
+
+    if (!header || header.dataset.mobileNavReady === 'true') {
+      return;
+    }
+
+    const nav = header.querySelector('[data-js="primary-navigation"]');
+    const toggle = header.querySelector('[data-js="nav-toggle"]');
+    const navLabel = header.querySelector('[data-js="nav-toggle-label"]');
+
+    if (!nav || !toggle) {
+      return;
+    }
+
+    header.dataset.mobileNavReady = 'true';
+
+    const linkElements = Array.from(nav.querySelectorAll('a'));
+    const desktopQuery = window.matchMedia(DESKTOP_BREAKPOINT);
+
+    let isOpen = false;
+
+    const updateNavState = (open) => {
+      const isDesktop = desktopQuery.matches;
+
+      if (isDesktop) {
+        nav.dataset.state = 'open';
+        toggle.dataset.state = 'closed';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        if (navLabel) {
+          navLabel.textContent = 'Menu';
+        }
+        nav.removeAttribute('aria-hidden');
+        document.body.classList.remove('has-mobile-nav-open');
+        return;
+      }
+
+      nav.dataset.state = open ? 'open' : 'closed';
+      toggle.dataset.state = open ? 'open' : 'closed';
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute(
+        'aria-label',
+        open ? 'Close navigation menu' : 'Open navigation menu',
+      );
+
+      if (navLabel) {
+        navLabel.textContent = open ? 'Close' : 'Menu';
+      }
+
+      if (open) {
+        nav.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('has-mobile-nav-open');
+      } else {
+        nav.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('has-mobile-nav-open');
+      }
+    };
+
+    const openNav = () => {
+      isOpen = true;
+      updateNavState(isOpen);
+    };
+
+    const closeNav = () => {
+      isOpen = false;
+      updateNavState(isOpen);
+    };
+
+    const onToggle = () => {
+      if (isOpen) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    };
+
+    const onKeydown = (event) => {
+      if (event.key === 'Escape') {
+        closeNav();
+      }
+    };
+
+    const handleDesktopChange = (event) => {
+      if (event.matches) {
+        isOpen = false;
+        updateNavState(isOpen);
+      } else {
+        updateNavState(isOpen);
+      }
+    };
+
+    toggle.addEventListener('click', onToggle);
+    window.addEventListener('keydown', onKeydown);
+    linkElements.forEach((link) => {
+      link.addEventListener('click', closeNav);
+    });
+
+    desktopQuery.addEventListener?.('change', handleDesktopChange);
+    desktopQuery.addListener?.(handleDesktopChange);
+
+    updateNavState(isOpen);
+
+    const cleanup = () => {
+      closeNav();
+      toggle.removeEventListener('click', onToggle);
+      window.removeEventListener('keydown', onKeydown);
+      linkElements.forEach((link) => {
+        link.removeEventListener('click', closeNav);
+      });
+      desktopQuery.removeEventListener?.('change', handleDesktopChange);
+      desktopQuery.removeListener?.(handleDesktopChange);
+      document.body.classList.remove('has-mobile-nav-open');
+      delete header.dataset.mobileNavReady;
+    };
+
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  };
+
+  setupMobileNav();
+  document.addEventListener('astro:page-load', setupMobileNav);
+</script>
