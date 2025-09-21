@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.11.6](https://github.com/yamshy/portfolio/compare/v4.11.5...v4.11.6) (2025-09-21)
+
+### Bug Fixes
+
+* keep reveal scripts inline ([#112](https://github.com/yamshy/portfolio/issues/112)) ([a93029c](https://github.com/yamshy/portfolio/commit/a93029c5b1dbeddf4069e8dc32e4422cc5698b95))
+
 ## [4.11.5](https://github.com/yamshy/portfolio/compare/v4.11.4...v4.11.5) (2025-09-20)
 
 ### Bug Fixes
