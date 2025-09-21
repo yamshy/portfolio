@@ -220,15 +220,18 @@ spec:
 ---
 
 <BaseLayout>
-  <header class="site-header u-container" data-reveal>
-    <div class="site-header__brand">
-      <span class="u-pill">Shyam Ajudia</span>
-      <p>
-        Scientist-turned DevOps engineer translating bench workflows into
-        resilient cloud systems
-      </p>
+  <header class="site-header" data-reveal>
+    <div class="site-header__inner u-container">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="site-nav__link" href="#hero">Overview</a>
+        <a class="site-nav__link" href="#projects">Projects</a>
+        <a class="site-nav__link" href="#skills">Skills</a>
+        <a class="site-nav__link" href="#experience">Experience</a>
+        <a class="site-nav__link" href="#insights">Insights</a>
+        <a class="site-nav__link" href="#contact">Contact</a>
+      </nav>
+      <ThemeToggle client:idle />
     </div>
-    <ThemeToggle client:idle />
   </header>
 
   <main>
@@ -622,24 +625,53 @@ spec:
   }
 
   .site-header {
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 35%,
+      var(--color-surface) 65%
+    );
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-md);
-    padding-block: var(--space-md);
+    padding-block: clamp(var(--space-2xs), 1.2vw, var(--space-sm));
+    flex-wrap: wrap;
   }
 
-  .site-header__brand {
-    display: grid;
-    gap: 0.75rem;
+  .site-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(var(--space-2xs), 1.6vw, var(--space-sm));
   }
 
-  .site-header__brand > .u-pill {
-    justify-self: center;
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-serif);
+    font-size: var(--text-md);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-block: 0.25rem;
+    padding-inline: 0.35rem;
+    color: color-mix(
+      in oklab,
+      var(--color-text) 82%,
+      var(--color-text-muted) 18%
+    );
+    transition: color var(--duration-base) var(--ease-smooth);
   }
 
-  .site-header__brand p {
-    max-width: 58ch;
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible {
+    color: var(--color-primary-strong);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   .hero {
