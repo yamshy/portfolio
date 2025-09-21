@@ -11,6 +11,7 @@ const { stats } = Astro.props as Props;
 <section class="hero" id="hero" data-reveal>
   <div class="u-container hero__inner">
     <div class="hero__copy">
+      <p class="hero__name">Shyam Ajudia</p>
       <h1 class="hero__title">
         From lab bench rigor
         <span class="hero__title--accent">to production-grade reliability</span>
@@ -58,9 +59,19 @@ const { stats } = Astro.props as Props;
   }
 
   .hero__title {
-    font-size: var(--heading-display);
-    line-height: 1;
+    font-size: clamp(2.85rem, 4vw + 1.6rem, 5.75rem);
+    line-height: 1.12;
     letter-spacing: -0.03em;
+  }
+
+  .hero__name {
+    margin: 0 0 clamp(var(--space-xs), 1.2vh, var(--space-sm));
+    font-family: var(--font-serif);
+    font-size: var(--heading-display);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-primary-strong);
   }
 
   .hero__title--accent {
@@ -149,8 +160,12 @@ const { stats } = Astro.props as Props;
   }
 
   @media (max-width: 720px) {
+    .hero__name {
+      font-size: clamp(2.75rem, 10vw + 0.6rem, 4.75rem);
+    }
+
     .hero__title {
-      font-size: clamp(3.5rem, 12vw, 4.75rem);
+      font-size: clamp(2.5rem, 9vw, 3.9rem);
     }
   }
 </style>
