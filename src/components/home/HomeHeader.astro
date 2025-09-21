@@ -44,8 +44,17 @@ const navLinks = [
           </a>
         ))
       }
+      <div class="site-nav__theme-toggle-wrapper" data-js="mobile-theme-target">
+      </div>
     </nav>
-    <ThemeToggle client:idle />
+    <div
+      class="site-header__theme-toggle-wrapper"
+      data-js="desktop-theme-target"
+    >
+      <div class="site-header__theme-toggle" data-js="theme-toggle">
+        <ThemeToggle client:idle />
+      </div>
+    </div>
   </div>
 </header>
 
@@ -157,6 +166,19 @@ const navLinks = [
     text-transform: uppercase;
   }
 
+  .site-header__theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .site-header__theme-toggle {
+    display: flex;
+  }
+
+  .site-nav__theme-toggle-wrapper {
+    display: none;
+  }
+
   :global(body.has-mobile-nav-open) {
     overflow: hidden;
   }
@@ -233,6 +255,8 @@ const navLinks = [
       transition:
         background var(--duration-base) var(--ease-smooth),
         transform var(--duration-base) var(--ease-smooth);
+      order: 3;
+      margin-inline-start: auto;
     }
 
     .site-nav__toggle:hover,
@@ -243,6 +267,23 @@ const navLinks = [
         var(--color-surface) 25%
       );
       transform: translateY(-1px);
+    }
+
+    .site-header__theme-toggle-wrapper {
+      display: none;
+    }
+
+    .site-nav__theme-toggle-wrapper {
+      display: flex;
+      width: 100%;
+      padding-top: clamp(var(--space-xs), 3vw, var(--space-md));
+      border-top: 1px solid
+        color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+    }
+
+    .site-nav__theme-toggle-wrapper :global(.toggle) {
+      width: 100%;
+      justify-content: space-between;
     }
   }
 
@@ -278,12 +319,33 @@ const navLinks = [
     header.dataset.mobileNavReady = 'true';
 
     const linkElements = Array.from(nav.querySelectorAll('a'));
+    const desktopThemeTarget = header.querySelector(
+      '[data-js="desktop-theme-target"]',
+    );
+    const mobileThemeTarget = header.querySelector(
+      '[data-js="mobile-theme-target"]',
+    );
+    const themeToggle = header.querySelector('[data-js="theme-toggle"]');
     const desktopQuery = window.matchMedia(DESKTOP_BREAKPOINT);
 
     let isOpen = false;
 
+    const updateThemeTogglePlacement = () => {
+      if (!themeToggle || !desktopThemeTarget || !mobileThemeTarget) {
+        return;
+      }
+
+      if (desktopQuery.matches) {
+        desktopThemeTarget.appendChild(themeToggle);
+      } else {
+        mobileThemeTarget.appendChild(themeToggle);
+      }
+    };
+
     const updateNavState = (open) => {
       const isDesktop = desktopQuery.matches;
+
+      updateThemeTogglePlacement();
 
       if (isDesktop) {
         nav.dataset.state = 'open';
@@ -372,6 +434,9 @@ const navLinks = [
       });
       desktopQuery.removeEventListener?.('change', handleDesktopChange);
       desktopQuery.removeListener?.(handleDesktopChange);
+      if (themeToggle && desktopThemeTarget) {
+        desktopThemeTarget.appendChild(themeToggle);
+      }
       document.body.classList.remove('has-mobile-nav-open');
       delete header.dataset.mobileNavReady;
     };
