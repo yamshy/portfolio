@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.13.3](https://github.com/yamshy/portfolio/compare/v4.13.2...v4.13.3) (2025-09-21)
+
+### Bug Fixes
+
+* refine hero positioning copy ([#130](https://github.com/yamshy/portfolio/issues/130)) ([bc29fd8](https://github.com/yamshy/portfolio/commit/bc29fd82129610dd003b62d980919c1b5e7ae1c7))
+
 ## [4.13.2](https://github.com/yamshy/portfolio/compare/v4.13.1...v4.13.2) (2025-09-21)
 
 ### Bug Fixes
