@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.12.0](https://github.com/yamshy/portfolio/compare/v4.11.6...v4.12.0) (2025-09-21)
+
+### Features
+
+* add responsive mobile navigation menu ([#116](https://github.com/yamshy/portfolio/issues/116)) ([e3dc6df](https://github.com/yamshy/portfolio/commit/e3dc6dfebe4e6e84c81605c7d4672d4ca4ff6393))
+
 ## [4.11.6](https://github.com/yamshy/portfolio/compare/v4.11.5...v4.11.6) (2025-09-21)
 
 ### Bug Fixes
