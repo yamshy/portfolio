@@ -15,6 +15,28 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
+  .u-surface-card {
+    --surface-card-padding: var(--space-lg);
+    --surface-card-radius: var(--radius-lg);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 88%,
+      transparent 12%
+    );
+    --surface-card-shadow: var(--shadow-sm);
+
+    padding: var(--surface-card-padding);
+    border-radius: var(--surface-card-radius);
+    border: 1px solid var(--surface-card-border-color);
+    background: var(--surface-card-background);
+    box-shadow: var(--surface-card-shadow);
+  }
+
   .u-glass {
     background: color-mix(in oklab, var(--color-surface) 88%, transparent 12%);
     border: 1px solid

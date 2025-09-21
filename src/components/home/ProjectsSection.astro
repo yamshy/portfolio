@@ -53,12 +53,6 @@ const { projects } = Astro.props as Props;
 
   .project-card {
     position: relative;
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
-    background: color-mix(in oklab, var(--color-surface) 88%, transparent 12%);
-    box-shadow: var(--shadow-sm);
     display: grid;
     gap: var(--space-md);
   }
@@ -157,7 +151,7 @@ const { projects } = Astro.props as Props;
 
   @media (max-width: 720px) {
     .project-card {
-      padding: var(--space-md);
+      --surface-card-padding: var(--space-md);
     }
   }
 </style>

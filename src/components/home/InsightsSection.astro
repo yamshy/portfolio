@@ -24,18 +24,18 @@ const { insights, codeSample } = Astro.props as Props;
   <div class="u-container insights__grid">
     {
       insights.map((insight) => (
-        <article class="insight-card">
+        <article class="insight-card u-surface-card">
           <h3>{insight.title}</h3>
           <p>{insight.summary}</p>
         </article>
       ))
     }
-    <article class="insight-card insight-card--code">
+    <article class="insight-card insight-card--code u-surface-card">
       <h3>Automation blueprint</h3>
       <p>Workflow manifest powering adaptive sequencing orchestration.</p>
       <pre><code>{codeSample}</code></pre>
     </article>
-    <article class="insight-card insight-card--demo" data-reveal>
+    <article class="insight-card insight-card--demo u-surface-card" data-reveal>
       <SequenceWorkbench client:visible />
     </article>
   </div>
@@ -56,11 +56,17 @@ const { insights, codeSample } = Astro.props as Props;
   }
 
   .insight-card {
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 50%, transparent 50%);
-    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 50%,
+      transparent 50%
+    );
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 85%,
+      transparent 15%
+    );
+    --surface-card-shadow: none;
     display: grid;
     gap: var(--space-sm);
   }
@@ -84,9 +90,11 @@ const { insights, codeSample } = Astro.props as Props;
   }
 
   .insight-card--demo {
-    padding: 0;
+    --surface-card-padding: 0;
+    --surface-card-border-color: transparent;
+    --surface-card-background: none;
+    --surface-card-shadow: none;
     border: none;
-    background: none;
   }
 
   @media (min-width: 960px) {

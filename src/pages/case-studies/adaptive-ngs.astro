@@ -74,7 +74,7 @@ const riskMitigations = [
   <section class="section" id="methods" data-reveal>
     <h2>Methods</h2>
     <div class="two-column">
-      <article>
+      <article class="u-surface-card">
         <h3>Workflow architecture</h3>
         <p>
           Sequencing stages were decomposed into <span class="u-code-inline"
@@ -101,7 +101,7 @@ const riskMitigations = [
           </li>
         </ul>
       </article>
-      <article>
+      <article class="u-surface-card">
         <h3>Validation protocol</h3>
         <p>
           Every DAG change shipped through a controlled validation harness.
@@ -122,10 +122,14 @@ const riskMitigations = [
     </div>
   </section>
 
-  <section class="section section--results" id="results" data-reveal>
+  <section
+    class="section section--results u-surface-card"
+    id="results"
+    data-reveal
+  >
     <h2>Results</h2>
     <div class="results-grid">
-      <article>
+      <article class="u-surface-card">
         <h3>Performance uplift</h3>
         <table>
           <thead>
@@ -158,7 +162,7 @@ const riskMitigations = [
           </tbody>
         </table>
       </article>
-      <article>
+      <article class="u-surface-card">
         <h3>Scientific fidelity</h3>
         <p>
           Adaptive QC prevented reagent drift from corrupting downstream
@@ -166,11 +170,11 @@ const riskMitigations = [
           platform surfaced potency shifts early enough for biologists to
           intervene.
         </p>
-        <div class="results-grid__viz">
+        <div class="results-grid__viz u-surface-card">
           <Ic50Visualizer client:visible />
         </div>
       </article>
-      <article>
+      <article class="u-surface-card">
         <h3>Regulatory operations</h3>
         <ul>
           <li>
@@ -193,7 +197,7 @@ const riskMitigations = [
       to scientists—not just platform teams. Weekly operations reviews pair this
       dashboard with reagent QC data to prioritise optimisation work.
     </p>
-    <div class="operations">
+    <div class="operations u-surface-card">
       <PipelineOpsDashboard client:visible />
     </div>
   </section>
@@ -203,7 +207,7 @@ const riskMitigations = [
     <div class="mitigations">
       {
         riskMitigations.map((item) => (
-          <article>
+          <article class="u-surface-card">
             <h3>{item.label}</h3>
             <p>{item.detail}</p>
           </article>
@@ -259,15 +263,19 @@ const riskMitigations = [
   }
 
   .two-column article {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
-    background: color-mix(
+    --surface-card-padding: var(--space-md);
+    --surface-card-radius: var(--radius-md);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-background: color-mix(
       in oklab,
       var(--color-surface-strong) 35%,
       var(--color-surface) 65%
     );
+    --surface-card-shadow: none;
     display: grid;
     gap: var(--space-sm);
   }
@@ -279,15 +287,18 @@ const riskMitigations = [
   }
 
   .section--results {
-    background: color-mix(
+    --surface-card-background: color-mix(
       in oklab,
       var(--color-surface-muted) 20%,
       var(--color-surface) 80%
     );
-    padding: var(--space-xl);
-    border-radius: var(--radius-lg);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    --surface-card-padding: var(--space-xl);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-shadow: none;
   }
 
   .results-grid {
@@ -296,11 +307,19 @@ const riskMitigations = [
   }
 
   .results-grid article {
-    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 85%,
+      transparent 15%
+    );
+    --surface-card-radius: var(--radius-md);
+    --surface-card-padding: var(--space-md);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-shadow: none;
     display: grid;
     gap: var(--space-sm);
   }
@@ -327,21 +346,36 @@ const riskMitigations = [
   }
 
   .results-grid__viz {
-    padding: var(--space-md);
-    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
-    border-radius: var(--radius-md);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    --surface-card-padding: var(--space-md);
+    --surface-card-radius: var(--radius-md);
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 90%,
+      transparent 10%
+    );
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-shadow: none;
   }
 
   .operations {
     margin-top: var(--space-md);
-    border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
-    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
-    padding: var(--space-md);
+    --surface-card-padding: var(--space-md);
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 90%,
+      transparent 10%
+    );
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-shadow: none;
   }
 
   .mitigations {
@@ -350,15 +384,19 @@ const riskMitigations = [
   }
 
   .mitigations article {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
-    background: color-mix(
+    --surface-card-padding: var(--space-md);
+    --surface-card-radius: var(--radius-md);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-background: color-mix(
       in oklab,
       var(--color-surface-strong) 35%,
       var(--color-surface) 65%
     );
+    --surface-card-shadow: none;
   }
 
   .phases {
@@ -370,11 +408,19 @@ const riskMitigations = [
   }
 
   .phases li {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
-    background: color-mix(in oklab, var(--color-surface) 85%, transparent 15%);
+    --surface-card-padding: var(--space-md);
+    --surface-card-radius: var(--radius-md);
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 55%,
+      transparent 45%
+    );
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 85%,
+      transparent 15%
+    );
+    --surface-card-shadow: none;
     display: grid;
     gap: 0.5rem;
   }

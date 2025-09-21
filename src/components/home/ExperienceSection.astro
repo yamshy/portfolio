@@ -25,7 +25,7 @@ const { experiences } = Astro.props as Props;
   <div class="u-container experience">
     {
       experiences.map((job) => (
-        <article class="experience__item">
+        <article class="experience__item u-surface-card">
           <header>
             <h3>{job.role}</h3>
             <p>{job.org}</p>
@@ -50,15 +50,17 @@ const { experiences } = Astro.props as Props;
   }
 
   .experience__item {
-    padding: var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 1px solid
-      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
-    background: color-mix(
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 60%,
+      transparent 40%
+    );
+    --surface-card-background: color-mix(
       in oklab,
       var(--color-surface-strong) 35%,
       var(--color-surface) 65%
     );
+    --surface-card-shadow: none;
     display: grid;
     gap: var(--space-sm);
   }

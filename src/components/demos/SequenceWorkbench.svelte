@@ -115,7 +115,7 @@
   const peptides = derived(cleanSequence, translate);
 </script>
 
-<section class="workbench" aria-label="Sequence analysis tool">
+<section class="workbench u-surface-card" aria-label="Sequence analysis tool">
   <header>
     <p class="u-title-overline">Live Demo</p>
     <h3>Sequence Workbench</h3>
@@ -136,7 +136,7 @@
       ></textarea>
     </label>
 
-    <div class="workbench__panel">
+    <div class="workbench__panel u-surface-card">
       <div>
         <h4>GC Content</h4>
         <p><strong>{$gcContent}%</strong> GC across {$cleanSequence.length} bp</p>
@@ -166,13 +166,18 @@
 
 <style>
   .workbench {
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface) 92%,
+      transparent 8%
+    );
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 60%,
+      transparent 40%
+    );
     display: grid;
     gap: var(--space-lg);
-    padding: var(--space-lg);
-    background: color-mix(in oklab, var(--color-surface) 92%, transparent 8%);
-    border-radius: var(--radius-lg);
-    border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
-    box-shadow: var(--shadow-sm);
   }
 
   header h3 {
@@ -218,13 +223,20 @@
   }
 
   .workbench__panel {
+    --surface-card-padding: var(--space-md);
+    --surface-card-radius: var(--radius-md);
+    --surface-card-background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 45%,
+      var(--color-surface) 55%
+    );
+    --surface-card-border-color: color-mix(
+      in oklab,
+      var(--color-border) 60%,
+      transparent 40%
+    );
     display: grid;
     gap: var(--space-md);
-    padding: var(--space-md);
-    background: color-mix(in oklab, var(--color-surface-strong) 45%, var(--color-surface) 55%);
-    border-radius: var(--radius-md);
-    border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
-    box-shadow: var(--shadow-sm);
   }
 
   .workbench__panel code {
@@ -316,7 +328,7 @@
 
   @media (max-width: 600px) {
     .workbench {
-      padding: var(--space-md);
+      --surface-card-padding: var(--space-md);
     }
   }
 </style>
