@@ -54,36 +54,23 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Encode screenshot
-        if: ${{ steps.capture.outcome == 'success' }}
-        id: encode
-        run: |
-          echo "base64=$(base64 -w0 artifacts/pr-preview.jpg)" >> "$GITHUB_OUTPUT"
-
       - name: Comment preview on PR
-        if: ${{ steps.capture.outcome == 'success' && steps.encode.outputs.base64 != '' }}
+        if: ${{ steps.capture.outcome == 'success' }}
         uses: actions/github-script@v7
-        env:
-          SCREENSHOT_BASE64: ${{ steps.encode.outputs.base64 }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const marker = '<!-- preview-screenshot -->';
-            const image = process.env.SCREENSHOT_BASE64;
             const { owner, repo } = context.repo;
             const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
+            const artifactUrl = `${runUrl}/artifacts`;
             const body = [
               marker,
               '## 🔍 Preview Screenshot',
               '',
-              '<details>',
-              '<summary>Expand to view</summary>',
+              'A fresh preview screenshot is ready for this pull request.',
               '',
-              `![Homepage preview](data:image/jpeg;base64,${image})`,
-              '',
-              '</details>',
-              '',
-              `[⬇️ Download the screenshot artifact](${runUrl})`,
+              `[⬇️ Download the screenshot artifact](${artifactUrl})`,
               '',
               '_This comment is updated automatically when the PR changes._',
             ].join('\n');
