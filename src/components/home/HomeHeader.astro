@@ -184,18 +184,33 @@ const navLinks = [
   }
 
   @media (max-width: 48rem) {
+    .site-header {
+      background: transparent;
+      border: none;
+      --safe-area-top: env(safe-area-inset-top, 0px);
+      --safe-area-right: env(safe-area-inset-right, 0px);
+      --mobile-nav-offset: clamp(var(--space-sm), 4vw, var(--space-lg));
+      --mobile-toggle-size: clamp(3.25rem, 11vw, 3.75rem);
+    }
+
     .site-header__inner {
       flex-wrap: nowrap;
       align-items: center;
+      padding: 0;
+      position: static;
     }
 
     .site-nav {
-      position: absolute;
-      top: calc(100% + var(--space-xs));
-      right: 0;
-      left: 0;
+      position: fixed;
+      top: calc(
+        var(--safe-area-top) + var(--mobile-nav-offset) +
+          var(--mobile-toggle-size) + var(--space-2xs)
+      );
+      right: calc(var(--safe-area-right) + var(--mobile-nav-offset));
+      left: auto;
+      width: min(22rem, calc(100vw - (var(--mobile-nav-offset) * 2)));
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
       gap: clamp(var(--space-2xs), 2.6vw, var(--space-sm));
       padding: clamp(var(--space-sm), 4vw, var(--space-lg));
       border-radius: var(--radius-md);
@@ -220,14 +235,14 @@ const navLinks = [
         opacity var(--duration-base) var(--ease-smooth),
         transform var(--duration-base) var(--ease-smooth),
         visibility 0s linear;
-      z-index: 5;
+      z-index: 8;
     }
 
     .site-nav[data-state='closed'] {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(-0.5rem);
+      transform: translateY(-0.75rem);
       transition:
         opacity var(--duration-base) var(--ease-smooth),
         transform var(--duration-base) var(--ease-smooth),
@@ -243,12 +258,14 @@ const navLinks = [
     .site-nav__toggle {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-3xs);
       border: 1px solid
         color-mix(in oklab, var(--color-border) 65%, transparent 35%);
-      border-radius: var(--radius-sm);
-      padding-inline: clamp(var(--space-xs), 3vw, var(--space-sm));
-      padding-block: 0.4rem;
+      border-radius: 999px;
+      width: var(--mobile-toggle-size);
+      height: var(--mobile-toggle-size);
+      padding: 0;
       background: color-mix(
         in oklab,
         var(--color-surface-strong) 65%,
@@ -258,9 +275,19 @@ const navLinks = [
       cursor: pointer;
       transition:
         background var(--duration-base) var(--ease-smooth),
-        transform var(--duration-base) var(--ease-smooth);
-      order: 3;
-      margin-inline-start: auto;
+        transform var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth);
+      position: fixed;
+      top: calc(var(--safe-area-top) + var(--mobile-nav-offset));
+      right: calc(var(--safe-area-right) + var(--mobile-nav-offset));
+      margin: 0;
+      z-index: 10;
+      box-shadow: 0 16px 28px -18px
+        color-mix(
+          in oklab,
+          var(--color-shadow, rgba(32, 22, 17, 0.65)) 50%,
+          transparent 50%
+        );
     }
 
     .site-nav__toggle:hover,
@@ -271,6 +298,20 @@ const navLinks = [
         var(--color-surface) 25%
       );
       transform: translateY(-1px);
+    }
+
+    .site-nav__toggle:focus-visible {
+      outline: 3px solid
+        color-mix(in oklab, var(--color-primary-strong) 65%, transparent 35%);
+      outline-offset: 3px;
+    }
+
+    .site-nav__toggle-icon {
+      margin: 0;
+    }
+
+    .site-nav__toggle-label {
+      display: none;
     }
 
     .site-header__theme-toggle-wrapper {
