@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.10](https://github.com/yamshy/portfolio/compare/v4.14.9...v4.14.10) (2025-09-22)
+
+### Bug Fixes
+
+* improve hero metric contrast ([#155](https://github.com/yamshy/portfolio/issues/155)) ([26ce800](https://github.com/yamshy/portfolio/commit/26ce800a93d3ca5ee8297b0eb1f1b63366c4e938))
+
 ## [4.14.9](https://github.com/yamshy/portfolio/compare/v4.14.8...v4.14.9) (2025-09-22)
 
 ### Bug Fixes
