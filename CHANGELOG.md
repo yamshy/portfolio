@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.7](https://github.com/yamshy/portfolio/compare/v4.14.6...v4.14.7) (2025-09-22)
+
+### Bug Fixes
+
+* **deps:** update dependency svelte to v5.39.4 ([#133](https://github.com/yamshy/portfolio/issues/133)) ([a34ab9d](https://github.com/yamshy/portfolio/commit/a34ab9d293882de0227cadf5164c5bc4654e8eef))
+
 ## [4.14.6](https://github.com/yamshy/portfolio/compare/v4.14.5...v4.14.6) (2025-09-22)
 
 ### Bug Fixes
