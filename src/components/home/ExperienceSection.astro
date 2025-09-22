@@ -1,4 +1,5 @@
 ---
+import SectionHeader from '../ui/SectionHeader.astro';
 import type { Experience } from '../../content/home';
 
 interface Props {
@@ -9,19 +10,11 @@ const { experiences } = Astro.props as Props;
 ---
 
 <section class="section" id="experience" data-reveal>
-  <div class="u-container section__heading">
-    <div>
-      <p class="u-title-overline">Experience</p>
-      <h2>
-        Career progression from research to technical operations leadership
-      </h2>
-    </div>
-    <p>
-      Roles span academic research, biotechnology, and healthcare IT. Each
-      position strengthened the bridge between scientific discovery and scalable
-      technical implementation.
-    </p>
-  </div>
+  <SectionHeader
+    overline="Experience"
+    title="Career progression from research to technical operations leadership"
+    description="Roles span academic research, biotechnology, and healthcare IT. Each position strengthened the bridge between scientific discovery and scalable technical implementation."
+  />
   <div class="u-container experience">
     {
       experiences.map((job) => (
