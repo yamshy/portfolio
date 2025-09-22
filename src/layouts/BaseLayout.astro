@@ -24,22 +24,11 @@ const {
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <script is:inline>
-      try {
-        const storedTheme = localStorage.getItem('portfolio-theme');
-        const prefersDark = window.matchMedia(
-          '(prefers-color-scheme: dark)',
-        ).matches;
-        const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
-        document.documentElement.dataset.theme = theme;
-        document.documentElement.style.setProperty(
-          'color-scheme',
-          theme === 'dark' ? 'dark' : 'light',
-        );
-      } catch (error) {
-        document.documentElement.dataset.theme = 'light';
-        document.documentElement.style.setProperty('color-scheme', 'light');
-      }
+    <script type="module" is:inline>
+      import { applyTheme, getPreferredTheme } from '/src/scripts/theme.ts';
+
+      const theme = getPreferredTheme();
+      applyTheme(theme, { persist: false });
     </script>
   </head>
   <body>
