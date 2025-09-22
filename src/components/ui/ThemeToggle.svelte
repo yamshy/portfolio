@@ -1,42 +1,32 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import {
+    applyTheme,
+    getPreferredTheme,
+    type ApplyThemeOptions,
+    type Theme,
+  } from '../../scripts/theme';
 
   const themes = [
     { id: 'light', label: 'Light Mode', icon: '☀️' },
     { id: 'dark', label: 'Dark Mode', icon: '🌙' },
   ];
 
-  let theme: 'light' | 'dark' = 'light';
+  let theme: Theme = 'light';
 
-  const applyTheme = (next: 'light' | 'dark') => {
-    const root = document.documentElement;
-    root.dataset.theme = next;
-    root.style.setProperty('color-scheme', next === 'dark' ? 'dark' : 'light');
-    try {
-      localStorage.setItem('portfolio-theme', next);
-    } catch (error) {
-      /* localStorage may be disabled; ignore */
-    }
+  const setTheme = (next: Theme, options?: ApplyThemeOptions) => {
+    applyTheme(next, options);
     theme = next;
   };
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
-    applyTheme(next);
+    setTheme(next);
   };
 
   onMount(() => {
-    try {
-      const stored = localStorage.getItem('portfolio-theme');
-      if (stored === 'light' || stored === 'dark') {
-        theme = stored;
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        theme = 'dark';
-      }
-    } catch (error) {
-      theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-    }
-    applyTheme(theme);
+    const preferred = getPreferredTheme();
+    setTheme(preferred);
   });
 </script>
 
