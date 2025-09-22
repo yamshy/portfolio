@@ -64,6 +64,9 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
+      - name: Build
+        run: pnpm -s build
+
       - name: Run e2e tests
         env:
           PLAYWRIGHT_COLOR_SCHEME: light
