@@ -133,10 +133,14 @@ const { stats } = Astro.props as Props;
     color: var(--color-primary-strong);
   }
 
+  .hero__metric p,
+  .hero__metric span {
+    color: var(--color-text);
+  }
+
   .hero__metric span {
     display: block;
     font-size: 0.85rem;
-    color: var(--color-text-muted);
     margin-top: 0.35rem;
   }
 

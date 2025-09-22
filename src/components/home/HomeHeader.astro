@@ -1,4 +1,5 @@
 ---
+import mobileNavInitScript from '../../scripts/initMobileNav.ts?url';
 import ThemeToggle from '../ui/ThemeToggle.svelte';
 
 const navLinks = [
@@ -347,17 +348,4 @@ const navLinks = [
   }
 </style>
 
-<script type="module" is:inline>
-  import { setupMobileNav } from '../../scripts/setupMobileNav';
-
-  const initMobileNav = () => {
-    const cleanup = setupMobileNav();
-
-    if (cleanup) {
-      document.addEventListener('astro:before-swap', cleanup, { once: true });
-    }
-  };
-
-  initMobileNav();
-  document.addEventListener('astro:page-load', initMobileNav);
-</script>
+<script type="module" src={mobileNavInitScript}></script>
