@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.8](https://github.com/yamshy/portfolio/compare/v4.14.7...v4.14.8) (2025-09-22)
+
+### Bug Fixes
+
+* bundle reveal init and refresh e2e checks ([#147](https://github.com/yamshy/portfolio/issues/147)) ([91b9547](https://github.com/yamshy/portfolio/commit/91b95470d41e0acaa3e71d9a3d503418fb72f6d1))
+
 ## [4.14.7](https://github.com/yamshy/portfolio/compare/v4.14.6...v4.14.7) (2025-09-22)
 
 ### Bug Fixes
