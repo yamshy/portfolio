@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.2](https://github.com/yamshy/portfolio/compare/v4.14.1...v4.14.2) (2025-09-22)
+
+### Bug Fixes
+
+* clarify astro lint ignores ([#137](https://github.com/yamshy/portfolio/issues/137)) ([347ce72](https://github.com/yamshy/portfolio/commit/347ce72d384eea76ab878532ab97e99c0dbb6df8))
+
 ## [4.14.1](https://github.com/yamshy/portfolio/compare/v4.14.0...v4.14.1) (2025-09-22)
 
 ### Bug Fixes
