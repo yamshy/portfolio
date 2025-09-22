@@ -40,8 +40,38 @@ jobs:
       - name: Build
         run: pnpm -s astro build
 
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run e2e tests
+        run: pnpm -s test:e2e
+
   container-smoke-test:
     name: Container Smoke Test
+    needs:
+      - node-checks
+      - e2e-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
