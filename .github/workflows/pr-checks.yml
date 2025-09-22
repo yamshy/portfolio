@@ -65,6 +65,8 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Run e2e tests
+        env:
+          PLAYWRIGHT_COLOR_SCHEME: light
         run: pnpm -s test:e2e
 
   container-smoke-test:
