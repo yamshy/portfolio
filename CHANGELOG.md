@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.11](https://github.com/yamshy/portfolio/compare/v4.14.10...v4.14.11) (2025-09-22)
+
+### Bug Fixes
+
+* improve theme toggle spacing ([#157](https://github.com/yamshy/portfolio/issues/157)) ([8863713](https://github.com/yamshy/portfolio/commit/8863713156165abe15d53642466ed033525da2f9))
+
 ## [4.14.10](https://github.com/yamshy/portfolio/compare/v4.14.9...v4.14.10) (2025-09-22)
 
 ### Bug Fixes
