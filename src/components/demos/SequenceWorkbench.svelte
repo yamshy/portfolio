@@ -138,9 +138,20 @@
 
     <div class="workbench__panel">
       <div>
-        <h4>GC Content</h4>
-        <p><strong>{$gcContent}%</strong> GC across {$cleanSequence.length} bp</p>
-        <div class="meter">
+        <h4 id="gc-content-heading">GC Content</h4>
+        <p id="gc-content-summary">
+          <strong>{$gcContent}%</strong> GC across {$cleanSequence.length} bp
+        </p>
+        <div
+          class="meter"
+          role="progressbar"
+          aria-labelledby="gc-content-heading"
+          aria-describedby="gc-content-summary"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow={$gcContent}
+          aria-valuetext={`${$gcContent}% GC`}
+        >
           <div class="meter__fill" style={`width: ${Math.min(100, $gcContent)}%`}></div>
         </div>
       </div>
