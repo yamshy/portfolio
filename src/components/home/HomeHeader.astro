@@ -1,5 +1,5 @@
 ---
-import mobileNavInitScript from '../../scripts/initMobileNav.ts?url';
+import MobileNavInitializer from '../scripts/MobileNavInitializer.svelte';
 import ThemeToggle from '../ui/ThemeToggle.svelte';
 
 const navLinks = [
@@ -348,4 +348,4 @@ const navLinks = [
   }
 </style>
 
-<script type="module" src={mobileNavInitScript}></script>
+<MobileNavInitializer client:load />

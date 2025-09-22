@@ -46,12 +46,24 @@ export const setupMobileNav = (): Cleanup | undefined => {
 
   let isOpen = false;
 
+  const isDesktopView = () => {
+    if (typeof window.getComputedStyle === 'function') {
+      const toggleDisplay = window.getComputedStyle(toggle).display;
+
+      if (toggleDisplay !== 'none') {
+        return false;
+      }
+    }
+
+    return Boolean(desktopQuery?.matches);
+  };
+
   const updateThemeTogglePlacement = () => {
     if (!themeToggle || !desktopThemeTarget || !mobileThemeTarget) {
       return;
     }
 
-    if (desktopQuery?.matches) {
+    if (desktopQuery?.matches ?? isDesktopView()) {
       desktopThemeTarget.appendChild(themeToggle);
     } else {
       mobileThemeTarget.appendChild(themeToggle);
@@ -59,7 +71,7 @@ export const setupMobileNav = (): Cleanup | undefined => {
   };
 
   const updateNavState = (open: boolean) => {
-    const isDesktop = Boolean(desktopQuery?.matches);
+    const isDesktop = isDesktopView();
 
     updateThemeTogglePlacement();
 
@@ -159,9 +171,14 @@ export const setupMobileNav = (): Cleanup | undefined => {
     }
   };
 
+  const onResize = () => {
+    updateNavState(isOpen);
+  };
+
   toggle.addEventListener('click', onToggle);
   window.addEventListener('keydown', onKeydown);
   window.addEventListener('pointerdown', onPointerDown);
+  window.addEventListener('resize', onResize);
   linkElements.forEach((link) => {
     link.addEventListener('click', closeNav);
   });
@@ -172,11 +189,18 @@ export const setupMobileNav = (): Cleanup | undefined => {
 
   updateNavState(isOpen);
 
+  if (typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(() => {
+      updateNavState(isOpen);
+    });
+  }
+
   const cleanup: Cleanup = () => {
     closeNav();
     toggle.removeEventListener('click', onToggle);
     window.removeEventListener('keydown', onKeydown);
     window.removeEventListener('pointerdown', onPointerDown);
+    window.removeEventListener('resize', onResize);
     linkElements.forEach((link) => {
       link.removeEventListener('click', closeNav);
     });
