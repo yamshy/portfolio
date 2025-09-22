@@ -50,7 +50,7 @@ export const heroStats: HeroStat[] = [
   },
   {
     label: 'Efficiency unlocked',
-    value: '3,500+ hours saved',
+    value: '3k+ hours saved',
     context:
       'Systematic workflow automation reclaimed the equivalent of two FTEs across data processing and deployment',
   },
