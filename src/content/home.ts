@@ -203,6 +203,11 @@ export const contactChannels: ContactChannel[] = [
     value: 'github.com/yamshy',
     href: 'https://github.com/yamshy',
   },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/shyamajudia',
+    href: 'https://www.linkedin.com/in/shyamajudia/',
+  },
 ];
 
 export const codeSample = `
