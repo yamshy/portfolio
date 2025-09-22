@@ -1,0 +1,126 @@
+name: PR Preview Screenshot
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Generate Preview Screenshot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright (Chromium only)
+        run: pnpm exec playwright install chromium --with-deps
+
+      - name: Capture homepage screenshot
+        id: capture
+        env:
+          PREVIEW_SCREENSHOT: 'true'
+          PREVIEW_SCREENSHOT_PATH: artifacts/pr-preview.jpg
+        run: pnpm exec playwright test tests/e2e/pr-preview.spec.ts --project=chromium --reporter=line
+
+      - name: Upload screenshot artifact
+        if: ${{ steps.capture.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-preview-screenshot
+          path: artifacts/pr-preview.jpg
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Encode screenshot
+        if: ${{ steps.capture.outcome == 'success' }}
+        id: encode
+        run: |
+          echo "base64=$(base64 -w0 artifacts/pr-preview.jpg)" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview on PR
+        if: ${{ steps.capture.outcome == 'success' && steps.encode.outputs.base64 != '' }}
+        uses: actions/github-script@v7
+        env:
+          SCREENSHOT_BASE64: ${{ steps.encode.outputs.base64 }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const marker = '<!-- preview-screenshot -->';
+            const image = process.env.SCREENSHOT_BASE64;
+            const { owner, repo } = context.repo;
+            const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
+            const body = [
+              marker,
+              '## 🔍 Preview Screenshot',
+              '',
+              '<details>',
+              '<summary>Expand to view</summary>',
+              '',
+              `![Homepage preview](data:image/jpeg;base64,${image})`,
+              '',
+              '</details>',
+              '',
+              `[⬇️ Download the screenshot artifact](${runUrl})`,
+              '',
+              '_This comment is updated automatically when the PR changes._',
+            ].join('\n');
+            const issue_number = context.issue.number;
+            if (!issue_number) {
+              core.info('No pull request found in context; skipping comment.');
+              return;
+            }
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+            const existing = comments.find(
+              (comment) => comment.body?.includes(marker) && comment.user?.type === 'Bot',
+            );
+
+            try {
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner,
+                  repo,
+                  comment_id: existing.id,
+                  body,
+                });
+                core.info(`Updated preview comment (ID: ${existing.id}).`);
+              } else {
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number,
+                  body,
+                });
+                core.info('Created preview comment.');
+              }
+            } catch (error) {
+              core.warning(`Unable to publish preview comment: ${error.message}`);
+            }
