@@ -14,9 +14,6 @@ test.describe('Home page experience', () => {
 
     await expect(page.locator('.hero__title')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
-    await expect(
-      page.getByRole('link', { name: 'View flagship case study' }),
-    ).toBeVisible();
 
     await expect(page.locator('.hero__metric')).toHaveCount(3);
   });

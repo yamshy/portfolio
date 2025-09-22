@@ -43,8 +43,7 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 │   │   ├── BaseLayout.astro
 │   │   └── CaseStudyLayout.astro
 │   ├── pages/
-│   │   ├── index.astro
-│   │   └── case-studies/adaptive-ngs.astro
+│   │   └── index.astro
 │   └── styles/{tokens.css,utilities.css,animations.css}
 ├── tests/
 │   ├── e2e/*
@@ -64,7 +63,7 @@ A ground-up Astro redesign that communicates how computational biology, scientif
 ## 🧬 Content Authoring
 
 - **Homepage (`src/pages/index.astro`)** exposes structured data arrays for hero metrics, featured projects, experience entries, and technical insights. Each project records problem, solution, tech stack, quantified results, and implementation challenges to keep storytelling specific.
-- **Case studies** inherit from `CaseStudyLayout.astro` to deliver abstract/methods/results sections alongside live dashboard slots. Duplicate `src/pages/case-studies/adaptive-ngs.astro` as a starting point for additional stories.
+- **Case studies** can be introduced by composing `CaseStudyLayout.astro`, which delivers abstract/methods/results sections alongside live dashboard slots when needed.
 - **Skills & demos** use Svelte props for data injection—extend the exported collections in each island to surface new disciplines or visualizations.
 
 ## 🎨 Design System
