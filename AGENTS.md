@@ -13,7 +13,7 @@
 - `pnpm dev` — start local dev server at `http://localhost:4321`.
 - `pnpm build` — production build to `dist/`.
 - `pnpm preview` — preview built site.
-- Always create a preview of the website by running `pnpm build` followed by `pnpm preview --host` when working on tasks; use this preview for screenshots or validations of UI changes.
+- **You MUST ALWAYS generate a preview** of the website by running `pnpm build` followed by `pnpm preview --host` when working on tasks; use this preview for screenshots or validations of UI changes.
 - `pnpm astro` — run Astro CLI; e.g., `pnpm astro check` (static analysis).
 - `pnpm test` / `pnpm test:watch` / `pnpm test:ui` — Vitest run/watch/UI.
 - `pnpm test:coverage` — collect coverage.
