@@ -116,16 +116,16 @@ export const projects: Project[] = [
   {
     title: 'YamshyOS',
     summary:
-      'Fedora Atomic image engineered with immutable infrastructure patterns for fleet-style management.',
+      'Fedora Atomic image engineered with immutable infrastructure patterns for my daily workstation.',
     problem:
-      'Needed a reproducible operating system baseline aligning with GitOps and supply-chain guarantees for every node I administer.',
+      'Wanted a reproducible desktop environment that keeps my personal workstation consistent with the same GitOps and supply-chain guarantees I trust elsewhere.',
     solution:
-      'Used BlueBuild to compose a custom Fedora Atomic variant, layered rpm-ostree updates, and signed releases through Sigstore.',
+      'Used BlueBuild to compose a custom Fedora Atomic variant tailored to my desktop, layered rpm-ostree updates, and signed releases through Sigstore.',
     stack: ['Fedora Atomic', 'BlueBuild', 'rpm-ostree', 'Podman', 'Sigstore'],
     results: [
-      'Cryptographically signed system images for trustable installs',
+      'Cryptographically signed system images for trustworthy personal installs',
       'Atomic updates with instant rollback via rpm-ostree',
-      'GitOps configuration keeps hosts converged with declarative state',
+      'GitOps configuration keeps my desktop converged with declarative state',
     ],
     challenges: [
       'Integrating Sigstore signing into an immutable image build pipeline',
