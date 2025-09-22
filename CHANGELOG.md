@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.14.1](https://github.com/yamshy/portfolio/compare/v4.14.0...v4.14.1) (2025-09-22)
+
+### Bug Fixes
+
+* resolve astro check hints ([#134](https://github.com/yamshy/portfolio/issues/134)) ([910386d](https://github.com/yamshy/portfolio/commit/910386d3b25ad4cbd23e2e78be0b385338c0e921))
+* tighten hero mobile spacing ([#136](https://github.com/yamshy/portfolio/issues/136)) ([a24bbab](https://github.com/yamshy/portfolio/commit/a24bbab83e23e2ddf3f33b0d4c130c0641052a0b))
+
 ## [4.14.0](https://github.com/yamshy/portfolio/compare/v4.13.3...v4.14.0) (2025-09-22)
 
 ### Features
