@@ -16,6 +16,7 @@ import {
   codeSample,
 } from '../content/home';
 import '../styles/pages/home.css';
+import RevealController from '../components/util/RevealController.svelte';
 ---
 
 <BaseLayout>
@@ -30,10 +31,5 @@ import '../styles/pages/home.css';
     <ContactSection channels={contactChannels} />
   </main>
 
-  <script type="module" is:inline>
-    import { initReveal } from '../scripts/initReveal';
-
-    // Lower threshold prevents tall sections (like Projects) from remaining hidden too long on mobile.
-    initReveal({ threshold: 0, rootMargin: '-6%' });
-  </script>
+  <RevealController threshold={0} rootMargin="-6%" client:load />
 </BaseLayout>

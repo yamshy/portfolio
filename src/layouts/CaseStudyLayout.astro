@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import RevealController from '../components/util/RevealController.svelte';
 
 type Metric = { label: string; value: string };
 type LayoutProps = {
@@ -54,11 +55,7 @@ const {
       <slot />
     </div>
   </main>
-  <script type="module" is:inline>
-    import { initReveal } from '../scripts/initReveal';
-
-    initReveal({ threshold: 0.25, rootMargin: '-10%' });
-  </script>
+  <RevealController threshold={0.25} rootMargin="-10%" client:load />
 </BaseLayout>
 
 <style>

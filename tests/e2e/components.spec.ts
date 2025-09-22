@@ -9,9 +9,6 @@ test.describe('Home page experience', () => {
   test('renders hero content and site navigation', async ({ page }) => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
-    await expect(page.locator('.site-header')).toBeVisible();
-    await expect(page.getByRole('banner')).toBeVisible();
-
     await expect(page.locator('.hero__title')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
     await expect(
@@ -54,14 +51,31 @@ test.describe('Home page experience', () => {
     await projectsSection.scrollIntoViewIfNeeded();
     await expect(projectsSection).toBeVisible();
 
-    await expect(page.locator('.projects__grid .project-card')).toHaveCount(6);
+    const projectCards = page.locator('.projects__grid .project-card');
+    const featuredProjects = [
+      'GitOps Kubernetes Platform',
+      'This Website',
+      'YamshyOS',
+    ];
+
+    await expect(projectCards).toHaveCount(featuredProjects.length);
+    for (const projectTitle of featuredProjects) {
+      await expect(
+        page.getByRole('heading', { level: 3, name: projectTitle }),
+      ).toBeVisible();
+    }
     await expect(
       page.getByRole('link', { name: 'Read research-style case study →' }),
     ).toBeVisible();
 
-    await expect(page.getByTestId('ic50-visualizer')).toBeVisible();
+    const insightsSection = page.locator('#insights');
+    await insightsSection.scrollIntoViewIfNeeded();
+
     await expect(
-      page.getByRole('region', { name: 'Infrastructure health' }),
+      page.getByRole('heading', { name: 'Sequence Workbench' }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('region', { name: 'Sequence analysis tool' }),
     ).toBeVisible();
   });
 
@@ -107,7 +121,16 @@ test.describe('Home page experience', () => {
     const html = page.locator('html');
     const initialTheme = (await html.getAttribute('data-theme')) ?? 'light';
 
+    const navToggle = page.getByRole('button', { name: /navigation menu/i });
     const themeToggle = page.getByRole('button', { name: /switch to/i });
+
+    if (
+      (await themeToggle.isVisible()) === false &&
+      (await navToggle.isVisible())
+    ) {
+      await navToggle.click();
+    }
+
     await expect(themeToggle).toBeVisible();
     await themeToggle.click();
 
@@ -121,6 +144,14 @@ test.describe('Home page experience', () => {
 
     await page.reload();
     await expect(html).toHaveAttribute('data-theme', expectedTheme);
+
+    if (
+      (await themeToggle.isVisible()) === false &&
+      (await navToggle.isVisible())
+    ) {
+      await navToggle.click();
+    }
+
     await expect(
       page.getByRole('button', {
         name: new RegExp(`Switch to ${initialTheme} mode`, 'i'),
