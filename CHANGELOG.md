@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.17.0](https://github.com/yamshy/portfolio/compare/v4.16.1...v4.17.0) (2025-09-22)
+
+### Features
+
+* redesign contact section ([#165](https://github.com/yamshy/portfolio/issues/165)) ([8db9c9d](https://github.com/yamshy/portfolio/commit/8db9c9d3c5dd0a776562d064169f38655b1328e7))
+
+### Bug Fixes
+
+* return cleanup from mobile nav helper ([#160](https://github.com/yamshy/portfolio/issues/160)) ([cc008c7](https://github.com/yamshy/portfolio/commit/cc008c79bd0c93d86e148bc69de2763bfdb4b233))
+
 ## [4.16.1](https://github.com/yamshy/portfolio/compare/v4.16.0...v4.16.1) (2025-09-22)
 
 ### Bug Fixes
