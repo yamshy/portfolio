@@ -8,10 +8,16 @@
   onMount(() => {
     const runReveal = () => initReveal({ threshold, rootMargin });
 
-    runReveal();
-
     const handlePageLoad = () => runReveal();
+
+    runReveal();
     document.addEventListener('astro:page-load', handlePageLoad);
+    document.addEventListener(
+      'astro:before-swap',
+      () =>
+        document.removeEventListener('astro:page-load', handlePageLoad),
+      { once: true },
+    );
 
     return () => {
       document.removeEventListener('astro:page-load', handlePageLoad);
