@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.5](https://github.com/yamshy/portfolio/compare/v4.14.4...v4.14.5) (2025-09-22)
+
+### Bug Fixes
+
+* rephrase projects copy for services ([#144](https://github.com/yamshy/portfolio/issues/144)) ([91d2a5a](https://github.com/yamshy/portfolio/commit/91d2a5ab3747f4ace6ccbf637b511305da8ee856))
+
 ## [4.14.4](https://github.com/yamshy/portfolio/compare/v4.14.3...v4.14.4) (2025-09-22)
 
 ### Bug Fixes
