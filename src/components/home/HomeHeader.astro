@@ -469,8 +469,9 @@ const navLinks = [
       link.addEventListener('click', closeNav);
     });
 
-    desktopQuery.addEventListener?.('change', handleDesktopChange);
-    desktopQuery.addListener?.(handleDesktopChange);
+    if (typeof desktopQuery.addEventListener === 'function') {
+      desktopQuery.addEventListener('change', handleDesktopChange);
+    }
 
     updateNavState(isOpen);
 
@@ -481,8 +482,9 @@ const navLinks = [
       linkElements.forEach((link) => {
         link.removeEventListener('click', closeNav);
       });
-      desktopQuery.removeEventListener?.('change', handleDesktopChange);
-      desktopQuery.removeListener?.(handleDesktopChange);
+      if (typeof desktopQuery.removeEventListener === 'function') {
+        desktopQuery.removeEventListener('change', handleDesktopChange);
+      }
       if (themeToggle && desktopThemeTarget) {
         desktopThemeTarget.appendChild(themeToggle);
       }
