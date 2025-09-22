@@ -9,8 +9,33 @@ test.describe('Home page experience', () => {
   test('renders hero content and site navigation', async ({ page }) => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
-    await expect(page.locator('.site-header')).toBeVisible();
-    await expect(page.getByRole('banner')).toBeVisible();
+    const header = page.locator('.site-header');
+    await expect(header).toHaveAttribute('data-js', 'site-header');
+
+    const navigation = page.getByRole('navigation', {
+      name: 'Primary navigation',
+    });
+    const navToggle = page.locator('[data-js="nav-toggle"]');
+
+    if (await navToggle.isVisible()) {
+      await navToggle.click();
+      await expect(navigation).toBeVisible();
+    } else {
+      await expect(navigation).toBeVisible();
+    }
+
+    const navLabels = [
+      'Overview',
+      'Projects',
+      'Skills',
+      'Experience',
+      'Insights',
+      'Contact',
+    ];
+
+    for (const label of navLabels) {
+      await expect(navigation.getByRole('link', { name: label })).toBeVisible();
+    }
 
     await expect(page.locator('.hero__title')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
@@ -56,10 +81,18 @@ test.describe('Home page experience', () => {
       page.getByRole('link', { name: 'Read research-style case study →' }),
     ).toBeVisible();
 
-    await expect(page.getByTestId('ic50-visualizer')).toBeVisible();
+    const insightsSection = page.locator('#insights');
+    await insightsSection.scrollIntoViewIfNeeded();
+    await expect(insightsSection).toBeVisible();
+
+    const workbench = page.getByRole('region', {
+      name: 'Sequence analysis tool',
+    });
+    await expect(workbench).toBeVisible();
     await expect(
-      page.getByRole('region', { name: 'Infrastructure health' }),
+      workbench.getByRole('heading', { name: 'Sequence Workbench' }),
     ).toBeVisible();
+    await expect(workbench.getByLabel('DNA Sequence')).toBeVisible();
   });
 
   test('highlights skills, experience, and contact sections', async ({
@@ -104,6 +137,11 @@ test.describe('Home page experience', () => {
     const html = page.locator('html');
     const initialTheme = (await html.getAttribute('data-theme')) ?? 'light';
 
+    const navToggle = page.locator('[data-js="nav-toggle"]');
+    if (await navToggle.isVisible()) {
+      await navToggle.click();
+    }
+
     const themeToggle = page.getByRole('button', { name: /switch to/i });
     await expect(themeToggle).toBeVisible();
     await themeToggle.click();
@@ -118,6 +156,9 @@ test.describe('Home page experience', () => {
 
     await page.reload();
     await expect(html).toHaveAttribute('data-theme', expectedTheme);
+    if (await navToggle.isVisible()) {
+      await navToggle.click();
+    }
     await expect(
       page.getByRole('button', {
         name: new RegExp(`Switch to ${initialTheme} mode`, 'i'),
