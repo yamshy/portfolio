@@ -10,7 +10,7 @@ export default [
   {
     ignores: [
       'dist',
-      '.astro',
+      '**/.astro/**', // Astro's generated artifacts
       'node_modules',
       'public',
       'coverage',
