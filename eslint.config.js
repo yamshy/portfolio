@@ -6,11 +6,11 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import prettier from 'eslint-config-prettier';
 
-export default tseslint.config(
+export default [
   {
     ignores: [
       'dist',
-      '.astro',
+      '**/.astro/**', // Astro's generated artifacts
       'node_modules',
       'public',
       'coverage',
@@ -51,4 +51,4 @@ export default tseslint.config(
       },
     },
   },
-);
+];

@@ -2,7 +2,7 @@
 import '../styles/tokens.css';
 import '../styles/utilities.css';
 import '../styles/animations.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 const {
   title = 'Shyam Ajudia | Infrastructure & Data Engineer',
   description = 'Portfolio highlighting the intersection of molecular biology, large-scale data, and resilient infrastructure.',
@@ -43,7 +43,7 @@ const {
     </script>
   </head>
   <body>
-    <ViewTransitions />
+    <ClientRouter />
     <slot />
   </body>
 </html>
