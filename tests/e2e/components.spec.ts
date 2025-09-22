@@ -1,5 +1,11 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
+import {
+  heroStats,
+  projects,
+  insights,
+  contactChannels,
+} from '../../src/content/home';
 
 test.describe('Home page experience', () => {
   test.beforeEach(async ({ page }) => {
@@ -9,13 +15,15 @@ test.describe('Home page experience', () => {
   test('renders hero content and site navigation', async ({ page }) => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
+    const siteHeader = page.locator('[data-js="site-header"]');
+    await expect(siteHeader).toHaveClass(/\bis-revealed\b/);
     await expect(page.locator('.hero__title')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
     await expect(
       page.getByRole('link', { name: 'View flagship case study' }),
     ).toBeVisible();
 
-    await expect(page.locator('.hero__metric')).toHaveCount(3);
+    await expect(page.locator('.hero__metric')).toHaveCount(heroStats.length);
   });
 
   test('supports toggling primary navigation on small screens', async ({
@@ -52,16 +60,11 @@ test.describe('Home page experience', () => {
     await expect(projectsSection).toBeVisible();
 
     const projectCards = page.locator('.projects__grid .project-card');
-    const featuredProjects = [
-      'GitOps Kubernetes Platform',
-      'This Website',
-      'YamshyOS',
-    ];
 
-    await expect(projectCards).toHaveCount(featuredProjects.length);
-    for (const projectTitle of featuredProjects) {
+    await expect(projectCards).toHaveCount(projects.length);
+    for (const { title } of projects) {
       await expect(
-        page.getByRole('heading', { level: 3, name: projectTitle }),
+        page.getByRole('heading', { level: 3, name: title }),
       ).toBeVisible();
     }
     await expect(
@@ -77,6 +80,12 @@ test.describe('Home page experience', () => {
     await expect(
       page.getByRole('region', { name: 'Sequence analysis tool' }),
     ).toBeVisible();
+
+    for (const { title } of insights) {
+      await expect(
+        page.getByRole('heading', { level: 3, name: title }),
+      ).toBeVisible();
+    }
   });
 
   test('highlights skills, experience, and contact sections', async ({
@@ -115,6 +124,11 @@ test.describe('Home page experience', () => {
         name: 'Let’s design infrastructure that keeps pace with discovery',
       }),
     ).toBeVisible();
+
+    for (const channel of contactChannels) {
+      const link = contact.locator('a', { hasText: channel.label });
+      await expect(link).toContainText(channel.value);
+    }
   });
 
   test('persists theme preference across reloads', async ({ page }) => {

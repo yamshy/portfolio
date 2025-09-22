@@ -6,6 +6,15 @@
   export let rootMargin: string | undefined;
 
   onMount(() => {
-    initReveal({ threshold, rootMargin });
+    const runReveal = () => initReveal({ threshold, rootMargin });
+
+    runReveal();
+
+    const handlePageLoad = () => runReveal();
+    document.addEventListener('astro:page-load', handlePageLoad);
+
+    return () => {
+      document.removeEventListener('astro:page-load', handlePageLoad);
+    };
   });
 </script>
