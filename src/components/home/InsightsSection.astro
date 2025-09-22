@@ -1,4 +1,5 @@
 ---
+import SectionHeader from '../ui/SectionHeader.astro';
 import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
 import type { Insight } from '../../content/home';
 
@@ -11,16 +12,11 @@ const { insights, codeSample } = Astro.props as Props;
 ---
 
 <section class="section section--insights" id="insights" data-reveal>
-  <div class="u-container section__heading">
-    <div>
-      <p class="u-title-overline">Technical Insights</p>
-      <h2>Operating principles for reproducible, scalable science</h2>
-    </div>
-    <p>
-      Essays, conference talks, and internal runbooks that translate
-      infrastructure decisions into scientific leverage.
-    </p>
-  </div>
+  <SectionHeader
+    overline="Technical Insights"
+    title="Operating principles for reproducible, scalable science"
+    description="Essays, conference talks, and internal runbooks that translate infrastructure decisions into scientific leverage."
+  />
   <div class="u-container insights__grid">
     {
       insights.map((insight) => (
