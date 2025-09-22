@@ -208,9 +208,10 @@ const navLinks = [
       );
       right: calc(var(--safe-area-right) + var(--mobile-nav-offset));
       left: auto;
-      width: min(22rem, calc(100vw - (var(--mobile-nav-offset) * 2)));
+      width: auto;
+      max-width: min(22rem, calc(100vw - (var(--mobile-nav-offset) * 2)));
       flex-direction: column;
-      align-items: stretch;
+      align-items: flex-end;
       gap: clamp(var(--space-2xs), 2.6vw, var(--space-sm));
       padding: clamp(var(--space-sm), 4vw, var(--space-lg));
       border-radius: var(--radius-md);
@@ -236,6 +237,7 @@ const navLinks = [
         transform var(--duration-base) var(--ease-smooth),
         visibility 0s linear;
       z-index: 8;
+      text-align: right;
     }
 
     .site-nav[data-state='closed'] {
@@ -250,9 +252,10 @@ const navLinks = [
     }
 
     .site-nav__link {
-      width: 100%;
+      width: auto;
       font-size: clamp(var(--text-md), 4.2vw, var(--text-lg));
-      justify-content: space-between;
+      justify-content: flex-end;
+      text-align: right;
     }
 
     .site-nav__toggle {
@@ -320,15 +323,16 @@ const navLinks = [
 
     .site-nav__theme-toggle-wrapper {
       display: flex;
-      width: 100%;
+      align-self: stretch;
       padding-top: clamp(var(--space-xs), 3vw, var(--space-md));
       border-top: 1px solid
         color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+      justify-content: flex-end;
     }
 
     .site-nav__theme-toggle-wrapper :global(.toggle) {
-      width: 100%;
-      justify-content: space-between;
+      width: auto;
+      justify-content: flex-end;
     }
   }
 
