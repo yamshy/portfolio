@@ -199,6 +199,11 @@ export const contactChannels: ContactChannel[] = [
     href: 'mailto:sajudia@proton.me',
   },
   {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/shyamajudia',
+    href: 'https://www.linkedin.com/in/shyamajudia/',
+  },
+  {
     label: 'GitHub',
     value: 'github.com/yamshy',
     href: 'https://github.com/yamshy',
