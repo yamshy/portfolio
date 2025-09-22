@@ -7,6 +7,7 @@ import SkillsSection from '../components/home/SkillsSection.astro';
 import ExperienceSection from '../components/home/ExperienceSection.astro';
 import InsightsSection from '../components/home/InsightsSection.astro';
 import ContactSection from '../components/home/ContactSection.astro';
+import RevealInitializer from '../components/util/RevealInitializer.svelte';
 import {
   heroStats,
   projects,
@@ -29,11 +30,5 @@ import '../styles/pages/home.css';
     <InsightsSection insights={insights} codeSample={codeSample} />
     <ContactSection channels={contactChannels} />
   </main>
-
-  <script type="module" is:inline>
-    import { initReveal } from '../scripts/initReveal';
-
-    // Lower threshold prevents tall sections (like Projects) from remaining hidden too long on mobile.
-    initReveal({ threshold: 0, rootMargin: '-6%' });
-  </script>
+  <RevealInitializer client:load />
 </BaseLayout>
