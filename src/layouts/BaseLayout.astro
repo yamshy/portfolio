@@ -3,6 +3,7 @@ import '../styles/tokens.css';
 import '../styles/utilities.css';
 import '../styles/animations.css';
 import { ClientRouter } from 'astro:transitions';
+import { inlineThemeScript } from '../scripts/theme-inline';
 const {
   title = 'Shyam Ajudia | Infrastructure & Data Engineer',
   description = 'Portfolio highlighting the intersection of molecular biology, large-scale data, and resilient infrastructure.',
@@ -24,12 +25,7 @@ const {
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <script type="module" is:inline>
-      import { applyTheme, getPreferredTheme } from '/src/scripts/theme.ts';
-
-      const theme = getPreferredTheme();
-      applyTheme(theme, { persist: false });
-    </script>
+    <script is:inline set:html={inlineThemeScript} />
   </head>
   <body>
     <ClientRouter />

@@ -1,7 +1,7 @@
 export type Theme = 'light' | 'dark';
 
-const STORAGE_KEY = 'portfolio-theme';
-const DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+export const STORAGE_KEY = 'portfolio-theme';
+export const DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
 
 const isTheme = (value: unknown): value is Theme =>
   value === 'light' || value === 'dark';
