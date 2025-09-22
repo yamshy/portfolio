@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.4](https://github.com/yamshy/portfolio/compare/v4.14.3...v4.14.4) (2025-09-22)
+
+### Bug Fixes
+
+* close mobile nav when tapping outside ([#139](https://github.com/yamshy/portfolio/issues/139)) ([9068a04](https://github.com/yamshy/portfolio/commit/9068a049b973f698f0e4e37d8e393d2f9e605a3e))
+
 ## [4.14.3](https://github.com/yamshy/portfolio/compare/v4.14.2...v4.14.3) (2025-09-22)
 
 ### Bug Fixes
