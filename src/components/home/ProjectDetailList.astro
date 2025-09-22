@@ -1,0 +1,32 @@
+---
+import type { ProjectDetail } from './projectDetails';
+
+interface Props {
+  detail: ProjectDetail;
+  wrapper?: 'div';
+}
+
+const { detail, wrapper } = Astro.props as Props;
+---
+
+{
+  wrapper === 'div' ? (
+    <div>
+      <h4>{detail.title}</h4>
+      <ul class={detail.listClass ?? undefined}>
+        {detail.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <>
+      <h4>{detail.title}</h4>
+      <ul class={detail.listClass ?? undefined}>
+        {detail.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </>
+  )
+}

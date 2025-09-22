@@ -1,5 +1,6 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
 import type { Project } from '../../content/home';
 
 interface Props {
@@ -10,17 +11,11 @@ const { projects } = Astro.props as Props;
 ---
 
 <section class="section projects" id="projects" data-reveal>
-  <div class="u-container section__heading">
-    <div>
-      <p class="u-title-overline">Featured Projects</p>
-      <h2>Hybrid services connecting lab work to cloud scale</h2>
-    </div>
-    <p>
-      Core infrastructure services keep my platform running: the GitOps
-      Kubernetes platform, this portfolio, and the immutable operating system
-      that keeps my personal desktop reproducible.
-    </p>
-  </div>
+  <SectionHeader
+    overline="Featured Projects"
+    title="Hybrid services connecting lab work to cloud scale"
+    description="Core infrastructure services keep my platform running: the GitOps Kubernetes platform, this portfolio, and the immutable operating system that keeps my personal desktop reproducible."
+  />
 
   <div class="u-container projects__grid">
     {projects.map((project) => <ProjectCard project={project} />)}

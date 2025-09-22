@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.16.0](https://github.com/yamshy/portfolio/compare/v4.15.0...v4.16.0) (2025-09-22)
+
+### Features
+
+* centralize theme helpers ([#159](https://github.com/yamshy/portfolio/issues/159)) ([7df4cd4](https://github.com/yamshy/portfolio/commit/7df4cd41decce48a1cf6d8107d7ba7f12f89a624))
+
+## [4.15.0](https://github.com/yamshy/portfolio/compare/v4.14.11...v4.15.0) (2025-09-22)
+
+### Features
+
+* add see more scroll control to hero ([#162](https://github.com/yamshy/portfolio/issues/162)) ([485660f](https://github.com/yamshy/portfolio/commit/485660fb6f00cd3adc0104f43537c353e87eedc2))
+
 ## [4.14.11](https://github.com/yamshy/portfolio/compare/v4.14.10...v4.14.11) (2025-09-22)
 
 ### Bug Fixes
