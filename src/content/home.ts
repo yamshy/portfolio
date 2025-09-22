@@ -58,90 +58,81 @@ export const heroStats: HeroStat[] = [
 
 export const projects: Project[] = [
   {
-    title: 'Adaptive NGS Orchestrator',
+    title: 'GitOps Kubernetes Platform',
     summary:
-      'Transformed a brittle sequencing pipeline into a self-healing platform spanning benchtop sequencers and GPU clouds.',
+      'Self-hosted production Kubernetes built as a GitOps control plane for every service I run.',
     problem:
-      'Legacy Bash pipelines stalled nightly; manual restarts delayed oncology trial enrollment by 48 hours on average.',
+      'Needed production-grade infrastructure at home capable of sustaining public workloads without managed cloud safety nets.',
     solution:
-      'Recomposed workflows into event-driven Nextflow + Argo, added automatic reagent QC triggers, and codified approvals in GitOps.',
-    stack: ['Nextflow', 'Argo Workflows', 'Terraform', 'Grafana', 'Karpenter'],
+      'Provisioned bare-metal cluster nodes, wired Flux CD pipelines, centralised secrets with Infisical, and automated lifecycle work via Renovate.',
+    stack: [
+      'Kubernetes',
+      'Flux CD',
+      'Infisical',
+      'MetalLB',
+      'Renovate',
+      'Cloudflare Tunnels',
+    ],
     results: [
-      '97.6% reduction in rerun hours after implementing health-probing sidecars',
-      'Mean turnaround dropped from 36h → 9.4h with adaptive GPU autoscaling',
-      'Audit-ready provenance bundles generated for every cohort in 2.1 seconds',
+      '24/7 uptime across self-hosted services',
+      'GitOps-driven deployments with policy-controlled rollouts',
+      'Production workloads reachable globally through Cloudflare Tunnels',
     ],
     challenges: [
-      'Designing deterministic container images for FDA submissions without sacrificing GPU throughput',
-      'Aligning wet-lab SOP changes with automated gating to avoid reagent wastage',
+      'Hardening consumer hardware to behave like a production cluster',
+      'Designing sealed-secret rotation and update automation entirely in Git',
     ],
-    link: '/case-studies/adaptive-ngs',
+    link: 'https://github.com/yamshy/homelab',
     layout: 'wide',
   },
   {
-    title: 'Lab Telemetry Mesh',
+    title: 'This Website',
     summary:
-      'Synchronized 42 lab instruments with streaming analytics for reagent consumption and maintenance forecasting.',
+      'Astro + TypeScript portfolio deployed through the same GitOps platform it documents.',
     problem:
-      'Manual CSV exports obscured reagent shortages; chromatography columns failed unpredictably.',
+      'Required a modern portfolio that demonstrates platform engineering craft while running on my own infrastructure.',
     solution:
-      'Edge collectors stream to Redpanda → Flink windowing; predictive maintenance models trigger Slack + PagerDuty runbooks.',
-    stack: ['Rust', 'Apache Flink', 'Redpanda', 'dbt', 'PagerDuty'],
-    results: [
-      'Cut emergency instrument downtime 61%',
-      'Forecast accuracy ±4.2% for reagent depletion at 24h horizon',
-      'Automatically scheduled calibrations saved $420k/year in consumables',
-    ],
-    challenges: [
-      'Reconciling vendor-specific OPC-UA schemas into a governed contract catalog',
-      'Guaranteeing <10s latency for alerts inside air-gapped cleanrooms',
-    ],
-    layout: 'standard',
-  },
-  {
-    title: 'Regulatory Data Fabric',
-    summary:
-      'Unified lab notebooks, LIMS, and EMR data into a governed knowledge graph feeding translational dashboards.',
-    problem:
-      'Trial teams waited 14 days for curated cohorts; audit requests required multi-week detective work.',
-    solution:
-      'Delta Lake backed data contracts orchestrated by Dagster with automated CFR 21 Part 11 validations.',
+      'Built the site with Astro and TypeScript, containerised it with Docker, and ship updates through GitHub Actions into the Kubernetes cluster.',
     stack: [
-      'Dagster',
-      'Delta Lake',
-      'Great Expectations',
-      'AWS Lake Formation',
+      'Astro',
+      'TypeScript',
+      'Docker',
+      'GitHub Actions',
+      'Kubernetes',
+      'Cloudflare Tunnels',
     ],
     results: [
-      'Cohort assembly SLA shrank to 2 hours with reproducible SQL snapshots',
-      'Audit trails generated in <5 minutes across seven regulatory frameworks',
-      'Downstream dashboards saw 18x query acceleration using Arrow flight servers',
+      'Self-hosted delivery on the GitOps Kubernetes platform',
+      'CI/CD automated from commit to production via GitHub Actions',
+      'Edge routing and TLS handled by Cloudflare Tunnels',
     ],
     challenges: [
-      'Designing role-aware lineage views acceptable to both QA and research leadership',
-      'Coordinating schema evolution without breaking legacy analytics notebooks',
+      'Keeping container images lightweight for rapid GitOps rollouts',
+      'Orchestrating zero-downtime releases on a homelab control plane',
     ],
-    layout: 'tall',
+    link: 'https://github.com/yamshy/portfolio',
+    layout: 'standard',
   },
   {
-    title: 'Clinician-Ready Insights Portal',
+    title: 'YamshyOS',
     summary:
-      'Delivered a decision support UI synthesising genomic variants, imaging markers, and trial eligibility in real time.',
+      'Fedora Atomic image engineered with immutable infrastructure patterns for fleet-style management.',
     problem:
-      'Oncologists toggled between six systems for molecular tumour boards; insights arrived days after pathology sign-off.',
+      'Needed a reproducible operating system baseline aligning with GitOps and supply-chain guarantees for every node I administer.',
     solution:
-      'Built Astro+Svelte portal with WebGL cohort visualisations, FHIR APIs, and embedded reproducible notebooks.',
-    stack: ['Astro', 'Svelte', 'WebGL', 'FHIR', 'Auth0'],
+      'Used BlueBuild to compose a custom Fedora Atomic variant, layered rpm-ostree updates, and signed releases through Sigstore.',
+    stack: ['Fedora Atomic', 'BlueBuild', 'rpm-ostree', 'Podman', 'Sigstore'],
     results: [
-      'Meeting prep time fell from 5h to 55m per tumour board',
-      'Integrated feedback loops driving weekly ML model recalibration',
-      'WCAG AAA compliant UI approved for bedside deployment',
+      'Cryptographically signed system images for trustable installs',
+      'Atomic updates with instant rollback via rpm-ostree',
+      'GitOps configuration keeps hosts converged with declarative state',
     ],
     challenges: [
-      'Balancing GPU-heavy visualisations with sub-3s load on hospital Wi-Fi',
-      'Designing redaction workflows for multi-institutional collaboration',
+      'Integrating Sigstore signing into an immutable image build pipeline',
+      'Balancing containerised workloads with read-only host constraints',
     ],
-    layout: 'standard',
+    link: 'https://github.com/yamshy/yamshy-os',
+    layout: 'tall',
   },
 ];
 
