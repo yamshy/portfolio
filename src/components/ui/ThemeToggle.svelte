@@ -59,47 +59,61 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    gap: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--color-border) 75%, var(--color-primary-soft) 25%);
     border-radius: 999px;
-    padding: 0.4rem 0.85rem;
-    background: color-mix(in oklab, var(--color-surface-strong) 50%, var(--color-surface) 50%);
+    padding: 0.55rem 1.15rem;
+    background: color-mix(in oklab, var(--color-surface-strong) 60%, var(--color-surface) 40%);
     color: var(--color-text);
     font-family: var(--font-sans);
     font-size: 0.9rem;
     cursor: pointer;
     transition: transform var(--duration-base) var(--ease-smooth),
-      box-shadow var(--duration-base) var(--ease-smooth);
+      box-shadow var(--duration-base) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-smooth);
   }
 
   .toggle:hover,
   .toggle:focus-visible {
     transform: translateY(-1px);
-    box-shadow: 0 12px 20px -18px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 24px -18px rgba(0, 0, 0, 0.5);
+    border-color: color-mix(in oklab, var(--color-primary) 55%, transparent 45%);
+  }
+
+  .toggle:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--color-primary) 25%, transparent 75%);
+    outline-offset: 2px;
   }
 
   .toggle span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    opacity: 0.45;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    opacity: 0.55;
+    background: color-mix(in oklab, var(--color-surface-muted) 40%, transparent 60%);
     transition: opacity var(--duration-base) var(--ease-smooth),
-      transform var(--duration-base) var(--ease-smooth);
+      transform var(--duration-base) var(--ease-smooth),
+      background var(--duration-base) var(--ease-smooth),
+      color var(--duration-base) var(--ease-smooth);
   }
 
   .toggle span.active {
     opacity: 1;
-    transform: scale(1.1);
+    transform: translateY(-1px);
+    background: color-mix(in oklab, var(--color-primary) 25%, transparent 75%);
+    color: var(--color-primary-strong);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-primary-strong) 30%, transparent 70%);
   }
 
   .toggle__label {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--color-text-subtle);
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
   }
 
   @media (prefers-reduced-motion: reduce) {
