@@ -1,118 +1,29 @@
 <script lang="ts">
   import { derived, writable } from 'svelte/store';
 
-  const COMPLEMENT_MAP = {
-    A: 'T',
-    T: 'A',
-    G: 'C',
-    C: 'G',
-  } as const;
-
-  const CODON_MAP = {
-    TTT: 'F',
-    TTC: 'F',
-    TTA: 'L',
-    TTG: 'L',
-    CTT: 'L',
-    CTC: 'L',
-    CTA: 'L',
-    CTG: 'L',
-    ATT: 'I',
-    ATC: 'I',
-    ATA: 'I',
-    ATG: 'M',
-    GTT: 'V',
-    GTC: 'V',
-    GTA: 'V',
-    GTG: 'V',
-    TCT: 'S',
-    TCC: 'S',
-    TCA: 'S',
-    TCG: 'S',
-    CCT: 'P',
-    CCC: 'P',
-    CCA: 'P',
-    CCG: 'P',
-    ACT: 'T',
-    ACC: 'T',
-    ACA: 'T',
-    ACG: 'T',
-    GCT: 'A',
-    GCC: 'A',
-    GCA: 'A',
-    GCG: 'A',
-    TAT: 'Y',
-    TAC: 'Y',
-    TAA: '*',
-    TAG: '*',
-    CAT: 'H',
-    CAC: 'H',
-    CAA: 'Q',
-    CAG: 'Q',
-    AAT: 'N',
-    AAC: 'N',
-    AAA: 'K',
-    AAG: 'K',
-    GAT: 'D',
-    GAC: 'D',
-    GAA: 'E',
-    GAG: 'E',
-    TGT: 'C',
-    TGC: 'C',
-    TGA: '*',
-    TGG: 'W',
-    CGT: 'R',
-    CGC: 'R',
-    CGA: 'R',
-    CGG: 'R',
-    AGT: 'S',
-    AGC: 'S',
-    AGA: 'R',
-    AGG: 'R',
-    GGT: 'G',
-    GGC: 'G',
-    GGA: 'G',
-    GGG: 'G',
-  } as const;
+  import {
+    calculateGcContent,
+    cleanSequence,
+    getReverseComplement,
+    translateFrames,
+  } from '../../lib/sequenceUtils';
 
   const defaultSequence =
     'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAGCTAGGACTAGCTAGGTCAGTCTGAGTGA';
 
   const sequence = writable(defaultSequence);
 
-  const cleanSequence = derived(sequence, ($sequence) =>
-    $sequence.replace(/[^acgtACGT]/g, '').toUpperCase()
+  const cleanedSequence = derived(sequence, ($sequence) => cleanSequence($sequence));
+
+  const gcContent = derived(cleanedSequence, ($sequence) =>
+    calculateGcContent($sequence)
   );
 
-  const gcContent = derived(cleanSequence, ($sequence) => {
-    if ($sequence.length === 0) return 0;
-    const gc = ($sequence.match(/[GC]/g) ?? []).length;
-    return Number(((gc / $sequence.length) * 100).toFixed(2));
-  });
-
-  const reverseComplement = derived(cleanSequence, ($sequence) =>
-    $sequence
-      .split('')
-      .reverse()
-      .map((base) => COMPLEMENT_MAP[base as keyof typeof COMPLEMENT_MAP])
-      .join('')
+  const reverseComplement = derived(cleanedSequence, ($sequence) =>
+    getReverseComplement($sequence)
   );
 
-  const translate = (seq: string) => {
-    const peptides: string[] = [];
-    for (let frame = 0; frame < 3; frame += 1) {
-      let peptide = '';
-      for (let i = frame; i < seq.length; i += 3) {
-        const codon = seq.slice(i, i + 3);
-        if (codon.length < 3) break;
-        peptide += CODON_MAP[codon as keyof typeof CODON_MAP] ?? '?';
-      }
-      peptides.push(peptide);
-    }
-    return peptides;
-  };
-
-  const peptides = derived(cleanSequence, translate);
+  const peptides = derived(cleanedSequence, ($sequence) => translateFrames($sequence));
 </script>
 
 <section class="workbench" aria-label="Sequence analysis tool">
@@ -139,7 +50,7 @@
     <div class="workbench__panel">
       <div>
         <h4>GC Content</h4>
-        <p><strong>{$gcContent}%</strong> GC across {$cleanSequence.length} bp</p>
+        <p><strong>{$gcContent}%</strong> GC across {$cleanedSequence.length} bp</p>
         <div class="meter">
           <div class="meter__fill" style={`width: ${Math.min(100, $gcContent)}%`}></div>
         </div>
