@@ -39,6 +39,9 @@ test.describe('Home page experience', () => {
 
     await expect(page.locator('.hero__title')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
+    const seeMoreLink = page.getByRole('link', { name: 'See more' });
+    await expect(seeMoreLink).toBeVisible();
+    await expect(seeMoreLink).toHaveAttribute('href', '#projects');
 
     await expect(page.locator('.hero__metric')).toHaveCount(3);
   });
