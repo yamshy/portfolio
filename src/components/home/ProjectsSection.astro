@@ -1,7 +1,5 @@
 ---
 import ProjectCard from './ProjectCard.astro';
-import Ic50Visualizer from '../visualizations/Ic50Visualizer.svelte';
-import PipelineOpsDashboard from '../infrastructure/PipelineOpsDashboard.svelte';
 import type { Project } from '../../content/home';
 
 interface Props {
@@ -18,30 +16,14 @@ const { projects } = Astro.props as Props;
       <h2>Hybrid programmes bridging lab reality and cloud scale</h2>
     </div>
     <p>
-      Each engagement pairs deep scientific context with hardened
-      infrastructure. Bento layout mirrors how these systems interlock:
-      orchestration, telemetry, governance, and human interfaces.
+      Core infrastructure programmes that keep my platform running: the GitOps
+      Kubernetes platform, this portfolio, and the immutable operating system
+      powering the nodes underneath.
     </p>
   </div>
 
   <div class="u-container projects__grid">
-    {
-      projects.map((project, index) => (
-        <>
-          <ProjectCard project={project} />
-          {index === 1 && (
-            <div class="project-card project-card--viz" data-reveal>
-              <Ic50Visualizer client:visible />
-            </div>
-          )}
-          {index === projects.length - 1 && (
-            <div class="project-card project-card--dashboard" data-reveal>
-              <PipelineOpsDashboard client:visible />
-            </div>
-          )}
-        </>
-      ))
-    }
+    {projects.map((project) => <ProjectCard project={project} />)}
   </div>
 </section>
 
@@ -49,6 +31,8 @@ const { projects } = Astro.props as Props;
   .projects__grid {
     display: grid;
     gap: var(--space-lg);
+    align-items: start;
+    grid-auto-flow: row;
   }
 
   :global(.project-card) {
@@ -127,12 +111,8 @@ const { projects } = Astro.props as Props;
     text-transform: uppercase;
   }
 
-  .project-card--viz,
-  .project-card--dashboard {
-    padding: 0;
-    background: none;
-    border: none;
-    box-shadow: none;
+  :global(.project-card--wide .project-card__link) {
+    margin-top: 0;
   }
 
   :global(.project-card--wide) {
@@ -158,16 +138,20 @@ const { projects } = Astro.props as Props;
 
   @media (min-width: 960px) {
     .projects__grid {
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
     }
 
     :global(.project-card--wide) {
-      grid-column: span 8;
+      grid-column: span 12;
       align-items: start;
     }
 
     :global(.project-card--standard) {
-      grid-column: span 4;
+      grid-column: span 6;
+    }
+
+    :global(.project-card--tall) {
+      grid-column: span 6;
     }
 
     :global(.project-card--wide .project-card__content) {
@@ -183,18 +167,6 @@ const { projects } = Astro.props as Props;
     :global(.project-card--wide .project-card__link) {
       grid-column: span 12;
       justify-self: start;
-    }
-
-    .project-card--viz {
-      grid-column: span 6;
-    }
-
-    :global(.project-card--tall) {
-      grid-column: span 6;
-    }
-
-    .project-card--dashboard {
-      grid-column: span 6;
     }
   }
 
