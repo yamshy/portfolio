@@ -454,6 +454,32 @@ const navLinks = [
       }
     };
 
+    const isEventInsideNav = (event) => {
+      const path =
+        typeof event.composedPath === 'function' ? event.composedPath() : null;
+      if (path) {
+        return path.includes(nav) || path.includes(toggle);
+      }
+
+      const target = event.target;
+      return (
+        (target instanceof Node && nav.contains(target)) ||
+        (target instanceof Node && toggle.contains(target))
+      );
+    };
+
+    const onPointerDown = (event) => {
+      if (!isOpen || desktopQuery.matches) {
+        return;
+      }
+
+      if (isEventInsideNav(event)) {
+        return;
+      }
+
+      closeNav();
+    };
+
     const handleDesktopChange = (event) => {
       if (event.matches) {
         isOpen = false;
@@ -465,6 +491,7 @@ const navLinks = [
 
     toggle.addEventListener('click', onToggle);
     window.addEventListener('keydown', onKeydown);
+    window.addEventListener('pointerdown', onPointerDown);
     linkElements.forEach((link) => {
       link.addEventListener('click', closeNav);
     });
@@ -479,6 +506,7 @@ const navLinks = [
       closeNav();
       toggle.removeEventListener('click', onToggle);
       window.removeEventListener('keydown', onKeydown);
+      window.removeEventListener('pointerdown', onPointerDown);
       linkElements.forEach((link) => {
         link.removeEventListener('click', closeNav);
       });
