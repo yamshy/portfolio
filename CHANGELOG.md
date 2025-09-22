@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.16.1](https://github.com/yamshy/portfolio/compare/v4.16.0...v4.16.1) (2025-09-22)
+
+### Bug Fixes
+
+* ensure backdrop covers mobile safe areas ([#154](https://github.com/yamshy/portfolio/issues/154)) ([60d8e80](https://github.com/yamshy/portfolio/commit/60d8e8072b1cf8cb970e1b57d42c491fa97ad9e8))
+
 ## [4.16.0](https://github.com/yamshy/portfolio/compare/v4.15.0...v4.16.0) (2025-09-22)
 
 ### Features
