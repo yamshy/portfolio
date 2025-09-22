@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.3](https://github.com/yamshy/portfolio/compare/v4.14.2...v4.14.3) (2025-09-22)
+
+### Bug Fixes
+
+* streamline projects layout ([#138](https://github.com/yamshy/portfolio/issues/138)) ([7101741](https://github.com/yamshy/portfolio/commit/710174165dd400069315f819bebe3a01d8abc970))
+
 ## [4.14.2](https://github.com/yamshy/portfolio/compare/v4.14.1...v4.14.2) (2025-09-22)
 
 ### Bug Fixes
