@@ -145,10 +145,20 @@
     line-height: 1.6;
     background: var(--color-bg);
     color: var(--color-text);
-    background-image: var(--gradient-backdrop);
-    background-attachment: fixed;
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--color-bg);
+    background-image: var(--gradient-backdrop);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   ::selection {
