@@ -11,13 +11,39 @@ const { channels } = Astro.props as Props;
 <section class="section section--contact" id="contact" data-reveal>
   <div class="u-container contact">
     <div class="contact__copy">
-      <p class="u-title-overline">Contact</p>
-      <h2>Let’s design infrastructure that keeps pace with discovery</h2>
-      <p>
-        I partner with biotech, pharmaceutical, and research organisations
-        seeking to fuse cutting-edge computation with the realities of regulated
-        science.
+      <div class="contact__heading">
+        <p class="u-title-overline">Contact</p>
+        <h2>Build regulated-ready infrastructure faster</h2>
+        <p class="contact__intro">
+          I partner with biotech, pharmaceutical, and research organisations to
+          align scientific platforms with the realities of regulated delivery.
+        </p>
+        <p class="contact__cta">
+          Share your current initiative and I’ll respond with next steps within
+          two business days.
+        </p>
+      </div>
+      <div class="contact__highlights">
+        <h3 id="contact-focus-title">Focus areas</h3>
+        <ul aria-labelledby="contact-focus-title" class="contact__focus">
+          <li>Platform roadmaps for sequencing, ML, and analytics</li>
+          <li>Compliance-focused technical diligence</li>
+          <li>Embedded mentorship for resilient operations</li>
+        </ul>
+      </div>
+      <p class="contact__availability">
+        Booking new collaborations for the upcoming quarter — share timelines
+        early for priority alignment.
       </p>
+    </div>
+    <aside class="contact__panel" aria-labelledby="contact-panel-title">
+      <div class="contact__panel-header">
+        <h3 id="contact-panel-title">Start a conversation</h3>
+        <p class="contact__panel-description">
+          Choose the channel that fits best — I reply to every message within
+          two business days.
+        </p>
+      </div>
       <div class="contact__channels">
         {
           channels.map((channel) => (
@@ -28,7 +54,11 @@ const { channels } = Astro.props as Props;
           ))
         }
       </div>
-    </div>
+      <p class="contact__panel-note">
+        Prefer secure tooling? Request a Signal or Matrix invite when you reach
+        out.
+      </p>
+    </aside>
   </div>
 </section>
 
@@ -38,45 +68,200 @@ const { channels } = Astro.props as Props;
   }
 
   .contact {
+    position: relative;
     display: grid;
-    gap: var(--space-xl);
+    gap: clamp(var(--space-lg), 5vw, var(--space-xl));
+    align-items: stretch;
   }
 
   .contact__copy {
     display: grid;
-    gap: var(--space-md);
+    gap: clamp(var(--space-md), 4vw, var(--space-lg));
+    max-width: min(48ch, 100%);
+  }
+
+  .contact__heading {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .contact__intro {
+    color: var(--color-text-muted);
+  }
+
+  .contact__cta {
+    font-size: var(--text-md);
+    color: var(--color-text);
+  }
+
+  .contact__highlights {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .contact__highlights h3 {
+    margin: 0;
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .contact__focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact__focus li {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface) 88%,
+      var(--color-primary) 12%
+    );
+    font-size: var(--text-sm);
+    line-height: 1.35;
+    color: var(--color-text-muted);
+  }
+
+  .contact__availability {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+  }
+
+  .contact__panel {
+    position: relative;
+    display: grid;
+    gap: clamp(var(--space-md), 3.5vw, var(--space-lg));
+    padding: clamp(var(--space-lg), 4vw, var(--space-xl));
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 70%, transparent 30%);
+    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+    box-shadow: 0 14px 30px -24px var(--color-shadow);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .contact__panel::before {
+    content: '';
+    position: absolute;
+    inset-block-start: -25%;
+    inset-inline-end: -10%;
+    width: 55%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-primary) 32%, transparent) 0%,
+      transparent 70%
+    );
+    opacity: 0.55;
+    transform: rotate(8deg);
+    pointer-events: none;
+  }
+
+  .contact__panel > * {
+    position: relative;
+  }
+
+  .contact__panel-header {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .contact__panel h3 {
+    margin: 0;
+    font-size: var(--heading-md);
+  }
+
+  .contact__panel-description {
+    margin: 0;
+    color: var(--color-text-muted);
   }
 
   .contact__channels {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--space-xs);
   }
 
   .contact__channels a {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.75rem 1rem;
+    position: relative;
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.85rem 1rem;
     border-radius: var(--radius-md);
     border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
     background: color-mix(
       in oklab,
       var(--color-primary) 12%,
       var(--color-surface)
     );
-    transition: transform var(--duration-base) var(--ease-smooth);
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 12px 24px -22px var(--color-shadow);
+    transition:
+      transform var(--duration-base) var(--ease-smooth),
+      box-shadow var(--duration-base) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-smooth);
+  }
+
+  .contact__channels a span {
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .contact__channels a strong {
+    font-size: var(--text-md);
+    font-weight: 600;
+    word-break: break-word;
   }
 
   .contact__channels a:hover,
   .contact__channels a:focus-visible {
-    transform: translateX(4px);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 38px -28px var(--color-shadow);
+    border-color: color-mix(
+      in oklab,
+      var(--color-primary) 45%,
+      transparent 55%
+    );
+  }
+
+  .contact__channels a:focus-visible {
+    outline: 2px solid
+      color-mix(in oklab, var(--color-primary) 55%, transparent 45%);
+    outline-offset: 3px;
+  }
+
+  .contact__panel-note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
   }
 
   @media (min-width: 960px) {
     .contact {
-      grid-template-columns: 1fr 0.85fr;
-      align-items: start;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .contact__channels {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
 </style>
