@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.0](https://github.com/yamshy/portfolio/compare/v4.13.3...v4.14.0) (2025-09-22)
+
+### Features
+
+* add floating mobile nav toggle ([#132](https://github.com/yamshy/portfolio/issues/132)) ([c2900ca](https://github.com/yamshy/portfolio/commit/c2900caf05175b37bd037c42d364458203de70e0))
+
 ## [4.13.3](https://github.com/yamshy/portfolio/compare/v4.13.2...v4.13.3) (2025-09-21)
 
 ### Bug Fixes
