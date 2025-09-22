@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.9](https://github.com/yamshy/portfolio/compare/v4.14.8...v4.14.9) (2025-09-22)
+
+### Bug Fixes
+
+* **deps:** update dependency astro to v5.13.10 ([#148](https://github.com/yamshy/portfolio/issues/148)) ([99ec174](https://github.com/yamshy/portfolio/commit/99ec1742ae53c791ba509c703b23fe8805f85c8c))
+
 ## [4.14.8](https://github.com/yamshy/portfolio/compare/v4.14.7...v4.14.8) (2025-09-22)
 
 ### Bug Fixes
