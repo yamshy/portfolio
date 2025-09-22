@@ -10,31 +10,75 @@ const { channels } = Astro.props as Props;
 
 <section class="section section--contact" id="contact" data-reveal>
   <div class="u-container contact">
-    <div class="contact__copy">
+    <div class="contact__intro">
       <p class="u-title-overline">Contact</p>
-      <h2>Let’s design infrastructure that keeps pace with discovery</h2>
+      <h2>Build regulated-ready infrastructure faster</h2>
       <p>
         I partner with biotech, pharmaceutical, and research organisations
-        seeking to fuse cutting-edge computation with the realities of regulated
-        science.
+        aligning scientific platforms with regulated delivery.
       </p>
-      <div class="contact__channels">
-        {
-          channels.map((channel) => (
-            <a href={channel.href}>
-              <span>{channel.label}</span>
-              <strong>{channel.value}</strong>
-            </a>
-          ))
-        }
+      <p>
+        Share your current initiative and I’ll respond with next steps within
+        two business days.
+      </p>
+      <div class="contact__focus">
+        <p class="contact__focus-title">Focus areas</p>
+        <ul class="contact__focus-list">
+          <li>Platform roadmaps for sequencing, ML, and analytics</li>
+          <li>Compliance-focused technical diligence</li>
+          <li>Embedded mentorship for resilient operations</li>
+        </ul>
       </div>
+      <p class="contact__note">
+        Booking new collaborations for the upcoming quarter — share timelines
+        early for priority alignment.
+      </p>
     </div>
+    <aside class="contact__panel" aria-labelledby="contact-panel-title">
+      <div class="contact-card">
+        <h3 id="contact-panel-title">Start a conversation</h3>
+        <p class="contact-card__intro">
+          Choose the channel that fits best — I reply to every message within
+          two business days.
+        </p>
+        <div class="contact-card__channels">
+          {
+            channels.map((channel) => (
+              <a
+                class="contact-card__channel"
+                href={channel.href}
+                target={channel.href.startsWith('http') ? '_blank' : undefined}
+                rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
+              >
+                <span>{channel.label}</span>
+                <strong>{channel.value}</strong>
+              </a>
+            ))
+          }
+        </div>
+        <p class="contact-card__note">
+          Prefer secure tooling? Request a Signal or Matrix invite when you
+          reach out.
+        </p>
+      </div>
+    </aside>
   </div>
 </section>
 
 <style>
   .section--contact {
-    background: color-mix(in oklab, var(--color-surface) 90%, transparent 10%);
+    background:
+      radial-gradient(
+        circle at top right,
+        color-mix(in oklab, var(--color-primary-soft) 45%, transparent) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at bottom left,
+        color-mix(in oklab, var(--color-primary) 12%, transparent) 0%,
+        transparent 60%
+      ),
+      color-mix(in oklab, var(--color-surface) 94%, transparent 6%);
   }
 
   .contact {
@@ -42,35 +86,139 @@ const { channels } = Astro.props as Props;
     gap: var(--space-xl);
   }
 
-  .contact__copy {
+  .contact__intro {
     display: grid;
     gap: var(--space-md);
+    max-width: 32rem;
   }
 
-  .contact__channels {
+  .contact__intro h2 {
+    font-size: clamp(2rem, 2.8vw + 1rem, 2.75rem);
+    line-height: 1.1;
+  }
+
+  .contact__focus {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .contact__focus-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: color-mix(in oklab, var(--color-text-subtle) 70%, transparent 30%);
+  }
+
+  .contact__focus-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .contact__focus-list li {
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 85%,
+      transparent 15%
+    );
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .contact__note {
+    color: color-mix(in oklab, var(--color-text-subtle) 75%, transparent 25%);
+    font-size: 0.95rem;
+  }
+
+  .contact__panel {
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact-card {
+    display: grid;
+    gap: var(--space-md);
+    padding: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+    width: min(100%, 26rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: linear-gradient(
+      145deg,
+      color-mix(in oklab, var(--color-surface) 95%, transparent 5%),
+      color-mix(in oklab, var(--color-surface-strong) 92%, transparent 8%)
+    );
+    box-shadow: 0 32px 60px -40px rgba(15, 23, 42, 0.35);
+  }
+
+  .contact-card h3 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .contact-card__intro {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .contact-card__channels {
     display: grid;
     gap: 0.75rem;
   }
 
-  .contact__channels a {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  .contact-card__channel {
+    display: grid;
+    gap: 0.25rem;
     padding: 0.75rem 1rem;
     border-radius: var(--radius-md);
     border: 1px solid
-      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+      color-mix(in oklab, var(--color-border) 50%, transparent 50%);
     background: color-mix(
       in oklab,
-      var(--color-primary) 12%,
+      var(--color-primary) 14%,
       var(--color-surface)
     );
-    transition: transform var(--duration-base) var(--ease-smooth);
+    box-shadow: inset 0 1px 0
+      color-mix(in oklab, var(--color-surface) 65%, transparent 35%);
+    transition:
+      transform var(--duration-base) var(--ease-smooth),
+      box-shadow var(--duration-base) var(--ease-smooth);
   }
 
-  .contact__channels a:hover,
-  .contact__channels a:focus-visible {
+  .contact-card__channel span {
+    font-size: 0.875rem;
+    color: color-mix(in oklab, var(--color-text-subtle) 65%, transparent 35%);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .contact-card__channel strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .contact-card__channel:hover,
+  .contact-card__channel:focus-visible {
     transform: translateX(4px);
+    box-shadow:
+      inset 0 1px 0
+        color-mix(in oklab, var(--color-surface) 80%, transparent 20%),
+      0 12px 28px -22px rgba(15, 23, 42, 0.65);
+  }
+
+  .contact-card__note {
+    margin: 0;
+    font-size: 0.875rem;
+    color: color-mix(in oklab, var(--color-text-subtle) 70%, transparent 30%);
   }
 
   @media (min-width: 960px) {
