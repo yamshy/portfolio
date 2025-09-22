@@ -158,6 +158,15 @@ const { stats } = Astro.props as Props;
     }
   }
 
+  @media (max-width: 48rem) {
+    .hero {
+      --hero-mobile-padding-start: clamp(var(--space-lg), 3vh, var(--space-xl));
+      padding-block-start: calc(
+        env(safe-area-inset-top, 0px) + var(--hero-mobile-padding-start)
+      );
+    }
+  }
+
   @media (max-width: 720px) {
     .hero__name {
       font-size: clamp(2.75rem, 10vw + 0.6rem, 4.75rem);
