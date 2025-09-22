@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.14.6](https://github.com/yamshy/portfolio/compare/v4.14.5...v4.14.6) (2025-09-22)
+
+### Bug Fixes
+
+* clarify immutable os description ([#146](https://github.com/yamshy/portfolio/issues/146)) ([b4331f5](https://github.com/yamshy/portfolio/commit/b4331f527e6da3a4fa8a4baa2c0f278e018d1449))
+
 ## [4.14.5](https://github.com/yamshy/portfolio/compare/v4.14.4...v4.14.5) (2025-09-22)
 
 ### Bug Fixes
