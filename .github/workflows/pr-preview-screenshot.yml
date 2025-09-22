@@ -60,20 +60,57 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('node:fs/promises');
+            const path = require('node:path');
+
             const marker = '<!-- preview-screenshot -->';
+            const screenshotPath = path.join(
+              process.env.GITHUB_WORKSPACE ?? process.cwd(),
+              'artifacts/pr-preview.jpg',
+            );
             const { owner, repo } = context.repo;
             const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}`;
             const artifactUrl = `${runUrl}/artifacts`;
-            const body = [
+            const maxCommentBytes = 65000;
+
+            let previewImageMarkdown;
+            try {
+              const screenshot = await fs.readFile(screenshotPath);
+              const base64 = screenshot.toString('base64');
+              previewImageMarkdown = `![Preview screenshot](data:image/jpeg;base64,${base64})`;
+            } catch (error) {
+              core.warning(`Unable to read preview screenshot for embedding: ${error.message}`);
+            }
+
+            const bodyLines = [
               marker,
               '## 🔍 Preview Screenshot',
               '',
-              'A fresh preview screenshot is ready for this pull request.',
+              previewImageMarkdown ?? '_Preview screenshot is unavailable._',
               '',
               `[⬇️ Download the screenshot artifact](${artifactUrl})`,
               '',
               '_This comment is updated automatically when the PR changes._',
-            ].join('\n');
+            ];
+
+            let body = bodyLines.join('\n');
+            if (
+              previewImageMarkdown &&
+              Buffer.byteLength(body, 'utf8') > maxCommentBytes
+            ) {
+              core.warning('Preview comment would exceed GitHub\'s size limit; falling back to artifact link.');
+              body = [
+                marker,
+                '## 🔍 Preview Screenshot',
+                '',
+                '_Preview screenshot is too large to embed._',
+                '',
+                `[⬇️ Download the screenshot artifact](${artifactUrl})`,
+                '',
+                '_This comment is updated automatically when the PR changes._',
+              ].join('\n');
+            }
+
             const issue_number = context.issue.number;
             if (!issue_number) {
               core.info('No pull request found in context; skipping comment.');

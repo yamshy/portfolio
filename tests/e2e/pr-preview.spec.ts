@@ -13,15 +13,16 @@ test.describe('pr preview screenshot', () => {
     const absolutePath = resolve(screenshotTarget);
     mkdirSync(dirname(absolutePath), { recursive: true });
 
+    await page.setViewportSize({ width: 1280, height: 720 });
+
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('main')).toBeVisible();
 
     const buffer = await page.screenshot({
       path: absolutePath,
-      fullPage: true,
       type: 'jpeg',
-      quality: 80,
+      quality: 60,
     });
 
     test.info().attach('preview-screenshot', {
