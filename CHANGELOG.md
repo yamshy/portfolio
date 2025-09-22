@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.16.0](https://github.com/yamshy/portfolio/compare/v4.15.0...v4.16.0) (2025-09-22)
+
+### Features
+
+* centralize theme helpers ([#159](https://github.com/yamshy/portfolio/issues/159)) ([7df4cd4](https://github.com/yamshy/portfolio/commit/7df4cd41decce48a1cf6d8107d7ba7f12f89a624))
+
 ## [4.15.0](https://github.com/yamshy/portfolio/compare/v4.14.11...v4.15.0) (2025-09-22)
 
 ### Features
