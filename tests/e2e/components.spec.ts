@@ -54,7 +54,7 @@ test.describe('Home page experience', () => {
     await projectsSection.scrollIntoViewIfNeeded();
     await expect(projectsSection).toBeVisible();
 
-    await expect(page.locator('.projects__grid .project-card')).toHaveCount(6);
+    await expect(page.locator('.projects__grid .project-card')).toHaveCount(3);
     await expect(
       page.getByRole('link', { name: 'Read research-style case study →' }),
     ).toBeVisible();
