@@ -81,7 +81,7 @@ test.describe('Home page experience', () => {
 
     await expect(page.locator('.projects__grid .project-card')).toHaveCount(3);
     await expect(
-      page.getByRole('link', { name: 'Read research-style case study →' }),
+      page.getByRole('link', { name: 'Source code →' }),
     ).toBeVisible();
 
     const insightsSection = page.locator('#insights');
