@@ -82,8 +82,8 @@ const { projects } = Astro.props as Props;
     text-transform: uppercase;
   }
 
-  :global(.project-card__footer ul),
-  :global(.project-card__meta ul) {
+  :global(.project-card__footer ul:not(.project-card__tags)),
+  :global(.project-card__meta ul:not(.project-card__tags)) {
     list-style: none;
     padding: 0;
     margin: 0;
