@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.17.1](https://github.com/yamshy/portfolio/compare/v4.17.0...v4.17.1) (2025-09-23)
+
+### Bug Fixes
+
+* keep stack pills sized to their text ([#171](https://github.com/yamshy/portfolio/issues/171)) ([d6e6c1c](https://github.com/yamshy/portfolio/commit/d6e6c1cbbc1272f64a08226135dfb0d91911a174))
+
 ## [4.17.0](https://github.com/yamshy/portfolio/compare/v4.16.1...v4.17.0) (2025-09-22)
 
 ### Features
