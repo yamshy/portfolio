@@ -29,7 +29,7 @@ test.describe('Home page experience', () => {
       'Projects',
       'Skills',
       'Experience',
-      'Insights',
+      'Interactive Lab',
       'Contact',
     ];
 
