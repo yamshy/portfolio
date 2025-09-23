@@ -198,15 +198,14 @@ const { stats } = Astro.props as Props;
     color: var(--color-text);
   }
 
-  .hero__metric p,
-  .hero__metric span {
+  .hero__metric p {
     color: var(--color-text);
   }
 
   .hero__metric span {
     display: block;
     font-size: 0.85rem;
-    color: color-mix(in oklab, var(--color-text) 78%, transparent 22%);
+    color: var(--color-text-subtle);
     margin-top: 0.35rem;
   }
 
