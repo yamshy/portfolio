@@ -152,6 +152,8 @@ const { stats } = Astro.props as Props;
     width: 1.25rem;
     height: 1.25rem;
     flex-shrink: 0;
+    transform: translateY(0);
+    animation: hero-scroll-float 2.8s var(--ease-smooth) infinite;
     transition: transform var(--duration-base) var(--ease-smooth);
   }
 
@@ -172,6 +174,7 @@ const { stats } = Astro.props as Props;
 
   .hero__scroll:hover svg,
   .hero__scroll:focus-visible svg {
+    animation: none;
     transform: translateY(4px);
   }
 
