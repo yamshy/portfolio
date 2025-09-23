@@ -36,11 +36,12 @@
       id: 'infrastructure',
       title: 'Infrastructure Engineering',
       narrative:
-        'Hybrid cloud infrastructure connecting laboratory sequencers to computational pipelines. Reliability through systematic automation and containerization, reducing manual operations by 50%.',
+        'Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient while GitOps automation sustains compliance and slashes manual effort.',
       highlights: [
         'Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization',
         'Built CI/CD pipelines with GitHub Actions for containerized deployments across dev/staging/prod',
-        'Automated NGS data flow from Illumina sequencers to AWS Batch compute clusters via Nextflow Tower',
+        'Currently running production Kubernetes homelab with Flux GitOps, Infisical secrets, and MetalLB load balancing',
+        'Reduced manual operations by 50% through Python automation and systematic workflow optimization',
       ],
       stack: [
         {
