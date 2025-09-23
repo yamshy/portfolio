@@ -67,8 +67,13 @@ const navLinks = [
       var(--color-surface) 65%
     );
     border-bottom: 1px solid var(--color-border);
-    position: relative;
+    position: sticky;
+    top: 0;
+    inset-inline: 0;
     z-index: 10;
+    padding-block-start: var(--safe-area-top, 0px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .site-header__inner {
@@ -192,6 +197,8 @@ const navLinks = [
       --safe-area-right: env(safe-area-inset-right, 0px);
       --mobile-nav-offset: clamp(var(--space-sm), 4vw, var(--space-lg));
       --mobile-toggle-size: clamp(3.25rem, 11vw, 3.75rem);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .site-header__inner {
