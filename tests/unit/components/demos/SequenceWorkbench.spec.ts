@@ -16,6 +16,7 @@ describe('SequenceWorkbench', () => {
     await tick();
 
     const cleanedSequence = 'ATGGCTTAA';
+    expect(textarea.value).toBe(cleanedSequence);
     const gcBases =
       (cleanedSequence.match(/[GC]/g)?.length ?? 0) / cleanedSequence.length;
     const expectedGc = Number((gcBases * 100).toFixed(2));
@@ -51,6 +52,7 @@ describe('SequenceWorkbench', () => {
     await fireEvent.input(textarea, { target: { value: '123456---' } });
     await tick();
 
+    expect(textarea.value).toBe('');
     const gcParagraph = screen.getByText('GC Content').nextElementSibling;
     expect(gcParagraph?.textContent).toBe('0% GC across 0 bp');
 
