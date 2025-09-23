@@ -196,8 +196,45 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
       var(--color-primary) 35%,
       var(--color-surface-muted) 65%
     );
-    box-shadow: inset 0 0 0 1px
-      color-mix(in oklab, var(--color-border) 40%, transparent 60%);
+    box-shadow:
+      inset 0 0 0 1px
+        color-mix(in oklab, var(--color-border) 40%, transparent 60%),
+      0 0 0 0 color-mix(in oklab, var(--color-primary) 60%, transparent 40%);
+    position: relative;
+    isolation: isolate;
+    animation: homelab-node-pulse 5.4s var(--ease-smooth) infinite;
+    will-change: transform, box-shadow;
+  }
+
+  .homelab-nodes span:nth-child(2) {
+    animation-delay: -1.8s;
+  }
+
+  .homelab-nodes span:nth-child(3) {
+    animation-delay: -3.6s;
+  }
+
+  .homelab-nodes span::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-primary) 30%, transparent 70%) 0%,
+      transparent 70%
+    );
+    opacity: 0;
+    animation: homelab-node-glow 5.4s var(--ease-smooth) infinite;
+    pointer-events: none;
+  }
+
+  .homelab-nodes span:nth-child(2)::after {
+    animation-delay: -1.8s;
+  }
+
+  .homelab-nodes span:nth-child(3)::after {
+    animation-delay: -3.6s;
   }
 
   .insight-card__visual--nextflow {
@@ -259,6 +296,10 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
       var(--color-text-muted) 35%,
       transparent 65%
     );
+    position: relative;
+    overflow: hidden;
+    animation: terminal-line-breathe 5.2s ease-in-out infinite;
+    will-change: opacity;
   }
 
   .line--prompt {
@@ -277,6 +318,101 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
       color-mix(in oklab, var(--color-primary) 70%, transparent) 0%,
       color-mix(in oklab, var(--color-science-purple) 60%, transparent) 100%
     );
+  }
+
+  .terminal__body .line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 15%,
+      color-mix(in oklab, var(--color-bg) 60%, transparent 40%) 45%,
+      transparent 85%
+    );
+    opacity: 0;
+    transform: translateX(-125%);
+    animation: terminal-line-shimmer 3.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes homelab-node-pulse {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+      box-shadow:
+        inset 0 0 0 1px
+          color-mix(in oklab, var(--color-border) 40%, transparent 60%),
+        0 0 0 0 color-mix(in oklab, var(--color-primary) 60%, transparent 40%);
+    }
+    35% {
+      transform: translateY(-8px) scale(1.08);
+      box-shadow:
+        inset 0 0 0 1px
+          color-mix(in oklab, var(--color-border) 25%, transparent 75%),
+        0 14px 24px -18px
+          color-mix(in oklab, var(--color-primary) 65%, transparent 35%);
+    }
+    65% {
+      transform: translateY(4px) scale(0.97);
+      box-shadow:
+        inset 0 0 0 1px
+          color-mix(in oklab, var(--color-border) 45%, transparent 55%),
+        0 4px 12px -10px
+          color-mix(in oklab, var(--color-primary) 45%, transparent 55%);
+    }
+  }
+
+  @keyframes homelab-node-glow {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    40% {
+      opacity: 0.75;
+      transform: scale(1.15);
+    }
+    70% {
+      opacity: 0;
+      transform: scale(1.3);
+    }
+  }
+
+  @keyframes terminal-line-breathe {
+    0%,
+    100% {
+      opacity: 0.85;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes terminal-line-shimmer {
+    0% {
+      transform: translateX(-135%);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.8;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(135%);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .homelab-nodes span,
+    .homelab-nodes span::after,
+    .terminal__body .line,
+    .terminal__body .line::after {
+      animation: none !important;
+    }
   }
 
   @media (min-width: 960px) {
