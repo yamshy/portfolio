@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.23.0](https://github.com/yamshy/portfolio/compare/v4.22.3...v4.23.0) (2025-09-23)
+
+### Features
+
+* add animated transitions to skills tabs ([#192](https://github.com/yamshy/portfolio/issues/192)) ([b482ecd](https://github.com/yamshy/portfolio/commit/b482ecdb0d33f183b217b074421c830614c7253d))
+* restrict sequence workbench input to gcat ([#191](https://github.com/yamshy/portfolio/issues/191)) ([a724ddd](https://github.com/yamshy/portfolio/commit/a724dddb77114c4693291d708a3f9bb2175d0160))
+
 ## [4.22.3](https://github.com/yamshy/portfolio/compare/v4.22.2...v4.22.3) (2025-09-23)
 
 ### Bug Fixes
