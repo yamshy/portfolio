@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.25.0](https://github.com/yamshy/portfolio/compare/v4.24.1...v4.25.0) (2025-09-23)
+
+### Features
+
+* update interactive lab section header copy ([#197](https://github.com/yamshy/portfolio/issues/197)) ([ea82b6b](https://github.com/yamshy/portfolio/commit/ea82b6bdd889804bbc5a4605f48fb03209bd48ee))
+
 ## [4.24.1](https://github.com/yamshy/portfolio/compare/v4.24.0...v4.24.1) (2025-09-23)
 
 ### Bug Fixes
