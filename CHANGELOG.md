@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.20.0](https://github.com/yamshy/portfolio/compare/v4.19.1...v4.20.0) (2025-09-23)
+
+### Features
+
+* simplify theme toggle UI ([#182](https://github.com/yamshy/portfolio/issues/182)) ([0239c8e](https://github.com/yamshy/portfolio/commit/0239c8efacada185971d5b897e4b9efbd022d6ed))
+
 ## [4.19.1](https://github.com/yamshy/portfolio/compare/v4.19.0...v4.19.1) (2025-09-23)
 
 ## [4.19.0](https://github.com/yamshy/portfolio/compare/v4.18.2...v4.19.0) (2025-09-23)
