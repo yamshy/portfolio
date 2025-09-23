@@ -1,7 +1,7 @@
 @layer components {
   @keyframes fade-rise {
     from {
-      opacity: 0;
+      opacity: 0.92;
       transform: translateY(24px) scale(0.98);
     }
     to {

@@ -195,7 +195,7 @@ const { channels } = Astro.props as Props;
 
   .contact-card__channel span {
     font-size: 0.875rem;
-    color: color-mix(in oklab, var(--color-text-subtle) 65%, transparent 35%);
+    color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
@@ -204,6 +204,7 @@ const { channels } = Astro.props as Props;
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.2;
+    color: var(--color-text);
   }
 
   .contact-card__channel:hover,
