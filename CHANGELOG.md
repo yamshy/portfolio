@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.23.1](https://github.com/yamshy/portfolio/compare/v4.23.0...v4.23.1) (2025-09-23)
+
+### Bug Fixes
+
+* remove contact availability note ([#193](https://github.com/yamshy/portfolio/issues/193)) ([58b2df0](https://github.com/yamshy/portfolio/commit/58b2df007b91f2520f759f901089626f04162cb7))
+
 ## [4.23.0](https://github.com/yamshy/portfolio/compare/v4.22.3...v4.23.0) (2025-09-23)
 
 ### Features
