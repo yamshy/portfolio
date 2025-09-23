@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.18.1](https://github.com/yamshy/portfolio/compare/v4.18.0...v4.18.1) (2025-09-23)
+
+### Bug Fixes
+
+* tighten sequence workbench layout ([#174](https://github.com/yamshy/portfolio/issues/174)) ([db10668](https://github.com/yamshy/portfolio/commit/db10668e517640211821487e6935f9e4fc92fb17))
+
 ## [4.18.0](https://github.com/yamshy/portfolio/compare/v4.17.3...v4.18.0) (2025-09-23)
 
 ### Features
