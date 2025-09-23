@@ -78,8 +78,10 @@
 <style>
   .workbench {
     display: grid;
-    gap: var(--space-lg);
-    padding: var(--space-lg);
+    gap: clamp(var(--space-md), 3vw, var(--space-lg));
+    padding: clamp(var(--space-md), 4vw, var(--space-lg));
+    max-width: min(60rem, 100%);
+    margin-inline: auto;
     background: color-mix(in oklab, var(--color-surface) 92%, transparent 8%);
     border-radius: var(--radius-lg);
     border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
@@ -96,7 +98,7 @@
 
   .workbench__grid {
     display: grid;
-    gap: var(--space-lg);
+    gap: clamp(var(--space-md), 3vw, var(--space-lg));
   }
 
   label {
@@ -116,7 +118,7 @@
     font-family: "Berkeley Mono", "IBM Plex Mono", "Fira Code", monospace;
     font-size: 0.95rem;
     color: var(--color-text);
-    min-height: 180px;
+    min-height: 160px;
     resize: vertical;
     transition: border-color var(--duration-base) var(--ease-smooth),
       box-shadow var(--duration-base) var(--ease-smooth);
