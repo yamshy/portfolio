@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.19.1](https://github.com/yamshy/portfolio/compare/v4.19.0...v4.19.1) (2025-09-23)
+
 ## [4.19.0](https://github.com/yamshy/portfolio/compare/v4.18.2...v4.19.0) (2025-09-23)
 
 ### Features
