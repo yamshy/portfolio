@@ -43,6 +43,13 @@ const { experiences } = Astro.props as Props;
       ))
     }
   </div>
+  <div class="u-container">
+    <div class="experience__education">
+      <span class="experience__education-pill">
+        B.S. Molecular Biology · University of Washington
+      </span>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -123,6 +130,32 @@ const { experiences } = Astro.props as Props;
   .experience__item--secondary,
   .experience__item--tertiary {
     align-self: stretch;
+  }
+
+  .experience__education {
+    margin-top: var(--space-xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .experience__education-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid
+      color-mix(in oklab, var(--color-primary) 30%, transparent 70%);
+    background: color-mix(in oklab, var(--color-primary) 14%, transparent 86%);
+    color: var(--color-primary-strong);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  @media (max-width: 639px) {
+    .experience__education {
+      margin-top: var(--space-lg);
+    }
   }
 
   @media (min-width: 640px) and (max-width: 959px) {
