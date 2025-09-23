@@ -7,10 +7,7 @@
     type Theme,
   } from '../../scripts/theme';
 
-  const themeOptions: Array<{ id: Theme; label: string }> = [
-    { id: 'light', label: 'Light' },
-    { id: 'dark', label: 'Dark' },
-  ];
+  const themeOptions: Array<Theme> = ['light', 'dark'];
 
   let theme: Theme = 'light';
 
@@ -41,9 +38,9 @@
   <span class="theme-toggle__track" aria-hidden="true">
     <span class="theme-toggle__indicator"></span>
     {#each themeOptions as option}
-      <span class:active={option.id === theme} class="theme-toggle__option" data-theme={option.id}>
+      <span class:active={option === theme} class="theme-toggle__option" data-theme={option}>
         <span class="theme-toggle__icon" aria-hidden="true">
-          {#if option.id === 'light'}
+          {#if option === 'light'}
             <svg viewBox="0 0 24 24" role="presentation">
               <circle cx="12" cy="12" r="4.25" fill="none" stroke="currentColor" stroke-width="1.5" />
               <path
@@ -67,7 +64,6 @@
             </svg>
           {/if}
         </span>
-        <span class="theme-toggle__label">{option.label}</span>
       </span>
     {/each}
   </span>
@@ -75,8 +71,10 @@
 
 <style>
   .theme-toggle {
-    --toggle-padding: 0.35rem;
-    --indicator-x: 0%;
+    --toggle-size: 1.45rem;
+    --toggle-gap: 0.35rem;
+    --toggle-padding: 0.2rem;
+    --indicator-x: 0;
     position: relative;
     display: inline-flex;
     border: none;
@@ -88,7 +86,7 @@
   }
 
   .theme-toggle[data-theme='dark'] {
-    --indicator-x: 100%;
+    --indicator-x: 1;
   }
 
   .theme-toggle:focus-visible {
@@ -98,10 +96,11 @@
 
   .theme-toggle__track {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: inline-grid;
+    grid-template-columns: repeat(2, var(--toggle-size));
     align-items: center;
-    border-radius: calc(var(--radius-lg) + 6px);
+    justify-content: center;
+    border-radius: calc(var(--radius-lg) + 2px);
     padding: var(--toggle-padding);
     border: 1px solid color-mix(in oklab, var(--color-border) 72%, transparent 28%);
     background: linear-gradient(
@@ -110,8 +109,7 @@
       color-mix(in oklab, var(--color-surface-strong) 45%, var(--color-surface) 55%)
     );
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    gap: 0;
-    min-width: 11rem;
+    gap: var(--toggle-gap);
     transition: border-color var(--duration-base) var(--ease-smooth),
       box-shadow var(--duration-base) var(--ease-smooth),
       background var(--duration-base) var(--ease-smooth);
@@ -129,15 +127,15 @@
     position: absolute;
     z-index: 0;
     top: var(--toggle-padding);
-    bottom: var(--toggle-padding);
     left: var(--toggle-padding);
-    width: calc(50% - var(--toggle-padding));
-    border-radius: calc(var(--radius-lg) - 4px);
+    width: var(--toggle-size);
+    height: var(--toggle-size);
+    border-radius: 999px;
     background: color-mix(in oklab, var(--color-primary-soft) 55%, var(--color-surface) 45%);
     box-shadow:
       0 16px 32px -26px var(--color-shadow),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
-    transform: translateX(var(--indicator-x));
+    transform: translateX(calc(var(--indicator-x) * (var(--toggle-size) + var(--toggle-gap))));
     transition: transform var(--duration-base) var(--ease-emphatic),
       background var(--duration-base) var(--ease-smooth),
       box-shadow var(--duration-base) var(--ease-smooth);
@@ -156,20 +154,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: calc(var(--radius-lg) - 2px);
-    font-size: 0.78rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--color-text-subtle);
+    width: var(--toggle-size);
+    height: var(--toggle-size);
+    border-radius: 999px;
+    color: var(--color-text-muted);
     transition: color var(--duration-base) var(--ease-smooth);
   }
 
   .theme-toggle__option.active {
     color: var(--color-text);
-    font-weight: 600;
   }
 
   .theme-toggle__option[data-theme='dark'].active {
@@ -178,8 +171,8 @@
 
   .theme-toggle__icon {
     display: inline-flex;
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.2rem;
+    height: 1.2rem;
     align-items: center;
     justify-content: center;
   }
@@ -188,10 +181,6 @@
     width: 100%;
     height: 100%;
     stroke: currentColor;
-  }
-
-  .theme-toggle__option:not(.active) .theme-toggle__icon {
-    color: var(--color-text-muted);
   }
 
   @media (prefers-reduced-motion: reduce) {
