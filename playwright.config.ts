@@ -13,7 +13,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [['github'], ['dot']] : [['html'], ['list']],
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: 'http://127.0.0.1:4321',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     colorScheme: colorSchemePreference,
@@ -37,7 +37,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm build && pnpm preview',
+    command: 'pnpm build && pnpm preview --host 127.0.0.1',
     port: 4321,
+    reuseExistingServer: !process.env.CI,
   },
 });
