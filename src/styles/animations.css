@@ -46,16 +46,6 @@
     }
   }
 
-  @keyframes hero-scroll-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(6px);
-    }
-  }
-
   .anim-fade-rise {
     animation: fade-rise var(--duration-slow) var(--ease-emphatic) both;
   }
@@ -107,8 +97,7 @@
     .anim-stagger > *,
     .pulse-ring::after,
     .glow-gradient,
-    .line-trace,
-    .hero__scroll svg {
+    .line-trace {
       animation: none !important;
     }
   }
