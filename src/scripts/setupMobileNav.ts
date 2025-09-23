@@ -70,6 +70,73 @@ export const setupMobileNav = (): Cleanup | undefined => {
     }
   };
 
+  const NAV_TAB_GUARD_ATTR = 'data-mobile-nav-tab-restore';
+  const FOCUSABLE_SELECTOR =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]';
+
+  const getFocusableElements = () =>
+    Array.from(nav.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+
+  const toggleNavInert = (disabled: boolean) => {
+    if ('inert' in nav) {
+      (nav as HTMLElement & { inert: boolean }).inert = disabled;
+    }
+
+    if (disabled) {
+      nav.setAttribute('inert', '');
+    } else {
+      nav.removeAttribute('inert');
+    }
+  };
+
+  const setFocusableState = (enabled: boolean) => {
+    const focusableElements = getFocusableElements();
+
+    focusableElements.forEach((element) => {
+      if (enabled) {
+        if (element.hasAttribute(NAV_TAB_GUARD_ATTR)) {
+          const originalTabIndex = element.getAttribute(NAV_TAB_GUARD_ATTR);
+
+          if (originalTabIndex && originalTabIndex !== 'restore-none') {
+            element.setAttribute('tabindex', originalTabIndex);
+          } else {
+            element.removeAttribute('tabindex');
+          }
+
+          element.removeAttribute(NAV_TAB_GUARD_ATTR);
+        } else if (element.getAttribute('tabindex') === '-1') {
+          element.removeAttribute('tabindex');
+        }
+
+        if (element instanceof HTMLButtonElement) {
+          element.removeAttribute('aria-disabled');
+        }
+
+        return;
+      }
+
+      if (!element.hasAttribute(NAV_TAB_GUARD_ATTR)) {
+        const existingTabIndex = element.getAttribute('tabindex');
+        element.setAttribute(
+          NAV_TAB_GUARD_ATTR,
+          existingTabIndex ?? 'restore-none',
+        );
+      }
+
+      element.setAttribute('tabindex', '-1');
+
+      if (element instanceof HTMLButtonElement) {
+        element.setAttribute('aria-disabled', 'true');
+      }
+    });
+  };
+
+  const clearNavAccessibility = () => {
+    toggleNavInert(false);
+    nav.removeAttribute('aria-hidden');
+    setFocusableState(true);
+  };
+
   const updateNavState = (open: boolean) => {
     const isDesktop = isDesktopView();
 
@@ -83,7 +150,7 @@ export const setupMobileNav = (): Cleanup | undefined => {
       if (navLabel) {
         navLabel.textContent = 'Menu';
       }
-      nav.removeAttribute('aria-hidden');
+      clearNavAccessibility();
       document.body.classList.remove('has-mobile-nav-open');
       return;
     }
@@ -102,9 +169,13 @@ export const setupMobileNav = (): Cleanup | undefined => {
 
     if (open) {
       nav.setAttribute('aria-hidden', 'false');
+      toggleNavInert(false);
+      setFocusableState(true);
       document.body.classList.add('has-mobile-nav-open');
     } else {
       nav.setAttribute('aria-hidden', 'true');
+      toggleNavInert(true);
+      setFocusableState(false);
       document.body.classList.remove('has-mobile-nav-open');
     }
   };
