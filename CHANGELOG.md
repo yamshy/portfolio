@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.24.0](https://github.com/yamshy/portfolio/compare/v4.23.1...v4.24.0) (2025-09-23)
+
+### Features
+
+* reorganize insights bento grid ([#195](https://github.com/yamshy/portfolio/issues/195)) ([2416055](https://github.com/yamshy/portfolio/commit/2416055871be253ff946bdd8738f63cd87fce178))
+
 ## [4.23.1](https://github.com/yamshy/portfolio/compare/v4.23.0...v4.23.1) (2025-09-23)
 
 ### Bug Fixes
