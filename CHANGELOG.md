@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.20.1](https://github.com/yamshy/portfolio/compare/v4.20.0...v4.20.1) (2025-09-23)
+
+### Bug Fixes
+
+* harden external contact links ([#184](https://github.com/yamshy/portfolio/issues/184)) ([d2abb34](https://github.com/yamshy/portfolio/commit/d2abb343f1fde981a8cb524f9242a11b204192ef))
+
 ## [4.20.0](https://github.com/yamshy/portfolio/compare/v4.19.1...v4.20.0) (2025-09-23)
 
 ### Features
