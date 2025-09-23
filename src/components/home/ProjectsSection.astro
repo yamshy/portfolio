@@ -41,6 +41,20 @@ const { projects } = Astro.props as Props;
     display: grid;
     gap: var(--space-md);
     align-content: start;
+    transition:
+      transform var(--duration-base) var(--ease-smooth),
+      box-shadow var(--duration-base) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-smooth);
+    will-change: transform, box-shadow;
+  }
+
+  :global(.project-card:is(:hover, :focus-visible, :focus-within)) {
+    transform: var(--motion-surface-lift-translate, translate3d(0, -10px, 0));
+    box-shadow: var(--motion-surface-lift-shadow, var(--shadow-md));
+    border-color: var(
+      --motion-surface-lift-border,
+      color-mix(in oklab, var(--color-primary) 38%, transparent 62%)
+    );
   }
 
   :global(.project-card header) {
@@ -129,6 +143,18 @@ const { projects } = Astro.props as Props;
   :global(.project-card--wide .project-card__footer > *) {
     display: grid;
     gap: var(--space-2xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.project-card) {
+      transition:
+        box-shadow var(--duration-fast) var(--ease-smooth),
+        border-color var(--duration-fast) var(--ease-smooth);
+    }
+
+    :global(.project-card:is(:hover, :focus-visible, :focus-within)) {
+      transform: none;
+    }
   }
 
   @media (min-width: 960px) {
