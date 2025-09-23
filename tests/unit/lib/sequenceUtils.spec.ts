@@ -35,4 +35,18 @@ describe('sequenceUtils', () => {
     const frames = translateFrames('ATGGCTTAA');
     expect(frames).toEqual(['MA*', 'WL', 'GL']);
   });
+
+  it('normalizes incoming sequences before performing calculations', () => {
+    expect(calculateGcContent('atgc')).toBe(50);
+    expect(calculateGcContent('AtGc')).toBe(50);
+
+    expect(getReverseComplement('atgc')).toBe('GCAT');
+    expect(getReverseComplement('aTgC')).toBe('GCAT');
+
+    const lowerCaseFrames = translateFrames('atggcttaa');
+    const mixedCaseFrames = translateFrames('AtGgCtTaA');
+
+    expect(lowerCaseFrames).toEqual(['MA*', 'WL', 'GL']);
+    expect(mixedCaseFrames).toEqual(['MA*', 'WL', 'GL']);
+  });
 });

@@ -13,6 +13,34 @@
 
   const sequence = writable(defaultSequence);
 
+  const handleSequenceInput = (event: Event) => {
+    const target = event.currentTarget as HTMLTextAreaElement | null;
+    if (!target) return;
+
+    const rawValue = target.value;
+    const sanitizedValue = cleanSequence(rawValue);
+
+    const selectionStart = target.selectionStart ?? rawValue.length;
+    const selectionEnd = target.selectionEnd ?? rawValue.length;
+
+    if (rawValue !== sanitizedValue) {
+      const sanitizedStart = cleanSequence(rawValue.slice(0, selectionStart)).length;
+      const sanitizedEnd = cleanSequence(rawValue.slice(0, selectionEnd)).length;
+
+      target.value = sanitizedValue;
+
+      const applySelection = () => target.setSelectionRange(sanitizedStart, sanitizedEnd);
+
+      if (typeof requestAnimationFrame === 'function') {
+        requestAnimationFrame(applySelection);
+      } else {
+        setTimeout(applySelection, 0);
+      }
+    }
+
+    sequence.set(sanitizedValue);
+  };
+
   const cleanedSequence = derived(sequence, ($sequence) => cleanSequence($sequence));
 
   const gcContent = derived(cleanedSequence, ($sequence) =>
@@ -40,7 +68,8 @@
     <label>
       <span>DNA Sequence</span>
       <textarea
-        bind:value={$sequence}
+        value={$sequence}
+        on:input={handleSequenceInput}
         spellcheck="false"
         rows="6"
         placeholder="Paste genomic sequence"
