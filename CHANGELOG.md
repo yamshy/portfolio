@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.26.0](https://github.com/yamshy/portfolio/compare/v4.25.1...v4.26.0) (2025-09-23)
+
+### Features
+
+* reorder homepage sections ([#202](https://github.com/yamshy/portfolio/issues/202)) ([43e9635](https://github.com/yamshy/portfolio/commit/43e96353957c44bb55d7f4bf6c1da1b4da226a3a))
+
+### Bug Fixes
+
+* simplify education callout ([#203](https://github.com/yamshy/portfolio/issues/203)) ([e39365e](https://github.com/yamshy/portfolio/commit/e39365eed53703e7d0423f76474456fe23f31f8e))
+
 ## [4.25.1](https://github.com/yamshy/portfolio/compare/v4.25.0...v4.25.1) (2025-09-23)
 
 ### Bug Fixes
