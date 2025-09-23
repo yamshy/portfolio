@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.17.3](https://github.com/yamshy/portfolio/compare/v4.17.2...v4.17.3) (2025-09-23)
+
+### Bug Fixes
+
+* limit project source link update ([#173](https://github.com/yamshy/portfolio/issues/173)) ([f23ccef](https://github.com/yamshy/portfolio/commit/f23ccef223e8382bd5d14bb7984839c5a175f9d4))
+
 ## [4.17.2](https://github.com/yamshy/portfolio/compare/v4.17.1...v4.17.2) (2025-09-23)
 
 ### Bug Fixes

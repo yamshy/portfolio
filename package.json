@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "type": "module",
-  "version": "4.17.2",
+  "version": "4.17.3",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
