@@ -1,5 +1,7 @@
 <script lang="ts">
   import { derived, writable } from 'svelte/store';
+  import { fade, fly } from 'svelte/transition';
+  import { cubicOut } from 'svelte/easing';
 
   type SkillCategory = {
     id: string;
@@ -124,23 +126,31 @@
       </ul>
     </nav>
 
-    <article class="skills__detail" aria-live="polite">
-      <h4>{$selected.title}</h4>
-      <p>{$selected.narrative}</p>
-      <ul class="skills__highlights">
-        {#each $selected.highlights as highlight}
-          <li>{highlight}</li>
-        {/each}
-      </ul>
-      <dl>
-        {#each $selected.stack as item}
-          <div>
-            <dt>{item.label}</dt>
-            <dd>{item.detail}</dd>
-          </div>
-        {/each}
-      </dl>
-    </article>
+    <div aria-live="polite">
+      {#key $selected.id}
+        <article
+          class="skills__detail"
+          in:fly={{ y: 12, duration: 220, easing: cubicOut }}
+          out:fade={{ duration: 140 }}
+        >
+          <h4>{$selected.title}</h4>
+          <p>{$selected.narrative}</p>
+          <ul class="skills__highlights">
+            {#each $selected.highlights as highlight}
+              <li>{highlight}</li>
+            {/each}
+          </ul>
+          <dl>
+            {#each $selected.stack as item}
+              <div>
+                <dt>{item.label}</dt>
+                <dd>{item.detail}</dd>
+              </div>
+            {/each}
+          </dl>
+        </article>
+      {/key}
+    </div>
   </div>
 </section>
 
