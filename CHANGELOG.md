@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.22.3](https://github.com/yamshy/portfolio/compare/v4.22.2...v4.22.3) (2025-09-23)
+
+### Bug Fixes
+
+* Revert "feat: animate hero scroll cue ([#185](https://github.com/yamshy/portfolio/issues/185))" ([#190](https://github.com/yamshy/portfolio/issues/190)) ([79614cb](https://github.com/yamshy/portfolio/commit/79614cb8c92989e967a0a8dde0596735b526c05b))
+* Revert "style: add hover motion to project cards ([#187](https://github.com/yamshy/portfolio/issues/187))" ([#189](https://github.com/yamshy/portfolio/issues/189)) ([a653c6b](https://github.com/yamshy/portfolio/commit/a653c6b6c61db346ea5a421734ffffe38bfcfc71))
+
 ## [4.22.2](https://github.com/yamshy/portfolio/compare/v4.22.1...v4.22.2) (2025-09-23)
 
 ### Bug Fixes
