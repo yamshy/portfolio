@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.19.0](https://github.com/yamshy/portfolio/compare/v4.18.2...v4.19.0) (2025-09-23)
+
+### Features
+
+* make navigation sticky across devices ([#178](https://github.com/yamshy/portfolio/issues/178)) ([88eec5b](https://github.com/yamshy/portfolio/commit/88eec5bebd81ef88face88b278e4e614f76ab80d))
+
 ## [4.18.2](https://github.com/yamshy/portfolio/compare/v4.18.1...v4.18.2) (2025-09-23)
 
 ### Bug Fixes
