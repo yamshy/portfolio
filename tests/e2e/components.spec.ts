@@ -122,7 +122,7 @@ test.describe('Home page experience', () => {
     await expect(insights).toBeVisible();
     await expect(
       page.getByRole('heading', {
-        name: 'Operating principles for reproducible, scalable science',
+        name: 'Live tools and sandboxes for genomic computing',
       }),
     ).toBeVisible();
 
