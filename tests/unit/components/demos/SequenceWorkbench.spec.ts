@@ -43,6 +43,29 @@ describe('SequenceWorkbench', () => {
     expect(reverseComplementCode?.textContent).toBe('TTAAGCCAT');
   });
 
+  it('prevents invalid nucleotide key presses', () => {
+    render(SequenceWorkbench);
+    const textarea = screen.getByPlaceholderText(
+      'Paste genomic sequence',
+    ) as HTMLTextAreaElement;
+
+    const invalidKeyEvent = new KeyboardEvent('keydown', {
+      key: 'B',
+      bubbles: true,
+      cancelable: true,
+    });
+    const prevented = !textarea.dispatchEvent(invalidKeyEvent);
+    expect(prevented).toBe(true);
+
+    const validKeyEvent = new KeyboardEvent('keydown', {
+      key: 'G',
+      bubbles: true,
+      cancelable: true,
+    });
+    const validPrevented = !textarea.dispatchEvent(validKeyEvent);
+    expect(validPrevented).toBe(false);
+  });
+
   it('handles inputs that strip to an empty sequence gracefully', async () => {
     render(SequenceWorkbench);
     const textarea = screen.getByPlaceholderText(

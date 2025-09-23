@@ -13,6 +13,20 @@
 
   const sequence = writable(defaultSequence);
 
+  const baseKeyPattern = /^[GCAT]$/i;
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) return;
+
+    const { altKey, ctrlKey, metaKey, key } = event;
+
+    if (altKey || ctrlKey || metaKey) return;
+
+    if (key.length === 1 && !baseKeyPattern.test(key)) {
+      event.preventDefault();
+    }
+  };
+
   const handleSequenceInput = (event: Event) => {
     const target = event.currentTarget as HTMLTextAreaElement | null;
     if (!target) return;
@@ -69,6 +83,7 @@
       <span>DNA Sequence</span>
       <textarea
         value={$sequence}
+        on:keydown={handleKeyDown}
         on:input={handleSequenceInput}
         spellcheck="false"
         rows="6"
