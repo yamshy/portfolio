@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.25.1](https://github.com/yamshy/portfolio/compare/v4.25.0...v4.25.1) (2025-09-23)
+
+### Bug Fixes
+
+* update navigation label for interactive lab ([#198](https://github.com/yamshy/portfolio/issues/198)) ([df2a9bc](https://github.com/yamshy/portfolio/commit/df2a9bc9375d214512a6d90ec52b13ab6641a7a1))
+
 ## [4.25.0](https://github.com/yamshy/portfolio/compare/v4.24.1...v4.25.0) (2025-09-23)
 
 ### Features
