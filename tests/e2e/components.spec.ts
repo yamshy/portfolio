@@ -26,10 +26,10 @@ test.describe('Home page experience', () => {
 
     const navLabels = [
       'Overview',
-      'Projects',
-      'Skills',
       'Experience',
+      'Projects',
       'Interactive Lab',
+      'Skills',
       'Contact',
     ];
 
@@ -41,7 +41,7 @@ test.describe('Home page experience', () => {
     await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
     const seeMoreLink = page.getByRole('link', { name: 'See more' });
     await expect(seeMoreLink).toBeVisible();
-    await expect(seeMoreLink).toHaveAttribute('href', '#projects');
+    await expect(seeMoreLink).toHaveAttribute('href', '#experience');
 
     await expect(page.locator('.hero__metric')).toHaveCount(3);
   });
@@ -121,9 +121,7 @@ test.describe('Home page experience', () => {
     await insights.scrollIntoViewIfNeeded();
     await expect(insights).toBeVisible();
     await expect(
-      page.getByRole('heading', {
-        name: 'Live tools and sandboxes for genomic computing',
-      }),
+      page.getByRole('heading', { name: 'Interactive Lab' }),
     ).toBeVisible();
 
     const contact = page.locator('#contact');

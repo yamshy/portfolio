@@ -2,10 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeHeader from '../components/home/HomeHeader.astro';
 import HeroSection from '../components/home/HeroSection.astro';
-import ProjectsSection from '../components/home/ProjectsSection.astro';
-import SkillsSection from '../components/home/SkillsSection.astro';
 import ExperienceSection from '../components/home/ExperienceSection.astro';
+import ProjectsSection from '../components/home/ProjectsSection.astro';
 import InsightsSection from '../components/home/InsightsSection.astro';
+import SkillsSection from '../components/home/SkillsSection.astro';
 import ContactSection from '../components/home/ContactSection.astro';
 import RevealInitializer from '../components/util/RevealInitializer.svelte';
 import {
@@ -22,10 +22,10 @@ import '../styles/pages/home.css';
 
   <main>
     <HeroSection stats={heroStats} />
-    <ProjectsSection projects={projects} />
-    <SkillsSection />
     <ExperienceSection experiences={experiences} />
+    <ProjectsSection projects={projects} />
     <InsightsSection />
+    <SkillsSection />
     <ContactSection channels={contactChannels} />
   </main>
   <RevealInitializer client:load />
