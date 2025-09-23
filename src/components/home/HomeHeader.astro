@@ -61,19 +61,51 @@ const navLinks = [
 
 <style>
   .site-header {
-    background: color-mix(
-      in oklab,
-      var(--color-surface-strong) 35%,
-      var(--color-surface) 65%
+    --glass-panel-glow: linear-gradient(
+      145deg,
+      color-mix(in oklab, var(--color-primary-strong) 14%, transparent 86%),
+      transparent 60%
     );
-    border-bottom: 1px solid var(--color-border);
+    --glass-panel-tint: linear-gradient(
+      125deg,
+      color-mix(in oklab, var(--color-surface) 22%, transparent 78%),
+      color-mix(in oklab, var(--color-surface-strong) 56%, transparent 44%)
+    );
+    --glass-panel-elevated: linear-gradient(
+      130deg,
+      color-mix(in oklab, var(--color-surface) 36%, transparent 64%),
+      color-mix(in oklab, var(--color-surface-strong) 72%, transparent 28%)
+    );
+    --glass-panel-hover: linear-gradient(
+      130deg,
+      color-mix(in oklab, var(--color-surface) 46%, transparent 54%),
+      color-mix(in oklab, var(--color-surface-strong) 82%, transparent 18%)
+    );
+    --glass-panel-border: color-mix(
+      in oklab,
+      var(--color-border) 42%,
+      transparent 58%
+    );
+    --glass-panel-shadow: 0 22px 48px -32px
+      color-mix(
+        in oklab,
+        var(--color-shadow, rgba(32, 22, 17, 0.65)) 35%,
+        transparent 65%
+      );
+    background: var(--glass-panel-glow), var(--glass-panel-tint);
+    border-bottom: 1px solid var(--glass-panel-border);
+    box-shadow: var(--glass-panel-shadow);
     position: sticky;
     top: 0;
     inset-inline: 0;
     z-index: 10;
     padding-block-start: var(--safe-area-top, 0px);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    transition:
+      background var(--duration-base) var(--ease-smooth),
+      border-color var(--duration-base) var(--ease-smooth),
+      box-shadow var(--duration-base) var(--ease-smooth);
   }
 
   .site-header__inner {
@@ -193,6 +225,7 @@ const navLinks = [
     .site-header {
       background: transparent;
       border: none;
+      box-shadow: none;
       --safe-area-top: env(safe-area-inset-top, 0px);
       --safe-area-right: env(safe-area-inset-right, 0px);
       --mobile-nav-offset: clamp(var(--space-sm), 4vw, var(--space-lg));
@@ -223,19 +256,11 @@ const navLinks = [
       gap: clamp(var(--space-2xs), 2.6vw, var(--space-sm));
       padding: clamp(var(--space-sm), 4vw, var(--space-lg));
       border-radius: var(--radius-md);
-      background: color-mix(
-        in oklab,
-        var(--color-surface-strong) 92%,
-        var(--color-surface) 8%
-      );
-      border: 1px solid
-        color-mix(in oklab, var(--color-border) 78%, transparent 22%);
-      box-shadow: 0 24px 36px -22px
-        color-mix(
-          in oklab,
-          var(--color-shadow, rgba(32, 22, 17, 0.65)) 45%,
-          transparent 55%
-        );
+      background: var(--glass-panel-glow), var(--glass-panel-elevated);
+      border: 1px solid var(--glass-panel-border);
+      box-shadow: var(--glass-panel-shadow);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -271,17 +296,12 @@ const navLinks = [
       align-items: center;
       justify-content: center;
       gap: var(--space-3xs);
-      border: 1px solid
-        color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+      border: 1px solid var(--glass-panel-border);
       border-radius: 999px;
       width: var(--mobile-toggle-size);
       height: var(--mobile-toggle-size);
       padding: 0;
-      background: color-mix(
-        in oklab,
-        var(--color-surface-strong) 65%,
-        var(--color-surface) 35%
-      );
+      background: var(--glass-panel-glow), var(--glass-panel-elevated);
       color: var(--color-text);
       cursor: pointer;
       transition:
@@ -293,21 +313,14 @@ const navLinks = [
       right: calc(var(--safe-area-right) + var(--mobile-nav-offset));
       margin: 0;
       z-index: 10;
-      box-shadow: 0 16px 28px -18px
-        color-mix(
-          in oklab,
-          var(--color-shadow, rgba(32, 22, 17, 0.65)) 50%,
-          transparent 50%
-        );
+      box-shadow: var(--glass-panel-shadow);
+      backdrop-filter: blur(22px) saturate(155%);
+      -webkit-backdrop-filter: blur(22px) saturate(155%);
     }
 
     .site-nav__toggle:hover,
     .site-nav__toggle:focus-visible {
-      background: color-mix(
-        in oklab,
-        var(--color-surface-strong) 75%,
-        var(--color-surface) 25%
-      );
+      background: var(--glass-panel-glow), var(--glass-panel-hover);
       transform: translateY(-1px);
     }
 
@@ -333,8 +346,7 @@ const navLinks = [
       display: flex;
       align-self: stretch;
       padding-top: clamp(var(--space-xs), 3vw, var(--space-md));
-      border-top: 1px solid
-        color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+      border-top: 1px solid var(--glass-panel-border);
       justify-content: flex-end;
     }
 
