@@ -417,15 +417,28 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
 
   @media (min-width: 960px) {
     .insights__grid {
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: minmax(320px, auto);
+      align-items: stretch;
+    }
+
+    .insight-card {
+      height: 100%;
     }
 
     .insight-card--demo {
-      grid-column: span 12;
+      grid-column: span 8;
+      grid-row: span 2;
+      width: 100%;
+      margin-inline: 0;
     }
 
     .insight-card--upcoming {
-      grid-column: span 6;
+      grid-column: 9 / -1;
+    }
+
+    .insight-card--upcoming:last-child {
+      grid-row: 2;
     }
   }
 </style>
