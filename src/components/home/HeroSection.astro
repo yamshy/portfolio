@@ -195,7 +195,7 @@ const { stats } = Astro.props as Props;
 
   .hero__metric h2 {
     font-size: var(--heading-xl);
-    color: var(--color-primary-strong);
+    color: var(--color-text);
   }
 
   .hero__metric p,
@@ -206,7 +206,7 @@ const { stats } = Astro.props as Props;
   .hero__metric span {
     display: block;
     font-size: 0.85rem;
-    color: var(--color-text-subtle);
+    color: color-mix(in oklab, var(--color-text) 78%, transparent 22%);
     margin-top: 0.35rem;
   }
 

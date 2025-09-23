@@ -131,7 +131,7 @@ test.describe('Home page experience', () => {
     await expect(contact).toBeVisible();
     await expect(
       page.getByRole('heading', {
-        name: 'Let’s design infrastructure that keeps pace with discovery',
+        name: /Build regulated-ready infrastructure faster/i,
       }),
     ).toBeVisible();
   });
