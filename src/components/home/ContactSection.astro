@@ -12,10 +12,10 @@ const { channels } = Astro.props as Props;
   <div class="u-container contact">
     <div class="contact__intro">
       <p class="u-title-overline">Contact</p>
-      <h2>Build regulated-ready infrastructure faster</h2>
+      <h2>Scale your genomics infrastructure with scientific context</h2>
       <p>
-        I partner with biotech, pharmaceutical, and research organisations
-        aligning scientific platforms with regulated delivery.
+        I partner with biotech, pharmaceutical, and research organizations to
+        build scientific platforms with production reliability.
       </p>
       <p>
         Share your current initiative and I’ll respond with next steps within
@@ -24,15 +24,22 @@ const { channels } = Astro.props as Props;
       <div class="contact__focus">
         <p class="contact__focus-title">Focus areas</p>
         <ul class="contact__focus-list">
-          <li>Platform roadmaps for sequencing, ML, and analytics</li>
-          <li>Compliance-focused technical diligence</li>
-          <li>Embedded mentorship for resilient operations</li>
+          <li>
+            <strong>Genomics Platform Architecture</strong>
+            <span>NGS pipelines, Nextflow workflows, cloud optimization</span>
+          </li>
+          <li>
+            <strong>Research Infrastructure Modernization</strong>
+            <span>GitOps, containerization, reproducible science</span>
+          </li>
+          <li>
+            <strong>Laboratory Data Automation</strong>
+            <span
+              >Instrument integration, LIMS connections, automated analysis</span
+            >
+          </li>
         </ul>
       </div>
-      <p class="contact__note">
-        Booking new collaborations for the upcoming quarter — share timelines
-        early for priority alignment.
-      </p>
     </div>
     <aside class="contact__panel" aria-labelledby="contact-panel-title">
       <div class="contact-card">
@@ -41,6 +48,20 @@ const { channels } = Astro.props as Props;
           Choose the channel that fits best — I reply to every message within
           two business days.
         </p>
+        <dl class="contact-card__details">
+          <div>
+            <dt>Location</dt>
+            <dd>Seattle, WA | Remote-friendly</dd>
+          </div>
+          <div>
+            <dt>Availability</dt>
+            <dd>Open to opportunities</dd>
+          </div>
+          <div>
+            <dt>Response time</dt>
+            <dd>Typically respond within 48 hours</dd>
+          </div>
+        </dl>
         <div class="contact-card__channels">
           {
             channels.map((channel) => (
@@ -115,26 +136,40 @@ const { channels } = Astro.props as Props;
   }
 
   .contact__focus-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    display: grid;
+    gap: clamp(0.75rem, 1vw + 0.35rem, 1rem);
     padding: 0;
     margin: 0;
     list-style: none;
   }
 
   .contact__focus-list li {
-    padding: 0.5rem 0.75rem;
-    border-radius: 999px;
-    background: color-mix(
-      in oklab,
-      var(--color-surface-strong) 85%,
-      transparent 15%
-    );
+    display: grid;
+    gap: 0.35rem;
+    padding: clamp(0.85rem, 1.1vw + 0.6rem, 1.15rem)
+      clamp(1rem, 1.2vw + 0.7rem, 1.4rem);
+    border-radius: var(--radius-lg);
     border: 1px solid
-      color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+      color-mix(in oklab, var(--color-border) 55%, transparent 45%);
+    background: linear-gradient(
+      140deg,
+      color-mix(in oklab, var(--color-surface) 96%, transparent 4%),
+      color-mix(in oklab, var(--color-surface-strong) 90%, transparent 10%)
+    );
+    box-shadow: inset 0 1px 0
+      color-mix(in oklab, var(--color-surface) 70%, transparent 30%);
+  }
+
+  .contact__focus-list strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .contact__focus-list span {
     font-size: 0.875rem;
-    line-height: 1.25;
+    color: color-mix(in oklab, var(--color-text-subtle) 70%, transparent 30%);
+    line-height: 1.35;
   }
 
   .contact__note {
@@ -169,6 +204,29 @@ const { channels } = Astro.props as Props;
   }
 
   .contact-card__intro {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .contact-card__details {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .contact-card__details > div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .contact-card__details dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: color-mix(in oklab, var(--color-text-subtle) 70%, transparent 30%);
+  }
+
+  .contact-card__details dd {
     margin: 0;
     font-size: 0.95rem;
   }
