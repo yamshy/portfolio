@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.22.0](https://github.com/yamshy/portfolio/compare/v4.21.0...v4.22.0) (2025-09-23)
+
+### Features
+
+* **home:** animate insights lab and terminal ([#186](https://github.com/yamshy/portfolio/issues/186)) ([6958337](https://github.com/yamshy/portfolio/commit/695833770780383b3de2eaf9a8f384df0034b394))
+
 ## [4.21.0](https://github.com/yamshy/portfolio/compare/v4.20.1...v4.21.0) (2025-09-23)
 
 ### Features
