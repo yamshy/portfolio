@@ -126,7 +126,7 @@
       </ul>
     </nav>
 
-    <div aria-live="polite">
+    <div class="skills__panel" aria-live="polite">
       {#key $selected.id}
         <article
           class="skills__detail"
@@ -225,6 +225,15 @@
     border-color: var(--color-primary);
     color: var(--color-text);
     background: color-mix(in oklab, var(--color-primary) 20%, var(--color-surface));
+  }
+
+  .skills__panel {
+    position: relative;
+    display: grid;
+  }
+
+  .skills__panel > * {
+    grid-area: 1 / 1 / -1 / -1;
   }
 
   .skills__detail {
