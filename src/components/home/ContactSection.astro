@@ -48,7 +48,11 @@ const { channels } = Astro.props as Props;
                 class="contact-card__channel"
                 href={channel.href}
                 target={channel.href.startsWith('http') ? '_blank' : undefined}
-                rel={channel.href.startsWith('http') ? 'noreferrer' : undefined}
+                rel={
+                  channel.href.startsWith('http')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
               >
                 <span>{channel.label}</span>
                 <strong>{channel.value}</strong>
