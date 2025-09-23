@@ -33,12 +33,12 @@ describe('ApplicationSkills', () => {
     expect(scientificButton).not.toHaveClass('selected');
     expect(
       screen.getByText(
-        /Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and self-hosted Kubernetes clusters keeps sequencing pipelines resilient/i,
+        /Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient/i,
       ),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        /Managed hybrid infrastructure spanning Azure Container Apps, on-premises Proxmox virtualization, and self-hosted Kubernetes clusters/i,
+        /Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization/i,
       ),
     ).toBeInTheDocument();
   });

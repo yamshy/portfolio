@@ -36,11 +36,11 @@
       id: 'infrastructure',
       title: 'Infrastructure Engineering',
       narrative:
-        'Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and self-hosted Kubernetes clusters keeps sequencing pipelines resilient while GitOps automation sustains compliance and slashes manual effort.',
+        'Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient while GitOps automation sustains compliance and slashes manual effort.',
       highlights: [
-        'Managed hybrid infrastructure spanning Azure Container Apps, on-premises Proxmox virtualization, and self-hosted Kubernetes clusters',
+        'Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization',
         'Built CI/CD pipelines with GitHub Actions for containerized deployments across dev/staging/prod',
-        'Currently running Proxmox-backed production Kubernetes homelab with Flux GitOps, Infisical secrets, and MetalLB load balancing',
+        'Currently running production Kubernetes homelab with Flux GitOps, Infisical secrets, and MetalLB load balancing',
         'Reduced manual operations by 50% through Python automation and systematic workflow optimization',
       ],
       stack: [
