@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.17.2](https://github.com/yamshy/portfolio/compare/v4.17.1...v4.17.2) (2025-09-23)
+
+### Bug Fixes
+
+* bind playwright preview to ipv4 host ([#170](https://github.com/yamshy/portfolio/issues/170)) ([4c72e36](https://github.com/yamshy/portfolio/commit/4c72e365fe3b0ae6b009e4311b07a03676c6fe49))
+
 ## [4.17.1](https://github.com/yamshy/portfolio/compare/v4.17.0...v4.17.1) (2025-09-23)
 
 ### Bug Fixes
