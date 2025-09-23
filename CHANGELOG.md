@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.24.1](https://github.com/yamshy/portfolio/compare/v4.24.0...v4.24.1) (2025-09-23)
+
+### Bug Fixes
+
+* stabilize skills panel animation ([#196](https://github.com/yamshy/portfolio/issues/196)) ([b4ee334](https://github.com/yamshy/portfolio/commit/b4ee3340fc22e132d281722ee728ecae159cfab5))
+
 ## [4.24.0](https://github.com/yamshy/portfolio/compare/v4.23.1...v4.24.0) (2025-09-23)
 
 ### Features
