@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.2](https://github.com/yamshy/portfolio/compare/v4.18.1...v4.18.2) (2025-09-23)
+
+### Bug Fixes
+
+* balance experience grid columns ([#177](https://github.com/yamshy/portfolio/issues/177)) ([21d3836](https://github.com/yamshy/portfolio/commit/21d38368fd8919178917cfd534f12e1aaa3551bf))
+* **deps:** update dependency svelte to v5.39.5 ([#176](https://github.com/yamshy/portfolio/issues/176)) ([cc62a15](https://github.com/yamshy/portfolio/commit/cc62a1548d78fb6ed97e1353ae569fc9a8a52c24))
+
 ## [4.18.1](https://github.com/yamshy/portfolio/compare/v4.18.0...v4.18.1) (2025-09-23)
 
 ### Bug Fixes
