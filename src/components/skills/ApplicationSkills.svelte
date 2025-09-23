@@ -180,9 +180,9 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-align: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    text-align: left;
     padding: 0.9rem 1rem;
     border-radius: var(--radius-md);
     border: 1px solid color-mix(in oklab, var(--color-border) 55%, transparent 45%);
@@ -196,8 +196,13 @@
       border-color var(--duration-base) var(--ease-smooth);
   }
 
+  nav button span:first-child {
+    flex: 1;
+  }
+
   nav button span[aria-hidden='true'] {
     flex-shrink: 0;
+    margin-left: auto;
   }
 
   nav button:hover,
