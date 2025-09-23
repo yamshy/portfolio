@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.22.2](https://github.com/yamshy/portfolio/compare/v4.22.1...v4.22.2) (2025-09-23)
+
+### Bug Fixes
+
+* normalize sequence helpers and sanitize workbench input ([#188](https://github.com/yamshy/portfolio/issues/188)) ([6fe4fd1](https://github.com/yamshy/portfolio/commit/6fe4fd155e3e2214f9d0bb00f6bf82887480cdfc))
+
 ## [4.22.1](https://github.com/yamshy/portfolio/compare/v4.22.0...v4.22.1) (2025-09-23)
 
 ## [4.22.0](https://github.com/yamshy/portfolio/compare/v4.21.0...v4.22.0) (2025-09-23)
