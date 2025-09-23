@@ -23,3 +23,29 @@ if (typeof window !== 'undefined' && !('matchMedia' in window)) {
     })),
   });
 }
+
+if (typeof Element !== 'undefined' && !Element.prototype.animate) {
+  Element.prototype.animate = ((
+    keyframes?: Keyframe[] | PropertyIndexedKeyframes,
+    options?: number | KeyframeAnimationOptions,
+  ) => {
+    void keyframes;
+    void options;
+
+    const animation: Partial<Animation> = {
+      cancel: () => {},
+      commitStyles: () => {},
+      finished: Promise.resolve() as unknown as Promise<Animation>,
+      onfinish: null,
+      pause: () => {},
+      play: () => {},
+      reverse: () => {},
+      updatePlaybackRate: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    };
+
+    return animation as Animation;
+  }) as typeof Element.prototype.animate;
+}
