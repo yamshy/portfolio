@@ -142,6 +142,12 @@ export const experiences: Experience[] = [
       'Built automated pipelines processing 10,000+ samples with a 50% reduction in turnaround time',
       'Deployed NGS workflows on AWS Batch via Nextflow Tower, managing TB-scale genomic data',
       'Mentored 4+ scientists in laboratory automation and computational workflows',
+      'Integrated laboratory robotics with custom scheduling to maximize instrument uptime',
+      'Implemented LIMS integrations syncing instrumentation data with analytics environments',
+      'Designed QC dashboards tracking assay performance and readiness metrics in real time',
+      'Authored SOPs and validation documentation to meet regulatory expectations',
+      'Forecasted reagent, instrumentation, and staffing needs across multi-quarter roadmaps',
+      'Partnered with product and commercial teams to align R&D output with client deliverables',
     ],
   },
   {

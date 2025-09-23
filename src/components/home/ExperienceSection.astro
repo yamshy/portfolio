@@ -17,15 +17,24 @@ const { experiences } = Astro.props as Props;
   />
   <div class="u-container experience">
     {
-      experiences.map((job) => (
-        <article class="experience__item">
-          <header>
-            <h3>{job.role}</h3>
-            <p>{job.org}</p>
-            <span>{job.years}</span>
+      experiences.map((job, index) => (
+        <article
+          class:list={{
+            experience__item: true,
+            'experience__item--primary': index === 0,
+            'experience__item--secondary': index === 1,
+            'experience__item--tertiary': index === 2,
+          }}
+        >
+          <header class="experience__item-header">
+            <div class="experience__item-meta">
+              <h3>{job.role}</h3>
+              <p class="experience__item-org">{job.org}</p>
+            </div>
+            <span class="experience__item-years">{job.years}</span>
           </header>
-          <p>{job.focus}</p>
-          <ul>
+          <p class="experience__focus">{job.focus}</p>
+          <ul class="experience__item-impact">
             {job.impact.map((item) => (
               <li>{item}</li>
             ))}
@@ -53,29 +62,160 @@ const { experiences } = Astro.props as Props;
       var(--color-surface) 65%
     );
     display: grid;
-    gap: var(--space-sm);
+    gap: var(--space-md);
+    height: 100%;
   }
 
-  .experience__item header {
+  .experience__item-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: baseline;
+    flex-direction: column;
+    gap: var(--space-xs);
   }
 
-  .experience__item header h3 {
+  .experience__item-meta h3 {
     font-size: var(--heading-md);
+    margin: 0;
   }
 
-  .experience__item ul {
+  .experience__item-org {
+    margin: 0;
+    color: var(--color-text-subtle);
+  }
+
+  .experience__item-years {
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .experience__focus {
+    margin: 0;
+    max-width: var(--size-readable);
+  }
+
+  .experience__item-impact {
     margin: 0;
     padding-left: 1.2rem;
     color: var(--color-text);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .experience__item--primary .experience__focus {
+    font-size: var(--text-lg);
+    line-height: 1.8;
+  }
+
+  .experience__item--primary .experience__item-org {
+    font-size: var(--text-lg);
+  }
+
+  .experience__item--primary .experience__item-years {
+    color: var(--color-primary-strong);
+  }
+
+  .experience__item--primary .experience__item-impact {
+    gap: 0.65rem;
+  }
+
+  .experience__item--secondary,
+  .experience__item--tertiary {
+    align-self: stretch;
+  }
+
+  @media (min-width: 640px) and (max-width: 959px) {
+    .experience {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'primary primary'
+        'secondary tertiary';
+    }
+
+    .experience__item--primary {
+      grid-area: primary;
+    }
+
+    .experience__item--secondary {
+      grid-area: secondary;
+    }
+
+    .experience__item--tertiary {
+      grid-area: tertiary;
+    }
   }
 
   @media (min-width: 960px) {
     .experience {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        'primary secondary'
+        'primary tertiary';
+      align-items: stretch;
+    }
+
+    .experience__item-header {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .experience__item--primary {
+      grid-area: primary;
+      padding: clamp(var(--space-lg), 5vw, var(--space-xl));
+      background: color-mix(
+        in oklab,
+        var(--color-surface-strong) 55%,
+        var(--color-surface) 45%
+      );
+      border-color: color-mix(
+        in oklab,
+        var(--color-border) 75%,
+        transparent 25%
+      );
+      box-shadow: 0 22px 55px -35px var(--color-shadow);
+    }
+
+    .experience__item--secondary {
+      grid-area: secondary;
+    }
+
+    .experience__item--tertiary {
+      grid-area: tertiary;
+    }
+
+    .experience__item--primary .experience__item-header {
+      align-items: flex-start;
+    }
+
+    .experience__item--primary .experience__item-impact {
+      padding-left: 1.4rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .experience__item--primary .experience__item-impact {
+      column-count: 2;
+      column-gap: var(--space-lg);
+    }
+
+    .experience__item--primary .experience__item-impact li {
+      break-inside: avoid;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .experience__item {
+      transition:
+        transform var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth);
+    }
+
+    .experience__item:hover,
+    .experience__item:focus-within {
+      transform: translateY(-6px);
     }
   }
 </style>
