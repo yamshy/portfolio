@@ -24,11 +24,6 @@ export type Experience = {
   impact: string[];
 };
 
-export type Insight = {
-  title: string;
-  summary: string;
-};
-
 export type ContactChannel = {
   label: string;
   value: string;
@@ -174,24 +169,6 @@ export const experiences: Experience[] = [
   },
 ];
 
-export const insights: Insight[] = [
-  {
-    title: 'Why Docker Matters for Reproducible Science',
-    summary:
-      'Container digests outlast lab rotations. Provenance-aware builds keep regulators and collaborators aligned on exactly what ran.',
-  },
-  {
-    title: 'Designing Observability for Wet-Lab Reality',
-    summary:
-      'Instrumentation fails physically before dashboards blink. Pair sensor fusion with service-level indicators to detect reagent anomalies first.',
-  },
-  {
-    title: 'From Bench to GPU Cluster',
-    summary:
-      'Latency budgets begin at the pipette. Aligning robotics cycles with autoscalers keeps GPU utilisation high without starving experiments.',
-  },
-];
-
 export const contactChannels: ContactChannel[] = [
   {
     label: 'Email',
@@ -209,26 +186,3 @@ export const contactChannels: ContactChannel[] = [
     href: 'https://www.linkedin.com/in/shyamajudia/',
   },
 ];
-
-export const codeSample = `
-apiVersion: argoproj.io/v1alpha1
-kind: Workflow
-metadata:
-  labels:
-    runbook: ngs-ingest
-spec:
-  entrypoint: orchestrate
-  templates:
-    - name: orchestrate
-      dag:
-        tasks:
-          - name: qc
-            template: fastqc
-          - name: align
-            template: gpu-bwa
-            depends: qc.Succeeded
-            arguments:
-              parameters:
-                - name: lanes
-                  value: {{inputs.parameters.lanes}}
-`;

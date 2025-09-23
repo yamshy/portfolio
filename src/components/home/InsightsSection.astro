@@ -1,14 +1,6 @@
 ---
 import SectionHeader from '../ui/SectionHeader.astro';
 import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
-import type { Insight } from '../../content/home';
-
-interface Props {
-  insights: Insight[];
-  codeSample: string;
-}
-
-const { insights, codeSample } = Astro.props as Props;
 ---
 
 <section class="section section--insights" id="insights" data-reveal>
@@ -18,21 +10,63 @@ const { insights, codeSample } = Astro.props as Props;
     description="Essays, conference talks, and internal runbooks that translate infrastructure decisions into scientific leverage."
   />
   <div class="u-container insights__grid">
-    {
-      insights.map((insight) => (
-        <article class="insight-card">
-          <h3>{insight.title}</h3>
-          <p>{insight.summary}</p>
-        </article>
-      ))
-    }
-    <article class="insight-card insight-card--code">
-      <h3>Automation blueprint</h3>
-      <p>Workflow manifest powering adaptive sequencing orchestration.</p>
-      <pre><code>{codeSample}</code></pre>
-    </article>
     <article class="insight-card insight-card--demo" data-reveal>
       <SequenceWorkbench client:visible />
+    </article>
+    <article class="insight-card insight-card--upcoming" data-reveal>
+      <header class="insight-card__header">
+        <span class="insight-card__badge insight-card__badge--soon"
+          >Coming Soon</span
+        >
+        <h3>Kubernetes Homelab Deep Dive</h3>
+      </header>
+      <p>
+        Interactive exploration of my production GitOps setup. Walk through Flux
+        deployments, Infisical secrets management, and how this portfolio runs
+        on self-hosted infrastructure.
+      </p>
+      <div
+        class="insight-card__visual insight-card__visual--homelab"
+        aria-hidden="true"
+      >
+        <div class="homelab-core">⎈</div>
+        <div class="homelab-nodes">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </article>
+    <article class="insight-card insight-card--upcoming" data-reveal>
+      <header class="insight-card__header">
+        <span class="insight-card__badge insight-card__badge--soon"
+          >Coming Soon</span
+        >
+        <h3>Try Nextflow on My Cluster</h3>
+      </header>
+      <p>
+        Launch a test bioinformatics pipeline directly on my Kubernetes cluster.
+        Watch real-time logs, resource usage, and execution graphs. Safe sandbox
+        environment for exploring cloud-native genomics.
+      </p>
+      <div
+        class="insight-card__visual insight-card__visual--nextflow"
+        aria-hidden="true"
+      >
+        <div class="terminal">
+          <div class="terminal__header">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="terminal__body">
+            <span class="line line--prompt"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line line--progress"></span>
+          </div>
+        </div>
+      </div>
     </article>
   </div>
 </section>
@@ -65,24 +99,184 @@ const { insights, codeSample } = Astro.props as Props;
     font-size: var(--heading-md);
   }
 
-  .insight-card--code pre {
-    background: var(--color-code-bg);
-    color: var(--color-code-text);
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    overflow-x: auto;
+  .insight-card__header {
+    display: grid;
+    gap: var(--space-xs);
   }
 
-  .insight-card--code code {
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .insight-card__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-primary) 65%, transparent 35%);
+    color: var(--color-bg);
+    box-shadow: 0 6px 12px -10px var(--color-shadow);
+    width: fit-content;
+  }
+
+  .insight-card__badge--soon {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, #ffb347 80%, transparent) 0%,
+      color-mix(in oklab, #ff7e5f 80%, transparent) 100%
+    );
+    color: var(--color-text);
   }
 
   .insight-card--demo {
     padding: 0;
     border: none;
     background: none;
+    width: min(100%, 64rem);
+    margin-inline: auto;
+  }
+
+  .insight-card--upcoming {
+    position: relative;
+  }
+
+  .insight-card--upcoming p {
+    color: var(--color-text-muted);
+  }
+
+  .insight-card__visual {
+    border-radius: var(--radius-md);
+    border: 1px dashed
+      color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 25%,
+      transparent 75%
+    );
+    padding: var(--space-md);
+    margin-top: auto;
+  }
+
+  .insight-card__visual--homelab {
+    display: grid;
+    gap: var(--space-md);
+    justify-items: center;
+    padding-block: var(--space-lg);
+  }
+
+  .homelab-core {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at top,
+      color-mix(in oklab, var(--color-science-purple) 75%, transparent) 0%,
+      color-mix(in oklab, var(--color-primary) 45%, transparent) 100%
+    );
+    color: color-mix(in oklab, var(--color-bg) 85%, transparent 15%);
+    font-size: 2.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .homelab-nodes {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .homelab-nodes span {
+    width: 44px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: color-mix(
+      in oklab,
+      var(--color-primary) 35%,
+      var(--color-surface-muted) 65%
+    );
+    box-shadow: inset 0 0 0 1px
+      color-mix(in oklab, var(--color-border) 40%, transparent 60%);
+  }
+
+  .insight-card__visual--nextflow {
+    display: grid;
+    padding: 0;
+  }
+
+  .terminal {
+    border-radius: var(--radius-md);
+    border: 1px solid
+      color-mix(in oklab, var(--color-border) 65%, transparent 35%);
+    background: color-mix(
+      in oklab,
+      var(--color-surface-strong) 55%,
+      var(--color-surface) 45%
+    );
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .terminal__header {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.55rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--color-surface-muted) 75%, transparent) 0%,
+      color-mix(in oklab, var(--color-surface) 85%, transparent) 100%
+    );
+  }
+
+  .terminal__header span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: color-mix(
+      in oklab,
+      var(--color-text-muted) 30%,
+      transparent 70%
+    );
+  }
+
+  .terminal__body {
+    display: grid;
+    gap: 0.5rem;
+    padding: var(--space-md);
+    background: radial-gradient(
+      circle at top left,
+      color-mix(in oklab, var(--color-surface-muted) 20%, transparent) 0%,
+      color-mix(in oklab, var(--color-surface) 90%, transparent) 100%
+    );
+  }
+
+  .line {
+    height: 10px;
+    border-radius: 4px;
+    background: color-mix(
+      in oklab,
+      var(--color-text-muted) 35%,
+      transparent 65%
+    );
+  }
+
+  .line--prompt {
+    width: 80%;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-science-green) 65%, transparent) 0%,
+      color-mix(in oklab, var(--color-text-muted) 30%, transparent) 100%
+    );
+  }
+
+  .line--progress {
+    width: 60%;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-primary) 70%, transparent) 0%,
+      color-mix(in oklab, var(--color-science-purple) 60%, transparent) 100%
+    );
   }
 
   @media (min-width: 960px) {
@@ -90,16 +284,12 @@ const { insights, codeSample } = Astro.props as Props;
       grid-template-columns: repeat(12, 1fr);
     }
 
-    .insight-card {
-      grid-column: span 4;
-    }
-
-    .insight-card--code {
-      grid-column: span 5;
-    }
-
     .insight-card--demo {
-      grid-column: span 7;
+      grid-column: span 12;
+    }
+
+    .insight-card--upcoming {
+      grid-column: span 6;
     }
   }
 </style>
