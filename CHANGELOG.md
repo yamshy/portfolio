@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.18.0](https://github.com/yamshy/portfolio/compare/v4.17.3...v4.18.0) (2025-09-23)
+
+### Features
+
+* highlight hybrid proxmox kubernetes ops ([#172](https://github.com/yamshy/portfolio/issues/172)) ([076eb75](https://github.com/yamshy/portfolio/commit/076eb75d072e3bd56b50d7094dddefed2a36ecb7))
+
 ## [4.17.3](https://github.com/yamshy/portfolio/compare/v4.17.2...v4.17.3) (2025-09-23)
 
 ### Bug Fixes
