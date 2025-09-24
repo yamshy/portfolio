@@ -1,0 +1,14 @@
+---
+import type { Project } from '../../content/home';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props as Props;
+---
+
+<header>
+  <h3>{project.title}</h3>
+  <p>{project.summary}</p>
+</header>

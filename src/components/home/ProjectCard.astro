@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../../content/home';
-import ProjectDetailList from './ProjectDetailList.astro';
+import ProjectCardHeader from './ProjectCardHeader.astro';
+import ProjectDetailGroup from './ProjectDetailGroup.astro';
 import { getProjectDetails } from './projectDetails';
 
 interface Props {
@@ -17,10 +18,7 @@ const details = getProjectDetails(project);
       case 'wide':
         return (
           <article class="project-card project-card--wide u-glass" data-reveal>
-            <header>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-            </header>
+            <ProjectCardHeader project={project} />
             <div class="project-card__content">
               <div>
                 <h4>Problem</h4>
@@ -30,11 +28,18 @@ const details = getProjectDetails(project);
                 <h4>Solution</h4>
                 <p>{project.solution}</p>
               </div>
-              <ProjectDetailList detail={details.stack} wrapper="div" />
+              <ProjectDetailGroup
+                details={details}
+                keys={['stack']}
+                wrapper="div"
+              />
             </div>
             <div class="project-card__footer">
-              <ProjectDetailList detail={details.results} wrapper="div" />
-              <ProjectDetailList detail={details.challenges} wrapper="div" />
+              <ProjectDetailGroup
+                details={details}
+                keys={['results', 'challenges']}
+                wrapper="div"
+              />
             </div>
             {project.link && (
               <a class="project-card__link" href={project.link}>
@@ -46,10 +51,7 @@ const details = getProjectDetails(project);
       case 'standard':
         return (
           <article class="project-card project-card--standard" data-reveal>
-            <header>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-            </header>
+            <ProjectCardHeader project={project} />
             <dl>
               <div>
                 <dt>Problem</dt>
@@ -61,19 +63,17 @@ const details = getProjectDetails(project);
               </div>
             </dl>
             <div class="project-card__meta">
-              <ProjectDetailList detail={details.stack} />
-              <ProjectDetailList detail={details.results} />
-              <ProjectDetailList detail={details.challenges} />
+              <ProjectDetailGroup
+                details={details}
+                keys={['stack', 'results', 'challenges']}
+              />
             </div>
           </article>
         );
       case 'tall':
         return (
           <article class="project-card project-card--tall" data-reveal>
-            <header>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-            </header>
+            <ProjectCardHeader project={project} />
             <div class="project-card__meta">
               <h4>Problem</h4>
               <p>{project.problem}</p>
@@ -81,9 +81,10 @@ const details = getProjectDetails(project);
               <p>{project.solution}</p>
             </div>
             <div class="project-card__meta">
-              <ProjectDetailList detail={details.stack} />
-              <ProjectDetailList detail={details.results} />
-              <ProjectDetailList detail={details.challenges} />
+              <ProjectDetailGroup
+                details={details}
+                keys={['stack', 'results', 'challenges']}
+              />
             </div>
           </article>
         );

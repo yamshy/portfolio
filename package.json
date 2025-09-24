@@ -33,6 +33,7 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@astrojs/compiler": "^2.13.0",
     "@axe-core/playwright": "^4.10.2",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
