@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.26.2](https://github.com/yamshy/portfolio/compare/v4.26.1...v4.26.2) (2025-09-24)
+
+### Bug Fixes
+
+* preserve caret after sequence sanitization ([#207](https://github.com/yamshy/portfolio/issues/207)) ([78465e3](https://github.com/yamshy/portfolio/commit/78465e3ac6c4afeeb27f05b1f4880bfc62fd6092))
+
 ## [4.26.1](https://github.com/yamshy/portfolio/compare/v4.26.0...v4.26.1) (2025-09-24)
 
 ### Bug Fixes
