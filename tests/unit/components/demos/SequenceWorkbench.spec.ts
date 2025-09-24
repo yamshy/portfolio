@@ -87,4 +87,33 @@ describe('SequenceWorkbench', () => {
       expect(heading.nextElementSibling?.textContent).toBe('');
     });
   });
+
+  it('keeps caret aligned after filtering invalid middle characters', async () => {
+    render(SequenceWorkbench);
+    const textarea = screen.getByPlaceholderText(
+      'Paste genomic sequence',
+    ) as HTMLTextAreaElement;
+
+    textarea.value = 'ATGC';
+    textarea.selectionStart = 4;
+    textarea.selectionEnd = 4;
+    await fireEvent.input(textarea);
+    await tick();
+
+    textarea.selectionStart = 2;
+    textarea.selectionEnd = 2;
+
+    const rawValueWithInvalid = 'ATxGC';
+    textarea.value = rawValueWithInvalid;
+    textarea.selectionStart = 3;
+    textarea.selectionEnd = 3;
+    await fireEvent.input(textarea);
+    await tick();
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(textarea.value).toBe('ATGC');
+    expect(textarea.selectionStart).toBe(2);
+    expect(textarea.selectionEnd).toBe(2);
+  });
 });

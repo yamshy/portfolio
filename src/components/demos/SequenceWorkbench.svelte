@@ -27,20 +27,53 @@
     }
   };
 
+  const sanitizeSequenceWithSelection = (
+    value: string,
+    selectionStart: number,
+    selectionEnd: number,
+  ) => {
+    let sanitizedValue = '';
+    let sanitizedStart = 0;
+    let sanitizedEnd = 0;
+
+    const clampedStart = Math.max(0, Math.min(selectionStart, value.length));
+    const clampedEnd = Math.max(0, Math.min(selectionEnd, value.length));
+
+    for (let index = 0; index < value.length; index += 1) {
+      const character = value[index];
+
+      if (!baseKeyPattern.test(character)) continue;
+
+      sanitizedValue += character.toUpperCase();
+
+      if (index < clampedStart) sanitizedStart += 1;
+      if (index < clampedEnd) sanitizedEnd += 1;
+    }
+
+    const sanitizedLength = sanitizedValue.length;
+
+    return {
+      value: sanitizedValue,
+      selectionStart: Math.min(sanitizedStart, sanitizedLength),
+      selectionEnd: Math.min(sanitizedEnd, sanitizedLength),
+    };
+  };
+
   const handleSequenceInput = (event: Event) => {
     const target = event.currentTarget as HTMLTextAreaElement | null;
     if (!target) return;
 
     const rawValue = target.value;
-    const sanitizedValue = cleanSequence(rawValue);
-
     const selectionStart = target.selectionStart ?? rawValue.length;
     const selectionEnd = target.selectionEnd ?? rawValue.length;
 
-    if (rawValue !== sanitizedValue) {
-      const sanitizedStart = cleanSequence(rawValue.slice(0, selectionStart)).length;
-      const sanitizedEnd = cleanSequence(rawValue.slice(0, selectionEnd)).length;
+    const {
+      value: sanitizedValue,
+      selectionStart: sanitizedStart,
+      selectionEnd: sanitizedEnd,
+    } = sanitizeSequenceWithSelection(rawValue, selectionStart, selectionEnd);
 
+    if (rawValue !== sanitizedValue) {
       target.value = sanitizedValue;
 
       const applySelection = () => target.setSelectionRange(sanitizedStart, sanitizedEnd);
