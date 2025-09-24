@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.29.1](https://github.com/yamshy/portfolio/compare/v4.29.0...v4.29.1) (2025-09-24)
+
+### Bug Fixes
+
+* remove typing animation from skills tabs ([#217](https://github.com/yamshy/portfolio/issues/217)) ([7dbd8ef](https://github.com/yamshy/portfolio/commit/7dbd8ef49fc2485ce67f9a5f0871d1411c126fe9))
+
 ## [4.29.0](https://github.com/yamshy/portfolio/compare/v4.28.1...v4.29.0) (2025-09-24)
 
 ### Features
