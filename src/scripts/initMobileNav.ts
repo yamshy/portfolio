@@ -1,5 +1,11 @@
 import { setupMobileNav } from './setupMobileNav';
 
+type Registrations = {
+  domContentLoaded: EventListener | null;
+  pageLoad: EventListener | null;
+  rafId: number | null;
+};
+
 const runSetup = () => {
   const cleanup = setupMobileNav();
 
@@ -11,37 +17,108 @@ const runSetup = () => {
   return true;
 };
 
-const scheduleSetup = () => {
+const clearScheduledWork = (registrations: Registrations) => {
+  if (registrations.domContentLoaded) {
+    document.removeEventListener(
+      'DOMContentLoaded',
+      registrations.domContentLoaded,
+    );
+    registrations.domContentLoaded = null;
+  }
+
+  if (
+    registrations.rafId !== null &&
+    typeof window.cancelAnimationFrame === 'function'
+  ) {
+    window.cancelAnimationFrame(registrations.rafId);
+    registrations.rafId = null;
+  }
+};
+
+const scheduleSetup = (
+  registrations: Registrations,
+  attemptSetup: () => void,
+) => {
+  clearScheduledWork(registrations);
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', runSetup, { once: true });
+    const handleDomContentLoaded = () => {
+      registrations.domContentLoaded = null;
+      attemptSetup();
+    };
+
+    registrations.domContentLoaded = handleDomContentLoaded;
+    document.addEventListener('DOMContentLoaded', handleDomContentLoaded, {
+      once: true,
+    });
     return;
   }
 
   if (typeof window.requestAnimationFrame === 'function') {
-    window.requestAnimationFrame(() => {
-      runSetup();
+    registrations.rafId = window.requestAnimationFrame(() => {
+      registrations.rafId = null;
+      attemptSetup();
     });
     return;
   }
 
-  runSetup();
+  attemptSetup();
 };
 
-let hasRegisteredPageLoad = false;
+let activeCleanup: (() => void) | null = null;
 
 const initMobileNav = () => {
-  if (!runSetup()) {
-    scheduleSetup();
-  }
+  activeCleanup?.();
 
-  if (!hasRegisteredPageLoad) {
-    hasRegisteredPageLoad = true;
-    document.addEventListener('astro:page-load', () => {
-      if (!runSetup()) {
-        scheduleSetup();
-      }
-    });
-  }
+  const registrations: Registrations = {
+    domContentLoaded: null,
+    pageLoad: null,
+    rafId: null,
+  };
+
+  let cleaned = false;
+
+  const attemptSetup = () => {
+    if (cleaned) {
+      return;
+    }
+
+    if (!runSetup()) {
+      scheduleSetup(registrations, attemptSetup);
+    }
+  };
+
+  attemptSetup();
+
+  const handlePageLoad = () => {
+    attemptSetup();
+  };
+
+  document.addEventListener('astro:page-load', handlePageLoad);
+  registrations.pageLoad = handlePageLoad;
+
+  const cleanup = () => {
+    if (cleaned) {
+      return;
+    }
+
+    cleaned = true;
+
+    if (registrations.pageLoad) {
+      document.removeEventListener('astro:page-load', registrations.pageLoad);
+      registrations.pageLoad = null;
+    }
+
+    clearScheduledWork(registrations);
+
+    if (activeCleanup === cleanup) {
+      activeCleanup = null;
+    }
+  };
+
+  activeCleanup = cleanup;
+
+  return cleanup;
 };
 
 export default initMobileNav;
