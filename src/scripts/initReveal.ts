@@ -82,9 +82,15 @@ export const initReveal = ({
 
     revealNodes.forEach(revealIfVisible);
 
-    requestAnimationFrame(() => {
+    const setActiveState = () => {
       rootElement.dataset.revealState = 'active';
-    });
+    };
+
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(setActiveState);
+    } else {
+      setActiveState();
+    }
   };
 
   if (window.scrollY > 0) {
