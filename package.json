@@ -21,6 +21,7 @@
     "format": "prettier -w .",
     "format:check": "prettier -c .",
     "check": "pnpm check:astro && pnpm type-check && pnpm lint && pnpm format:check",
+    "smoke": "node scripts/smoke-test.mjs",
     "release": "semantic-release",
     "prepare": "husky"
   },

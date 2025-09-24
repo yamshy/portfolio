@@ -27,11 +27,20 @@ jobs:
       
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 20
           cache: pnpm
-      
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint, type, and format checks
+        run: pnpm -s check
+
+      - name: Run unit tests
+        run: pnpm -s test
+
+      - name: Build site
+        run: pnpm -s build
 
       - name: Semantic Release
         id: sr
