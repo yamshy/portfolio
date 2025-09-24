@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.28.1](https://github.com/yamshy/portfolio/compare/v4.28.0...v4.28.1) (2025-09-24)
+
 ## [4.28.0](https://github.com/yamshy/portfolio/compare/v4.27.1...v4.28.0) (2025-09-24)
 
 ### Features
