@@ -10,11 +10,32 @@ const runSetup = () => {
   const cleanup = setupMobileNav();
 
   if (!cleanup) {
-    return false;
+    return null;
   }
 
-  document.addEventListener('astro:before-swap', cleanup, { once: true });
-  return true;
+  let setupCleaned = false;
+
+  const performCleanup = () => {
+    if (setupCleaned) {
+      return;
+    }
+
+    setupCleaned = true;
+    cleanup();
+  };
+
+  const handleBeforeSwap = () => {
+    performCleanup();
+  };
+
+  document.addEventListener('astro:before-swap', handleBeforeSwap, {
+    once: true,
+  });
+
+  return () => {
+    document.removeEventListener('astro:before-swap', handleBeforeSwap);
+    performCleanup();
+  };
 };
 
 const clearScheduledWork = (registrations: Registrations) => {
@@ -77,15 +98,21 @@ const initMobileNav = () => {
   };
 
   let cleaned = false;
+  let setupCleanup: (() => void) | null = null;
 
   const attemptSetup = () => {
     if (cleaned) {
       return;
     }
 
-    if (!runSetup()) {
+    const runCleanup = runSetup();
+
+    if (!runCleanup) {
       scheduleSetup(registrations, attemptSetup);
+      return;
     }
+
+    setupCleanup = runCleanup;
   };
 
   attemptSetup();
@@ -110,6 +137,9 @@ const initMobileNav = () => {
     }
 
     clearScheduledWork(registrations);
+
+    setupCleanup?.();
+    setupCleanup = null;
 
     if (activeCleanup === cleanup) {
       activeCleanup = null;
