@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, tick } from 'svelte';
+  import { onDestroy, onMount, tick } from 'svelte';
 
   type SkillCategory = {
     id: string;
@@ -100,8 +100,9 @@
   let exitingCategory: SkillCategory | null = null;
   let isAnimating = false;
   let reduceMotion = false;
-  let isTyping = false;
   let typedNarrative = displayCategory.narrative;
+  let typedHighlights = [...displayCategory.highlights];
+  let highlightTypingIndex = -1;
 
   const timeouts = new Set<ReturnType<typeof setTimeout>>();
 
@@ -124,34 +125,38 @@
     timeouts.add(timeout);
   };
 
-  const typeNarrative = (text: string) => {
+  const typeText = (text: string, onUpdate: (value: string) => void) => {
     if (reduceMotion) {
-      typedNarrative = text;
-      isTyping = false;
+      onUpdate(text);
       return Promise.resolve();
     }
-
-    typedNarrative = '';
-    isTyping = true;
 
     const characters = Array.from(text);
-    let index = 0;
 
     if (characters.length === 0) {
-      isTyping = false;
+      onUpdate('');
       return Promise.resolve();
     }
+
+    let index = 0;
+    let currentValue = '';
 
     return new Promise<void>((resolve) => {
       const typeNext = () => {
-        if (index >= characters.length) {
-          isTyping = false;
+        if (reduceMotion) {
+          onUpdate(text);
           resolve();
           return;
         }
 
-        typedNarrative += characters[index];
+        if (index >= characters.length) {
+          resolve();
+          return;
+        }
+
+        currentValue += characters[index];
         index += 1;
+        onUpdate(currentValue);
 
         const lastChar = characters[index - 1];
         const delay =
@@ -168,6 +173,36 @@
     });
   };
 
+  const updateHighlightAt = (index: number, value: string) => {
+    typedHighlights = typedHighlights.map((current, currentIndex) =>
+      currentIndex === index ? value : current,
+    );
+  };
+
+  const typeHighlights = async (highlights: string[]) => {
+    if (reduceMotion) {
+      typedHighlights = [...highlights];
+      highlightTypingIndex = -1;
+      return;
+    }
+
+    typedHighlights = highlights.map(() => '');
+    highlightTypingIndex = -1;
+
+    for (let index = 0; index < highlights.length; index += 1) {
+      highlightTypingIndex = index;
+      await typeText(highlights[index], (value) => updateHighlightAt(index, value));
+      if (reduceMotion) {
+        typedHighlights = [...highlights];
+        highlightTypingIndex = -1;
+        return;
+      }
+      await wait(TYPE_INTERVAL * 6);
+    }
+
+    highlightTypingIndex = -1;
+  };
+
   let motionQuery: MediaQueryList | null = null;
   let motionListener: ((event: MediaQueryListEvent) => void) | null = null;
 
@@ -178,7 +213,11 @@
       reduceMotion = event.matches;
       if (reduceMotion) {
         typedNarrative = displayCategory.narrative;
-        isTyping = false;
+        typedHighlights = [...displayCategory.highlights];
+        highlightTypingIndex = -1;
+      } else {
+        typedHighlights = displayCategory.highlights.map(() => '');
+        typeHighlights(displayCategory.highlights);
       }
     };
     if ('addEventListener' in motionQuery) {
@@ -203,6 +242,13 @@
     }
   });
 
+  onMount(() => {
+    if (!reduceMotion) {
+      typedHighlights = displayCategory.highlights.map(() => '');
+      typeHighlights(displayCategory.highlights);
+    }
+  });
+
   async function selectCategory(category: SkillCategory) {
     if (category.id === activeCategoryId || isAnimating) {
       return;
@@ -218,11 +264,14 @@
 
       exitingCategory = null;
       displayCategory = category;
+      typedNarrative = category.narrative;
       await tick();
-      await typeNarrative(category.narrative);
+      await typeHighlights(category.highlights);
     } else {
       displayCategory = category;
       typedNarrative = category.narrative;
+      typedHighlights = [...category.highlights];
+      highlightTypingIndex = -1;
     }
 
     exitingCategory = null;
@@ -283,17 +332,15 @@
       {#if !exitingCategory}
         <article class="skills__detail">
           <h4>{displayCategory.title}</h4>
-          <p class="skills__narrative">
-            <span class="skills__narrative-text">{typedNarrative}</span>
-            <span
-              class="skills__narrative-cursor"
-              class:is-visible={isTyping && !reduceMotion}
-              aria-hidden="true"
-            ></span>
-          </p>
+          <p class="skills__narrative">{typedNarrative}</p>
           <ul class="skills__highlights">
-            {#each displayCategory.highlights as highlight}
-              <li>{highlight}</li>
+            {#each displayCategory.highlights as highlight, index}
+              <li>
+                {reduceMotion ? highlight : typedHighlights[index] ?? ''}
+                {#if !reduceMotion && highlightTypingIndex === index}
+                  <span class="skills__highlight-cursor" aria-hidden="true"></span>
+                {/if}
+              </li>
             {/each}
           </ul>
           <dl>
@@ -418,23 +465,15 @@
     white-space: pre-wrap;
   }
 
-  .skills__narrative-text {
-    display: inline;
-  }
-
-  .skills__narrative-cursor {
+  .skills__highlight-cursor {
     display: inline-block;
     width: 0.55ch;
     height: 1.1em;
     margin-left: 0.1em;
     background: currentColor;
-    opacity: 0;
+    opacity: 0.8;
     transform: translateY(0.15em);
     animation: cursorBlink 650ms steps(1, end) infinite;
-  }
-
-  .skills__narrative-cursor.is-visible {
-    opacity: 0.8;
   }
 
   @keyframes cursorBlink {
@@ -507,7 +546,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .tab-content-exit,
-    .skills__narrative-cursor {
+    .skills__highlight-cursor {
       animation: none;
       opacity: 1;
     }
