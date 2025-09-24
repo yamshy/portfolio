@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.27.0](https://github.com/yamshy/portfolio/compare/v4.26.2...v4.27.0) (2025-09-24)
+
+### Features
+
+* add slide animation to skills tabs ([#209](https://github.com/yamshy/portfolio/issues/209)) ([d0895ca](https://github.com/yamshy/portfolio/commit/d0895ca598456939c81176a8e7dfe74a5384c83d))
+
 ## [4.26.2](https://github.com/yamshy/portfolio/compare/v4.26.1...v4.26.2) (2025-09-24)
 
 ### Bug Fixes
