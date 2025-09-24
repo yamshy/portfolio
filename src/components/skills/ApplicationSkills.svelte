@@ -93,16 +93,15 @@
   ];
 
   const EXIT_DURATION = 150;
-  const CURSOR_DURATION = 200;
-  const ENTER_DURATION = 200;
+  const TYPE_INTERVAL = 12;
 
   let activeCategoryId = categories[0].id;
   let displayCategory: SkillCategory = categories[0];
   let exitingCategory: SkillCategory | null = null;
-  let showCursor = false;
-  let entering = false;
   let isAnimating = false;
   let reduceMotion = false;
+  let isTyping = false;
+  let typedNarrative = displayCategory.narrative;
 
   const timeouts = new Set<ReturnType<typeof setTimeout>>();
 
@@ -116,6 +115,59 @@
       timeouts.add(timeout);
     });
 
+  const schedule = (callback: () => void, ms: number) => {
+    const timeout = setTimeout(() => {
+      timeouts.delete(timeout);
+      callback();
+    }, ms);
+
+    timeouts.add(timeout);
+  };
+
+  const typeNarrative = (text: string) => {
+    if (reduceMotion) {
+      typedNarrative = text;
+      isTyping = false;
+      return Promise.resolve();
+    }
+
+    typedNarrative = '';
+    isTyping = true;
+
+    const characters = Array.from(text);
+    let index = 0;
+
+    if (characters.length === 0) {
+      isTyping = false;
+      return Promise.resolve();
+    }
+
+    return new Promise<void>((resolve) => {
+      const typeNext = () => {
+        if (index >= characters.length) {
+          isTyping = false;
+          resolve();
+          return;
+        }
+
+        typedNarrative += characters[index];
+        index += 1;
+
+        const lastChar = characters[index - 1];
+        const delay =
+          lastChar === '.' || lastChar === '!' || lastChar === '?'
+            ? TYPE_INTERVAL * 6
+            : lastChar === ',' || lastChar === ';' || lastChar === ':'
+              ? TYPE_INTERVAL * 4
+              : TYPE_INTERVAL;
+
+        schedule(typeNext, delay);
+      };
+
+      schedule(typeNext, TYPE_INTERVAL);
+    });
+  };
+
   let motionQuery: MediaQueryList | null = null;
   let motionListener: ((event: MediaQueryListEvent) => void) | null = null;
 
@@ -124,6 +176,10 @@
     reduceMotion = motionQuery.matches;
     motionListener = (event: MediaQueryListEvent) => {
       reduceMotion = event.matches;
+      if (reduceMotion) {
+        typedNarrative = displayCategory.narrative;
+        isTyping = false;
+      }
     };
     if ('addEventListener' in motionQuery) {
       motionQuery.addEventListener('change', motionListener);
@@ -161,21 +217,14 @@
       await wait(EXIT_DURATION);
 
       exitingCategory = null;
-      showCursor = true;
-      await tick();
-      await wait(CURSOR_DURATION);
-
-      showCursor = false;
       displayCategory = category;
-      entering = true;
       await tick();
-      await wait(ENTER_DURATION);
+      await typeNarrative(category.narrative);
     } else {
       displayCategory = category;
+      typedNarrative = category.narrative;
     }
 
-    entering = false;
-    showCursor = false;
     exitingCategory = null;
     isAnimating = false;
   }
@@ -231,16 +280,17 @@
         </article>
       {/if}
 
-      {#if showCursor}
-        <div class="skills__cursor" aria-hidden="true">
-          <span class="tab-cursor-blink">_</span>
-        </div>
-      {/if}
-
-      {#if !exitingCategory && !showCursor}
-        <article class="skills__detail" class:tab-content-enter={entering}>
+      {#if !exitingCategory}
+        <article class="skills__detail">
           <h4>{displayCategory.title}</h4>
-          <p>{displayCategory.narrative}</p>
+          <p class="skills__narrative">
+            <span class="skills__narrative-text">{typedNarrative}</span>
+            <span
+              class="skills__narrative-cursor"
+              class:is-visible={isTyping && !reduceMotion}
+              aria-hidden="true"
+            ></span>
+          </p>
           <ul class="skills__highlights">
             {#each displayCategory.highlights as highlight}
               <li>{highlight}</li>
@@ -342,22 +392,6 @@
     grid-area: 1 / 1 / -1 / -1;
   }
 
-  .skills__cursor {
-    display: grid;
-    place-items: center;
-    padding: var(--space-md);
-    background: color-mix(in oklab, var(--color-surface-strong) 50%, var(--color-surface) 50%);
-    border-radius: var(--radius-md);
-    border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
-    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
-    font-size: 1.5rem;
-    color: var(--color-text);
-  }
-
-  .tab-cursor-blink {
-    animation: blink 100ms step-end 2;
-  }
-
   .skills__detail {
     padding: var(--space-md);
     background: color-mix(in oklab, var(--color-surface-strong) 50%, var(--color-surface) 50%);
@@ -371,10 +405,6 @@
     animation: slideOutLeft 150ms ease-out forwards;
   }
 
-  .tab-content-enter {
-    animation: slideInRight 200ms ease-out forwards;
-  }
-
   @keyframes slideOutLeft {
     to {
       opacity: 0;
@@ -382,24 +412,39 @@
     }
   }
 
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+
+  .skills__narrative {
+    position: relative;
+    white-space: pre-wrap;
   }
 
-  @keyframes blink {
+  .skills__narrative-text {
+    display: inline;
+  }
+
+  .skills__narrative-cursor {
+    display: inline-block;
+    width: 0.55ch;
+    height: 1.1em;
+    margin-left: 0.1em;
+    background: currentColor;
+    opacity: 0;
+    transform: translateY(0.15em);
+    animation: cursorBlink 650ms steps(1, end) infinite;
+  }
+
+  .skills__narrative-cursor.is-visible {
+    opacity: 0.8;
+  }
+
+  @keyframes cursorBlink {
     0%,
+    49% {
+      opacity: 0.8;
+    }
+    50%,
     100% {
       opacity: 0;
-    }
-    50% {
-      opacity: 1;
     }
   }
 
@@ -461,10 +506,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .tab-content-enter,
     .tab-content-exit,
-    .tab-cursor-blink {
+    .skills__narrative-cursor {
       animation: none;
+      opacity: 1;
     }
   }
 </style>
