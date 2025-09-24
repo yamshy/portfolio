@@ -28,7 +28,10 @@ for (let i = 2; i < process.argv.length; i += 1) {
 const baseUrl = args.get('url') ?? 'http://localhost:8080';
 const timeoutSeconds = Number.parseInt(args.get('timeout') ?? '60', 10);
 const pollIntervalMs = Number.parseInt(args.get('interval') ?? '2000', 10);
-const stabilityChecks = Number.parseInt(args.get('stability-checks') ?? '3', 10);
+const stabilityChecks = Number.parseInt(
+  args.get('stability-checks') ?? '3',
+  10,
+);
 
 if (Number.isNaN(timeoutSeconds) || timeoutSeconds <= 0) {
   throw new Error('timeout must be a positive integer');
@@ -72,7 +75,9 @@ async function verifyStability(url, checks) {
     await delay(pollIntervalMs);
     const status = await fetchStatus(url);
     if (status !== 200) {
-      throw new Error(`Received status ${status} on stability check ${attempt}`);
+      throw new Error(
+        `Received status ${status} on stability check ${attempt}`,
+      );
     }
     console.log(`✅ Stability check ${attempt} passed for ${url}`);
   }
@@ -83,7 +88,9 @@ async function verifyStability(url, checks) {
     const target = new URL(baseUrl).toString();
     const ready = await waitForHealthy(target);
     if (!ready) {
-      throw new Error(`Service at ${target} did not return 200 within ${timeoutSeconds}s`);
+      throw new Error(
+        `Service at ${target} did not return 200 within ${timeoutSeconds}s`,
+      );
     }
     await verifyStability(target, stabilityChecks);
     console.log('🚀 Container smoke test passed');
