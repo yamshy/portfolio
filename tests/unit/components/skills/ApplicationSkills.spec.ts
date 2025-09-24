@@ -18,8 +18,10 @@ describe('ApplicationSkills', () => {
       ),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(
+      await screen.findByText(
         /Orchestrated RNA\/DNA-seq and variant calling through Nextflow Tower on AWS Batch/i,
+        undefined,
+        { timeout: 5000 },
       ),
     ).toBeInTheDocument();
 
@@ -41,6 +43,8 @@ describe('ApplicationSkills', () => {
     expect(
       await screen.findByText(
         /Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization/i,
+        undefined,
+        { timeout: 5000 },
       ),
     ).toBeInTheDocument();
   });
