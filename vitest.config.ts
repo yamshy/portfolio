@@ -1,13 +1,45 @@
+import { transform } from '@astrojs/compiler';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import type { Options as SvelteOptions } from '@sveltejs/vite-plugin-svelte';
+import ts from 'typescript';
 import { defineConfig } from 'vitest/config';
 
 import svelteConfig from './svelte.config.js';
 
 const resolvedSvelteConfig = svelteConfig as SvelteOptions;
 
+const astroPlugin = () => ({
+  name: 'astro-component-transform',
+  enforce: 'pre' as const,
+  async transform(code: string, id: string) {
+    const [filename] = id.split('?');
+    if (!filename?.endsWith('.astro')) {
+      return null;
+    }
+
+    const result = await transform(code, { filename });
+    const transpiled = ts.transpileModule(result.code, {
+      compilerOptions: {
+        module: ts.ModuleKind.ESNext,
+        target: ts.ScriptTarget.ES2020,
+      },
+    });
+    const sanitizedCode = transpiled.outputText
+      .replace(/,?\s*createMetadata as \$\$createMetadata/, '')
+      .replace(
+        /const \$\$metadata = \$\$createMetadata\([^;]+\);/,
+        'const $$metadata = {};',
+      );
+    return {
+      code: sanitizedCode,
+      map: result.map ? JSON.parse(result.map) : null,
+    };
+  },
+});
+
 export default defineConfig({
   plugins: [
+    astroPlugin(),
     svelte({
       ...resolvedSvelteConfig,
       compilerOptions: {

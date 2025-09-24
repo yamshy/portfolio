@@ -1,0 +1,18 @@
+---
+import ProjectDetailList from './ProjectDetailList.astro';
+import type { ProjectDetailMap } from './projectDetails';
+
+interface Props {
+  details: ProjectDetailMap;
+  keys: (keyof ProjectDetailMap)[];
+  wrapper?: 'div';
+}
+
+const { details, keys, wrapper } = Astro.props as Props;
+---
+
+{
+  keys.map((key) => (
+    <ProjectDetailList detail={details[key]} wrapper={wrapper} />
+  ))
+}
