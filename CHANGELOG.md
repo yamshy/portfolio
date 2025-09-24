@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.29.0](https://github.com/yamshy/portfolio/compare/v4.28.1...v4.29.0) (2025-09-24)
+
+### Features
+
+* animate application skills highlights ([#216](https://github.com/yamshy/portfolio/issues/216)) ([924699b](https://github.com/yamshy/portfolio/commit/924699b9beabf74c80e3677e04116dd32af3b565))
+
 ## [4.28.1](https://github.com/yamshy/portfolio/compare/v4.28.0...v4.28.1) (2025-09-24)
 
 ## [4.28.0](https://github.com/yamshy/portfolio/compare/v4.27.1...v4.28.0) (2025-09-24)
