@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.28.0](https://github.com/yamshy/portfolio/compare/v4.27.1...v4.28.0) (2025-09-24)
+
+### Features
+
+* add typing transition to application skills ([#212](https://github.com/yamshy/portfolio/issues/212)) ([cb613ba](https://github.com/yamshy/portfolio/commit/cb613baa323726fd779cfc3961690daa433c846f))
+
 ## [4.27.1](https://github.com/yamshy/portfolio/compare/v4.27.0...v4.27.1) (2025-09-24)
 
 ### Bug Fixes
