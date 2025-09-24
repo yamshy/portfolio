@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.27.1](https://github.com/yamshy/portfolio/compare/v4.27.0...v4.27.1) (2025-09-24)
+
+### Bug Fixes
+
+* simplify focus area backgrounds ([#210](https://github.com/yamshy/portfolio/issues/210)) ([c309049](https://github.com/yamshy/portfolio/commit/c309049d3238929dddc5eaa51dee3a74dcef3ebd))
+
 ## [4.27.0](https://github.com/yamshy/portfolio/compare/v4.26.2...v4.27.0) (2025-09-24)
 
 ### Features
