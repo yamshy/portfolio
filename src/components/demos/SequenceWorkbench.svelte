@@ -11,7 +11,7 @@
   const defaultSequence =
     'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAGCTAGGACTAGCTAGGTCAGTCTGAGTGA';
 
-  const sequence = writable(defaultSequence);
+  const sanitizedSequence = writable(defaultSequence);
 
   const baseKeyPattern = /^[GCAT]$/i;
 
@@ -52,20 +52,20 @@
       }
     }
 
-    sequence.set(sanitizedValue);
+    sanitizedSequence.set(sanitizedValue);
   };
 
-  const cleanedSequence = derived(sequence, ($sequence) => cleanSequence($sequence));
-
-  const gcContent = derived(cleanedSequence, ($sequence) =>
+  const gcContent = derived(sanitizedSequence, ($sequence) =>
     calculateGcContent($sequence)
   );
 
-  const reverseComplement = derived(cleanedSequence, ($sequence) =>
+  const reverseComplement = derived(sanitizedSequence, ($sequence) =>
     getReverseComplement($sequence)
   );
 
-  const peptides = derived(cleanedSequence, ($sequence) => translateFrames($sequence));
+  const peptides = derived(sanitizedSequence, ($sequence) =>
+    translateFrames($sequence)
+  );
 </script>
 
 <section class="workbench" aria-label="Sequence analysis tool">
@@ -82,7 +82,7 @@
     <label>
       <span>DNA Sequence</span>
       <textarea
-        value={$sequence}
+        value={$sanitizedSequence}
         on:keydown={handleKeyDown}
         on:input={handleSequenceInput}
         spellcheck="false"
@@ -94,7 +94,7 @@
     <div class="workbench__panel">
       <div>
         <h4>GC Content</h4>
-        <p><strong>{$gcContent}%</strong> GC across {$cleanedSequence.length} bp</p>
+        <p><strong>{$gcContent}%</strong> GC across {$sanitizedSequence.length} bp</p>
         <div class="meter">
           <div class="meter__fill" style={`width: ${Math.min(100, $gcContent)}%`}></div>
         </div>
