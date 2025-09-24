@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { derived, writable } from 'svelte/store';
-  import { fade, fly } from 'svelte/transition';
-  import { cubicOut } from 'svelte/easing';
+  import { onDestroy, tick } from 'svelte';
 
   type SkillCategory = {
     id: string;
@@ -94,8 +92,93 @@
     },
   ];
 
-  const selected = writable<SkillCategory>(categories[0]);
-  const selectedId = derived(selected, ($selected) => $selected.id);
+  const EXIT_DURATION = 150;
+  const CURSOR_DURATION = 200;
+  const ENTER_DURATION = 200;
+
+  let activeCategoryId = categories[0].id;
+  let displayCategory: SkillCategory = categories[0];
+  let exitingCategory: SkillCategory | null = null;
+  let showCursor = false;
+  let entering = false;
+  let isAnimating = false;
+  let reduceMotion = false;
+
+  const timeouts = new Set<ReturnType<typeof setTimeout>>();
+
+  const wait = (ms: number) =>
+    new Promise<void>((resolve) => {
+      const timeout = setTimeout(() => {
+        timeouts.delete(timeout);
+        resolve();
+      }, ms);
+
+      timeouts.add(timeout);
+    });
+
+  let motionQuery: MediaQueryList | null = null;
+  let motionListener: ((event: MediaQueryListEvent) => void) | null = null;
+
+  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+    motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    reduceMotion = motionQuery.matches;
+    motionListener = (event: MediaQueryListEvent) => {
+      reduceMotion = event.matches;
+    };
+    if ('addEventListener' in motionQuery) {
+      motionQuery.addEventListener('change', motionListener);
+    } else {
+      motionQuery.addListener?.(motionListener);
+    }
+  }
+
+  onDestroy(() => {
+    for (const timeout of timeouts) {
+      clearTimeout(timeout);
+    }
+    timeouts.clear();
+
+    if (motionQuery && motionListener) {
+      if ('removeEventListener' in motionQuery) {
+        motionQuery.removeEventListener('change', motionListener);
+      } else {
+        motionQuery.removeListener?.(motionListener);
+      }
+    }
+  });
+
+  async function selectCategory(category: SkillCategory) {
+    if (category.id === activeCategoryId || isAnimating) {
+      return;
+    }
+
+    activeCategoryId = category.id;
+    isAnimating = true;
+
+    if (!reduceMotion) {
+      exitingCategory = displayCategory;
+      await tick();
+      await wait(EXIT_DURATION);
+
+      exitingCategory = null;
+      showCursor = true;
+      await tick();
+      await wait(CURSOR_DURATION);
+
+      showCursor = false;
+      displayCategory = category;
+      entering = true;
+      await tick();
+      await wait(ENTER_DURATION);
+    } else {
+      displayCategory = category;
+    }
+
+    entering = false;
+    showCursor = false;
+    exitingCategory = null;
+    isAnimating = false;
+  }
 </script>
 
 <section class="skills" aria-label="Skills by application area">
@@ -115,8 +198,9 @@
           <li>
             <button
               type="button"
-              class:selected={category.id === $selectedId}
-              on:click={() => selected.set(category)}
+              class:selected={category.id === activeCategoryId}
+              aria-pressed={category.id === activeCategoryId}
+              on:click={() => selectCategory(category)}
             >
               <span>{category.title}</span>
               <span aria-hidden="true">→</span>
@@ -127,21 +211,17 @@
     </nav>
 
     <div class="skills__panel" aria-live="polite">
-      {#key $selected.id}
-        <article
-          class="skills__detail"
-          in:fly={{ y: 12, duration: 220, easing: cubicOut }}
-          out:fade={{ duration: 140 }}
-        >
-          <h4>{$selected.title}</h4>
-          <p>{$selected.narrative}</p>
+      {#if exitingCategory}
+        <article class="skills__detail tab-content-exit" aria-hidden="true">
+          <h4>{exitingCategory.title}</h4>
+          <p>{exitingCategory.narrative}</p>
           <ul class="skills__highlights">
-            {#each $selected.highlights as highlight}
+            {#each exitingCategory.highlights as highlight}
               <li>{highlight}</li>
             {/each}
           </ul>
           <dl>
-            {#each $selected.stack as item}
+            {#each exitingCategory.stack as item}
               <div>
                 <dt>{item.label}</dt>
                 <dd>{item.detail}</dd>
@@ -149,7 +229,33 @@
             {/each}
           </dl>
         </article>
-      {/key}
+      {/if}
+
+      {#if showCursor}
+        <div class="skills__cursor" aria-hidden="true">
+          <span class="tab-cursor-blink">_</span>
+        </div>
+      {/if}
+
+      {#if !exitingCategory && !showCursor}
+        <article class="skills__detail" class:tab-content-enter={entering}>
+          <h4>{displayCategory.title}</h4>
+          <p>{displayCategory.narrative}</p>
+          <ul class="skills__highlights">
+            {#each displayCategory.highlights as highlight}
+              <li>{highlight}</li>
+            {/each}
+          </ul>
+          <dl>
+            {#each displayCategory.stack as item}
+              <div>
+                <dt>{item.label}</dt>
+                <dd>{item.detail}</dd>
+              </div>
+            {/each}
+          </dl>
+        </article>
+      {/if}
     </div>
   </div>
 </section>
@@ -236,6 +342,22 @@
     grid-area: 1 / 1 / -1 / -1;
   }
 
+  .skills__cursor {
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+    background: color-mix(in oklab, var(--color-surface-strong) 50%, var(--color-surface) 50%);
+    border-radius: var(--radius-md);
+    border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    font-size: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .tab-cursor-blink {
+    animation: blink 100ms step-end 2;
+  }
+
   .skills__detail {
     padding: var(--space-md);
     background: color-mix(in oklab, var(--color-surface-strong) 50%, var(--color-surface) 50%);
@@ -243,6 +365,42 @@
     border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
     display: grid;
     gap: var(--space-md);
+  }
+
+  .tab-content-exit {
+    animation: slideOutLeft 150ms ease-out forwards;
+  }
+
+  .tab-content-enter {
+    animation: slideInRight 200ms ease-out forwards;
+  }
+
+  @keyframes slideOutLeft {
+    to {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 
   .skills__detail h4 {
@@ -299,6 +457,14 @@
   @media (max-width: 600px) {
     .skills {
       padding: var(--space-md);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-content-enter,
+    .tab-content-exit,
+    .tab-cursor-blink {
+      animation: none;
     }
   }
 </style>

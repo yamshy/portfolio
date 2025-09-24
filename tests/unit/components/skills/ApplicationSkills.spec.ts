@@ -32,12 +32,12 @@ describe('ApplicationSkills', () => {
     expect(infrastructureButton).toHaveClass('selected');
     expect(scientificButton).not.toHaveClass('selected');
     expect(
-      screen.getByText(
+      await screen.findByText(
         /Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient/i,
       ),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(
+      await screen.findByText(
         /Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization/i,
       ),
     ).toBeInTheDocument();
