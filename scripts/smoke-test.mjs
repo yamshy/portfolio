@@ -7,6 +7,8 @@ import { URL } from 'node:url';
 const args = new Map();
 for (let i = 2; i < process.argv.length; i += 1) {
   const part = process.argv[i];
+
+  if (part === '--') continue;
   if (!part.startsWith('--')) continue;
 
   const [flag, inlineValue] = part.split('=');
