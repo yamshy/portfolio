@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.26.1](https://github.com/yamshy/portfolio/compare/v4.26.0...v4.26.1) (2025-09-24)
+
+### Bug Fixes
+
+* handle missing requestAnimationFrame in initReveal ([#206](https://github.com/yamshy/portfolio/issues/206)) ([b296049](https://github.com/yamshy/portfolio/commit/b2960492c2defc1f13af07c7854628d389e26c79))
+
 ## [4.26.0](https://github.com/yamshy/portfolio/compare/v4.25.1...v4.26.0) (2025-09-23)
 
 ### Features
