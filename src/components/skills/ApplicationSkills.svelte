@@ -105,6 +105,7 @@
   let highlightTypingIndex = -1;
 
   const timeouts = new Set<ReturnType<typeof setTimeout>>();
+  let highlightAnimationToken = 0;
 
   const wait = (ms: number) =>
     new Promise<void>((resolve) => {
@@ -125,7 +126,7 @@
     timeouts.add(timeout);
   };
 
-  const typeText = (text: string, onUpdate: (value: string) => void) => {
+  const typeText = (text: string, token: number, onUpdate: (value: string) => void) => {
     if (reduceMotion) {
       onUpdate(text);
       return Promise.resolve();
@@ -143,6 +144,11 @@
 
     return new Promise<void>((resolve) => {
       const typeNext = () => {
+        if (token !== highlightAnimationToken) {
+          resolve();
+          return;
+        }
+
         if (reduceMotion) {
           onUpdate(text);
           resolve();
@@ -179,7 +185,13 @@
     );
   };
 
+  const invalidateHighlightAnimation = () => {
+    highlightAnimationToken += 1;
+  };
+
   const typeHighlights = async (highlights: string[]) => {
+    const token = ++highlightAnimationToken;
+
     if (reduceMotion) {
       typedHighlights = [...highlights];
       highlightTypingIndex = -1;
@@ -190,17 +202,31 @@
     highlightTypingIndex = -1;
 
     for (let index = 0; index < highlights.length; index += 1) {
+      if (token !== highlightAnimationToken) {
+        return;
+      }
+
       highlightTypingIndex = index;
-      await typeText(highlights[index], (value) => updateHighlightAt(index, value));
+      await typeText(highlights[index], token, (value) => {
+        if (token === highlightAnimationToken) {
+          updateHighlightAt(index, value);
+        }
+      });
       if (reduceMotion) {
         typedHighlights = [...highlights];
         highlightTypingIndex = -1;
         return;
       }
+
+      if (token !== highlightAnimationToken) {
+        return;
+      }
       await wait(TYPE_INTERVAL * 6);
     }
 
-    highlightTypingIndex = -1;
+    if (token === highlightAnimationToken) {
+      highlightTypingIndex = -1;
+    }
   };
 
   let motionQuery: MediaQueryList | null = null;
@@ -213,6 +239,7 @@
       reduceMotion = event.matches;
       if (reduceMotion) {
         typedNarrative = displayCategory.narrative;
+        invalidateHighlightAnimation();
         typedHighlights = [...displayCategory.highlights];
         highlightTypingIndex = -1;
       } else {
@@ -256,6 +283,8 @@
 
     activeCategoryId = category.id;
     isAnimating = true;
+
+    invalidateHighlightAnimation();
 
     if (!reduceMotion) {
       exitingCategory = displayCategory;
