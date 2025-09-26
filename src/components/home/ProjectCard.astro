@@ -68,6 +68,11 @@ const details = getProjectDetails(project);
                 keys={['stack', 'results', 'challenges']}
               />
             </div>
+            {project.link && (
+              <a class="project-card__link" href={project.link}>
+                Source code →
+              </a>
+            )}
           </article>
         );
       case 'tall':
@@ -86,6 +91,11 @@ const details = getProjectDetails(project);
                 keys={['stack', 'results', 'challenges']}
               />
             </div>
+            {project.link && (
+              <a class="project-card__link" href={project.link}>
+                Source code →
+              </a>
+            )}
           </article>
         );
       default:
