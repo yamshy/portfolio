@@ -92,7 +92,7 @@
     },
   ];
 
-  const EXIT_DURATION = 150;
+  const EXIT_DURATION = 260;
 
   let activeCategoryId = categories[0].id;
   let displayCategory: SkillCategory = categories[0];
@@ -166,7 +166,11 @@
 
     <div class="skills__panel" aria-live="polite">
       {#if exitingCategory}
-        <article class="skills__detail tab-content-exit" aria-hidden="true">
+        <article
+          class="skills__detail tab-content-exit"
+          aria-hidden="true"
+          style={`--exit-duration: ${EXIT_DURATION}ms`}
+        >
           <h4>{exitingCategory.title}</h4>
           <p>{exitingCategory.narrative}</p>
           <ul class="skills__highlights">
@@ -300,13 +304,30 @@
   }
 
   .tab-content-exit {
-    animation: slideOutLeft 150ms ease-out forwards;
+    animation: slideOutLeft var(--exit-duration) var(--ease-smooth) forwards;
   }
 
   @keyframes slideOutLeft {
     to {
       opacity: 0;
       transform: translateX(-20px);
+    }
+  }
+
+  .skills__detail:not(.tab-content-exit) {
+    animation: fadeSlideIn 320ms var(--ease-smooth);
+    animation-fill-mode: backwards;
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 
@@ -377,6 +398,10 @@
     .tab-content-exit {
       animation: none;
       opacity: 1;
+    }
+
+    .skills__detail:not(.tab-content-exit) {
+      animation: none;
     }
   }
 </style>
