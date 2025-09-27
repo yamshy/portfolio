@@ -166,7 +166,11 @@
 
     <div class="skills__panel" aria-live="polite">
       {#if exitingCategory}
-        <article class="skills__detail tab-content-exit" aria-hidden="true">
+        <article
+          class="skills__detail tab-content-exit"
+          aria-hidden="true"
+          style={`--exit-duration: ${EXIT_DURATION}ms`}
+        >
           <h4>{exitingCategory.title}</h4>
           <p>{exitingCategory.narrative}</p>
           <ul class="skills__highlights">
@@ -300,7 +304,7 @@
   }
 
   .tab-content-exit {
-    animation: slideOutLeft 260ms var(--ease-smooth) forwards;
+    animation: slideOutLeft var(--exit-duration, 260ms) var(--ease-smooth) forwards;
   }
 
   @keyframes slideOutLeft {
