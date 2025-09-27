@@ -80,9 +80,13 @@ test.describe('Home page experience', () => {
     await expect(projectsSection).toBeVisible();
 
     await expect(page.locator('.projects__grid .project-card')).toHaveCount(3);
-    await expect(
-      page.getByRole('link', { name: 'Source code →' }),
-    ).toBeVisible();
+    const sourceLinks = projectsSection.getByRole('link', {
+      name: 'Source code →',
+    });
+    await expect(sourceLinks).toHaveCount(3);
+    for (const index of [0, 1, 2]) {
+      await expect(sourceLinks.nth(index)).toBeVisible();
+    }
 
     const insightsSection = page.locator('#insights');
     await insightsSection.scrollIntoViewIfNeeded();
