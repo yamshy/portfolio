@@ -304,7 +304,7 @@
   }
 
   .tab-content-exit {
-    animation: slideOutLeft var(--exit-duration, 260ms) var(--ease-smooth) forwards;
+    animation: slideOutLeft var(--exit-duration) var(--ease-smooth) forwards;
   }
 
   @keyframes slideOutLeft {
