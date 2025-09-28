@@ -8,6 +8,18 @@ export default defineConfig({
 
   vite: {
     css: {
+      transformer: 'lightningcss',
+      lightningcss: {
+        targets: {
+          browsers: 'defaults'
+        },
+        drafts: {
+          nesting: true,
+          customMedia: true
+        },
+        cssModules: false,
+        minify: true
+      },
       preprocessorOptions: {
         scss: {
           additionalData: `@import "open-props/style";`
