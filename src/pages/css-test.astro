@@ -1,0 +1,42 @@
+---
+
+---
+
+<html lang="en">
+  <head>
+    <title>CSS Test</title>
+  </head>
+  <body>
+    <div class="test-card">
+      <h1>Lightning CSS Test</h1>
+      <p class="test-props">Open Props: <span></span></p>
+      <div class="nested-test">
+        <p>Nesting test</p>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* Test Open Props variables still work */
+  .test-card {
+    padding: var(--size-4, 1rem);
+    background: var(--surface-2, #f0f0f0);
+    border-radius: var(--radius-2, 8px);
+  }
+
+  .test-props span::after {
+    content: '✓ Working' / '';
+    color: var(--green-5, green);
+  }
+
+  /* Test native nesting now works */
+  .nested-test {
+    border: 1px solid var(--gray-5, #ccc);
+
+    & p {
+      color: var(--blue-6, blue);
+      margin: var(--size-2, 0.5rem);
+    }
+  }
+</style>
