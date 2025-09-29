@@ -279,6 +279,7 @@
   .skills__panel {
     position: relative;
     display: grid;
+    align-items: start;
     overflow: hidden;
     transition: height var(--duration-slow) var(--ease-smooth);
   }
