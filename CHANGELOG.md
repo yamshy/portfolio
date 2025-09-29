@@ -1,5 +1,7 @@
 # Changelog
 
+## [4.30.3](https://github.com/yamshy/portfolio/compare/v4.30.2...v4.30.3) (2025-09-29)
+
 ## [4.30.2](https://github.com/yamshy/portfolio/compare/v4.30.1...v4.30.2) (2025-09-29)
 
 ### Bug Fixes
