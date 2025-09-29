@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.30.1](https://github.com/yamshy/portfolio/compare/v4.30.0...v4.30.1) (2025-09-29)
+
+### Bug Fixes
+
+* align project card typography ([#233](https://github.com/yamshy/portfolio/issues/233)) ([33c25a3](https://github.com/yamshy/portfolio/commit/33c25a34d5d98ac1d17aa54918bfd9c5a3bf744b))
+
 ## [4.30.0](https://github.com/yamshy/portfolio/compare/v4.29.3...v4.30.0) (2025-09-27)
 
 ### Features
