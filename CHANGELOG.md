@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.30.2](https://github.com/yamshy/portfolio/compare/v4.30.1...v4.30.2) (2025-09-29)
+
+### Bug Fixes
+
+* smooth application skills transitions ([#235](https://github.com/yamshy/portfolio/issues/235)) ([8caf2cf](https://github.com/yamshy/portfolio/commit/8caf2cf77b9ede0c3647334b841ae7d9cd767dce))
+
 ## [4.30.1](https://github.com/yamshy/portfolio/compare/v4.30.0...v4.30.1) (2025-09-29)
 
 ### Bug Fixes
