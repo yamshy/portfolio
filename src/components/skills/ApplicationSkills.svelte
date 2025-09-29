@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, tick } from 'svelte';
+  import { onMount, tick } from 'svelte';
 
   type SkillCategory = {
     id: string;
@@ -92,46 +92,59 @@
     },
   ];
 
-  const EXIT_DURATION = 260;
-
   let activeCategoryId = categories[0].id;
   let displayCategory: SkillCategory = categories[0];
-  let exitingCategory: SkillCategory | null = null;
-  let isAnimating = false;
+  let detailElement: HTMLElement | null = null;
+  let panelHeight: number | null = null;
+  let resizeObserver: ResizeObserver | null = null;
+  let observedElement: HTMLElement | null = null;
 
-  const timeouts = new Set<ReturnType<typeof setTimeout>>();
+  async function updatePanelHeight() {
+    await tick();
 
-  const wait = (ms: number) =>
-    new Promise<void>((resolve) => {
-      const timeout = setTimeout(() => {
-        timeouts.delete(timeout);
-        resolve();
-      }, ms);
-
-      timeouts.add(timeout);
-    });
-
-  onDestroy(() => {
-    for (const timeout of timeouts) {
-      clearTimeout(timeout);
+    if (detailElement) {
+      panelHeight = detailElement.offsetHeight;
     }
-    timeouts.clear();
+  }
+
+  onMount(async () => {
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        if (detailElement) {
+          panelHeight = detailElement.offsetHeight;
+        }
+      });
+    }
+
+    await updatePanelHeight();
+
+    if (detailElement && resizeObserver) {
+      resizeObserver.observe(detailElement);
+      observedElement = detailElement;
+    }
+
+    return () => {
+      resizeObserver?.disconnect();
+    };
   });
 
+  $: if (detailElement && resizeObserver && detailElement !== observedElement) {
+    if (observedElement) {
+      resizeObserver.unobserve(observedElement);
+    }
+    resizeObserver.observe(detailElement);
+    observedElement = detailElement;
+    panelHeight = detailElement.offsetHeight;
+  }
+
   async function selectCategory(category: SkillCategory) {
-    if (category.id === activeCategoryId || isAnimating) {
+    if (category.id === activeCategoryId) {
       return;
     }
 
     activeCategoryId = category.id;
-    isAnimating = true;
-    exitingCategory = displayCategory;
-    await tick();
-    await wait(EXIT_DURATION);
-
     displayCategory = category;
-    exitingCategory = null;
-    isAnimating = false;
+    await updatePanelHeight();
   }
 </script>
 
@@ -164,50 +177,28 @@
       </ul>
     </nav>
 
-    <div class="skills__panel" aria-live="polite">
-      {#if exitingCategory}
-        <article
-          class="skills__detail tab-content-exit"
-          aria-hidden="true"
-          style={`--exit-duration: ${EXIT_DURATION}ms`}
-        >
-          <h4>{exitingCategory.title}</h4>
-          <p>{exitingCategory.narrative}</p>
-          <ul class="skills__highlights">
-            {#each exitingCategory.highlights as highlight}
-              <li>{highlight}</li>
-            {/each}
-          </ul>
-          <dl>
-            {#each exitingCategory.stack as item}
-              <div>
-                <dt>{item.label}</dt>
-                <dd>{item.detail}</dd>
-              </div>
-            {/each}
-          </dl>
-        </article>
-      {/if}
-
-      {#if !exitingCategory}
-        <article class="skills__detail">
-          <h4>{displayCategory.title}</h4>
-          <p class="skills__narrative">{displayCategory.narrative}</p>
-          <ul class="skills__highlights">
-            {#each displayCategory.highlights as highlight}
-              <li>{highlight}</li>
-            {/each}
-          </ul>
-          <dl>
-            {#each displayCategory.stack as item}
-              <div>
-                <dt>{item.label}</dt>
-                <dd>{item.detail}</dd>
-              </div>
-            {/each}
-          </dl>
-        </article>
-      {/if}
+    <div
+      class="skills__panel"
+      aria-live="polite"
+      style={panelHeight !== null ? `height: ${panelHeight}px` : ''}
+    >
+      <article class="skills__detail" bind:this={detailElement}>
+        <h4>{displayCategory.title}</h4>
+        <p class="skills__narrative">{displayCategory.narrative}</p>
+        <ul class="skills__highlights">
+          {#each displayCategory.highlights as highlight}
+            <li>{highlight}</li>
+          {/each}
+        </ul>
+        <dl>
+          {#each displayCategory.stack as item}
+            <div>
+              <dt>{item.label}</dt>
+              <dd>{item.detail}</dd>
+            </div>
+          {/each}
+        </dl>
+      </article>
     </div>
   </div>
 </section>
@@ -288,6 +279,8 @@
   .skills__panel {
     position: relative;
     display: grid;
+    overflow: hidden;
+    transition: height var(--duration-slow) var(--ease-smooth);
   }
 
   .skills__panel > * {
@@ -301,34 +294,6 @@
     border: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent 40%);
     display: grid;
     gap: var(--space-md);
-  }
-
-  .tab-content-exit {
-    animation: slideOutLeft var(--exit-duration) var(--ease-smooth) forwards;
-  }
-
-  @keyframes slideOutLeft {
-    to {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-  }
-
-  .skills__detail:not(.tab-content-exit) {
-    animation: fadeSlideIn 320ms var(--ease-smooth);
-    animation-fill-mode: backwards;
-  }
-
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
   }
 
 
@@ -394,14 +359,4 @@
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .tab-content-exit {
-      animation: none;
-      opacity: 1;
-    }
-
-    .skills__detail:not(.tab-content-exit) {
-      animation: none;
-    }
-  }
 </style>
