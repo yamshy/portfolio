@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.30.4](https://github.com/yamshy/portfolio/compare/v4.30.3...v4.30.4) (2025-09-29)
+
+### Bug Fixes
+
+* prevent skills panel stretching ([#238](https://github.com/yamshy/portfolio/issues/238)) ([9330048](https://github.com/yamshy/portfolio/commit/9330048764528e6da12625dc4d4d9da2ac951030))
+
 ## [4.30.3](https://github.com/yamshy/portfolio/compare/v4.30.2...v4.30.3) (2025-09-29)
 
 ## [4.30.2](https://github.com/yamshy/portfolio/compare/v4.30.1...v4.30.2) (2025-09-29)
