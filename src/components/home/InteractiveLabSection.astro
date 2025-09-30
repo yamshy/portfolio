@@ -1,6 +1,7 @@
 ---
 import SectionHeader from '../ui/SectionHeader.astro';
 import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
+import NextflowPipeline from '../demos/NextflowPipeline.svelte';
 ---
 
 <section class="section section--insights" id="insights" data-reveal>
@@ -40,39 +41,8 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
         </div>
       </div>
     </article>
-    <article
-      class="insight-card insight-card--upcoming insight-card--nextflow"
-      data-reveal
-    >
-      <header class="insight-card__header">
-        <span class="insight-card__badge insight-card__badge--soon"
-          >Coming Soon</span
-        >
-        <h3>Try Nextflow on My Cluster</h3>
-      </header>
-      <p>
-        Launch a test bioinformatics pipeline directly on my Kubernetes cluster.
-        Watch real-time logs, resource usage, and execution graphs. Safe sandbox
-        environment for exploring cloud-native genomics.
-      </p>
-      <div
-        class="insight-card__visual insight-card__visual--nextflow"
-        aria-hidden="true"
-      >
-        <div class="terminal">
-          <div class="terminal__header">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="terminal__body">
-            <span class="line line--prompt"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line line--progress"></span>
-          </div>
-        </div>
-      </div>
+    <article class="insight-card insight-card--nextflow-demo" data-reveal>
+      <NextflowPipeline client:visible />
     </article>
   </div>
 </section>
@@ -136,7 +106,8 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     color: var(--color-text);
   }
 
-  .insight-card--demo {
+  .insight-card--demo,
+  .insight-card--nextflow-demo {
     padding: 0;
     border: none;
     background: none;
@@ -431,7 +402,9 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
       align-items: start;
     }
 
-    .insight-card--nextflow {
+    .insight-card--nextflow-demo {
+      width: 100%;
+      margin-inline: 0;
       grid-column: 1 / -1;
       grid-row: 1;
     }

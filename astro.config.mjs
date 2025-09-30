@@ -8,7 +8,14 @@ export default defineConfig({
 
   vite: {
     server: {
-      host: true
+      host: true,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8000',
+          changeOrigin: true,
+          ws: true
+        }
+      }
     },
     preview: {
       host: true,
