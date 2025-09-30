@@ -102,6 +102,12 @@
     try {
       const response = await fetch('/api/v1/pipeline/status');
       if (!response.ok) {
+        if (response.status === 429) {
+          // Rate limited - stop polling temporarily
+          console.warn('Rate limited, stopping status polling');
+          stopStatusPolling();
+          return;
+        }
         if (response.status === 500 || response.status === 502 || response.status === 503) {
           throw new Error('Backend API unavailable. Is the Nextflow service running?');
         }
@@ -157,8 +163,8 @@
 
   function startStatusPolling() {
     if (statusPollInterval) return;
-    // Poll every 500ms for responsive updates
-    statusPollInterval = window.setInterval(fetchStatus, 500);
+    // Poll every 2 seconds as fallback when WebSocket unavailable
+    statusPollInterval = window.setInterval(fetchStatus, 2000);
   }
 
   function stopStatusPolling() {
@@ -183,6 +189,8 @@
       ws.onopen = () => {
         console.log('WebSocket connected');
         errorMessage = null;
+        // Stop polling since WebSocket is working
+        stopStatusPolling();
       };
 
       ws.onmessage = (event) => {
@@ -241,6 +249,11 @@
       ws.onclose = () => {
         console.log('WebSocket disconnected');
         ws = null;
+        // If pipeline is still running, fall back to polling
+        if (isRunning) {
+          console.log('Falling back to polling for status updates');
+          startStatusPolling();
+        }
       };
     } catch (error) {
       console.error('Failed to connect WebSocket:', error);
@@ -311,10 +324,7 @@
       progressPercent = 0;
       startTimer();
 
-      // Start polling immediately for status updates
-      startStatusPolling();
-
-      // Also connect WebSocket for real-time logs
+      // Connect WebSocket for real-time updates (will fall back to polling on error)
       connectWebSocket();
 
       logLines.push(`Pipeline started: ${data.run_id}`);
