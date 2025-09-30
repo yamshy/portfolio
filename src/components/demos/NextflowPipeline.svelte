@@ -74,6 +74,8 @@
   let isBackendAvailable = true;
   let isCheckingHealth = true;
 
+  const MAX_LOG_LINES = 20; // Keep only latest 20 lines for performance
+
   function getStatusColor(status: RunStatus): string {
     switch (status) {
       case 'running':
@@ -142,7 +144,12 @@
         progressPercent = data.progress_percent ?? 0;
 
         if (data.log_preview) {
-          logLines = data.log_preview;
+          // Extract message field from each log line object
+          const extractedLines = data.log_preview.map((line: any) =>
+            typeof line === 'string' ? line : (line.message || JSON.stringify(line))
+          );
+          // Keep only latest MAX_LOG_LINES
+          logLines = extractedLines.slice(-MAX_LOG_LINES);
         }
 
         const runningStatuses: RunStatus[] = ['queued', 'starting', 'running'];
@@ -218,7 +225,12 @@
           switch (message.type) {
             case 'log':
               if (message.data?.lines && Array.isArray(message.data.lines)) {
-                logLines = [...logLines, ...message.data.lines];
+                // Extract message field from each log line object
+                const newLines = message.data.lines.map((line: any) =>
+                  typeof line === 'string' ? line : (line.message || JSON.stringify(line))
+                );
+                // Keep only latest MAX_LOG_LINES for performance
+                logLines = [...logLines, ...newLines].slice(-MAX_LOG_LINES);
                 scrollLogToBottom();
               }
               break;
@@ -774,12 +786,11 @@
 
   .log-viewer {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto;
     border-radius: var(--radius-md);
     border: 1px solid color-mix(in oklab, var(--color-border) 50%, transparent 50%);
     background: color-mix(in oklab, var(--color-surface-strong) 60%, transparent 40%);
     overflow: hidden;
-    min-height: 200px;
   }
 
   .log-header {
@@ -807,7 +818,7 @@
     font-size: 0.85rem;
     line-height: 1.6;
     overflow-y: auto;
-    max-height: 300px;
+    height: 300px;
   }
 
   .log-empty {
