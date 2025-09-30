@@ -7,6 +7,14 @@ export default defineConfig({
   integrations: [svelte()],
 
   vite: {
+    server: {
+      host: true,
+      allowedHosts: ['.gitpod.dev']
+    },
+    preview: {
+      host: true,
+      allowedHosts: ['.gitpod.dev']
+    },
     css: {
       transformer: 'lightningcss',
       lightningcss: {
