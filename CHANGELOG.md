@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.32.0](https://github.com/yamshy/portfolio/compare/v4.31.0...v4.32.0) (2025-09-30)
+
+### Features
+
+* improve interactive lab layout and rename section ([#241](https://github.com/yamshy/portfolio/issues/241)) ([0f12c4c](https://github.com/yamshy/portfolio/commit/0f12c4ca4a02389d317068c0204cb4df29fae600))
+
 ## [4.31.0](https://github.com/yamshy/portfolio/compare/v4.30.4...v4.31.0) (2025-09-30)
 
 ### Features
