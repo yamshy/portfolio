@@ -3,12 +3,12 @@
 
   type RunStatus = 'queued' | 'starting' | 'running' | 'succeeded' | 'failed' | 'cancelled' | 'unknown';
 
-  type PipelineType = 'hello' | 'rnaseq-test' | 'parallel-demo';
-
   interface PipelineOption {
-    id: PipelineType;
+    id: string;
+    pipeline: string;
     label: string;
     duration: string;
+    description: string;
   }
 
   interface RunResponse {
@@ -31,9 +31,27 @@
   }
 
   const pipelines: PipelineOption[] = [
-    { id: 'hello', label: 'Hello World', duration: '~30s' },
-    { id: 'rnaseq-test', label: 'RNA-seq Demo', duration: '~2min' },
-    { id: 'parallel-demo', label: 'Parallel Demo', duration: '~3min' }
+    {
+      id: 'fetchngs',
+      pipeline: 'nf-core/fetchngs',
+      label: 'fetchngs',
+      duration: '~3min',
+      description: 'Download FASTQ files from SRA/ENA'
+    },
+    {
+      id: 'rnaseq',
+      pipeline: 'nf-core/rnaseq',
+      label: 'rnaseq',
+      duration: '~8min',
+      description: 'RNA sequencing analysis pipeline'
+    },
+    {
+      id: 'atacseq',
+      pipeline: 'nf-core/atacseq',
+      label: 'atacseq',
+      duration: '~10min',
+      description: 'ATAC-seq peak calling and analysis'
+    }
   ];
 
   let activeRun: {
@@ -287,7 +305,7 @@
     isUserScrolling = !isAtBottom;
   }
 
-  async function startPipeline(pipeline: PipelineType) {
+  async function startPipeline(pipelineOption: PipelineOption) {
     if (isRunning) return;
 
     errorMessage = null;
@@ -300,7 +318,12 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          parameters: { pipeline },
+          parameters: {
+            pipeline: pipelineOption.pipeline,
+            parameters: {
+              profile: 'test'
+            }
+          },
           triggered_by: 'web-ui'
         })
       });
@@ -428,10 +451,12 @@
         <button
           class="pipeline-btn"
           disabled={isRunning}
-          onclick={() => startPipeline(pipeline.id)}
+          onclick={() => startPipeline(pipeline)}
+          title={pipeline.description}
         >
           <span class="pipeline-btn__label">{pipeline.label}</span>
           <span class="pipeline-btn__duration">{pipeline.duration}</span>
+          <span class="pipeline-btn__description">{pipeline.description}</span>
         </button>
       {/each}
     </div>
@@ -560,6 +585,12 @@
   .pipeline-btn__duration {
     font-size: 0.75rem;
     color: var(--color-text-muted);
+  }
+
+  .pipeline-btn__description {
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    line-height: 1.4;
   }
 
   .status-panel {
