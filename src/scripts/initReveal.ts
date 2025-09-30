@@ -6,7 +6,7 @@ type RevealOptions = {
   rootMargin?: string;
 };
 
-const computeRootMargin = (margin?: string) => {
+export const computeRootMargin = (margin?: string) => {
   const value = (margin ?? '-8%').trim();
   return value.includes(' ') ? value : `0px 0px ${value} 0px`;
 };
