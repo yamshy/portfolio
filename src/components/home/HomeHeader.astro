@@ -63,34 +63,34 @@ const navLinks = [
   .site-header {
     --glass-panel-glow: linear-gradient(
       145deg,
-      color-mix(in oklab, var(--color-primary-strong) 14%, transparent 86%),
-      transparent 60%
+      color-mix(in oklab, var(--color-primary-strong) 12%, transparent 88%),
+      transparent 65%
     );
     --glass-panel-tint: linear-gradient(
       125deg,
-      color-mix(in oklab, var(--color-surface) 22%, transparent 78%),
-      color-mix(in oklab, var(--color-surface-strong) 56%, transparent 44%)
+      color-mix(in oklab, var(--color-surface) 45%, transparent 55%),
+      color-mix(in oklab, var(--color-surface-strong) 65%, transparent 35%)
     );
     --glass-panel-elevated: linear-gradient(
       130deg,
-      color-mix(in oklab, var(--color-surface) 36%, transparent 64%),
-      color-mix(in oklab, var(--color-surface-strong) 72%, transparent 28%)
+      color-mix(in oklab, var(--color-surface) 45%, transparent 55%),
+      color-mix(in oklab, var(--color-surface-strong) 78%, transparent 22%)
     );
     --glass-panel-hover: linear-gradient(
       130deg,
-      color-mix(in oklab, var(--color-surface) 46%, transparent 54%),
-      color-mix(in oklab, var(--color-surface-strong) 82%, transparent 18%)
+      color-mix(in oklab, var(--color-surface) 52%, transparent 48%),
+      color-mix(in oklab, var(--color-surface-strong) 85%, transparent 15%)
     );
     --glass-panel-border: color-mix(
       in oklab,
-      var(--color-border) 42%,
-      transparent 58%
+      var(--color-border) 55%,
+      transparent 45%
     );
-    --glass-panel-shadow: 0 22px 48px -32px
+    --glass-panel-shadow: 0 24px 52px -28px
       color-mix(
         in oklab,
-        var(--color-shadow, rgba(32, 22, 17, 0.65)) 35%,
-        transparent 65%
+        var(--color-shadow, rgba(32, 22, 17, 0.65)) 45%,
+        transparent 55%
       );
     background: var(--glass-panel-glow), var(--glass-panel-tint);
     border-bottom: 1px solid var(--glass-panel-border);
@@ -100,8 +100,9 @@ const navLinks = [
     inset-inline: 0;
     z-index: 10;
     padding-block-start: var(--safe-area-top, 0px);
-    backdrop-filter: blur(28px) saturate(145%);
-    -webkit-backdrop-filter: blur(28px) saturate(145%);
+    /* Backdrop-filter for glassmorphic effect */
+    -webkit-backdrop-filter: blur(42px) saturate(165%) brightness(1.05);
+    backdrop-filter: blur(42px) saturate(165%) brightness(1.05);
     transition:
       background var(--duration-base) var(--ease-smooth),
       border-color var(--duration-base) var(--ease-smooth),
@@ -259,8 +260,8 @@ const navLinks = [
       background: var(--glass-panel-glow), var(--glass-panel-elevated);
       border: 1px solid var(--glass-panel-border);
       box-shadow: var(--glass-panel-shadow);
-      backdrop-filter: blur(30px) saturate(165%);
-      -webkit-backdrop-filter: blur(30px) saturate(165%);
+      -webkit-backdrop-filter: blur(45px) saturate(175%) brightness(1.08);
+      backdrop-filter: blur(45px) saturate(175%) brightness(1.08);
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -314,8 +315,8 @@ const navLinks = [
       margin: 0;
       z-index: 10;
       box-shadow: var(--glass-panel-shadow);
-      backdrop-filter: blur(28px) saturate(160%);
-      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(40px) saturate(170%) brightness(1.06);
+      backdrop-filter: blur(40px) saturate(170%) brightness(1.06);
     }
 
     .site-nav__toggle:hover,

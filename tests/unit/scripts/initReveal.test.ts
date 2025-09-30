@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import { initReveal } from '../../../src/scripts/initReveal';
+import { computeRootMargin, initReveal } from '../../../src/scripts/initReveal';
 
 const windowAny = window as any;
 const originalRAF = windowAny.requestAnimationFrame;
@@ -89,5 +89,23 @@ describe('initReveal', () => {
     revealNodes.forEach((node) => {
       expect(node.classList.contains('is-revealed')).toBe(true);
     });
+  });
+});
+
+describe('computeRootMargin', () => {
+  it('formats single margin values into four-sided CSS margin format', () => {
+    expect(computeRootMargin('-10%')).toBe('0px 0px -10% 0px');
+    expect(computeRootMargin('20px')).toBe('0px 0px 20px 0px');
+    expect(computeRootMargin()).toBe('0px 0px -8% 0px');
+  });
+
+  it('returns multi-value margins unchanged', () => {
+    expect(computeRootMargin('10px 20px')).toBe('10px 20px');
+    expect(computeRootMargin('5% 10% 15% 20%')).toBe('5% 10% 15% 20%');
+  });
+
+  it('handles whitespace correctly', () => {
+    expect(computeRootMargin('  -5%  ')).toBe('0px 0px -5% 0px');
+    expect(computeRootMargin('  10px 20px  ')).toBe('10px 20px');
   });
 });

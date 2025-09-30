@@ -8,18 +8,17 @@ export default defineConfig({
 
   vite: {
     server: {
-      host: true,
-      allowedHosts: ['.gitpod.dev']
+      host: true
     },
     preview: {
       host: true,
-      allowedHosts: ['.gitpod.dev']
+      allowedHosts: true
     },
     css: {
       transformer: 'lightningcss',
       lightningcss: {
         targets: {
-          browsers: 'defaults'
+          browsers: '>= 0.5%, last 2 versions, Firefox ESR, not dead'
         },
         drafts: {
           nesting: true,
