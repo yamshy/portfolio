@@ -1,6 +1,7 @@
 ---
 import SectionHeader from '../ui/SectionHeader.astro';
 import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
+import NextflowPipelineDemo from '../demos/NextflowPipelineDemo.svelte';
 ---
 
 <section class="section section--insights" id="insights" data-reveal>
@@ -40,40 +41,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
         </div>
       </div>
     </article>
-    <article
-      class="insight-card insight-card--upcoming insight-card--nextflow"
-      data-reveal
-    >
-      <header class="insight-card__header">
-        <span class="insight-card__badge insight-card__badge--soon"
-          >Coming Soon</span
-        >
-        <h3>Try Nextflow on My Cluster</h3>
-      </header>
-      <p>
-        Launch a test bioinformatics pipeline directly on my Kubernetes cluster.
-        Watch real-time logs, resource usage, and execution graphs. Safe sandbox
-        environment for exploring cloud-native genomics.
-      </p>
-      <div
-        class="insight-card__visual insight-card__visual--nextflow"
-        aria-hidden="true"
-      >
-        <div class="terminal">
-          <div class="terminal__header">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="terminal__body">
-            <span class="line line--prompt"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line line--progress"></span>
-          </div>
-        </div>
-      </div>
-    </article>
+    <NextflowPipelineDemo client:visible />
   </div>
 </section>
 
@@ -91,7 +59,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     gap: var(--space-lg);
   }
 
-  .insight-card {
+  :global(.insight-card) {
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     border: 1px solid
@@ -102,16 +70,16 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     height: 100%;
   }
 
-  .insight-card h3 {
+  :global(.insight-card h3) {
     font-size: var(--heading-md);
   }
 
-  .insight-card__header {
+  :global(.insight-card__header) {
     display: grid;
     gap: var(--space-xs);
   }
 
-  .insight-card__badge {
+  :global(.insight-card__badge) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -127,7 +95,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     width: fit-content;
   }
 
-  .insight-card__badge--soon {
+  :global(.insight-card__badge--soon) {
     background: linear-gradient(
       135deg,
       color-mix(in oklab, #ffb347 80%, transparent) 0%,
@@ -136,7 +104,16 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     color: var(--color-text);
   }
 
-  .insight-card--demo {
+  :global(.insight-card__badge--live) {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--color-success) 70%, transparent 30%) 0%,
+      color-mix(in oklab, var(--color-primary) 60%, transparent 40%) 100%
+    );
+    color: var(--color-bg);
+  }
+
+  :global(.insight-card--demo) {
     padding: 0;
     border: none;
     background: none;
@@ -144,16 +121,16 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     margin-inline: auto;
   }
 
-  .insight-card--upcoming {
+  :global(.insight-card--upcoming) {
     position: relative;
     align-content: start;
   }
 
-  .insight-card--upcoming p {
+  :global(.insight-card--upcoming p) {
     color: var(--color-text-muted);
   }
 
-  .insight-card__visual {
+  :global(.insight-card__visual) {
     border-radius: var(--radius-md);
     border: 1px dashed
       color-mix(in oklab, var(--color-border) 60%, transparent 40%);
@@ -245,12 +222,12 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     animation-delay: -3.6s;
   }
 
-  .insight-card__visual--nextflow {
+  :global(.insight-card__visual--nextflow) {
     display: grid;
     padding: 0;
   }
 
-  .terminal {
+  :global(.terminal) {
     border-radius: var(--radius-md);
     border: 1px solid
       color-mix(in oklab, var(--color-border) 65%, transparent 35%);
@@ -263,7 +240,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     box-shadow: var(--shadow-sm);
   }
 
-  .terminal__header {
+  :global(.terminal__header) {
     display: flex;
     gap: 0.4rem;
     padding: 0.55rem;
@@ -274,7 +251,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     );
   }
 
-  .terminal__header span {
+  :global(.terminal__header span) {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -285,7 +262,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     );
   }
 
-  .terminal__body {
+  :global(.terminal__body) {
     display: grid;
     gap: 0.5rem;
     padding: var(--space-md);
@@ -296,7 +273,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     );
   }
 
-  .line {
+  :global(.line) {
     height: 10px;
     border-radius: 4px;
     background: color-mix(
@@ -310,7 +287,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     will-change: opacity;
   }
 
-  .line--prompt {
+  :global(.line--prompt) {
     width: 80%;
     background: linear-gradient(
       90deg,
@@ -319,7 +296,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     );
   }
 
-  .line--progress {
+  :global(.line--progress) {
     width: 60%;
     background: linear-gradient(
       90deg,
@@ -328,7 +305,7 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
     );
   }
 
-  .terminal__body .line::after {
+  :global(.terminal__body .line::after) {
     content: '';
     position: absolute;
     inset: 0;
@@ -415,10 +392,10 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .homelab-nodes span,
-    .homelab-nodes span::after,
-    .terminal__body .line,
-    .terminal__body .line::after {
+    :global(.homelab-nodes span),
+    :global(.homelab-nodes span::after),
+    :global(.terminal__body .line),
+    :global(.terminal__body .line::after) {
       animation: none !important;
     }
   }
@@ -430,19 +407,19 @@ import SequenceWorkbench from '../demos/SequenceWorkbench.svelte';
       grid-auto-flow: dense;
     }
 
-    .insight-card--demo {
+    :global(.insight-card--demo) {
       width: 100%;
       margin-inline: 0;
       grid-column: span 7;
       grid-row: span 2;
     }
 
-    .insight-card--homelab {
+    :global(.insight-card--homelab) {
       grid-column: 8 / span 5;
       grid-row: 1;
     }
 
-    .insight-card--nextflow {
+    :global(.insight-card--nextflow) {
       grid-column: 8 / span 5;
       grid-row: 2;
     }
