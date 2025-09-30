@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.33.0](https://github.com/yamshy/portfolio/compare/v4.32.0...v4.33.0) (2025-09-30)
+
+### Features
+
+* add Conductor workspace configuration ([#246](https://github.com/yamshy/portfolio/issues/246)) ([ed713b8](https://github.com/yamshy/portfolio/commit/ed713b89d958379c5106421fb650a09abd318a8d))
+
 ## [4.32.0](https://github.com/yamshy/portfolio/compare/v4.31.0...v4.32.0) (2025-09-30)
 
 ### Features
