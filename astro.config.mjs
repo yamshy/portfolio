@@ -7,11 +7,18 @@ export default defineConfig({
   integrations: [svelte()],
 
   vite: {
+    server: {
+      host: true
+    },
+    preview: {
+      host: true,
+      allowedHosts: true
+    },
     css: {
       transformer: 'lightningcss',
       lightningcss: {
         targets: {
-          browsers: 'defaults'
+          browsers: '>= 0.5%, last 2 versions, Firefox ESR, not dead'
         },
         drafts: {
           nesting: true,
