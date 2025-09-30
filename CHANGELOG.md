@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.31.0](https://github.com/yamshy/portfolio/compare/v4.30.4...v4.31.0) (2025-09-30)
+
+### Features
+
+* enhance header glassmorphic effect with stronger backdrop-filter ([8abe91d](https://github.com/yamshy/portfolio/commit/8abe91daaf4393dc019cf24e2069dae27012f276))
+
 ## [4.30.4](https://github.com/yamshy/portfolio/compare/v4.30.3...v4.30.4) (2025-09-29)
 
 ### Bug Fixes
