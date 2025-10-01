@@ -28,7 +28,6 @@ test.describe('Home page experience', () => {
       'Overview',
       'Experience',
       'Projects',
-      'Interactive Lab',
       'Skills',
       'Contact',
     ];
@@ -72,9 +71,7 @@ test.describe('Home page experience', () => {
     await expect(navigation).not.toBeVisible();
   });
 
-  test('displays featured projects and interactive modules', async ({
-    page,
-  }) => {
+  test('displays featured projects', async ({ page }) => {
     const projectsSection = page.locator('#projects');
     await projectsSection.scrollIntoViewIfNeeded();
     await expect(projectsSection).toBeVisible();
@@ -87,19 +84,6 @@ test.describe('Home page experience', () => {
     for (const index of [0, 1, 2]) {
       await expect(sourceLinks.nth(index)).toBeVisible();
     }
-
-    const insightsSection = page.locator('#insights');
-    await insightsSection.scrollIntoViewIfNeeded();
-    await expect(insightsSection).toBeVisible();
-
-    const workbench = page.getByRole('region', {
-      name: 'Sequence analysis tool',
-    });
-    await expect(workbench).toBeVisible();
-    await expect(
-      workbench.getByRole('heading', { name: 'Sequence Workbench' }),
-    ).toBeVisible();
-    await expect(workbench.getByLabel('DNA Sequence')).toBeVisible();
   });
 
   test('highlights skills, experience, and contact sections', async ({
@@ -119,13 +103,6 @@ test.describe('Home page experience', () => {
       page.getByRole('heading', {
         name: /Career progression from research to technical operations leadership/i,
       }),
-    ).toBeVisible();
-
-    const insights = page.locator('#insights');
-    await insights.scrollIntoViewIfNeeded();
-    await expect(insights).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: 'Interactive Lab' }),
     ).toBeVisible();
 
     const contact = page.locator('#contact');
