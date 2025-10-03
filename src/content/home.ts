@@ -137,23 +137,20 @@ export const experiences: Experience[] = [
     org: 'Advanced Cellular Dynamics',
     years: '2019 — 2024',
     focus:
-      'Led molecular biology operations while building computational infrastructure for high-throughput research.',
+      'Led molecular biology operations while building computational infrastructure and web-based scientific workflow tools for high-throughput research.',
     impact: [
       'Built automated pipelines processing 10,000+ samples with a 50% reduction in turnaround time',
       'Deployed NGS workflows on AWS Batch via Nextflow Tower, managing TB-scale genomic data',
+      'Developed web-based scientific applications using SvelteKit and FastAPI, creating custom analysis tools and interactive dashboards that streamlined biological data workflows',
+      'Operated and maintained Illumina NGS platforms (iSeq100, NextSeq500), managing complete workflows from library preparation through data analysis',
       'Mentored 4+ scientists in laboratory automation and computational workflows',
-      'Integrated laboratory robotics with custom scheduling to maximize instrument uptime',
       'Implemented LIMS integrations syncing instrumentation data with analytics environments',
-      'Designed QC dashboards tracking assay performance and readiness metrics in real time',
-      'Authored SOPs and validation documentation to meet regulatory expectations',
-      'Forecasted reagent, instrumentation, and staffing needs across multi-quarter roadmaps',
-      'Partnered with product and commercial teams to align R&D output with client deliverables',
     ],
   },
   {
     role: 'IT Systems Support (Part-Time)',
     org: 'Allcare Medical Clinic',
-    years: '2018 — 2024',
+    years: '2025',
     focus:
       'Maintained healthcare IT infrastructure and supported EMR system implementation.',
     impact: [
