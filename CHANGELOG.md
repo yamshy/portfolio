@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.34.0](https://github.com/yamshy/portfolio/compare/v4.33.1...v4.34.0) (2025-10-03)
+
+### Features
+
+* refresh experience section content ([#251](https://github.com/yamshy/portfolio/issues/251)) ([343d98e](https://github.com/yamshy/portfolio/commit/343d98e2eb56f379510fdd31f2aa5efe639ea919))
+
 ## [4.33.1](https://github.com/yamshy/portfolio/compare/v4.33.0...v4.33.1) (2025-10-01)
 
 ### Bug Fixes
