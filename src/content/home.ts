@@ -39,7 +39,7 @@ export const heroStats: HeroStat[] = [
   },
   {
     label: 'Scale proven in production',
-    value: '10,000+ samples',
+    value: '1M+ samples',
     context:
       'Sequencing and analysis workloads orchestrated end-to-end without sacrificing reproducibility or compliance',
   },
@@ -139,7 +139,7 @@ export const experiences: Experience[] = [
     focus:
       'Led molecular biology operations while building computational infrastructure and web-based scientific workflow tools for high-throughput research.',
     impact: [
-      'Built automated pipelines processing 10,000+ samples with a 50% reduction in turnaround time',
+      'Built automated pipelines processing 1M+ samples with a 50% reduction in turnaround time',
       'Deployed NGS workflows on AWS Batch via Nextflow Tower, managing TB-scale genomic data',
       'Developed web-based scientific applications using SvelteKit and FastAPI, creating custom analysis tools and interactive dashboards that streamlined biological data workflows',
       'Operated and maintained Illumina NGS platforms (iSeq100, NextSeq500), managing complete workflows from library preparation through data analysis',
