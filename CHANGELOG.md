@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.0](https://github.com/yamshy/portfolio/compare/v4.36.0...v4.37.0) (2025-10-04)
+
+### Features
+
+* refine translational collaboration content ([#259](https://github.com/yamshy/portfolio/issues/259)) ([68da6b9](https://github.com/yamshy/portfolio/commit/68da6b97399745b66721b0990c11eee9022e44a9))
+
 ## [4.36.0](https://github.com/yamshy/portfolio/compare/v4.35.0...v4.36.0) (2025-10-04)
 
 ### Features
