@@ -3,15 +3,20 @@ import MobileNavInitializer from '../scripts/MobileNavInitializer.svelte';
 import ThemeToggle from '../ui/ThemeToggle.svelte';
 
 const navLinks = [
-  { label: 'Overview', href: '#hero' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Overview', href: '#hero', id: 'overview' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 ---
 
-<header class="site-header" data-reveal data-js="site-header">
+<header
+  class="site-header"
+  data-reveal
+  data-js="site-header"
+  data-testid="site-header"
+>
   <div class="site-header__inner u-container">
     <button
       class="site-nav__toggle"
@@ -21,6 +26,7 @@ const navLinks = [
       aria-label="Open navigation menu"
       data-js="nav-toggle"
       data-state="closed"
+      data-testid="primary-nav-toggle"
     >
       <span class="site-nav__toggle-icon" aria-hidden="true">
         <span class="site-nav__toggle-line"></span>
@@ -36,10 +42,15 @@ const navLinks = [
       aria-label="Primary navigation"
       data-js="primary-navigation"
       data-state="open"
+      data-testid="primary-navigation"
     >
       {
         navLinks.map((link) => (
-          <a class="site-nav__link" href={link.href}>
+          <a
+            class="site-nav__link"
+            href={link.href}
+            data-testid={`primary-nav-link-${link.id}`}
+          >
             {link.label}
           </a>
         ))

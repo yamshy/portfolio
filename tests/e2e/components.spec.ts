@@ -9,13 +9,13 @@ test.describe('Home page experience', () => {
   test('renders hero content and site navigation', async ({ page }) => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
-    const header = page.locator('.site-header');
+    const header = page.getByTestId('site-header');
+    await expect(header).toBeAttached();
+    await expect(header).toHaveClass(/site-header/);
     await expect(header).toHaveAttribute('data-js', 'site-header');
 
-    const navigation = page.getByRole('navigation', {
-      name: 'Primary navigation',
-    });
-    const navToggle = page.locator('[data-js="nav-toggle"]');
+    const navigation = page.getByTestId('primary-navigation');
+    const navToggle = page.getByTestId('primary-nav-toggle');
 
     if (await navToggle.isVisible()) {
       await navToggle.click();
@@ -24,25 +24,25 @@ test.describe('Home page experience', () => {
       await expect(navigation).toBeVisible();
     }
 
-    const navLabels = [
-      'Overview',
-      'Experience',
-      'Projects',
-      'Skills',
-      'Contact',
+    const navLinkIds = [
+      'overview',
+      'experience',
+      'projects',
+      'skills',
+      'contact',
     ];
 
-    for (const label of navLabels) {
-      await expect(navigation.getByRole('link', { name: label })).toBeVisible();
+    for (const id of navLinkIds) {
+      await expect(page.getByTestId(`primary-nav-link-${id}`)).toBeVisible();
     }
 
-    await expect(page.locator('.hero__title')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Collaborate' })).toBeVisible();
-    const seeMoreLink = page.getByRole('link', { name: 'See more' });
+    await expect(page.getByTestId('hero-title')).toBeVisible();
+    await expect(page.getByTestId('hero-cta')).toBeVisible();
+    const seeMoreLink = page.getByTestId('hero-see-more');
     await expect(seeMoreLink).toBeVisible();
     await expect(seeMoreLink).toHaveAttribute('href', '#experience');
 
-    await expect(page.locator('.hero__metric')).toHaveCount(3);
+    await expect(page.getByTestId('hero-metric')).toHaveCount(3);
   });
 
   test('supports toggling primary navigation on small screens', async ({
@@ -51,13 +51,11 @@ test.describe('Home page experience', () => {
     await page.setViewportSize({ width: 480, height: 900 });
     await page.reload();
 
-    const toggle = page.getByRole('button', { name: /navigation menu/i });
+    const toggle = page.getByTestId('primary-nav-toggle');
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 
-    const navigation = page.getByRole('navigation', {
-      name: 'Primary navigation',
-    });
+    const navigation = page.getByTestId('primary-navigation');
     await expect(navigation).not.toBeVisible();
 
     await toggle.click();
@@ -65,21 +63,21 @@ test.describe('Home page experience', () => {
     await expect(toggle).toHaveAccessibleName(/close navigation menu/i);
     await expect(navigation).toBeVisible();
 
-    await page.getByRole('link', { name: 'Projects' }).click();
+    await page.getByTestId('primary-nav-link-projects').click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(toggle).toHaveAccessibleName(/open navigation menu/i);
     await expect(navigation).not.toBeVisible();
   });
 
   test('displays featured projects', async ({ page }) => {
-    const projectsSection = page.locator('#projects');
+    const projectsSection = page.getByTestId('projects-section');
     await projectsSection.scrollIntoViewIfNeeded();
     await expect(projectsSection).toBeVisible();
 
-    await expect(page.locator('.projects__grid .project-card')).toHaveCount(3);
-    const sourceLinks = projectsSection.getByRole('link', {
-      name: 'Source code →',
-    });
+    await expect(
+      page.getByTestId('projects-grid').getByTestId('project-card'),
+    ).toHaveCount(3);
+    const sourceLinks = page.getByTestId('project-source-link');
     await expect(sourceLinks).toHaveCount(3);
     for (const index of [0, 1, 2]) {
       await expect(sourceLinks.nth(index)).toBeVisible();
@@ -89,37 +87,28 @@ test.describe('Home page experience', () => {
   test('highlights skills, experience, and contact sections', async ({
     page,
   }) => {
-    const skills = page.locator('#skills');
+    const skills = page.getByTestId('skills-section');
     await skills.scrollIntoViewIfNeeded();
     await expect(skills).toBeVisible();
-    await expect(
-      page.getByRole('heading', { name: /Capabilities organised/i }),
-    ).toBeVisible();
+    await expect(page.getByTestId('skills-header')).toBeVisible();
 
-    const experience = page.locator('#experience');
+    const experience = page.getByTestId('experience-section');
     await experience.scrollIntoViewIfNeeded();
     await expect(experience).toBeVisible();
-    await expect(
-      page.getByRole('heading', {
-        name: /Career progression from research to technical operations leadership/i,
-      }),
-    ).toBeVisible();
+    await expect(page.getByTestId('experience-header')).toBeVisible();
 
-    const contact = page.locator('#contact');
+    const contact = page.getByTestId('contact-section');
     await contact.scrollIntoViewIfNeeded();
     await expect(contact).toBeVisible();
-    await expect(
-      page.getByRole('heading', {
-        name: /Scale your genomics infrastructure without losing scientific rigor/i,
-      }),
-    ).toBeVisible();
+    await expect(page.getByTestId('contact-heading')).toBeVisible();
+    await expect(page.getByTestId('contact-card')).toBeVisible();
   });
 
   test('persists theme preference across reloads', async ({ page }) => {
     const html = page.locator('html');
     const initialTheme = (await html.getAttribute('data-theme')) ?? 'light';
 
-    const navToggle = page.locator('[data-js="nav-toggle"]');
+    const navToggle = page.getByTestId('primary-nav-toggle');
     if (await navToggle.isVisible()) {
       await navToggle.click();
     }

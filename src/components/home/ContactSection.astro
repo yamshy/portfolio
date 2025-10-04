@@ -8,11 +8,16 @@ interface Props {
 const { channels } = Astro.props as Props;
 ---
 
-<section class="section section--contact" id="contact" data-reveal>
-  <div class="u-container contact">
-    <div class="contact__intro">
+<section
+  class="section section--contact"
+  id="contact"
+  data-reveal
+  data-testid="contact-section"
+>
+  <div class="u-container contact" data-testid="contact-layout">
+    <div class="contact__intro" data-testid="contact-intro">
       <p class="u-title-overline">Contact</p>
-      <h2>
+      <h2 data-testid="contact-heading">
         Scale your genomics infrastructure without losing scientific rigor
       </h2>
       <p>
@@ -52,9 +57,15 @@ const { channels } = Astro.props as Props;
         </ul>
       </div>
     </div>
-    <aside class="contact__panel" aria-labelledby="contact-panel-title">
-      <div class="contact-card">
-        <h3 id="contact-panel-title">Start a conversation</h3>
+    <aside
+      class="contact__panel"
+      aria-labelledby="contact-panel-title"
+      data-testid="contact-panel"
+    >
+      <div class="contact-card" data-testid="contact-card">
+        <h3 id="contact-panel-title" data-testid="contact-panel-heading">
+          Start a conversation
+        </h3>
         <p class="contact-card__intro">
           Share whether you're scaling NGS workflows, modernizing lab
           infrastructure, or automating data pipelines and I'll reply with

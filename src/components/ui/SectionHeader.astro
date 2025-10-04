@@ -3,12 +3,13 @@ interface Props {
   overline: string;
   title: string;
   description?: string;
+  testId?: string;
 }
 
-const { overline, title, description } = Astro.props as Props;
+const { overline, title, description, testId } = Astro.props as Props;
 ---
 
-<div class="u-container section__heading">
+<div class="u-container section__heading" data-testid={testId}>
   <div>
     <p class="u-title-overline">{overline}</p>
     <h2>{title}</h2>
