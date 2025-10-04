@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.36.0](https://github.com/yamshy/portfolio/compare/v4.35.0...v4.36.0) (2025-10-04)
+
+### Features
+
+* update infrastructure engineering narrative ([#257](https://github.com/yamshy/portfolio/issues/257)) ([d2bee7c](https://github.com/yamshy/portfolio/commit/d2bee7c9b19ee72e9876665f32c74ba75a8a98c0))
+
 ## [4.35.0](https://github.com/yamshy/portfolio/compare/v4.34.1...v4.35.0) (2025-10-04)
 
 ### Features
