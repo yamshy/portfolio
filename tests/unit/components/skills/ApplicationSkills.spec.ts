@@ -35,14 +35,14 @@ describe('ApplicationSkills', () => {
     expect(scientificButton).not.toHaveClass('selected');
     expect(
       await screen.findByText(
-        /Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient/i,
+        /Hybrid infrastructure spanning Azure Container Apps, on-premises Proxmox virtualization, and Terraform-provisioned cloud resources keeps sequencing pipelines resilient while GitOps automation sustains compliance and eliminates manual toil/i,
         undefined,
         { timeout: 5000 },
       ),
     ).toBeInTheDocument();
     expect(
       await screen.findByText(
-        /Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization/i,
+        /Provisioned infrastructure as code with Terraform across Azure \(Container Apps, databases, networking\) and on-premises Proxmox virtualization, maintaining GitOps workflows for reproducible deployments/i,
         undefined,
         { timeout: 5000 },
       ),
