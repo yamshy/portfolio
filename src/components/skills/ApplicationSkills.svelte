@@ -36,11 +36,11 @@
       id: 'infrastructure',
       title: 'Infrastructure Engineering',
       narrative:
-        'Hybrid infrastructure spanning Azure Container Apps, on-prem Proxmox virtualization, and privately managed Kubernetes automation keeps sequencing pipelines resilient while GitOps automation sustains compliance and slashes manual effort.',
+        'Hybrid infrastructure spanning Azure Container Apps, on-premises Proxmox virtualization, and Terraform-provisioned cloud resources keeps sequencing pipelines resilient while GitOps automation sustains compliance and eliminates manual toil.',
       highlights: [
-        'Managed hybrid infrastructure spanning Azure Container Apps and on-premises Proxmox virtualization',
-        'Built CI/CD pipelines with GitHub Actions for containerized deployments across dev/staging/prod',
-        'Currently running production Kubernetes homelab with Flux GitOps, Infisical secrets, and MetalLB load balancing',
+        'Provisioned infrastructure as code with Terraform across Azure (Container Apps, databases, networking) and on-premises Proxmox virtualization, maintaining GitOps workflows for reproducible deployments',
+        'Built CI/CD pipelines with GitHub Actions for automated testing, containerized builds, and multi-environment deployments across development, staging, and production',
+        'Deployed production Kubernetes clusters and Azure Container Apps for scientific workloads, implementing automated scaling, container orchestration, and microservices architecture for genomic analysis pipelines',
         'Reduced manual operations by 50% through Python automation and systematic workflow optimization',
       ],
       stack: [
@@ -54,7 +54,8 @@
         },
         {
           label: 'INFRASTRUCTURE',
-          detail: 'Linux administration, Proxmox hypervisor, Omada networking, backup systems',
+          detail:
+            'Terraform, Kubernetes, Linux administration, Proxmox hypervisor, Azure networking (VNets, NSGs), GitOps workflows, infrastructure as code',
         },
       ],
     },
