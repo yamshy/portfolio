@@ -62,14 +62,17 @@
       id: 'data-engineering',
       title: 'Data Engineering',
       narrative:
-        'Turning laboratory instrumentation output into automated, queryable data pipelines that feed analytical dashboards and decision support tools for research teams.',
+        'Transforming raw instrumentation output into production data pipelines that power analytical dashboards and automated decision support for research teams.',
       highlights: [
-        'Built ETL pipelines integrating SciNote LIMS data with automated processing workflows via REST APIs',
-        'Implemented automated data ingestion from Illumina sequencers (iSeq100, NextSeq500) to cloud storage and analysis',
-        'Developed Python frameworks processing 384-well plate assays into validated PostgreSQL databases with automated reporting',
+        'Built ETL pipelines integrating SciNote LIMS data with automated processing workflows via REST APIs, eliminating manual data entry for 100+ weekly experiments',
+        'Implemented automated data ingestion from Illumina sequencers (iSeq100, NextSeq500) to Azure cloud storage with real-time processing triggers and quality validation',
+        'Developed Python frameworks processing 384-well plate assays into validated PostgreSQL databases with automated reporting, reducing analysis time from hours to minutes',
       ],
       stack: [
-        { label: 'Pipelines', detail: 'Python ETL, Nextflow, REST API integration, automated validation' },
+        {
+          label: 'Pipelines',
+          detail: 'Python ETL, Nextflow workflows, REST API integration, automated validation, event-driven processing',
+        },
         { label: 'Data Stores', detail: 'PostgreSQL, Azure databases, Excel automation, structured experimental data' },
         { label: 'Analytics', detail: 'Power BI dashboards, Plotly visualizations, automated PDF/Excel reports' },
       ],
