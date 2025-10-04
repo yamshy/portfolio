@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.3](https://github.com/yamshy/portfolio/compare/v4.37.2...v4.37.3) (2025-10-04)
+
+### Bug Fixes
+
+* update hero stat sample count ([#262](https://github.com/yamshy/portfolio/issues/262)) ([175b6c4](https://github.com/yamshy/portfolio/commit/175b6c483e3bd77a41b64e55b6806c4b64dcb15c))
+
 ## [4.37.2](https://github.com/yamshy/portfolio/compare/v4.37.1...v4.37.2) (2025-10-04)
 
 ### Bug Fixes
