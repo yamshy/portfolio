@@ -39,7 +39,7 @@ export const heroStats: HeroStat[] = [
   },
   {
     label: 'Scale proven in production',
-    value: 'High-throughput runs',
+    value: '1M+ samples',
     context:
       'Sequencing and analysis workloads orchestrated end-to-end without sacrificing reproducibility or compliance',
   },
