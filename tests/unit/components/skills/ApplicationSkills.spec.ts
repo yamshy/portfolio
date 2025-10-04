@@ -14,12 +14,12 @@ describe('ApplicationSkills', () => {
     expect(scientificButton).toHaveClass('selected');
     expect(
       screen.getByText(
-        /High-performance compute pipelines translating raw sequencer output into audit-ready biology/i,
+        /Production-grade compute pipelines transforming raw sequencer output into analysis-ready biology/i,
       ),
     ).toBeInTheDocument();
     expect(
       await screen.findByText(
-        /Orchestrated RNA\/DNA-seq and variant calling through Nextflow Tower on AWS Batch/i,
+        /Orchestrated RNA\/DNA-seq and variant calling workflows through Nextflow Tower on AWS Batch/i,
         undefined,
         { timeout: 5000 },
       ),
