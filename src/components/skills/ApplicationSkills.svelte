@@ -14,21 +14,21 @@
       id: 'scientific-computing',
       title: 'Scientific Computing',
       narrative:
-        'High-performance compute pipelines translating raw sequencer output into audit-ready biology. Automations keep terabyte-scale studies reproducible while matching the tempo of translational teams.',
+        'Production-grade compute pipelines transforming raw sequencer output into analysis-ready biology. Automated workflows keep terabyte-scale studies reproducible while matching the pace of translational research teams.',
       highlights: [
-        'Orchestrated RNA/DNA-seq and variant calling through Nextflow Tower on AWS Batch from Illumina ingest to biological readouts',
-        'Automated IC50, dose-response, and kinase inhibition analyses with Python/R pipelines enforcing statistical validation gates',
-        'Trained scikit-learn models across experimental datasets to classify responder phenotypes and predict compound efficacy',
+        'Orchestrated RNA/DNA-seq and variant calling workflows through Nextflow Tower on AWS Batch, processing high-throughput sequences from Illumina instruments to validated biological insights',
+        'Automated IC50, dose-response, and kinase inhibition analyses with Python/R pipelines featuring built-in statistical validation and quality control gates',
+        'Trained scikit-learn models on experimental datasets to classify cellular phenotypes and predict compound efficacy, integrating ML predictions into research decision workflows',
       ],
       stack: [
         { label: 'Core', detail: 'Python, R, SQL, Nextflow, Bash, statistical modeling' },
         {
           label: 'HPC & Pipelines',
-          detail: 'AWS Batch, Nextflow Tower, nf-core, Galaxy, Conda environments, Docker',
+          detail: 'AWS Batch, Nextflow Tower, nf-core workflows, Galaxy, Conda environments, Docker containerization, cloud-native computing',
         },
         {
           label: 'Analysis & Viz',
-          detail: 'GraphPad Prism, JMP, Plotly, Power BI, automated report generation, fragment analysis',
+          detail: 'GraphPad Prism, Python (pandas/scikit-learn), R, Plotly, Power BI, automated reporting, interactive dashboards',
         },
       ],
     },
