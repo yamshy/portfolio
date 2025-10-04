@@ -94,7 +94,10 @@
           detail:
             'Requirements gathering, user training, technical documentation, cross-functional coordination, iterative feedback loops',
         },
-        { label: 'Quality Standards', detail: 'GLP practices, CLIA/CAP familiarity, validated workflows, reproducible analysis' },
+        {
+          label: 'Quality Standards',
+          detail: 'Validated workflows, audit-ready documentation, reproducible analysis',
+        },
         { label: 'Enablement', detail: 'Technical mentoring, workflow automation, data visualization, client-focused tool development' },
       ],
     },
