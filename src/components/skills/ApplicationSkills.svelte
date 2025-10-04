@@ -82,14 +82,18 @@
       id: 'collaboration',
       title: 'Translational Collaboration',
       narrative:
-        'Bridging laboratory scientists and computational teams. Every pipeline, analysis tool, and automated workflow validated with end users to ensure practical adoption and reliable results.',
+        'Bridging wet-lab scientists and computational teams. Every pipeline, tool, and workflow co-developed with end users to ensure practical adoption and reliable results.',
       highlights: [
-        'Led molecular biology technical operations, mentoring 4+ graduate scientists in NGS and laboratory automation',
-        'Translated client research requirements into automated analysis pipelines → 50% reduction in turnaround time',
-        'Built interactive dashboards and reports that made complex genomic data accessible to non-computational scientists',
+        'Led molecular biology operations and trained 4+ graduate scientists in NGS workflows, laboratory automation, and computational analysis—building cross-functional expertise across the team',
+        'Translated scientist research requirements into production analysis pipelines, achieving 50% reduction in turnaround time while maintaining scientific rigor and reproducibility',
+        'Built interactive dashboards and automated reports that transformed complex genomic data into actionable insights for non-computational scientists, accelerating research decisions',
       ],
       stack: [
-        { label: 'Practices', detail: 'Requirements gathering, user training, technical documentation, cross-functional coordination' },
+        {
+          label: 'Practices',
+          detail:
+            'Requirements gathering, user training, technical documentation, cross-functional coordination, iterative feedback loops',
+        },
         { label: 'Quality Standards', detail: 'GLP practices, CLIA/CAP familiarity, validated workflows, reproducible analysis' },
         { label: 'Enablement', detail: 'Technical mentoring, workflow automation, data visualization, client-focused tool development' },
       ],
