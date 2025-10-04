@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.1](https://github.com/yamshy/portfolio/compare/v4.37.0...v4.37.1) (2025-10-04)
+
+### Bug Fixes
+
+* streamline contact focus areas ([#260](https://github.com/yamshy/portfolio/issues/260)) ([8fc27f7](https://github.com/yamshy/portfolio/commit/8fc27f7f1183180d2d1dbac765f175aabb5000a8))
+
 ## [4.37.0](https://github.com/yamshy/portfolio/compare/v4.36.0...v4.37.0) (2025-10-04)
 
 ### Features
