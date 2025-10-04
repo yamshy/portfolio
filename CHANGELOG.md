@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.4](https://github.com/yamshy/portfolio/compare/v4.37.3...v4.37.4) (2025-10-04)
+
+### Bug Fixes
+
+* update quality standards summary ([#264](https://github.com/yamshy/portfolio/issues/264)) ([12aaedd](https://github.com/yamshy/portfolio/commit/12aaedddc67c39ab09600a8860d72dc25b4b066e))
+
 ## [4.37.3](https://github.com/yamshy/portfolio/compare/v4.37.2...v4.37.3) (2025-10-04)
 
 ### Bug Fixes
