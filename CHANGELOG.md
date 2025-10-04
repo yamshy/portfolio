@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.35.0](https://github.com/yamshy/portfolio/compare/v4.34.1...v4.35.0) (2025-10-04)
+
+### Features
+
+* highlight data engineering impact ([#258](https://github.com/yamshy/portfolio/issues/258)) ([3b75191](https://github.com/yamshy/portfolio/commit/3b75191a392aa18968e1b24b0c7b5a3dff821da5))
+
 ## [4.34.1](https://github.com/yamshy/portfolio/compare/v4.34.0...v4.34.1) (2025-10-04)
 
 ### Bug Fixes
