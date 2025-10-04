@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.34.1](https://github.com/yamshy/portfolio/compare/v4.34.0...v4.34.1) (2025-10-04)
+
+### Bug Fixes
+
+* shorten scale metric copy ([#254](https://github.com/yamshy/portfolio/issues/254)) ([1754a1c](https://github.com/yamshy/portfolio/commit/1754a1ca57efdce6c28a1d150e7cc4fbeb0ff016))
+
 ## [4.34.0](https://github.com/yamshy/portfolio/compare/v4.33.1...v4.34.0) (2025-10-03)
 
 ### Features
