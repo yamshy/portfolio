@@ -139,12 +139,12 @@ export const experiences: Experience[] = [
     focus:
       'Led molecular biology operations while building computational infrastructure and web-based scientific workflow tools for high-throughput research.',
     impact: [
-      'Built automated pipelines processing 1M+ samples with a 50% reduction in turnaround time',
-      'Deployed NGS workflows on AWS Batch via Nextflow Tower, managing TB-scale genomic data',
-      'Developed web-based scientific applications using SvelteKit and FastAPI, creating custom analysis tools and interactive dashboards that streamlined biological data workflows',
+      'Built automated pipelines processing 1,000,000+ genomic sequences with 50% reduction in turnaround time, orchestrating workflows across cloud infrastructure',
+      'Deployed production NGS workflows on Kubernetes and AWS Batch via Nextflow Tower, managing TB-scale genomic data with Terraform-provisioned infrastructure',
+      'Developed web-based scientific applications using SvelteKit and FastAPI with containerized deployments, creating custom analysis tools and interactive dashboards that streamlined biological data workflows',
       'Operated and maintained Illumina NGS platforms (iSeq100, NextSeq500), managing complete workflows from library preparation through data analysis',
       'Mentored 4+ scientists in laboratory automation and computational workflows',
-      'Implemented LIMS integrations syncing instrumentation data with analytics environments',
+      'Implemented LIMS integrations and ETL pipelines syncing instrumentation data with cloud analytics environments',
     ],
   },
   {
