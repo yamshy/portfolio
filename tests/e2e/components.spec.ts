@@ -110,7 +110,7 @@ test.describe('Home page experience', () => {
     await expect(contact).toBeVisible();
     await expect(
       page.getByRole('heading', {
-        name: /Scale your genomics infrastructure with scientific context/i,
+        name: /Scale your genomics infrastructure without losing scientific rigor/i,
       }),
     ).toBeVisible();
   });
