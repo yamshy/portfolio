@@ -9,11 +9,17 @@ interface Props {
 const { experiences } = Astro.props as Props;
 ---
 
-<section class="section" id="experience" data-reveal>
+<section
+  class="section"
+  id="experience"
+  data-reveal
+  data-testid="experience-section"
+>
   <SectionHeader
     overline="Experience"
     title="Career progression from research to technical operations leadership"
     description="Roles span academic research, biotechnology, and healthcare IT. Each position strengthened the bridge between scientific discovery and scalable technical implementation."
+    testId="experience-header"
   />
   <div class="u-container experience">
     {

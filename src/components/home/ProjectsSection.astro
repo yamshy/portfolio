@@ -10,14 +10,20 @@ interface Props {
 const { projects } = Astro.props as Props;
 ---
 
-<section class="section projects" id="projects" data-reveal>
+<section
+  class="section projects"
+  id="projects"
+  data-reveal
+  data-testid="projects-section"
+>
   <SectionHeader
     overline="Featured Projects"
     title="Hybrid services connecting lab work to cloud scale"
     description="Core infrastructure services keep my platform running: the GitOps Kubernetes platform, this portfolio, and the immutable operating system that keeps my personal desktop reproducible."
+    testId="projects-header"
   />
 
-  <div class="u-container projects__grid">
+  <div class="u-container projects__grid" data-testid="projects-grid">
     {projects.map((project) => <ProjectCard project={project} />)}
   </div>
 </section>

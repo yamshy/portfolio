@@ -3,11 +3,12 @@ import ApplicationSkills from '../skills/ApplicationSkills.svelte';
 import SectionHeader from '../ui/SectionHeader.astro';
 ---
 
-<section class="section" id="skills" data-reveal>
+<section class="section" id="skills" data-reveal data-testid="skills-section">
   <SectionHeader
     overline="Skill Architecture"
     title="Capabilities organised by scientific outcome"
     description="Choose a lens—scientific computing, infrastructure, data, collaboration—to see how tooling decisions connect directly to scientific velocity and compliance."
+    testId="skills-header"
   />
   <div class="u-container">
     <ApplicationSkills client:visible />

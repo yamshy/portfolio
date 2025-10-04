@@ -8,11 +8,11 @@ interface Props {
 const { stats } = Astro.props as Props;
 ---
 
-<section class="hero" id="hero" data-reveal>
-  <div class="u-container hero__inner">
-    <div class="hero__copy">
-      <p class="hero__name">Shyam Ajudia</p>
-      <h1 class="hero__title">
+<section class="hero" id="hero" data-reveal data-testid="hero-section">
+  <div class="u-container hero__inner" data-testid="hero-layout">
+    <div class="hero__copy" data-testid="hero-copy">
+      <p class="hero__name" data-testid="hero-name">Shyam Ajudia</p>
+      <h1 class="hero__title" data-testid="hero-title">
         From lab bench
         <span class="hero__title--accent"
           >to production-grade data platforms</span
@@ -28,9 +28,11 @@ const { stats } = Astro.props as Props;
         My wet-lab background means I don't just deploy infrastructure—I understand
         the experiments running on it.
       </p>
-      <div class="hero__actions">
-        <a class="hero__cta" href="#contact">Collaborate</a>
-        <a class="hero__scroll" href="#experience">
+      <div class="hero__actions" data-testid="hero-actions">
+        <a class="hero__cta" href="#contact" data-testid="hero-cta"
+          >Collaborate</a
+        >
+        <a class="hero__scroll" href="#experience" data-testid="hero-see-more">
           <span>See more</span>
           <svg aria-hidden="true" viewBox="0 0 24 24" role="presentation">
             <path
@@ -51,10 +53,10 @@ const { stats } = Astro.props as Props;
         </a>
       </div>
     </div>
-    <div class="hero__metrics anim-stagger">
+    <div class="hero__metrics anim-stagger" data-testid="hero-metrics">
       {
         stats.map((stat) => (
-          <article class="hero__metric">
+          <article class="hero__metric" data-testid="hero-metric">
             <h2>{stat.value}</h2>
             <p>{stat.label}</p>
             <span>{stat.context}</span>
