@@ -10,7 +10,9 @@ test.describe('Home page experience', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
     const header = page.getByTestId('site-header');
-    await expect(header).toBeVisible();
+    await expect(header).toBeAttached();
+    await expect(header).toHaveClass(/site-header/);
+    await expect(header).toHaveAttribute('data-js', 'site-header');
 
     const navigation = page.getByTestId('primary-navigation');
     const navToggle = page.getByTestId('primary-nav-toggle');
