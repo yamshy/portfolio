@@ -84,7 +84,7 @@
       narrative:
         'Bridging wet-lab scientists and computational teams. Every pipeline, tool, and workflow co-developed with end users to ensure practical adoption and reliable results.',
       highlights: [
-        'Led molecular biology operations and trained 4+ graduate scientists in NGS workflows, laboratory automation, and computational analysis—building cross-functional expertise across the team',
+        'Led molecular biology operations and trained 4+ research associates in NGS, automation, and molecular biology—building cross-functional expertise across the team',
         'Translated scientist research requirements into production analysis pipelines, achieving 50% reduction in turnaround time while maintaining scientific rigor and reproducibility',
         'Built interactive dashboards and automated reports that transformed complex genomic data into actionable insights for non-computational scientists, accelerating research decisions',
       ],

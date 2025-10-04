@@ -143,7 +143,7 @@ export const experiences: Experience[] = [
       'Deployed production NGS workflows on Kubernetes and AWS Batch via Nextflow Tower, managing TB-scale genomic data with Terraform-provisioned infrastructure',
       'Developed web-based scientific applications using SvelteKit and FastAPI with containerized deployments, creating custom analysis tools and interactive dashboards that streamlined biological data workflows',
       'Operated and maintained Illumina NGS platforms (iSeq100, NextSeq500), managing complete workflows from library preparation through data analysis',
-      'Mentored 4+ scientists in laboratory automation and computational workflows',
+      'Mentored 4+ research associates across NGS, automation, and molecular biology workflows',
       'Implemented LIMS integrations and ETL pipelines syncing instrumentation data with cloud analytics environments',
     ],
   },
