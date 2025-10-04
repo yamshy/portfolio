@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.2](https://github.com/yamshy/portfolio/compare/v4.37.1...v4.37.2) (2025-10-04)
+
+### Bug Fixes
+
+* adjust scientific computing highlight ([#261](https://github.com/yamshy/portfolio/issues/261)) ([2479807](https://github.com/yamshy/portfolio/commit/24798071f1c75b744b09f73652b951c9a66e25b3))
+
 ## [4.37.1](https://github.com/yamshy/portfolio/compare/v4.37.0...v4.37.1) (2025-10-04)
 
 ### Bug Fixes
