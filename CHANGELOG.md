@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.37.5](https://github.com/yamshy/portfolio/compare/v4.37.4...v4.37.5) (2025-10-06)
+
+### Bug Fixes
+
+* add legacy media query listener fallback ([#273](https://github.com/yamshy/portfolio/issues/273)) ([dbc2398](https://github.com/yamshy/portfolio/commit/dbc239824285f64d031d2e28deadaf9f3d3790bd))
+
 ## [4.37.4](https://github.com/yamshy/portfolio/compare/v4.37.3...v4.37.4) (2025-10-04)
 
 ### Bug Fixes
