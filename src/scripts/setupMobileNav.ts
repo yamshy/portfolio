@@ -254,9 +254,45 @@ export const setupMobileNav = (): Cleanup | undefined => {
     link.addEventListener('click', closeNav);
   });
 
-  if (desktopQuery && typeof desktopQuery.addEventListener === 'function') {
-    desktopQuery.addEventListener('change', handleDesktopChange);
-  }
+  const registerDesktopQueryListener = (): Cleanup | undefined => {
+    if (!desktopQuery) {
+      return undefined;
+    }
+
+    if (
+      typeof desktopQuery.addEventListener === 'function' &&
+      typeof desktopQuery.removeEventListener === 'function'
+    ) {
+      desktopQuery.addEventListener('change', handleDesktopChange);
+
+      return () => {
+        desktopQuery.removeEventListener('change', handleDesktopChange);
+      };
+    }
+
+    const legacyDesktopQuery = desktopQuery as MediaQueryList;
+
+    const addLegacyListener = Reflect.get(legacyDesktopQuery, 'addListener');
+    const removeLegacyListener = Reflect.get(
+      legacyDesktopQuery,
+      'removeListener',
+    );
+
+    if (
+      typeof addLegacyListener === 'function' &&
+      typeof removeLegacyListener === 'function'
+    ) {
+      addLegacyListener.call(legacyDesktopQuery, handleDesktopChange);
+
+      return () => {
+        removeLegacyListener.call(legacyDesktopQuery, handleDesktopChange);
+      };
+    }
+
+    return undefined;
+  };
+
+  const desktopQueryCleanup = registerDesktopQueryListener();
 
   updateNavState(isOpen);
 
@@ -275,12 +311,7 @@ export const setupMobileNav = (): Cleanup | undefined => {
     linkElements.forEach((link) => {
       link.removeEventListener('click', closeNav);
     });
-    if (
-      desktopQuery &&
-      typeof desktopQuery.removeEventListener === 'function'
-    ) {
-      desktopQuery.removeEventListener('change', handleDesktopChange);
-    }
+    desktopQueryCleanup?.();
     if (themeToggle && desktopThemeTarget) {
       desktopThemeTarget.appendChild(themeToggle);
     }

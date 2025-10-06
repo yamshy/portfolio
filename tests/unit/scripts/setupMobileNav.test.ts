@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { setupMobileNav } from '../../../src/scripts/setupMobileNav';
 
@@ -136,5 +136,102 @@ describe('setupMobileNav', () => {
     expect(header.dataset.mobileNavReady).toBe('true');
     expect(mobileTarget?.contains(themeToggle)).toBe(true);
     expect(nav?.dataset.state).toBe('closed');
+  });
+
+  it('uses legacy media query listeners when addEventListener is unavailable', () => {
+    type MutableWindow = typeof window & {
+      matchMedia?: typeof window.matchMedia;
+    };
+
+    const mutableWindow = window as MutableWindow;
+    const originalMatchMedia = mutableWindow.matchMedia;
+
+    let registeredListener: Function | undefined;
+
+    const removeListener = vi.fn((listener: Function) => {
+      if (registeredListener === listener) {
+        registeredListener = undefined;
+      }
+    });
+
+    let currentMatches = false;
+
+    const setMatches = (value: boolean) => {
+      currentMatches = value;
+    };
+
+    const mediaQuery = {
+      get matches() {
+        return currentMatches;
+      },
+      media: '(min-width: 48rem)',
+      onchange: null,
+      addListener: vi.fn((listener: Function) => {
+        registeredListener = listener;
+      }),
+      removeListener,
+      dispatchEvent: vi.fn(),
+      addEventListener: undefined,
+      removeEventListener: undefined,
+    } as unknown as MediaQueryList;
+
+    mutableWindow.matchMedia = vi
+      .fn<typeof window.matchMedia>()
+      .mockReturnValue(mediaQuery);
+
+    const getComputedStyleSpy = vi
+      .spyOn(window, 'getComputedStyle')
+      .mockImplementation(() => {
+        const display = currentMatches ? 'none' : 'block';
+
+        return {
+          display,
+        } as CSSStyleDeclaration;
+      });
+
+    try {
+      renderHeader();
+      cleanup = setupMobileNav();
+
+      expect(mediaQuery.addListener).toHaveBeenCalledTimes(1);
+      expect(registeredListener).toBeTypeOf('function');
+
+      const nav = document.querySelector<HTMLElement>(
+        '[data-js="primary-navigation"]',
+      );
+      const toggle = document.querySelector(
+        '[data-js="nav-toggle"]',
+      ) as HTMLButtonElement;
+
+      toggle.click();
+      expect(nav?.dataset.state).toBe('open');
+
+      const listenerRef = registeredListener as Function;
+
+      const triggerChange = (matches: boolean) => {
+        setMatches(matches);
+        listenerRef.call(mediaQuery, { matches } as MediaQueryListEvent);
+      };
+
+      triggerChange(true);
+
+      expect(nav?.dataset.state).toBe('open');
+      expect(toggle.dataset.state).toBe('closed');
+      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+      triggerChange(false);
+
+      expect(nav?.dataset.state).toBe('closed');
+      expect(toggle.dataset.state).toBe('closed');
+      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+      cleanup?.();
+      cleanup = undefined;
+
+      expect(removeListener).toHaveBeenCalledWith(listenerRef);
+    } finally {
+      getComputedStyleSpy.mockRestore();
+      mutableWindow.matchMedia = originalMatchMedia;
+    }
   });
 });
