@@ -59,7 +59,7 @@ export const projects: Project[] = [
     problem:
       'Needed production-grade infrastructure at home capable of sustaining public workloads without managed cloud safety nets.',
     solution:
-      'Provisioned bare-metal cluster nodes, wired Flux CD pipelines, centralised secrets with Infisical, and automated lifecycle work via Renovate.',
+      'Provisioned bare-metal cluster nodes, wired Flux CD pipelines, centralized secrets with Infisical, and automated lifecycle work via Renovate.',
     stack: [
       'Kubernetes',
       'Flux CD',
