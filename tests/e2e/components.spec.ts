@@ -69,6 +69,29 @@ test.describe('Home page experience', () => {
     await expect(navigation).not.toBeVisible();
   });
 
+  test('closes primary navigation when tapping outside on small screens', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 480, height: 900 });
+    await page.reload();
+
+    const toggle = page.getByTestId('primary-nav-toggle');
+    const navigation = page.getByTestId('primary-navigation');
+    const pageMain = page.getByTestId('page-main');
+
+    await expect(toggle).toBeVisible();
+    await expect(navigation).not.toBeVisible();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(navigation).toBeVisible();
+
+    await pageMain.click({ position: { x: 10, y: 10 } });
+
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(navigation).toBeHidden();
+  });
+
   test('displays featured projects', async ({ page }) => {
     const projectsSection = page.getByTestId('projects-section');
     await projectsSection.scrollIntoViewIfNeeded();
