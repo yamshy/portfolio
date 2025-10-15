@@ -107,7 +107,7 @@ importers:
         version: 16.4.0
       happy-dom:
         specifier: ^20.0.0
-        version: 20.0.0
+        version: 20.0.1
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -137,7 +137,7 @@ importers:
         version: 8.46.1(eslint@9.37.0(jiti@2.6.0))(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.0)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.1)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
 
 packages:
 
@@ -1476,8 +1476,8 @@ packages:
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
 
-  '@types/node@20.19.20':
-    resolution: {integrity: sha512-2Q7WS25j4pS1cS8yw3d6buNCVJukOTeQ39bAnwR6sOJbaxvyCGebzTMypDFN82CxBLnl+lSWVdCCWbRY6y9yZQ==}
+  '@types/node@20.19.21':
+    resolution: {integrity: sha512-CsGG2P3I5y48RPMfprQGfy4JPRZ6csfC3ltBZSRItG3ngggmNY/qs2uZKp4p9VbrpqNNSMzUZNFZKzgOGnd/VA==}
 
   '@types/node@24.5.2':
     resolution: {integrity: sha512-FYxk1I7wPv3K2XBaoyH2cTnocQEu8AOZ60hPbsyukMPLv5/5qr7V1i8PLHdl6Zf87I+xZXFvPCXYjiTFq+YSDQ==}
@@ -2790,8 +2790,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@20.0.0:
-    resolution: {integrity: sha512-GkWnwIFxVGCf2raNrxImLo397RdGhLapj5cT3R2PT7FwL62Ze1DROhzmYW7+J3p9105DYMVenEejEbnq5wA37w==}
+  happy-dom@20.0.1:
+    resolution: {integrity: sha512-LLvZwSHE4XUB6m3G6GQCxfJik6Og7ChaRb4fs11dmPKz6QLqZIihUVsr7qum1VIrJdDQ1HvVlHX+XGMy4OJLTA==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -6900,7 +6900,7 @@ snapshots:
       svelte: 5.39.12
     optionalDependencies:
       vite: 7.1.5(@types/node@24.7.2)(jiti@2.6.0)(lightningcss@1.30.2)(yaml@2.8.1)
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.0)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.1)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
@@ -6956,7 +6956,7 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
-  '@types/node@20.19.20':
+  '@types/node@20.19.21':
     dependencies:
       undici-types: 6.21.0
 
@@ -7123,7 +7123,7 @@ snapshots:
       std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.0)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.1)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -7172,7 +7172,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.0)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.1)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
 
   '@vitest/utils@3.2.4':
     dependencies:
@@ -8611,9 +8611,9 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@20.0.0:
+  happy-dom@20.0.1:
     dependencies:
-      '@types/node': 20.19.20
+      '@types/node': 20.19.21
       '@types/whatwg-mimetype': 3.0.2
       whatwg-mimetype: 3.0.0
 
@@ -11249,7 +11249,7 @@ snapshots:
     optionalDependencies:
       vite: 7.1.5(@types/node@24.7.2)(jiti@2.6.0)(lightningcss@1.30.2)(yaml@2.8.1)
 
-  vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.0)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1):
+  vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(@vitest/ui@3.2.4)(happy-dom@20.0.1)(jiti@2.6.0)(jsdom@27.0.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
@@ -11278,7 +11278,7 @@ snapshots:
       '@types/debug': 4.1.12
       '@types/node': 24.7.2
       '@vitest/ui': 3.2.4(vitest@3.2.4)
-      happy-dom: 20.0.0
+      happy-dom: 20.0.1
       jsdom: 27.0.0(postcss@8.5.6)
     transitivePeerDependencies:
       - jiti
