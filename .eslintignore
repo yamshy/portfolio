@@ -1,6 +1,0 @@
-dist/
-.astro/
-node_modules/
-public/
-coverage/
-*.mjs
