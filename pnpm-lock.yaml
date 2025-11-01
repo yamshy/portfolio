@@ -104,7 +104,7 @@ importers:
         version: 6.10.2(eslint@9.39.0(jiti@2.6.0))
       globals:
         specifier: ^16.3.0
-        version: 16.4.0
+        version: 16.5.0
       happy-dom:
         specifier: ^20.0.0
         version: 20.0.10
@@ -2763,8 +2763,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@16.4.0:
-    resolution: {integrity: sha512-ob/2LcVVaVGCYN+r14cnwnoDPUufjiYgSqRhiFD0Q1iI4Odora5RE8Iv1D24hAz5oMophRGkGz+yuvQmmUMnMw==}
+  globals@16.5.0:
+    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
     engines: {node: '>=18'}
 
   globalthis@1.0.4:
@@ -8147,7 +8147,7 @@ snapshots:
       astro-eslint-parser: 1.2.2
       eslint: 9.39.0(jiti@2.6.0)
       eslint-compat-utils: 0.6.5(eslint@9.39.0(jiti@2.6.0))
-      globals: 16.4.0
+      globals: 16.5.0
       postcss: 8.5.6
       postcss-selector-parser: 7.1.0
     transitivePeerDependencies:
@@ -8541,7 +8541,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@16.4.0: {}
+  globals@16.5.0: {}
 
   globalthis@1.0.4:
     dependencies:
