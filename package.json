@@ -30,7 +30,7 @@
     "@astrojs/svelte": "^7.1.0",
     "astro": "^5.13.4",
     "open-props": "^1.7.16",
-    "svelte": "^5.38.6",
+    "svelte": "^5.46.4",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
