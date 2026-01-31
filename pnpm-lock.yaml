@@ -19,7 +19,7 @@ importers:
         version: 5.16.4(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1)
       open-props:
         specifier: ^1.7.16
-        version: 1.7.17
+        version: 1.7.22
       svelte:
         specifier: ^5.38.6
         version: 5.49.1
@@ -3970,8 +3970,8 @@ packages:
   oniguruma-to-es@4.3.4:
     resolution: {integrity: sha512-3VhUGN3w2eYxnTzHn+ikMI+fp/96KoRSVK9/kMTcFqj1NRDh2IhQCKvYxDnWePKRXY/AqH+Fuiyb7VHSzBjHfA==}
 
-  open-props@1.7.17:
-    resolution: {integrity: sha512-Sa6zW2cdOFSCqjmlIZ6q3F0p4Hixab+xbMPRDbrM42mZIeGrqN2ty0Twxof1sYjuhwBe+Ft7dDyB6rLmyRInZQ==}
+  open-props@1.7.22:
+    resolution: {integrity: sha512-NLPzCRFPY0DwHFbjqxfPpiiXiGRunHJzWXiQPeBzzI7LOUPAv5414YhEMZquxaDKGuXxr2u92qYGQBGcwhQwCg==}
 
   open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
@@ -9879,7 +9879,7 @@ snapshots:
       regex: 6.0.1
       regex-recursion: 6.0.2
 
-  open-props@1.7.17: {}
+  open-props@1.7.22: {}
 
   open@8.4.2:
     dependencies:
